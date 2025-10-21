@@ -1,5 +1,6 @@
 import React from "react";
 import GlareButton from "../../../shared/utils/GlareButton";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -19,7 +20,9 @@ const Hero = () => {
           Tekia ofrece una selección curada de tecnología de primer nivel,
           revisada por expertos del sector.
         </p>
-    <GlareButton>Explore Collections</GlareButton>
+        <Link to="/products">
+          <GlareButton>Explore Collections</GlareButton>
+        </Link>
       </div>
     </section>
   );
