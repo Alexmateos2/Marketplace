@@ -2,7 +2,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @theme default {
   /* Colores principales */
-  --color-primary: #195de6;
+  --color-primary: #19a1e6;
   --color-background-light: #f6f6f8;
   --color-background-dark: #111621;
   --color-content-light: #0e121b;
@@ -43,7 +43,7 @@
 }
 @media (prefers-color-scheme: dark) {
   @theme dark {
-    --color-primary: #195de6; /* igual al tema claro */
+    --color-primary-dark: #195de6; 
     --color-background-dark: #111621;
     --color-content-dark: #ffffff;
     --color-subtle-dark: #a1a7b6;

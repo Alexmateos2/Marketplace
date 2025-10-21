@@ -24,7 +24,7 @@ function ProductosExpertos() {
   ];
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1  px-4 sm:px-0 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1  px-8 sm:px-0 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {items.map((item) => (
           <div
             key={item.title}
@@ -32,10 +32,10 @@ function ProductosExpertos() {
           >
             <img
               alt={item.title}
-              className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-105 "
               src={item.image}
             />
-            <div className="p-4">
+            <div className="px-4 py-6">
               <h3 className="font-bold">{item.title}</h3>
               <p className="mt-1 text-sm text-subtle-light dark:text-subtle-dark">
                 {item.desc}
