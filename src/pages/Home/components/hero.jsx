@@ -19,7 +19,7 @@ const Hero = () => {
           Tekia ofrece una selección curada de tecnología de primer nivel,
           revisada por expertos del sector.
         </p>
-    <GlareButton />
+    <GlareButton>Explore Collections</GlareButton>
       </div>
     </section>
   );
