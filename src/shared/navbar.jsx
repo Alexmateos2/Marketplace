@@ -3,99 +3,104 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-20 w-full border-b border-border-light bg-background-light/80 py-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:max-w-full">
-      <div className="flex justify-between mx-auto max-w-7xl items-center px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-8">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 text-xl font-bold">
-            <svg
-              className="h-6 w-6 text-primary"
-              fill="none"
-              viewBox="0 0 48 48"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
-                fill="currentColor"
-              />
-            </svg>
-            <span>Tekia</span>
-          </Link>
-
-          {/* Navigation links */}
-          <nav className="hidden items-center gap-8 md:flex">
-            <a
-              className="text-sm font-medium text-content-light hover:text-primary dark:text-content-dark dark:hover:text-primary transition-colors"
-              href="#"
-            >
-              Nuevo
-            </a>
-            <a
-              className="text-sm font-medium text-content-light hover:text-primary dark:text-content-dark dark:hover:text-primary transition-colors"
-              href="#"
-            >
-              Categorías
-            </a>
+    <header className="bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50 border-b border-primary/20 dark:border-primary/10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center gap-8">
             <Link
-              to="/products"
-              className="text-sm font-medium text-content-light hover:text-primary dark:text-content-dark dark:hover:text-primary transition-colors"
+              to="/"
+              className="flex items-center gap-3 text-xl font-bold text-content-light dark:text-content-dark"
             >
-              Productos
+              <svg
+                className="h-6 w-6 text-primary"
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>Tekia</span>
             </Link>
-            <a
-              className="text-sm font-medium text-content-light hover:text-primary dark:text-content-dark dark:hover:text-primary transition-colors"
-              href="#"
-            >
-              About
-            </a>
-          </nav>
-        </div>
 
-        {/* Right side: search, buttons, user */}
-        <div className="flex items-center gap-4">
-          <div className="relative hidden lg:block">
-            <svg
-              className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
-              fill="currentColor"
-              viewBox="0 0 256 256"
-            >
-              <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32Z"></path>
-            </svg>
-            <input
-              className="w-full rounded-full border-border-light bg-surface-light py-2 pl-10 pr-4 text-sm focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-surface-dark"
-              placeholder="Buscar productos..."
-              type="search"
-            />
+            <nav className="hidden md:flex items-center gap-6">
+              <a
+                className="text-sm font-medium hover:text-primary transition-colors"
+                href="#"
+              >
+                Home
+              </a>
+              <a
+                className="text-sm font-medium hover:text-primary transition-colors"
+                href="#"
+              >
+                Categories
+              </a>
+              <a
+                className="text-sm font-medium hover:text-primary transition-colors"
+                href="#"
+              >
+                Experts
+              </a>
+              <a
+                className="text-sm font-medium hover:text-primary transition-colors"
+                href="#"
+              >
+                Community
+              </a>
+            </nav>
           </div>
+          <div className="flex items-center gap-4">
+            <div className="relative hidden md:block md:w-40 lg:w-90">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                  className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="w-full rounded-lg border border-border-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              />
+            </div>
 
-          <button
-            className="rounded-full p-2 hover:bg-primary/10 dark:hover:bg-primary/20 lg:hidden"
-            aria-label="Buscar"
-          >
-            <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32Z"></path>
-            </svg>
-          </button>
-
-          <button className="rounded-full p-2 hover:bg-primary/10 dark:hover:bg-primary/20">
-            <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M216,48H48a8,8,0,0,0,0,16h24v128a16,16,0,0,0,16,16H168a16,16,0,0,0,16-16V64h24a8,8,0,0,0,0-16ZM168,192H88V64H168Z" />
-            </svg>
-          </button>
-
-          <button className="rounded-full p-2 hover:bg-primary/10 dark:hover:bg-primary/20">
-            <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M228,128a12,12,0,0,1-12,12,100.11,100.11,0,0,1-99.34-111.45,12,12,0,0,1,21.06,12.35A76.08,76.08,0,0,0,140,204a76,76,0,0,0,75.78-88.37,12,12,0,0,1,12.22-9.63Z" />
-            </svg>
-          </button>
-
-          <button>
-            <img
-              alt="User avatar"
-              className="h-10 w-10 rounded-full object-cover"
-              src="/unnamed.png"
-            />
-          </button>
+            <button className="p-2 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors">
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.5"
+                ></path>
+              </svg>
+            </button>
+            <div
+              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-10 h-10 border-2 border-primary/50"
+              style={{
+                backgroundImage:
+                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuAaJQWwq-jK4D1RbaBIbPBmTQfSyc2r-NHG-6LlzI_0E7ZmY2UNusTS8R1qR1c0Q__QCXf8RNwK1oylIvdV0-1i39zj5SODSDDFy8cKBbSLpy4r1iI1R57WSaihtw3z5l-eoCLmyZUma0EJB8HtZmmM1xfH-DSZG65F3my8y57pwOBcGh1fuvX5YMdIXf7eSD4aVJjq0W9Qk8molGcFJ41CmHYcjmv3c4jvFjw6q-o4Yji420ufR2Pg5-PJBo5scemCEW0gW6Kkf7c")',
+              }}
+            ></div>
+          </div>
         </div>
       </div>
     </header>
