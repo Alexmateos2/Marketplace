@@ -62,7 +62,7 @@ export default function HomePage() {
         </section>
 
         {/* Stay Updated */}
-        <section className="hidden sm:block bg-surface-light py-12 dark:bg-surface-dark sm:py-16 text-center">
+        <section className="bg-surface-light py-12 dark:bg-surface-dark sm:py-16 text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Stay Updated
           </h2>

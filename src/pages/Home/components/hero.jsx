@@ -1,4 +1,5 @@
 import React from "react";
+import GlareButton from "../../../shared/utils/GlareButton";
 
 const Hero = () => {
   return (
@@ -18,12 +19,7 @@ const Hero = () => {
           Tekia ofrece una selección curada de tecnología de primer nivel,
           revisada por expertos del sector.
         </p>
-        <a
-          href="#"
-          className=" rounded-full bg-primary px-6 py-3 text-sm font-bold text-white transition hover:bg-primary/90 sm:px-8 sm:py-4 sm:text-base"
-        >
-          Explore Collections
-        </a>
+    <GlareButton />
       </div>
     </section>
   );
