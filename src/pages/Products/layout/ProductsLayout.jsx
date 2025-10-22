@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../../../shared/navbar";
+import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/footer";
 import Pagination from "../components/pagination";
 import Products from "../components/products";
