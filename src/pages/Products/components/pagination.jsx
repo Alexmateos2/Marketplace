@@ -10,10 +10,10 @@ const Pagination = () => {
                   </svg>
                 </a>
                 <a className="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold text-sm" href="#">1</a>
-                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-gray-300 font-medium text-sm" href="#">2</a>
-                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-gray-300 font-medium text-sm" href="#">3</a>
-                <span className="w-10 h-10 flex items-center justify-center text-gray-600 dark:text-gray-300">...</span>
-                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-gray-300 font-medium text-sm" href="#">8</a>
+                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-subtle-dark font-medium text-sm" href="#">2</a>
+                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-subtle-dark font-medium text-sm" href="#">3</a>
+                <span className="w-10 h-10 flex items-center justify-center text-gray-600 dark:text-subtle-dark">...</span>
+                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-subtle-dark font-medium text-sm" href="#">8</a>
               </nav>
             </div>
   )

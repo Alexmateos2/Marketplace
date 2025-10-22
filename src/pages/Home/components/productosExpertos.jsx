@@ -4,22 +4,22 @@ function ProductosExpertos() {
     {
       title: "Laptop Pro 16",
       desc: "Powerful performance",
-      image: "../public/unnamed(2).png",
+      image: "../unnamed(2).png",
     },
     {
       title: "Wireless Headphones X50",
       desc: "Immersive sound",
-      image: "../public/unnamed(3).png",
+      image: "../unnamed(3).png",
     },
     {
       title: "Smartwatch Series 7",
       desc: "Advanced tracking",
-      image: "../public/unnamed(4).png",
+      image: "../unnamed(4).png",
     },
     {
       title: "Portable Speaker SoundWave",
       desc: "Compact power",
-      image: "../public/unnamed(5).png",
+      image: "../unnamed(5).png",
     },
   ];
   return (
