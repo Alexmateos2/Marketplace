@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const products = [
   {
@@ -48,11 +49,12 @@ const products = [
 
 const Products = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 font-display">
       {products.map((product) => (
-        <div
+        <NavLink
           key={product.id}
-          className="group relative flex flex-col bg-background-light dark:bg-background-dark rounded-lg overflow-hidden transition-all duration-300"
+          to={`/product`} 
+          className="group relative flex flex-col bg-background-light dark:bg-background-dark rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-md hover:shadow-xl"
         >
           <div
             className="relative w-full aspect-square bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
@@ -66,7 +68,7 @@ const Products = () => {
               ${product.price}
             </p>
           </div>
-        </div>
+        </NavLink>
       ))}
     </div>
   );

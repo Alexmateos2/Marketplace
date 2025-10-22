@@ -71,11 +71,11 @@ export default function HomePage() {
           </p>
           <form className="mx-auto mt-8 flex max-w-md gap-2">
             <input
-              className="flex-1 rounded-full border-border-light bg-background-light px-4 py-2 text-sm focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark"
+              className="flex-1 rounded-lg border-border-light bg-background-light px-4 py-3 text-sm focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark"
               placeholder="Enter your email"
               type="email"
             />
-            <button className="rounded-full bg-primary px-6 py-2 text-sm font-bold text-white transition hover:bg-primary/90">
+            <button className="rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition hover:bg-primary/90">
               Subscribe
             </button>
           </form>
