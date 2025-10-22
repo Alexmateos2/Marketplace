@@ -4,7 +4,7 @@ import Footer from "../../../shared/footer";
 import CategoriaDestacada from "../components/categoriasDestacadas";
 import ProductosExpertos from "../components/productosExpertos";
 import Card from "../components/card";
-import Navbar from "../../../shared/navbar";
+import Navbar from "../../../shared/navbar/navbar";
 
 
 
