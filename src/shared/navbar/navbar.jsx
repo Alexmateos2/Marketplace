@@ -28,7 +28,13 @@ const Navbar = () => {
 
             <nav className="hidden md:flex items-center gap-8">
               <CategoriesNavbar />
-
+              <NavLink to="/new"
+                className={({ isActive }) =>
+                  `text-sm font-medium transition-colors dark:text-white hover:text-primary ${
+                    isActive ? "text-primary" : ""
+                  }`
+                }
+              > Nuevo</NavLink>
               <NavLink
                 to="/products"
                 className={({ isActive }) =>
@@ -96,7 +102,7 @@ const Navbar = () => {
               </svg>
             </NavLink>
 
-          <ProfileNavbar />
+            <ProfileNavbar />
           </div>
         </div>
       </div>

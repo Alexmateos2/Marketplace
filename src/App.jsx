@@ -6,6 +6,8 @@ import ProductPage from "./pages/Home/layout/ProductLayout";
 import CarritoPage from "./pages/Cart/layout/layoutCarrito";
 import NotFound from "./shared/notFound";
 import LoginPage from "./pages/Login/layout/loginLayout";
+import NewPage from "./pages/New/layout/newLayout";
+import CategoryPage from "./pages/Categories/layout/categoryLayout";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path = "/cart" element= {<CarritoPage />} />
         <Route path = "*" element= {<NotFound />} />
+        <Route path="/new" element={<NewPage />} />
+        <Route path="/products/:category?" element={<CategoryPage />} />
       </Routes>
     </Router>
   );
