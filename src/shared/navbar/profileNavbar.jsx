@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 const ProfileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,19 +39,20 @@ const ProfileNavbar = () => {
 
       {/* Dropdown */}
       {isOpen && (
-          <div className="absolute mt-3  top-full -left-20 w-60 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg overflow-hidden z-50">
+        <div className="absolute mt-3  top-full -left-20 w-60 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg overflow-hidden z-50">
           <a
             href="#profile"
             className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
           >
             Profile
           </a>
-          <a
+          <NavLink
+            to={"/login"}
             href="#settings"
             className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark  hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
           >
             Log in
-          </a>
+          </NavLink>
           <a
             href="#logout"
             className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark  hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"

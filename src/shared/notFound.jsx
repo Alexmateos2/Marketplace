@@ -5,36 +5,23 @@ import { NavLink } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="dark:bg-background-dark dark:text-content-dark min-h-screen flex flex-col">
-    <div className="relative flex min-h-screen w-full flex-col items-center justify-center group/design-root overflow-x-hidden p-4">
-      <div className="layout-container flex h-full grow flex-col items-center justify-center">
-        <div className="px-4 py-5 w-full max-w-lg">
-          <div className="layout-content-container flex flex-col items-center gap-8 text-center">
-            <div className="flex flex-col items-center gap-6">
-              <div className="flex flex-col items-center gap-3">
-                <h1 className="text-text-light dark:text-text-dark text-3xl font-bold tracking-tight">
-                  404 - Page Not Found
-                </h1>
-                <p className="text-text-light/80 dark:text-text-dark/80 text-base font-normal leading-normal max-w-md">
-                  Oops! It seems you've taken a wrong turn. The page you are
-                  looking for might have been moved, deleted, or you might have
-                  mistyped the URL.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-sm justify-center">
-                <NavLink
-                  className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-semibold leading-normal tracking-wide shadow-sm hover:bg-primary/90 transition-colors"
-                    to="/"
-                >
-                  <span className="truncate">Go to Homepage</span>
-                </NavLink>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="dark:bg-background-dark dark:text-content-dark flex flex-col min-h-screen p-4 font-display">
+      <div className="max-w-lg flex-grow flex flex-col justify-center text-center space-y-8 mx-auto">
+        <h1 className="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark">
+          404 - Page Not Found
+        </h1>
+        <p className="text-base font-normal leading-normal max-w-md text-text-light/80 dark:text-text-dark/80 mx-auto">
+          Oops! It seems you've taken a wrong turn. The page you are looking for
+          might have been moved, deleted, or you might have mistyped the URL.
+        </p>
+        <NavLink
+          to="/"
+          className="inline-block min-w-[84px] rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:bg-primary/90 transition-colors"
+        >
+          Go to Homepage
+        </NavLink>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </div>
   );
 };
