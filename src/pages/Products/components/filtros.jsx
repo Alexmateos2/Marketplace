@@ -30,7 +30,7 @@ const Filtros = () => {
           Filters
         </h3>
 
-        <div className="space-y-4">
+        <div className="space-y-8 mb-10">
           <label className="block">
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Price
@@ -38,7 +38,7 @@ const Filtros = () => {
             <select
               value={filters.price}
               onChange={(e) => handleChange("price", e.target.value)}
-              className="form-select p-2 mt-1 block w-full rounded border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+              className="form-select p-2 mt-1 block w-full rounded border-gray-300 dark:border-dark bg-background-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
               <option value="">All Prices</option>
               <option value="$0 - $100">$0 - $100</option>
@@ -55,7 +55,7 @@ const Filtros = () => {
             <select
               value={filters.sortBy}
               onChange={(e) => handleChange("sortBy", e.target.value)}
-              className="form-select p-2 mt-1 block w-full rounded border-gray-300 dark:border-gray-700 bg-background-light dark:bg-background-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+              className="form-select p-2 mt-1 block w-full rounded border-gray-300 dark:border-gray-700 bg-background-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
               <option value="">Newest</option>
               <option value="low-high">Price: Low to High</option>
