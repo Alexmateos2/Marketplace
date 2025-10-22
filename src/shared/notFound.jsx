@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="dark:bg-background-dark dark:text-content-dark flex flex-col min-h-screen p-4 font-display">
+    <div className="dark:bg-background-dark dark:text-content-dark flex flex-col min-h-screen  font-display">
       <div className="max-w-lg flex-grow flex flex-col justify-center text-center space-y-8 mx-auto">
         <h1 className="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark">
           404 - Page Not Found

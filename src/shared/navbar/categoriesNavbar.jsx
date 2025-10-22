@@ -33,13 +33,20 @@ const CategoriesNavbar = () => {
       >
         Categories
         <svg
-          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
+          className={`h-4 w-4 transition-transform ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 
@@ -49,20 +56,32 @@ const CategoriesNavbar = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
+          {" "}
           <NavLink
-            to="/category/keyboards"
+            to="/products"
+            className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
+          >
+            All categories
+          </NavLink>
+          <NavLink
+            to="/products/Keyboards"
             className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
           >
             Keyboards
           </NavLink>
           <NavLink
-            to="/category/mice"
-            className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
-          >
+            to="/products/Mice"
+              className={({ isActive }) =>`block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors${
+                isActive ? "text-primary" : ""
+                  }`
+              
+                  
+                }
+         >
             Mice
           </NavLink>
           <NavLink
-            to="/category/headphones"
+            to="/products/Audio"
             className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
           >
             Headphones
