@@ -8,10 +8,12 @@ import NotFound from "./shared/notFound";
 import LoginPage from "./pages/Login/layout/loginLayout";
 import NewPage from "./pages/New/layout/newLayout";
 import CategoryPage from "./pages/Categories/layout/categoryLayout";
+import ScrollToTop from "./shared/utils/scrollToTop.jsx";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path ="login" element= {<LoginPage />} />
