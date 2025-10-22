@@ -62,7 +62,7 @@ const Products = () => {
             <h4 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex-grow">
               {product.name}
             </h4>
-            <p className="text-gray-700 dark:text-gray-300 font-bold text-lg mt-1">
+            <p className="text-gray-700 dark:text-subtle-dark font-bold text-lg mt-1">
               ${product.price}
             </p>
           </div>

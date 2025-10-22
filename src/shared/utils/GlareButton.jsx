@@ -16,7 +16,7 @@ const GlareButton = ({ children, width = "auto", textSize = "text-lg",type="butt
     >
       <button
         type={type}
-        className={`block rounded-full bg-primary px-6 py-3 font-bold text-white transition hover:bg-primary/90 text-center ${textSize} `}
+        className={`block rounded-full bg-primary px-6 py-3 font-bold  text-white transition hover:bg-primary/90 text-center ${textSize} `}
       >
         {children}
       </button>

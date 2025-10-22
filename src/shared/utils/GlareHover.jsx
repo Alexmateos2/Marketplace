@@ -53,18 +53,22 @@ const GlareHover = ({
     }
   };
 
-  const overlayStyle = {
-    position: "absolute",
-    inset: 0,
-    background: `linear-gradient(${glareAngle}deg,
-        hsla(0,0%,0%,0) 60%,
-        ${rgba} 70%,
-        hsla(0,0%,0%,0) 100%)`,
-    backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "-100% -100%, 0 0",
-    pointerEvents: "none",
-  };
+const isDark = document.documentElement.classList.contains("dark");
+
+const overlayStyle = {
+  position: "absolute",
+  inset: 0,
+  background: isDark
+
+    ? `bg-transparent`
+
+    : `linear-gradient(${glareAngle}deg, hsla(0,0%,0%,0) 60%, ${rgba} 70%, hsla(0,0%,0%,0) 100%)`,
+  backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "-100% -100%, 0 0",
+  pointerEvents: "none",
+  transition: "background 0.4s"
+};
 
   return (
     <div

@@ -2,10 +2,10 @@ import React from 'react'
 
 function CategoriaDestacada() {
   const categories = [
-    { title: "Laptops", image: "../public/unnamed(6).png" },
-    { title: "Audio", image: "../public/unnamed(7).png" },
-    { title: "Wearables", image: "../public/unnamed(8).png" },
-    { title: "Accessories", image: "../public/unnamed(9).png" },
+    { title: "Laptops", image: "../unnamed(6).png" },
+    { title: "Audio", image: "../unnamed(7).png" },
+    { title: "Wearables", image: "../unnamed(8).png" },
+    { title: "Accessories", image: "../unnamed(9).png" },
   ];
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

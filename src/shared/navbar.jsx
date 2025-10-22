@@ -69,25 +69,25 @@ const handleMouseLeave = () => {
 
                 {isOpen && (
                   <div
-                    className="absolute mt-2 top-full left-0 -mt-1 w-44 bg-background-light dark:bg-background-dark border border-border-light dark:border-gray-700 rounded-lg shadow-lg overflow-hidden z-50"
+                    className="absolute mt-2 top-full -left-20 w-60 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg overflow-hidden z-50"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
                     <a
                       href="#"
-                      className="block px-4 py-2 text-sm text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
+                      className="block px-4 py-4 text-sm text-content-light dark:text-content-dark  border  border-border-light dark:border-border-dark  hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
                     >
                       Keyboards
                     </a>
                     <a
                       to="/category/mice"
-                      className="block px-4 py-2 text-sm text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
+                      className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
                     >
                       Mice
                     </a>
                     <a
                       to="/category/headphones"
-                      className="block px-4 py-2 text-sm text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
+                      className="block px-4 py-4 text-sm text-content-light dark:text-content-dark hover:bg-primary/10 border border-border-light dark:border-border-dark  dark:hover:bg-primary/20 transition-colors"
                     >
                       Headphones
                     </a>
