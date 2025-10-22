@@ -9,6 +9,7 @@ import LoginPage from "./pages/Login/layout/loginLayout";
 import NewPage from "./pages/New/layout/newLayout";
 import CategoryPage from "./pages/Categories/layout/categoryLayout";
 import ScrollToTop from "./shared/utils/scrollToTop.jsx";
+import AddProduct from "./pages/Add-Product/layout/addProduct.jsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path = "*" element= {<NotFound />} />
         <Route path="/new" element={<NewPage />} />
         <Route path="/products/:category?" element={<CategoryPage />} />
+        <Route path="/add" element={<AddProduct />} />
       </Routes>
     </Router>
   );
