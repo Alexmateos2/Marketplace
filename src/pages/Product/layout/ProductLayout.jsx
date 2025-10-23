@@ -4,7 +4,7 @@ import Footer from "../../../shared/footer";
 
 const ProductPage = () => {
   return (
-    <div className="flex flex-col min-h-screen dark:bg-background-dark dark:text-content-dark bg-background-light text-content-light font-display">
+    <div className="flex flex-col min-h-screen dark:bg-background-dark dark:text-content-dark bg-background-light text-content-light font-display transition-colors">
       <Navbar />
       <main className="flex-1 px-4 sm:px-6 lg:px-40 py-8">
         <div className="mx-auto max-w-5xl">

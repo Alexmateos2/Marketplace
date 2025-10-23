@@ -5,7 +5,7 @@ import CarritoItem from "../components/carritoItem";
 
 const CarritoPage = () => {
   return (
-    <div className="dark:bg-background-dark font-display ">
+    <div className="dark:bg-background-dark dark:text-content-dark font-display transition-colors ">
       <Navbar />
       <main className="flex-1 px-4 py-8 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">

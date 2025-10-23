@@ -32,7 +32,7 @@ const Filtros = () => {
 
         <div className="space-y-8 mb-10">
           <label className="block">
-            <span className="text-sm font-medium text-gray-700 dark:text-subtle-dark">
+            <span className="text-sm font-medium text-content-light dark:text-content-dark">
               Price
             </span>
             <select
@@ -49,7 +49,7 @@ const Filtros = () => {
 
         
           <label className="block">
-            <span className="text-sm font-medium text-gray-700 dark:text-subtle-dark">
+            <span className="text-sm font-medium text-content-light dark:text-content-dark">
               Sort By
             </span>
             <select

@@ -7,7 +7,7 @@ import GlareButton from "../../../shared/utils/GlareButton";
 
 const AboutUsPage = () => {
   return (
-    <div className="flex flex-col min-h-screen dark:bg-background-dark dark:text-content-dark  text-content-light font-display">
+    <div className="flex flex-col min-h-screen dark:bg-background-dark dark:text-content-dark  text-content-light font-display transition-colors">
       <Navbar />
       <main className="flex flex-col flex-1">
         <section className="w-full py-20 md:py-32 lg:py-40 text-center px-4 md:px-10 lg:px-20">

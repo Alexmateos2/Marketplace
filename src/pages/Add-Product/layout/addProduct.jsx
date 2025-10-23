@@ -15,7 +15,7 @@ const AddProduct = () => {
           </p>
         </header>
 
-        <section className=" px-4 bg-card-light dark:bg-card-dark p-8 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+        <section className=" px-4 bg-card-light dark:bg-card-dark p-8 rounded-xl shadow-sm border border-border-light dark:border-border-dark transition-colors">
             <FormComponent />
         </section>
       </main>

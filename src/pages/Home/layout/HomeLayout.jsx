@@ -10,7 +10,7 @@ import Navbar from "../../../shared/navbar/navbar";
 
 export default function HomePage() {
   return (
-    <div className="bg-background-light font-display text-content-light dark:bg-background-dark dark:text-content-dark min-h-screen flex flex-col">
+    <div className="bg-background-light font-display text-content-light dark:bg-background-dark dark:text-content-dark min-h-screen transition-colors flex flex-col">
       {/* Header */}
       <Navbar />
       <main className="flex-1">
