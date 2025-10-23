@@ -30,7 +30,7 @@ const products = [
     category: "Mouse",
     price: 59.99,
     image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBz76-3gNzjDJQdp14e-eFH7no-Gn3Vm1vIUvvFjW4q6_N26VXx2WDI7rMiBCdgsR53aPn_oDwkTFByYnOp5ueej5_ta1DQpSYui1CpdFujWyMM5pf361evb4W6YXMClVU7FWBeZYWnPTW1vSgS0iPdMFAGV7GEVolRL8QkyVmLItbC5OmBwB5OokWXYar96yXYNv5_uII8xW-N-sxHiDD3JuJ5elJpVmnZCBd9q1KwAqL2uK-fP9tHjTPjTWlCy0pczGcrPfWzbcE",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuClTGZwPqQxDNPKOpqbPKgg3Jtx0jcdq7jerTaptF_vhnQaMfOxcDcIn2tGnS4Up1CL_DKg1JPA1DDbuMGpOSCcrDmUYiofPsxg2KqfkekBcf2JVOVB791Pte7j9tb1Oqtf_aNqDg7VqIYRB1yVhVJQj7KWJor51IjtR1_7lMZIbDdq6-jgeL6aM4UdR_eHlTN5g-l-DL5R4V09bwalQTGeAAzJMVOsc2aMxsk_-SMQjCdr_yzLzIZjLd8LGBy9FiY0SOWeJwMBlkE",
   },
   {
     id: 5,
@@ -119,7 +119,7 @@ const products = [
     name: "Ergonomic Wireless Mouse",
     category: "Mouse",
     price: 59.99,
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBz76-3gNzjDJQdp14e-eFH7no-Gn3Vm1vIUvvFjW4q6_N26VXx2WDI7rMiBCdgsR53aPn_oDwkTFByYnOp5ueej5_ta1DQpSYui1CpdFujWyMM5pf361evb4W6YXMClVU7FWBeZYWnPTW1vSgS0iPdMFAGV7GEVolRL8QkyVmLItbC5OmBwB5OokWXYar96yXYNv5_uII8xW-N-sxHiDD3JuJ5elJpVmnZCBd9q1KwAqL2uK-fP9tHjTPjTWlCy0pczGcrPfWzbcE",
+    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuClTGZwPqQxDNPKOpqbPKgg3Jtx0jcdq7jerTaptF_vhnQaMfOxcDcIn2tGnS4Up1CL_DKg1JPA1DDbuMGpOSCcrDmUYiofPsxg2KqfkekBcf2JVOVB791Pte7j9tb1Oqtf_aNqDg7VqIYRB1yVhVJQj7KWJor51IjtR1_7lMZIbDdq6-jgeL6aM4UdR_eHlTN5g-l-DL5R4V09bwalQTGeAAzJMVOsc2aMxsk_-SMQjCdr_yzLzIZjLd8LGBy9FiY0SOWeJwMBlkE",
   },
   {
     id: 27,
