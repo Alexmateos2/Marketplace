@@ -25,8 +25,8 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
           Personal Information
         </p>
       </div>
-      <div className="flex flex-col @container items-start gap-6 p-4 mb-8 bg-white dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark">
-        <div className="flex w-full flex-col sm:flex-row gap-6 items-start ">
+      <div className="flex flex-col @container items-start  gap-6 p-4 mb-8 bg-white dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark">
+        <div className="flex w-full flex-col sm:flex-row gap-6 items-center sm:items-start ">
           <div
             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-32 h-32"
             data-alt="User avatar"
@@ -44,7 +44,7 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
             </p>
             <button
               onClick={changeHandle}
-              className="mt-4 flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto hover:bg-primary/20 dark:hover:bg-primary/30"
+              className="mt-4 flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto hover:bg-primary/20 dark:hover:bg-primary/30"
             >
               <span className="truncate">Edit Profile</span>
             </button>
