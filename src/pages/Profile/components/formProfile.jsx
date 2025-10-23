@@ -89,7 +89,7 @@ const FormProfile = ({ setIsMenuOpen,isOpen }) => {
             id="shippingAddress"
             readOnly
             rows={3}
-            className="form-textarea ..."
+           className="form-textarea w-full rounded-lg p-4 border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark"
             value="123 Tech Lane, Silicon Valley, CA 94043"
           />
         </div>
