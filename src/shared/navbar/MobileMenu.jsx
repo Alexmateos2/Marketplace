@@ -37,12 +37,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
               {label}
             </NavLink>
           ))}
-          <button
-            onClick={() => setIsOpen(false)}
-            className="w-full text-left px-4 py-3 bg-primary/40 dark:bg-primary/30 dark:text-content-dark text-content-light hover:bg-primary/90 rounded-b-lg font-semibold"
-          >
-            Close
-          </button>
+          
         </motion.div>
       )}
     </AnimatePresence>
