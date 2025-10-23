@@ -1,20 +1,23 @@
 import React from "react";
 import { useState } from "react";
-const FormProfile = ({ setIsMenuOpen,isOpen }) => {
-    const [disabled,setDisabled]= useState(true);
-    const changeHandle = () =>{
-        setDisabled(!disabled)
-    }
+const FormProfile = ({ setIsMenuOpen, isOpen }) => {
+  const [disabled, setDisabled] = useState(true);
+  const changeHandle = () => {
+    setDisabled(!disabled);
+  };
   return (
     <div className="max-w-4xl mx-auto">
       <div className="lg:hidden flex justify-end items-center mb-6">
-       
         <button
-          onClick={() => setIsMenuOpen((!isOpen))}
+          onClick={() => setIsMenuOpen(!isOpen)}
           className="p-2"
           id="menu-btn"
         >
-          {<span className="material-symbols-outlined">{isOpen ? " cerrar menu ": " menu"}</span>}
+          {
+            <span className="material-symbols-outlined">
+              {isOpen ? " cerrar menu " : " menu"}
+            </span>
+          }
         </button>
       </div>
       <div className="mb-8">
@@ -39,9 +42,10 @@ const FormProfile = ({ setIsMenuOpen,isOpen }) => {
             <p className="text-base text-content-light-500 dark:text-content-dark">
               john.doe@email.com
             </p>
-            <button 
-            onClick={changeHandle}
-            className="mt-4 flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto hover:bg-primary/20 dark:hover:bg-primary/30">
+            <button
+              onClick={changeHandle}
+              className="mt-4 flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto hover:bg-primary/20 dark:hover:bg-primary/30"
+            >
               <span className="truncate">Edit Profile</span>
             </button>
           </div>
@@ -58,8 +62,8 @@ const FormProfile = ({ setIsMenuOpen,isOpen }) => {
             </label>
             <input
               id="fullName"
-              readOnly
-              value="John Doe"
+               readOnly={disabled}
+               placeholder="John Doe"
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
@@ -72,8 +76,8 @@ const FormProfile = ({ setIsMenuOpen,isOpen }) => {
             </label>
             <input
               id="emailAddress"
-              readOnly
-              value="john.doe@email.com"
+               readOnly={disabled}
+              placeholder="john.doe@email.com"
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
@@ -87,10 +91,10 @@ const FormProfile = ({ setIsMenuOpen,isOpen }) => {
           </label>
           <textarea
             id="shippingAddress"
-            readOnly
+             readOnly={disabled}
             rows={3}
-           className="form-textarea w-full rounded-lg p-4 border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark"
-            value="123 Tech Lane, Silicon Valley, CA 94043"
+            className="form-textarea w-full rounded-lg p-4 border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark"
+            placeholder="123 Tech Lane, Silicon Valley, CA 94043"
           />
         </div>
         <div className="border-t border-border-light dark:border-border-dark my-6"></div>
@@ -108,8 +112,8 @@ const FormProfile = ({ setIsMenuOpen,isOpen }) => {
               </label>
               <input
                 id="phoneNumber"
-                readOnly
-                value="+1 (555) 123-4567"
+                 readOnly={disabled}
+                placeholder="+34 654 897 357"
                 className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
               />
             </div>
@@ -122,24 +126,34 @@ const FormProfile = ({ setIsMenuOpen,isOpen }) => {
               </label>
               <input
                 id="password"
-                readOnly
+                 readOnly={disabled}
                 type="password"
-                value="••••••••"
+                placeholder="••••••••"
                 className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
               />
             </div>
           </div>
         </div>
         <div className="flex justify-end gap-3 pt-4">
-          <button 
-          onClick={setDisabled}
-          disabled={disabled}
-          className={disabled? " hidden": "flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10  px-4 bg-slate dark:bg-background-dark text-content-light   dark:text-content-dark text-sm font-medium leading-normal tracking-[0.015em]" }>
+          <button
+           onClick={() => setDisabled(true)}
+
+            disabled={disabled}
+            className={
+              disabled
+                ? " hidden"
+                : "flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10  px-4 bg-slate dark:bg-background-dark text-content-light   dark:text-content-dark text-sm font-medium leading-normal tracking-[0.015em]"
+            }
+          >
             <span className="truncate">Cancel</span>
           </button>
-          <button 
+          <button
+         
             disabled={disabled}
-          className="flex min-w-[84px] disabled:cursor-not-allowed disabled:bg-primary/50 cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]">
+            onClick={() => setDisabled(true)}
+
+            className="flex min-w-[84px] disabled:cursor-not-allowed disabled:bg-primary/50 cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]"
+          >
             <span className="truncate">Save Changes</span>
           </button>
         </div>

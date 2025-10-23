@@ -60,7 +60,7 @@ const overlayStyle = {
   inset: 0,
   background: isDark
 
-    ? `bg-transparent`
+    ? `transparent`
 
     : `linear-gradient(${glareAngle}deg, hsla(0,0%,0%,0) 60%, ${rgba} 70%, hsla(0,0%,0%,0) 100%)`,
   backgroundSize: `${glareSize}% ${glareSize}%, 100% 100%`,
