@@ -39,37 +39,40 @@ const ProfileNavbar = () => {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute mt-3  top-full -left-15 w-60 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg overflow-hidden z-50">
+        <div
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 
+          w-60 max-w-xs bg-background-light dark:bg-background-dark 
+          border border-border-light dark:border-border-dark 
+          rounded-lg shadow-lg overflow-hidden z-50"
+        >
           <NavLink
             to={"/profile"}
             className={({ isActive }) =>
-              `block px-4 py-4 text-sm border border-border-light dark:border-border-dark transition-colors 
+              `block px-4 py-4 text-base border-b border-border-light dark:border-border-dark transition-colors 
                ${isActive
-                ? "text-primary  dark:text-content-dark bg-primary/10 dark:bg-primary/20"
+                ? "text-primary bg-primary/10 dark:bg-primary/20"
                 : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
             }
-
           >
             Profile
           </NavLink>
           <NavLink
             to={"/login"}
             className={({ isActive }) =>
-              `block px-4 py-4 text-sm border border-border-light dark:border-border-dark transition-colors 
+              `block px-4 py-4 text-base  border-b border-border-light dark:border-border-dark transition-colors 
                ${isActive
-                ? "text-primary  dark:text-content-dark bg-primary/10 dark:bg-primary/20"
+                ? "text-primary bg-primary/10 dark:bg-primary/20"
                 : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
             }
-
           >
             Log in
           </NavLink>
-          <a
-            href="#logout"
-            className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark  hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
+          <button
+            className="block w-full text-left px-4 py-4 text-base  text-content-light dark:text-content-dark 
+            hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
           >
             Logout
-          </a>
+          </button>
         </div>
       )}
     </div>
