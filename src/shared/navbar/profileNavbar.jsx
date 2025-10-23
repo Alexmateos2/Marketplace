@@ -42,14 +42,25 @@ const ProfileNavbar = () => {
         <div className="absolute mt-3  top-full -left-15 w-60 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg overflow-hidden z-50">
           <NavLink
             to={"/profile"}
-            className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
+            className={({ isActive }) =>
+              `block px-4 py-4 text-sm border border-border-light dark:border-border-dark transition-colors 
+               ${isActive
+                ? "text-primary  dark:text-content-dark bg-primary/10 dark:bg-primary/20"
+                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
+            }
+
           >
             Profile
           </NavLink>
           <NavLink
             to={"/login"}
-            href="#settings"
-            className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark  hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
+            className={({ isActive }) =>
+              `block px-4 py-4 text-sm border border-border-light dark:border-border-dark transition-colors 
+               ${isActive
+                ? "text-primary  dark:text-content-dark bg-primary/10 dark:bg-primary/20"
+                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
+            }
+
           >
             Log in
           </NavLink>
