@@ -10,24 +10,28 @@ import NewPage from "./pages/New/layout/newLayout";
 import CategoryPage from "./pages/Categories/layout/categoryLayout";
 import ScrollToTop from "./shared/utils/scrollToTop.jsx";
 import AddProduct from "./pages/Add-Product/layout/addProduct.jsx";
+import AllCategoriesPage from "./pages/Categories/layout/allCategoriesLayout.jsx";
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path ="login" element= {<LoginPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/about" element={<AboutUsPage />} />
-        <Route path="/product" element={<ProductPage />} />
-        <Route path = "/cart" element= {<CarritoPage />} />
-        <Route path = "*" element= {<NotFound />} />
-        <Route path="/new" element={<NewPage />} />
-        <Route path="/products/:category?" element={<CategoryPage />} />
-        <Route path="/add" element={<AddProduct />} />
-      </Routes>
-    </Router>
+    <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/product" element={<ProductPage />} />
+          <Route path="/cart" element={<CarritoPage />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/new" element={<NewPage />} />
+          <Route path="/products/:category?" element={<CategoryPage />} />
+          <Route path="/categories" element={<AllCategoriesPage />} />
+          <Route path="/add" element={<AddProduct />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

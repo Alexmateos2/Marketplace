@@ -58,8 +58,8 @@ const CategoriesNavbar = () => {
         >
           {" "}
           <NavLink
-            to="/products"
-            end // importante para que solo se active cuando la ruta es exactamente /products
+            to="/categories"
+            end 
             className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
                 isActive ? "text-primary" : ""

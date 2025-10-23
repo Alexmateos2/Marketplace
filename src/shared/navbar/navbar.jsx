@@ -6,7 +6,7 @@ import DarkMode from "./darkMode";
 const Navbar = () => {
   return (
     <header className="flex items-center bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50 border-b border-primary/20 dark:border-primary/10">
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2">
     <div className="flex items-center justify-between h-16 w-full">
       <div className="flex items-center gap-8">
         <NavLink
