@@ -26,7 +26,7 @@ const AllCategoriesPage = () => {
               <div className="absolute inset-0 z-0">
                 <img
                   alt="Audio"
-                  className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
+                  className="h-full w-full object-top object-cover transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuACP6Y_ZfCUJHIbui17CRKFgU0o2B63Q5rEantbgDJeHBl8aCrenxtT-ekg6PiDWLELzMNBw_RLIS-MBaVys78Yk_qj3njPWIj0Hnl9Lsl_GlRtkK4OBaA1L1Ko4mL5dBeC1d31CE7dGcdXEVhZUJPtqHsMe7121IHEhjUDn9YICzOxZ4u6F9td46WSo_0A3fKQrixJl3tmgYS6GjMeL8iUrxRIHXQgSzxI8HLjnB7j682LI3KiNm2la4g06EM9c18tcCNr1kz53p8"
                 />
               </div>

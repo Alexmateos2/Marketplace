@@ -40,12 +40,12 @@ const ProfileNavbar = () => {
       {/* Dropdown */}
       {isOpen && (
         <div className="absolute mt-3  top-full -left-15 w-60 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg overflow-hidden z-50">
-          <a
-            href="#profile"
+          <NavLink
+            to={"/profile"}
             className="block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
           >
             Profile
-          </a>
+          </NavLink>
           <NavLink
             to={"/login"}
             href="#settings"
