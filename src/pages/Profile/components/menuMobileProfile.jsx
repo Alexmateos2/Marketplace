@@ -7,7 +7,7 @@ const MenuMobileProfile = ({ isOpen, setIsOpen }) => {
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="fixed p-6 top-20 left-0 w-64 h-auto bg-white dark:bg-background-dark p-6 flex flex-col justify-between shadow-xl">
+      <div className="fixed  top-20 left-0 w-64 h-auto bg-white dark:bg-background-dark p-6 flex flex-col justify-between shadow-xl">
         <div>
           <nav className="flex flex-col gap-2">
             <a
@@ -25,14 +25,7 @@ const MenuMobileProfile = ({ isOpen, setIsOpen }) => {
               <span className="text-sm font-medium">Order History</span>
             </a>
         
-              <button
-                onClick={() => setIsOpen(false)}
-                aria-label="Cerrar menú"
-                className=" rounded hover:bg-gray-200 text-sm font-medium dark:hover:bg-gray-700 flex items-center gap-3 px-3 py-2"
-              >
-                <MdClose size={18} /> <span>Cerrar menu</span>
-              </button>
-             
+              
           </nav>
         </div>
         <button className="mt-10  flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-surface-dark text-content-light dark:text-content-dark text-sm font-medium">
