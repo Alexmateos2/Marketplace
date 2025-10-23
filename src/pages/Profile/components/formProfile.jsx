@@ -8,17 +8,7 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="lg:hidden flex justify-end items-center mb-6">
-        <button
-          onClick={() => setIsMenuOpen(!isOpen)}
-          className="p-2"
-          id="menu-btn"
-        >
-          {
-            <span className="material-symbols-outlined">
-              {isOpen ? " cerrar menu " : " menu"}
-            </span>
-          }
-        </button>
+       
       </div>
       <div className="mb-8">
         <p className="text-4xl font-black text-content-light dark:text-content-dark">
