@@ -79,14 +79,14 @@ const CategoriesNavbar = () => {
             Keyboards
           </NavLink>
           <NavLink
-            to="/products/Mice"
+            to="/products/Mouse"
             className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
                 isActive ? "text-primary" : ""
               }`
             }
           >
-            Mice
+            Mouse
           </NavLink>
           <NavLink
             to="/products/Audio"

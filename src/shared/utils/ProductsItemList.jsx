@@ -27,7 +27,7 @@ const products = [
   {
     id: 4,
     name: "Ergonomic Wireless Mouse",
-    category: "Mice",
+    category: "Mouse",
     price: 59.99,
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuBz76-3gNzjDJQdp14e-eFH7no-Gn3Vm1vIUvvFjW4q6_N26VXx2WDI7rMiBCdgsR53aPn_oDwkTFByYnOp5ueej5_ta1DQpSYui1CpdFujWyMM5pf361evb4W6YXMClVU7FWBeZYWnPTW1vSgS0iPdMFAGV7GEVolRL8QkyVmLItbC5OmBwB5OokWXYar96yXYNv5_uII8xW-N-sxHiDD3JuJ5elJpVmnZCBd9q1KwAqL2uK-fP9tHjTPjTWlCy0pczGcrPfWzbcE",
@@ -113,39 +113,39 @@ const products = [
     image: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
   },
 
-  // Mice
+  // Mouse
   {
     id: 4,
     name: "Ergonomic Wireless Mouse",
-    category: "Mice",
+    category: "Mouse",
     price: 59.99,
     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBz76-3gNzjDJQdp14e-eFH7no-Gn3Vm1vIUvvFjW4q6_N26VXx2WDI7rMiBCdgsR53aPn_oDwkTFByYnOp5ueej5_ta1DQpSYui1CpdFujWyMM5pf361evb4W6YXMClVU7FWBeZYWnPTW1vSgS0iPdMFAGV7GEVolRL8QkyVmLItbC5OmBwB5OokWXYar96yXYNv5_uII8xW-N-sxHiDD3JuJ5elJpVmnZCBd9q1KwAqL2uK-fP9tHjTPjTWlCy0pczGcrPfWzbcE",
   },
   {
     id: 27,
     name: "Ergonomic Wired Mouse",
-    category: "Mice",
+    category: "Mouse",
     price: 39.99,
     image: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: 28,
     name: "Gaming RGB Mouse",
-    category: "Mice",
+    category: "Mouse",
     price: 79.99,
     image: "https://images.unsplash.com/photo-1508873699372-7ae1bb09cd81?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: 29,
     name: "Wireless Vertical Mouse",
-    category: "Mice",
+    category: "Mouse",
     price: 69.99,
     image: "https://images.unsplash.com/photo-1505658514211-5651173c4067?auto=format&fit=crop&w=400&q=80",
   },
   {
     id: 30,
     name: "Silent Click Mouse",
-    category: "Mice",
+    category: "Mouse",
     price: 49.99,
     image: "https://images.unsplash.com/photo-1469571486292-0ba58a3c66c5?auto=format&fit=crop&w=400&q=80",
   },
