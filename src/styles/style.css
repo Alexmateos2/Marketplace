@@ -6,14 +6,14 @@
 
 /* Variables CSS y tema por defecto */
 @theme {
-  --foreground-light: #111621;
-  --foreground-dark: #f6f6f8;
+  --color-foreground-light: #111621;
+  --color-foreground-dark: #f6f6f8;
 
-  --card-light: #ffffff;
-  --card-dark: #1a2230;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1a2230;
 
-  --muted-light: #6c757d;
-  --muted-dark: #a0aec0;
+  --color-muted-light: #6c757d;
+  --color-muted-dark: #a0aec0;
 
   --color-primary: #19a1e6;
   --color-background-light: #f6f6f8;
@@ -57,9 +57,9 @@
   @theme dark {
     --color-primary-dark: #195de6;
     --color-background-dark: #111621;
-    --card-dark: #1a2230;
-    --foreground-dark: #f6f6f8;
-    --muted-dark: #a0aec0;
+    --color-card-dark: #1a2230;
+    --color-foreground-dark: #f6f6f8;
+    --color-muted-dark: #a0aec0;
     --color-content-dark: #ffffff;
     --color-subtle-dark: #a1a7b6;
     --color-surface-dark: #1a212e;
