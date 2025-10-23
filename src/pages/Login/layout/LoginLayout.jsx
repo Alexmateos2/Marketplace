@@ -7,7 +7,7 @@ const LoginPage = () => {
     <div className="dark:bg-background-dark dark:text-white bg-background-light min-h-screen flex flex-col font-display">
       <Navbar />
 
-      <main className="flex-grow flex items-center justify-center p-4 sm:p-8 lg:p-12">
+      <main className="flex grow items-center justify-center p-4 sm:p-8 lg:p-12">
         <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-6 sm:p-10 lg:p-12 space-y-8 sm:space-y-10">
           {/* Header */}
           <div className="text-center space-y-3 sm:space-y-4">
