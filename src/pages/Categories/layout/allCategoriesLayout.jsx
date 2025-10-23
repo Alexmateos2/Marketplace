@@ -51,17 +51,17 @@ const AllCategoriesPage = () => {
             </NavLink>
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
-              to="/products/Mice"
+              to="/products/Mouse"
             >
               <div className="absolute inset-0 z-0">
                 <img
-                  alt="Mice"
+                  alt="Mouse"
                   className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7iA-wiUD-hzvwIDKpwEriTYurAqCpuyHaT_7099KVym89-fJpdTeOl50kasZIpiMttY-ToDof1hM7MWSUN8VTDvH5iWVDSVOf1VpUjtHVeMX-RKtXBVfqTHR0Ujx3pZ4srJQITBV10w-Tq53OUjIOfebbeYyFAc56vaWU1CBXPIzDnH4EvoREsSacPRny8toJ8Nb0t7dHMvKNQxOe5VkvJcAG9_8w78fbjXBqMzQt4PF0ljrmnt2AQlGOnxQs-WmBrH5QIMl5Quk"
                 />
               </div>
               <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
-                <h3 className="text-lg font-bold text-white">Mice</h3>
+                <h3 className="text-lg font-bold text-white">Mouse</h3>
               </div>
             </NavLink>
             <NavLink
