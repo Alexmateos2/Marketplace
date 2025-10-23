@@ -4,7 +4,7 @@ import Navbar from "../../../shared/navbar/navbar";
 import NewCards from "../components/NewCards";
 const NewPage = () => {
   return (
-    <div className="dark:bg-background-dark dark:text-white  min-h-screen  font-display">
+    <div className="dark:bg-background-dark dark:text-white  min-h-screen  font-display  transition-colors">
       <main className="flex-1">
         <Navbar />  
         <div className="bg-background-light py-12 dark:bg-background-dark sm:py-16">
