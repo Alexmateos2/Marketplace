@@ -1,7 +1,7 @@
 // ProfilePage.jsx
 import React, { useState } from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/footer";
+import Footer from "../../../shared/Footer";
 
 import AsideProfile from "../components/asideProfile";
 import FormProfile from "../components/formProfile";

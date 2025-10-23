@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/footer";
+import Footer from "../../../shared/Footer";
 
 const ProductPage = () => {
   return (

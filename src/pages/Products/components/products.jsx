@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import productsItemList from "../../../shared/utils/productsItemLIst.jsx";
-const products = productsItemList
+import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
+const products = ProductsItemList
 const Products = ({ category }) => {
   const filteredProducts = category
     ? products.filter(

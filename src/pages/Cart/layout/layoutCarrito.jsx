@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/footer";
+import Footer from "../../../shared/Footer";
 import CarritoItem from "../components/carritoItem";
 
 const CarritoPage = () => {

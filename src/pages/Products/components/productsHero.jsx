@@ -1,5 +1,5 @@
 import React from 'react'
-import PaginationTop  from '../../../shared/paginationTop'
+import PaginationTop  from '../../../shared/PaginationTop'
 
 const ProductsHero = ({name}) => {
   return (
