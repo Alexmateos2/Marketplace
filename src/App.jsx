@@ -11,6 +11,7 @@ import CategoryPage from "./pages/Categories/layout/categoryLayout";
 import ScrollToTop from "./shared/utils/scrollToTop.jsx";
 import AddProduct from "./pages/Add-Product/layout/addProduct.jsx";
 import AllCategoriesPage from "./pages/Categories/layout/allCategoriesLayout.jsx";
+import ProfilePage from "./pages/Profile/layout/profileLayout.jsx";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/products/:category?" element={<CategoryPage />} />
           <Route path="/categories" element={<AllCategoriesPage />} />
           <Route path="/add" element={<AddProduct />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Router>
     </div>

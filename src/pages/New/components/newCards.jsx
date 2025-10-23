@@ -95,7 +95,7 @@ const NewCards = () => {
             className="h-56 w-full object-cover"
             src={product.image}
           />
-          <div className="absolute top-3 left-3 rounded-full bg-primary/80 px-3 py-1 text-xs font-medium text-white">
+          <div className="absolute top-3 left-3 rounded-full bg-primary/80 dark:bg-primary px-3 py-1 text-xs font-medium text-content-light transition-colors">
             {product.tag}
           </div>
         </div>

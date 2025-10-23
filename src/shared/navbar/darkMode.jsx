@@ -18,16 +18,23 @@ const DarkMode = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="rounded-full p-2 hover:bg-primary/10 dark:hover:bg-primary/20"
+      className="rounded-full p-2 hover:bg-primary/10 dark:hover:bg-primary/20 cursor-pointer"
       id="dark-mode-toggle"
     >
       <svg
         className="h-6 w-6 block dark:hidden"
-        fill="currentColor"
-        viewBox="0 0 256 256"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path d="M228,128a12,12,0,0,1-12,12,100.11,100.11,0,0,1-99.34-111.45,12,12,0,0,1,21.06,12.35A76.08,76.08,0,0,0,140,204a76,76,0,0,0,75.78-88.37,12,12,0,0,1,12.22-9.63Z" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"
+        />
       </svg>
+
       <svg
         className="h-6 w-6 hidden dark:block"
         fill="currentColor"
