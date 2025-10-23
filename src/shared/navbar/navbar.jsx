@@ -69,7 +69,7 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center gap-4 ml-auto">
-              <div className="relative hidden md:block md:w-90 lg:w-90">
+              <div className="relative hidden md:block md:w-80 lg:w-60 xl:w-90">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <svg
                     className="h-5 w-5 text-subtle-light  dark:text-content-dark"

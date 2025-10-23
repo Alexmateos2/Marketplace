@@ -10,7 +10,7 @@ const Products = ({ category }) => {
     : products;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 font-display">
+    <div className="grid grid-cols-1 w-5/6 mt-4 md:w-auto md:mt-0 mx-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 font-display">
       {filteredProducts.map((product) => (
         <NavLink
           key={product.id}
@@ -18,14 +18,14 @@ const Products = ({ category }) => {
           className="group relative flex flex-col bg-background-light dark:bg-background-dark rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-md hover:shadow-xl"
         >
           <div
-            className="relative w-full aspect-square bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+            className="relative w-full  h-60 md:h-full aspect-square bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
             style={{ backgroundImage: `url(${product.image})` }}
           ></div>
-          <div className="px-4 py-5 flex-grow flex flex-col">
-            <h4 className="font-bold text-lg text-gray-800 dark:text-gray-100 flex-grow">
+          <div className="px-4 h-30 md:h-full py-5 flex-grow flex flex-col">
+            <h4 className="font-bold text-md lg:text-lg text-gray-800 dark:text-gray-100 flex-grow">
               {product.name}
             </h4>
-            <p className="text-gray-700 dark:text-subtle-dark font-bold text-lg mt-1">
+            <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg mt-1">
               ${product.price}
             </p>
           </div>
