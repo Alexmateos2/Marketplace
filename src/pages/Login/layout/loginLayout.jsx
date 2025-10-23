@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "../../../shared/footer";
+import Footer from "../../../shared/Footer";
 import Navbar from "../../../shared/navbar/navbar";
 
 const LoginPage = () => {

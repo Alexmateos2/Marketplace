@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/footer";
+import Footer from "../../../shared/Footer";
 import { MdVerified, MdThumbUp, MdRocketLaunch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import GlareButton from "../../../shared/utils/GlareButton";

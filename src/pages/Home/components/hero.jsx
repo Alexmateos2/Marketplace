@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="relative h-[500px] overflow-hidden rounded-xl md:my-12 lg:my-0">
+    <section className="relative h-[500px] overflow-hidden rounded-xl  lg:my-0">
       <img
         alt="Desk setup"
         className="absolute inset-0 h-full w-full object-cover brightness-65 md:brightness-100"
