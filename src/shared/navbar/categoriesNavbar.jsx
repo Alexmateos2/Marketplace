@@ -62,7 +62,8 @@ const CategoriesNavbar = () => {
             end 
             className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary" : ""
+                isActive ? " bg-primary/10 dark:bg-primary/20" 
+                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
               }`
             }
           >
@@ -72,7 +73,8 @@ const CategoriesNavbar = () => {
             to="/products/Keyboards"
             className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary" : ""
+                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
+                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
               }`
             }
           >
@@ -80,9 +82,10 @@ const CategoriesNavbar = () => {
           </NavLink>
           <NavLink
             to="/products/Mouse"
-            className={({ isActive }) =>
+           className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary" : ""
+                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
+                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
               }`
             }
           >
@@ -92,7 +95,8 @@ const CategoriesNavbar = () => {
             to="/products/Audio"
             className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary" : ""
+                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
+                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
               }`
             }
           >
