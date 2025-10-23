@@ -19,7 +19,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
           exit="exit"
           variants={menuVariants}
           transition={{ duration: 0.2 }}
-          className="absolute  top-35 left-0 w-64 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg z-20 mt-2"
+          className="absolute  top-37 left-0 w-64 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg z-20 mt-2"
         >
           {[
             { to: "/categories", label: "Categorías" },
