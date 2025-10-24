@@ -4,16 +4,17 @@ import Footer from "../../../shared/Footer";
 import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
 import { NavLink, useParams } from "react-router-dom";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
-
+ import { Navigate } from "react-router-dom";
 const products = ProductsItemList;
 
 const ProductPage = () => {
   const { id } = useParams();
   const { cart, addToCart } = useCart();
+ 
 
   const product = products.find((p) => String(p.id) === id);
 
-  if (!product) return <div>Producto no encontrado</div>;
+  if (!product) return <Navigate to="/noProduct" replace />;
 
   // Busca el producto en el carrito
   const productInCart = cart.find((item) => item.id === product.id);
