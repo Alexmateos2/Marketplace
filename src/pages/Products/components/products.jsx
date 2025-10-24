@@ -21,6 +21,7 @@ const Products = ({ category }) => {
             className="relative w-full  h-70 md:h-full aspect-square object-cover   transition-transform duration-300 group-hover:scale-105"
             src={product.image ? product.image : "../unnamed(6).png"}
             alt={product.name}
+            loading="lazy"
           />
           <div className="px-4 h-30 md:h-full py-5 flex-grow flex flex-col">
             <h4 className="font-bold text-md lg:text-lg text-gray-800 dark:text-gray-100 flex-grow">

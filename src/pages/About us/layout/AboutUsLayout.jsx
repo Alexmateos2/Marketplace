@@ -10,7 +10,7 @@ const AboutUsPage = () => {
     <div className="flex flex-col min-h-screen dark:bg-background-dark dark:text-content-dark  text-content-light font-display transition-colors">
       <Navbar />
       <main className="flex flex-col flex-1">
-        <section className="w-full py-20 md:py-32 lg:py-40 text-center px-4 md:px-10 lg:px-20">
+        <section className="w-full py-70 lg:py-40 text-center px-4 md:px-10 lg:px-20">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-4">
               Tech, Perfected.
