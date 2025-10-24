@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { MdPerson, MdReceiptLong, MdLogout, MdClose } from "react-icons/md";
-
+import { useCart } from "../hooks/CartContext";
 const menuVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: { opacity: 1, y: 0 },
@@ -11,22 +12,30 @@ const menuVariants = {
 
 const MobileMenu = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
+  const { cart } = useCart();
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
- 
   const isProfilePage = location.pathname.startsWith("/profile");
-
 
   const menuItems = isProfilePage
     ? [
-        { icon: <MdPerson />, label: "Personal Information", to: "/profile/info" },
-        { icon: <MdReceiptLong />, label: "Order History", to: "/profile/orders" },
+        {
+          icon: <MdPerson />,
+          label: "Personal Information",
+          to: "/profile/info",
+        },
+        {
+          icon: <MdReceiptLong />,
+          label: "Order History",
+          to: "/profile/orders",
+        },
       ]
     : [
         { label: "Categorías", to: "/categories" },
         { label: "Nuevo", to: "/new" },
         { label: "Productos", to: "/products" },
         { label: "About us", to: "/about" },
-        { label: "Cart", to: "/cart" },
+        { label: "Cart", to: "/cart", totalItems: { totalItems } },
       ];
 
   return (
@@ -41,7 +50,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
           className="absolute top-37 left-0 w-64 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg z-20 mt-2"
         >
           <nav className="flex flex-col gap-2 p-4">
-            {menuItems.map(({ to, label, icon }) => (
+            {menuItems.map(({ to, label }) => (
               <NavLink
                 key={to}
                 to={to}
@@ -54,12 +63,16 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
                   }`
                 }
               >
-                {icon && icon}
                 <span>{label}</span>
+                {totalItems >0 && label === "Cart"  ? (
+                  <span className=" bg-red-500  text-white rounded-full text-sm w-6 h-6 flex items-center justify-center">
+                    {totalItems > 9 ? "9+" : totalItems}
+                  </span>
+                ) : (
+                  ""
+                )}
               </NavLink>
             ))}
-
-           
           </nav>
 
           {/* Mostrar Logout solo si está en /profile */}

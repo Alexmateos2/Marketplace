@@ -4,9 +4,11 @@ import ProfileNavbar from "./profileNavbar";
 import DarkMode from "./darkMode";
 import MobileMenu from "./MobileMenu";
 import { useState } from "react";
-
+import { useCart } from "../hooks/CartContext";
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cart } = useCart();
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -91,10 +93,9 @@ const Navbar = () => {
                   className="w-full rounded-lg border border-border-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
                 />
               </div>
-
               <NavLink
                 to="/cart"
-                className="p-2 hidden md:block rounded-full hover:bg-primary/10 dark:text-white dark:hover:bg-primary/20 transition-colors"
+                className="hidden lg:block relative p-2 rounded-full hover:bg-primary/10 dark:text-white dark:hover:bg-primary/20 transition-colors"
               >
                 <svg
                   className="h-6 w-6"
@@ -109,6 +110,12 @@ const Navbar = () => {
                     strokeWidth="1.5"
                   ></path>
                 </svg>
+                {cart.length > 0 && (
+                  <span className="absolute -bottom-1 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                    {totalItems > 9 ? "9+" : totalItems}
+
+                  </span>
+                )}
               </NavLink>
 
               <DarkMode />
@@ -128,7 +135,6 @@ const Navbar = () => {
         >
           Add Product
         </NavLink>
-       
       </header>
       <div className="lg:hidden  mt-2 mb-4">
         <button
@@ -154,9 +160,8 @@ const Navbar = () => {
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-          
         </button>
-         {isMobileMenuOpen && (
+        {isMobileMenuOpen && (
           <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setMobileMenuOpen} />
         )}
       </div>
