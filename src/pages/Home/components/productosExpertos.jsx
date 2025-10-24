@@ -1,5 +1,6 @@
 import React from "react";
 import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
+import { NavLink } from "react-router-dom";
 function ProductosExpertos() {
   const products = ProductsItemList
   const items = products.slice(products.length - 4, products.length)
@@ -8,6 +9,9 @@ function ProductosExpertos() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1  px-8 sm:px-0 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {items.map((item) => (
+          <NavLink 
+          to={`product/${item.id}`}
+          >
           <div
             key={item.name}
             className="group overflow-hidden rounded-lg bg-surface-light shadow-sm transition-shadow hover:shadow-md dark:bg-surface-dark"
@@ -23,7 +27,9 @@ function ProductosExpertos() {
                 {item.shortDesc}
               </p>
             </div>
+           
           </div>
+        </NavLink>
         ))}
       </div>
     </div>
