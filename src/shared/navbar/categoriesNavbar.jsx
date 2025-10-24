@@ -100,7 +100,7 @@ const CategoriesNavbar = () => {
               }`
             }
           >
-            Headphones
+            Audio
           </NavLink>
         </div>
       )}
