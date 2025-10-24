@@ -24,37 +24,34 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div
-    className="flex items-center space-x-4 p-4 border-b border-gray-200">
+    <div className="flex items-center flex-col xxs:flex-row xxs:gap-2  gap-6 space-x-4 p-4 border-b border-gray-200">
       {item.image && (
-        <NavLink
-        to={`/product/${item.id}`}
-        >
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-20 h-20 object-cover rounded"
-        />
+        <NavLink to={`/product/${item.id}`}>
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-1/2 h-1/2 mx-auto xxs:w-30 xxs:h-30 object-cover rounded"
+          />
         </NavLink>
       )}
       <div className="flex-1">
-         <NavLink
-        to={`/product/${item.id}`}
-        >
-        <h3 className="font-semibold">{item.name}</h3>
+        <NavLink to={`/product/${item.id}`}>
+          <h3 className=" font-semibold ">{item.name}</h3>
         </NavLink>
-        <p className="text-sm text-gray-600">${item.price} x {item.quantity}</p>
-        <div className="flex items-center space-x-2 mt-4">
+        <p className="text-sm  text-content-light dark:text-subtle-dark">
+          ${item.price} x {item.quantity}
+        </p>
+        <div className="flex items-center justify-center xxs:justify-start space-x-2 mt-4">
           <button
             onClick={handleDecrease}
-            className="px-2 py-1 border font-medium  dark:border-border-dark dark:bg-surface-dark rounded hover:bg-gray-200"
+            className="w-6 h-6 flex items-center justify-center border font-medium dark:border-border-dark dark:bg-surface-dark rounded hover:bg-gray-200"
           >
             -
           </button>
           <span>{item.quantity}</span>
           <button
             onClick={handleIncrease}
-            className="px-2 py-1 border font-medium dark:border-border-dark dark:bg-surface-dark  rounded hover:bg-gray-200"
+            className="w-6 h-6 flex items-center justify-center border font-medium dark:border-border-dark dark:bg-surface-dark rounded hover:bg-gray-200"
           >
             +
           </button>
@@ -62,7 +59,7 @@ const CartItem = ({ item }) => {
       </div>
       <button
         onClick={handleRemove}
-        className="text-red-500 hover:text-red-700 font-bold"
+        className="text-red-500 hover:text-red-700   font-bold"
       >
         Eliminar
       </button>
