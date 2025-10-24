@@ -38,20 +38,20 @@ const CartItem = ({ item }) => {
         <NavLink to={`/product/${item.id}`}>
           <h3 className=" font-semibold ">{item.name}</h3>
         </NavLink>
-        <p className="text-sm  text-content-light dark:text-subtle-dark">
+        <p className="text-sm flex mt-1 xxs:block justify-center text-content-light dark:text-subtle-dark">
           ${item.price} x {item.quantity}
         </p>
         <div className="flex items-center justify-center xxs:justify-start space-x-2 mt-4">
           <button
             onClick={handleDecrease}
-            className="w-6 h-6 flex items-center justify-center border font-medium dark:border-border-dark dark:bg-surface-dark rounded hover:bg-gray-200"
+            className="w-6 h-6 ml-3 flex items-center justify-center border dark:border-border-dark dark:bg-surface-dark rounded-full hover:bg-gray-200"
           >
             -
           </button>
           <span>{item.quantity}</span>
           <button
             onClick={handleIncrease}
-            className="w-6 h-6 flex items-center justify-center border font-medium dark:border-border-dark dark:bg-surface-dark rounded hover:bg-gray-200"
+            className="w-6 h-6  flex items-center justify-center border dark:border-border-dark dark:bg-surface-dark rounded-full hover:bg-gray-200"
           >
             +
           </button>
@@ -59,7 +59,7 @@ const CartItem = ({ item }) => {
       </div>
       <button
         onClick={handleRemove}
-        className="text-red-500 hover:text-red-700   font-bold"
+        className="text-red-500  hover:text-red-700   font-bold"
       >
         Eliminar
       </button>
