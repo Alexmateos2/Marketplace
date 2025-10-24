@@ -14,13 +14,14 @@ const Products = ({ category }) => {
       {filteredProducts.map((product) => (
         <NavLink
           key={product.id}
-          to={`/product`}
+          to={`/product/${product.id}`}
           className="group relative flex flex-col bg-background-light dark:bg-background-dark rounded-lg overflow-hidden transition-all duration-300 cursor-pointer shadow-md hover:shadow-xl"
         >
-          <div
-            className="relative w-full  h-60 md:h-full aspect-square bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-            style={{ backgroundImage: `url(${product.image})` }}
-          ></div>
+          <img
+            className="relative w-full  h-70 md:h-full aspect-square object-cover   transition-transform duration-300 group-hover:scale-105"
+            src={product.image ? product.image : "../unnamed(6).png"}
+            alt={product.name}
+          />
           <div className="px-4 h-30 md:h-full py-5 flex-grow flex flex-col">
             <h4 className="font-bold text-md lg:text-lg text-gray-800 dark:text-gray-100 flex-grow">
               {product.name}
