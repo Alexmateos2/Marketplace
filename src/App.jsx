@@ -12,10 +12,12 @@ import ScrollToTop from "./shared/utils/ScrollToTop.jsx";
 import AddProduct from "./pages/Add-Product/layout/addProduct.jsx";
 import AllCategoriesPage from "./pages/Categories/layout/allCategoriesLayout.jsx";
 import ProfilePage from "./pages/Profile/layout/profileLayout.jsx";
-
+import { CartProvider } from "./shared/hooks/CartProvider.jsx";
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
+          <CartProvider>
+
       <Router>
         <ScrollToTop />
         <Routes>
@@ -33,6 +35,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Router>
+          </CartProvider>
     </div>
   );
 }

@@ -11,9 +11,10 @@ function ProductosExpertos() {
         {items.map((item) => (
           <NavLink 
           to={`product/${item.id}`}
+          key={item.name}
           >
           <div
-            key={item.name}
+            
             className="group overflow-hidden rounded-lg bg-surface-light shadow-sm transition-shadow hover:shadow-md dark:bg-surface-dark"
           >
             <img

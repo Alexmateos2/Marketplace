@@ -2,41 +2,59 @@ import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/Footer";
 import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
-const products = ProductsItemList
 import { NavLink, useParams } from "react-router-dom";
+import { useCart } from "../../../shared/hooks/CartContext.jsx";
+
+const products = ProductsItemList;
+
 const ProductPage = () => {
   const { id } = useParams();
-  // Si tu id es numérico, convierte: parseInt(id)
-  const product = products.find(p => String(p.id) === id);
+  const { cart, addToCart } = useCart();
+
+  const product = products.find((p) => String(p.id) === id);
 
   if (!product) return <div>Producto no encontrado</div>;
 
+  // Busca el producto en el carrito
+  const productInCart = cart.find((item) => item.id === product.id);
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: 1,
+    });
+  };
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-background-dark dark:text-content-dark bg-background-light text-content-light font-display transition-colors">
       <Navbar />
       <main className="flex-1 px-4 sm:px-6 lg:px-40 py-8">
         <div className="mx-auto max-w-5xl">
+          {/* Navegación breadcrumb */}
           <div className="mb-6">
             <nav className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
-              <NavLink
-                to='/products'
-               className="hover:text-primary" href="#">
+              <NavLink to="/products" className="hover:text-primary">
                 Tech
               </NavLink>
               <span className="mx-2">/</span>
-              <NavLink to={`/products/${product.category}`}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary">{product.category}</NavLink>
+              <NavLink
+                to={`/products/${product.category}`}
+                className="text-gray-700 dark:text-gray-300 hover:text-primary"
+              >
+                {product.category}
+              </NavLink>
             </nav>
           </div>
 
-
-          <div className="grid grid-cols-1 lg:grid-cols-2  gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Producto */}
-            <div className="flex flex-col order-1 lg:order-2 ">
-              <div className=" rounded-xl px-6 mb-8 lg:mb-0 ">
+            <div className="flex flex-col order-1 lg:order-2">
+              <div className="rounded-xl px-6 mb-8 lg:mb-0 ">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 ">
-                 {product.name}
+                  {product.name}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
                   {product.desc}
@@ -47,16 +65,31 @@ const ProductPage = () => {
                     content="299"
                     itemProp="price"
                   >
-                   ${product.price}
+                    ${product.price}
                   </span>
                 </div>
-                <button className="sm:w-full md:w-2/3 lg:w-full flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-all">
-                  Add to Cart
-                </button>
+                <div className="flex flex-col gap-4">
+                  <button
+                    onClick={handleAddToCart}
+                    className="cursor-pointer sm:w-full md:w-2/3 lg:w-full flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-all"
+                  >
+                    Add to Cart
+                  </button>
+                  {/* Cambia el botón según si el producto está en carrito */}
+                  <div className="min-h-[28px] ">
+                    <span
+                      className={`text-xl px-2 font-semibold transition-opacity duration-300 ${
+                        productInCart ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      Quantity: {productInCart?.quantity ?? ""}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Imagenes */}
+            {/* Imagen */}
             <div className="flex flex-col max-h-[350px] order-2 lg:order-1">
               <div className="w-full max-w-[600px] mx-auto relative overflow-hidden rounded-xl aspect-[4/3]">
                 <img
@@ -69,14 +102,13 @@ const ProductPage = () => {
             </div>
           </div>
 
-     
+          {/* Especificaciones */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
-            {/* Especificaciones */}
             <div className="flex flex-col">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Specifications
               </h2>
-              <div className="divide-y divide-subtle-light/60 dark:divide-border-black border-t border-b border-subtle-light/60 dark:border-border-dark  p-6">
+              <div className="divide-y divide-subtle-light/60 dark:divide-border-black border-t border-b border-subtle-light/60 dark:border-border-dark p-6">
                 <div className="py-4 grid grid-cols-3 gap-4">
                   <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Connectivity
