@@ -3,7 +3,7 @@ import React from 'react'
 function CategoriaDestacada() {
   const categories = [
     { title: "Laptops", image: "../unnamed(6).png" },
-    { title: "Audio", image: "../unnamed(7).png" },
+    { title: "Audio", image: "../(7).png" },
     { title: "Wearables", image: "../unnamed(8).png" },
     { title: "Accessories", image: "../unnamed(9).png" },
   ];
