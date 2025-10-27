@@ -36,7 +36,7 @@ const CartItem = ({ item }) => {
       )}
       <div className="flex-1">
         <NavLink to={`/product/${item.id}`}>
-          <h3 className=" font-semibold ">{item.name}</h3>
+          <h3 className="text-center xxs:text-start font-semibold ">{item.name}</h3>
         </NavLink>
         <p className="text-sm flex mt-1 xxs:block justify-center text-content-light dark:text-subtle-dark">
           ${item.price} x {item.quantity}
