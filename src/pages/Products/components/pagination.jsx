@@ -1,22 +1,51 @@
-import React from 'react'
+import React from "react";
+import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
+const Pagination = ({ category, currentPage, itemsPerPage, onPageChange }) => {
+  const products = ProductsItemList;
+const filteredProducts = category
+    ? products.filter((product) => product.category === category)
+    : products;
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
-const Pagination = () => {
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
-      <div className="flex items-center justify-center mt-8 lg:hidden">
-              <nav aria-label="Pagination" className="flex items-center gap-2">
-                <a className="p-2 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-500 dark:text-gray-400" href="#">
-                  <svg aria-hidden="true" className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path clipRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" fillRule="evenodd"></path>
-                  </svg>
-                </a>
-                <a className="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold text-sm" href="#">1</a>
-                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-subtle-dark font-medium text-sm" href="#">2</a>
-                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-subtle-dark font-medium text-sm" href="#">3</a>
-                <span className="w-10 h-10 flex items-center justify-center text-gray-600 dark:text-subtle-dark">...</span>
-                <a className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-subtle-dark font-medium text-sm" href="#">8</a>
-              </nav>
-            </div>
-  )
-}
+    <div className="flex items-center justify-center mt-8 ">
+      <nav aria-label="Pagination" className="flex items-center gap-2">
+        {/* Prev */}
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="p-2 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-500 dark:text-gray-400 disabled:opacity-50"
+        >
+          {"<"}
+        </button>
 
+        {/* Números de página */}
+        {pages.map((page) => (
+          <button
+            key={page}
+            onClick={() => onPageChange(page)}
+            className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-medium ${
+              page === currentPage
+                ? "bg-primary text-white font-bold"
+                : "hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-600 dark:text-subtle-dark"
+            }`}
+          >
+            {page}
+          </button>
+        ))}
+
+        {/* Next */}
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="p-2 rounded-full hover:bg-primary/10 dark:hover:bg-primary/20 text-gray-500 dark:text-gray-400 disabled:opacity-50"
+        >
+          {">"}
+        </button>
+      </nav>
+    </div>
+  );
+};
 export default Pagination
