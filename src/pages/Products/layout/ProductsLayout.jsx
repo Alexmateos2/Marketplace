@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/Footer";
 import Pagination from "../components/pagination";
@@ -6,18 +6,36 @@ import Products from "../components/products";
 import Filtros from "../components/filtros";
 import ProductsHero from "../components/productsHero";
 
-const ProductsPage = ({category}) => {
+const ProductsPage = ({ category }) => {
+  const itemsPerPage = 12;
+  const [currentPage, setCurrentPage] = useState(1); // <- Estado de página
+
   return (
     <div className="dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors ">
       <Navbar />
       <main className="grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
-    <ProductsHero name ={category} />
+        <ProductsHero
+          category={category}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+        />
         <div className="flex flex-col lg:flex-row gap-8">
-         <Filtros />
-
+          <Filtros />
           <div className="flex-1">
-            <Products category={category}/>
-            <Pagination />
+            <Products
+              category={category}
+              currentPage={currentPage}
+              itemsPerPage={itemsPerPage}
+            />
+            <div className="block lg:hidden">
+            <Pagination
+              category={category}
+              currentPage={currentPage}
+              itemsPerPage={itemsPerPage}
+              onPageChange={setCurrentPage} // <- Pasamos callback al hijo
+            />
+            </div>
           </div>
         </div>
       </main>
