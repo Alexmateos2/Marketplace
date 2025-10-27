@@ -5,10 +5,14 @@ import DarkMode from "./darkMode";
 import MobileMenu from "./MobileMenu";
 import { useState } from "react";
 import { useCart } from "../hooks/CartContext";
+import BarraBusqueda from "./BarraBusqueda";
+
 const Navbar = () => {
+  const isProfilePage = location.pathname.startsWith("/profile");
+  const isLoginPage = location.pathname.startsWith("/login");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cart } = useCart();
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -70,32 +74,17 @@ const Navbar = () => {
               </nav>
             </div>
 
-            <div className="flex items-center gap-4 ml-auto">
-              <div className="relative hidden md:block md:w-80 lg:w-60 xl:w-90">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg
-                    className="h-5 w-5 text-subtle-light  dark:text-content-dark"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  className="w-full rounded-lg border border-border-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
-                />
+            <div className="flex items-center  gap-4 ml-auto">
+              <div
+                className="relative hidden lg:block  lg:w-55 xl:w-90
+              "
+              >
+                <BarraBusqueda />
               </div>
+
               <NavLink
                 to="/cart"
-                className="hidden lg:block relative p-2 rounded-full hover:bg-primary/10 dark:text-white dark:hover:bg-primary/20 transition-colors"
+                className=" lg:block relative p-2 rounded-full hover:bg-primary/10 dark:text-white dark:hover:bg-primary/20 transition-colors"
               >
                 <svg
                   className="h-6 w-6"
@@ -113,7 +102,6 @@ const Navbar = () => {
                 {cart.length > 0 && (
                   <span className="absolute -bottom-1 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
                     {totalItems > 9 ? "9+" : totalItems}
-
                   </span>
                 )}
               </NavLink>
@@ -136,17 +124,17 @@ const Navbar = () => {
           Add Product
         </NavLink>
       </header>
-      <div className="lg:hidden  mt-2 mb-4">
+      <div className={`lg:hidden ${isProfilePage || isLoginPage ? "mt-10" : "mt-15"} mb-4`}>
         <button
-          className="p-4 w-20 flex justify-center bg-background-light border border-border-light text-primary rounded shadow-lg focus:outline-none focus:ring-2 focus:ring-primary 
-          dark:border-border-dark dark:bg-surface-dark dark:text-primary
-          transition-transform duration-300"
+          className="fixed top-25 left-1 z-50 p-4 w-20 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary 
+  dark:border-border-dark dark:bg-surface-dark dark:text-primary
+  transition-transform duration-300"
           onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={`w-6 h-6 transform transition-transform duration-300 ${
+            className={`w-6 h-6  transform transition-transform duration-300 ${
               isMobileMenuOpen ? "rotate-90" : "rotate-0"
             }`}
             fill="none"
@@ -161,9 +149,15 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        {isMobileMenuOpen && (
-          <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setMobileMenuOpen} />
-        )}
+        <div className="flex mx-auto  w-full  md:w-2/3 py-5 px-10 ">
+          {isMobileMenuOpen && (
+            <MobileMenu
+              isOpen={isMobileMenuOpen}
+              setIsOpen={setMobileMenuOpen}
+            />
+          )}
+          {!isProfilePage  && !isLoginPage && <BarraBusqueda />}
+        </div>
       </div>
     </>
   );
