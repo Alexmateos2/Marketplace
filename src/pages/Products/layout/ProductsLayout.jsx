@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/Footer";
+import Footer from "../../../shared/utils/Footer";
 import Pagination from "../components/pagination";
 import Products from "../components/products";
 import Filtros from "../components/filtros";

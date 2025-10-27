@@ -1,5 +1,5 @@
 import React from 'react'
-import PaginationTop  from '../../../shared/PaginationTop'
+
 import Pagination from './pagination'
 const ProductsHero = ({ category, currentPage, itemsPerPage ,onPageChange}) => {
   return (

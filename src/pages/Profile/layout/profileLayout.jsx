@@ -1,7 +1,7 @@
 // ProfilePage.jsx
 
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/Footer";
+import Footer from "../../../shared/utils/Footer";
 
 import AsideProfile from "../components/asideProfile";
 import FormProfile from "../components/formProfile";
