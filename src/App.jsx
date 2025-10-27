@@ -4,7 +4,7 @@ import ProductsPage from "./pages/Products/layout/ProductsLayout";
 import AboutUsPage from "./pages/About us/layout/AboutUsLayout";
 import ProductPage from "./pages/Product/layout/ProductLayout";
 import CarritoPage from "./pages/Cart/layout/layoutCarrito";
-import NotFound from "./shared/NotFound.jsx";
+import NotFound from "./shared/utils/NotFound.jsx";
 import LoginPage from "./pages/Login/layout/LoginLayout.jsx";
 import NewPage from "./pages/New/layout/NewLayout.jsx";
 import CategoryPage from "./pages/Categories/layout/categoryLayout";

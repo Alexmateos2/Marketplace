@@ -1,16 +1,22 @@
-import React from "react";
-import Navbar from "./navbar/navbar";
+import React, { useEffect } from "react";
 import Footer from "./Footer";
 import { NavLink } from "react-router-dom";
 
 const NotFound = () => {
+  useEffect(() => {
+    document.documentElement.classList.remove("dark");
+    return () => {
+      document.documentElement.classList.add("dark");
+    };
+  }, []);
+
   return (
-    <div className="dark:bg-background-dark dark:text-content-dark flex flex-col min-h-screen  font-display">
+    <div className="bg-background-light text-text-light flex flex-col min-h-screen font-display">
       <div className="max-w-lg flex-grow flex flex-col justify-center text-center space-y-8 mx-auto">
-        <h1 className="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark">
+        <h1 className="text-3xl font-bold tracking-tight">
           404 - Page Not Found
         </h1>
-        <p className="text-base font-normal leading-normal max-w-md text-text-light/80 dark:text-text-dark/80 mx-auto">
+        <p className="text-base font-normal leading-normal max-w-md text-text-light/80 mx-auto">
           Oops! It seems you've taken a wrong turn. The page you are looking for
           might have been moved, deleted, or you might have mistyped the URL.
         </p>

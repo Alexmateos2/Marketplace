@@ -1,6 +1,6 @@
 import React from "react";
 import Hero from "../components/hero";
-import Footer from "../../../shared/Footer";
+import Footer from "../../../shared/utils/Footer";
 import CategoriaDestacada from "../components/categoriasDestacadas";
 import ProductosExpertos from "../components/productosExpertos";
 import Card from "../components/card";

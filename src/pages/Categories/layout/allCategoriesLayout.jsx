@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/Footer";
+import Footer from "../../../shared/utils/Footer";
 import { NavLink } from "react-router-dom";
 
 const AllCategoriesPage = () => {

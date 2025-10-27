@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import Footer from "../../../shared/Footer";
+import Footer from "../../../shared/utils/Footer.jsx";
 import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
 import { NavLink, useParams } from "react-router-dom";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";

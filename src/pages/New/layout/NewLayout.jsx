@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "../../../shared/Footer";
+import Footer from "../../../shared/utils/Footer";
 import Navbar from "../../../shared/navbar/navbar";
 import NewCards from "../components/NewCards";
 const NewPage = () => {

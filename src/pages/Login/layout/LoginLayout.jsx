@@ -1,10 +1,10 @@
 import React from "react";
-import Footer from "../../../shared/Footer";
+import Footer from "../../../shared/utils/Footer";
 import Navbar from "../../../shared/navbar/navbar";
 
 const LoginPage = () => {
   return (
-    <div className="dark:bg-background-dark dark:text-white bg-background-light min-h-screen flex flex-col font-display">
+    <div className="dark:bg-background-dark dark:text-white bg-background-light min-h-screen flex flex-col font-display transition-colors">
       <Navbar />
 
       <main className="flex grow items-center justify-center p-4 sm:p-8 lg:p-12">
