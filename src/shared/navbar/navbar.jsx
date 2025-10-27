@@ -124,7 +124,7 @@ const Navbar = () => {
           Add Product
         </NavLink>
       </header>
-      <div className={`lg:hidden ${isProfilePage || isLoginPage ? "mt-10" : "mt-15"} mb-4`}>
+      <div className={`lg:hidden ${isProfilePage || isLoginPage ? "mt-10" : "mt-20"} mb-4`}>
         <button
           className="fixed top-25 left-1 z-50 p-4 w-20 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary 
   dark:border-border-dark dark:bg-surface-dark dark:text-primary
