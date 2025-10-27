@@ -33,7 +33,7 @@ const ProductsPage = ({ category }) => {
               category={category}
               currentPage={currentPage}
               itemsPerPage={itemsPerPage}
-              onPageChange={setCurrentPage} // <- Pasamos callback al hijo
+              onPageChange={setCurrentPage} 
             />
             </div>
           </div>
