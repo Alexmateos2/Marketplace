@@ -5,8 +5,10 @@ import { NavLink } from "react-router-dom";
 
 const AllCategoriesPage = () => {
   return (
-    <div className="dark:bg-background-dark dark:text-white min-h-screen font-display transition-colors">
+    <div className="flex flex-col min-h-screen dark:bg-background-dark bg-background-light dark:text-white font-display transition-colors">
+
       <Navbar />
+
       <main className="flex-1">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-3xl mx-auto text-center">
@@ -18,7 +20,10 @@ const AllCategoriesPage = () => {
               experts.
             </p>
           </div>
+
+
           <div className="mt-16 grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-8">
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Audio"
@@ -34,6 +39,8 @@ const AllCategoriesPage = () => {
                 <h3 className="text-lg font-bold text-white">Audio</h3>
               </div>
             </NavLink>
+
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Keyboards"
@@ -49,6 +56,8 @@ const AllCategoriesPage = () => {
                 <h3 className="text-lg font-bold text-white">Keyboards</h3>
               </div>
             </NavLink>
+
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Mouse"
@@ -64,6 +73,8 @@ const AllCategoriesPage = () => {
                 <h3 className="text-lg font-bold text-white">Mouse</h3>
               </div>
             </NavLink>
+
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Monitors"
@@ -79,6 +90,8 @@ const AllCategoriesPage = () => {
                 <h3 className="text-lg font-bold text-white">Monitors</h3>
               </div>
             </NavLink>
+
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Laptops"
@@ -94,6 +107,8 @@ const AllCategoriesPage = () => {
                 <h3 className="text-lg font-bold text-white">Laptops</h3>
               </div>
             </NavLink>
+
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Tablets"
@@ -109,6 +124,7 @@ const AllCategoriesPage = () => {
                 <h3 className="text-lg font-bold text-white">Tablets</h3>
               </div>
             </NavLink>
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Wearables"
@@ -124,6 +140,8 @@ const AllCategoriesPage = () => {
                 <h3 className="text-lg font-bold text-white">Smart Watches</h3>
               </div>
             </NavLink>
+
+
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Accessories"
@@ -142,6 +160,8 @@ const AllCategoriesPage = () => {
           </div>
         </div>
       </main>
+
+
       <Footer />
     </div>
   );

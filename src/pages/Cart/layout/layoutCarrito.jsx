@@ -9,17 +9,17 @@ const CarritoPage = () => {
   const { cart, totalPrice } = useCart();
 
   return (
-    <div className="dark:bg-background-dark dark:text-content-dark font-display transition-colors min-h-screen flex flex-col">
+    <div className="dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors min-h-screen flex flex-col">
       <Navbar />
 
       <main className="flex-1 px-4 py-8 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-black dark:text-white mb-8 border-b dark:border-border-dark pb-4 ">
+          <h1 className="text-4xl font-bold text-black dark:text-white mb-8 border-b border-border-dark/40 dark:border-border-dark pb-4 ">
             Shopping Cart
           </h1>
 
           {cart.length === 0 ? (
-            <p className="px-2 pb-4 font-medium border-b dark:border-border-dark">- Tu carrito está vacío.</p>
+            <p className="px-2 pb-4 font-medium border-b border-border-dark/40 dark:border-border-dark">- Tu carrito está vacío.</p>
           ) : (
             cart.map((item) => <CarritoItem key={item.id} item={item} />)
           )}
