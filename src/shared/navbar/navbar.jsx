@@ -108,8 +108,8 @@ const Navbar = () => {
 
                 <DarkMode />
                 <ProfileNavbar />
-
-                <NavLink className="hidden md:block" to="/add">Add Product</NavLink>
+              
+               
               </div>
             </div>
           </div>
@@ -179,11 +179,11 @@ const Navbar = () => {
           </div>
 
           {!isProfilePage && !isLoginPage && !isAboutPage && (
-            <div className="lg:hidden mb-5 px-4 flex items-center justify-start pl-20">
-              <div className="flex-1">
-                <BarraBusqueda />
-              </div>
-            </div>
+            <div className="lg:hidden mb-5 px-4 flex items-center justify-start sm:justify-center pl-20 sm:pl-0">
+    <div className="w-full max-w-sm md:max-w-md">
+      <BarraBusqueda />
+    </div>
+  </div>
           )}
         </>
       )}
