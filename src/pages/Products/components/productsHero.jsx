@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Pagination from './pagination'
-const ProductsHero = ({ category, currentPage, itemsPerPage ,onPageChange}) => {
+const ProductsHero = ({ category,search, currentPage, itemsPerPage ,onPageChange}) => {
   return (
     <div className="flex items-center justify-between mb-8">
       <div className="text-left">
@@ -16,9 +16,9 @@ const ProductsHero = ({ category, currentPage, itemsPerPage ,onPageChange}) => {
 
         <Pagination
           category={category}
+          search={search}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
-          // onPageChange prop debería llegar a ProductsHero para que funcione bien:
           onPageChange={onPageChange}
         />
       </div>

@@ -108,7 +108,7 @@ const BarraBusqueda = () => {
 
           {results.length >= 5 && (
             <NavLink
-              to={`/search?query=${encodeURIComponent(inputValue)}`}
+              to={`/search/${encodeURIComponent(inputValue.trim())}`}
               className="block text-center mt-2 p-2 text-sm text-primary hover:underline"
               onClick={() => setIsOpen(false)}
             >

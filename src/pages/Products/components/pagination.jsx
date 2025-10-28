@@ -2,11 +2,15 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
 
-const Pagination = ({ category, currentPage, itemsPerPage, onPageChange }) => {
+const Pagination = ({ category, search,currentPage, itemsPerPage, onPageChange }) => {
   const products = ProductsItemList;
-  const filteredProducts = category
-    ? products.filter((product) => product.category === category)
-    : products;
+   const filteredProducts = products.filter((product) => {
+    const matchesCategory = category ? product.category === category : true;
+    const matchesSearch = search
+      ? product.name.toLowerCase().includes(search.toLowerCase())
+      : true;
+    return matchesCategory && matchesSearch;
+  });
 
   const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
 
