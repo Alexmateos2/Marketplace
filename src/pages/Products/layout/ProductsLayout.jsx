@@ -9,6 +9,7 @@ import ProductsHero from "../components/productsHero";
 const ProductsPage = ({ category, search }) => {
   const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
+  const [filters, setFilters] = useState({ price: "", sortBy: "newest" });
 
   return (
     <div className="dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors">
@@ -22,13 +23,14 @@ const ProductsPage = ({ category, search }) => {
           onPageChange={setCurrentPage}
         />
         <div className="flex flex-col lg:flex-row gap-8">
-          <Filtros />
+          <Filtros setFilters={setFilters}/>
           <div className="flex-1">
             <Products
               category={category}
               search={search}
               currentPage={currentPage}
               itemsPerPage={itemsPerPage}
+              filters={filters}
             />
             <div className="block lg:hidden">
               <Pagination
