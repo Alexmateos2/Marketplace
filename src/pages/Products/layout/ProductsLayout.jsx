@@ -6,16 +6,17 @@ import Products from "../components/products";
 import Filtros from "../components/filtros";
 import ProductsHero from "../components/productsHero";
 
-const ProductsPage = ({ category }) => {
+const ProductsPage = ({ category, search }) => {
   const itemsPerPage = 12;
-  const [currentPage, setCurrentPage] = useState(1); // <- Estado de página
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
-    <div className="dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors ">
+    <div className="dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors">
       <Navbar />
-      <main className="grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 ">
+      <main className="grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <ProductsHero
           category={category}
+          search={search}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           onPageChange={setCurrentPage}
@@ -25,16 +26,18 @@ const ProductsPage = ({ category }) => {
           <div className="flex-1">
             <Products
               category={category}
+              search={search}
               currentPage={currentPage}
               itemsPerPage={itemsPerPage}
             />
             <div className="block lg:hidden">
-            <Pagination
-              category={category}
-              currentPage={currentPage}
-              itemsPerPage={itemsPerPage}
-              onPageChange={setCurrentPage} 
-            />
+              <Pagination
+                category={category}
+                search={search}
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </div>
           </div>
         </div>

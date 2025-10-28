@@ -13,6 +13,7 @@ import AddProduct from "./pages/Add-Product/layout/addProduct.jsx";
 import AllCategoriesPage from "./pages/Categories/layout/allCategoriesLayout.jsx";
 import ProfilePage from "./pages/Profile/layout/profileLayout.jsx";
 import { CartProvider } from "./shared/hooks/CartProvider.jsx";
+import BusquedaPage from "./pages/Busqueda/layout/BusquedaLayout.jsx";
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
@@ -30,6 +31,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/new" element={<NewPage />} />
           <Route path="/products/:category?" element={<CategoryPage />} />
+          <Route path = "/search/:search?" element={<BusquedaPage />} />
           <Route path="/categories" element={<AllCategoriesPage />} />
           <Route path="/add" element={<AddProduct />} />
           <Route path="/profile" element={<ProfilePage />} />
