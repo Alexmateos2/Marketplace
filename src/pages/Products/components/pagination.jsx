@@ -2,13 +2,24 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
 
-const Pagination = ({ category, search,currentPage, itemsPerPage, onPageChange }) => {
+const Pagination = ({
+  category,
+  search,
+  currentPage,
+  itemsPerPage,
+  onPageChange,
+}) => {
   const products = ProductsItemList;
-   const filteredProducts = products.filter((product) => {
+  const filteredProducts = products.filter((product) => {
     const matchesCategory = category ? product.category === category : true;
+
     const matchesSearch = search
-      ? product.name.toLowerCase().includes(search.toLowerCase())
+      ? search
+          .toLowerCase()
+          .split(" ") 
+          .every((word) => product.name.toLowerCase().includes(word))
       : true;
+
     return matchesCategory && matchesSearch;
   });
 
@@ -52,7 +63,7 @@ const Pagination = ({ category, search,currentPage, itemsPerPage, onPageChange }
         breakClassName="w-10 h-10 flex items-center justify-center text-gray-600 dark:text-subtle-dark"
         activeClassName="bg-primary text-white font-display"
         previousLabel={null}
-        nextLabel={null}     
+        nextLabel={null}
       />
 
       {/* Flecha siguiente */}
