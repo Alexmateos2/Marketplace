@@ -68,7 +68,7 @@ const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
         return (
           <div
             key={product.id}
-            className="h-full flex flex-col bg-background-light dark:bg-background-dark rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+            className="h-full flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
           >
             <NavLink
               to={`/product/${product.id}`}

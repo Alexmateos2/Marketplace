@@ -22,7 +22,7 @@ const AboutUsPage = () => {
             </p>
           </div>
         </section>
-        <section className="w-full max-w-6xl mx-auto rounded-md border border-border-light dark:border-border-dark py-12 md:py-24 bg-gray-100 dark:bg-gray-800 px-3 md:px-10 lg:px-20">
+        <section className="w-full max-w-6xl mx-auto rounded-md border border-border-light dark:border-border-dark py-12 md:py-24 bg-white dark:bg-gray-800 px-3 md:px-10 lg:px-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="flex flex-col gap-3">
               <h2 className="text-xl md:text-3xl font-bold tracking-tight leading-tight md:leading-snug">

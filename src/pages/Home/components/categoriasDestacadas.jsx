@@ -10,7 +10,7 @@ function CategoriaDestacada() {
   ];
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 px-8 sm:px-0 gap-6 sm:grid-cols-4 sm:gap-6">
+      <div className="grid grid-cols-2 px-8 sm:px-0 gap-6 sm:grid-cols-4 sm:gap-6">
         {categories.map((cat) => (
           <NavLink
           to={`products/${cat.title}`}

@@ -10,7 +10,7 @@ import Navbar from "../../../shared/navbar/navbar";
 
 export default function HomePage() {
   return (
-    <div className="font-display text-content-light dark:bg-background-dark dark:text-content-dark min-h-screen transition-colors flex flex-col">
+    <div className="font-display bg-background-light text-content-light dark:bg-background-dark dark:text-content-dark min-h-screen transition-colors flex flex-col">
       {/* Header */}
       <Navbar />
       <main className="flex-1">
@@ -62,7 +62,7 @@ export default function HomePage() {
         </section>
 
         {/* Stay Updated */}
-        <section className="bg-surface-light  py-12 dark:bg-surface-dark sm:py-16 text-center">
+        <section className="bg-surface-light w-full  xl:w-3/5 mx-auto rounded-lg py-12 dark:bg-surface-dark sm:py-16 text-center mb-20">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Stay Updated
           </h2>
