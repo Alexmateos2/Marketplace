@@ -140,48 +140,53 @@ const Navbar = () => {
       </header>
 
       {/* Menu móvil */}
-      {!isLoginPage && (
-        <div
-          className={`lg:hidden ${
-            isProfilePage || isLoginPage ? "mt-10" : "mt-20"
-          } mb-4`}
-        >
-          <button
-            className="fixed top-25 left-1 z-50 p-4 w-20 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-primary dark:border-border-dark dark:bg-surface-dark dark:text-primary transition-transform duration-300"
-            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle mobile menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className={`w-6 h-6 transform transition-transform duration-300 ${
-                isMobileMenuOpen ? "rotate-90" : "rotate-0"
-              }`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={3}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+{!isLoginPage && (
+  <>
 
-          <div className="flex mx-auto w-full md:w-2/3 py-5 px-10">
-            {isMobileMenuOpen && (
-              <MobileMenu
-                isOpen={isMobileMenuOpen}
-                setIsOpen={setMobileMenuOpen}
-              />
-            )}
-            {!isProfilePage && !isLoginPage && !isAboutPage && (
-              <BarraBusqueda />
-            )}
-          </div>
+    <div className="lg:hidden h-10" /> 
+
+
+   <div className="lg:hidden relative">
+
+  <button
+    className="fixed top-[120px] left-3 z-50 p-3 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary dark:border-border-dark dark:bg-surface-dark dark:text-primary transition-transform duration-300"
+    onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+    aria-label="Toggle mobile menu"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className={`w-6 h-6 transform transition-transform duration-300 ${
+        isMobileMenuOpen ? "rotate-90" : "rotate-0"
+      }`}
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={3}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  </button>
+
+
+  {isMobileMenuOpen && (
+  
+      <MobileMenu isOpen={isMobileMenuOpen} setIsOpen={setMobileMenuOpen} />
+    
+  )}
+</div>
+
+    {!isProfilePage && !isLoginPage && !isAboutPage && (
+      <div className="lg:hidden mb-5 px-4 flex items-center justify-start pl-20">
+        <div className="flex-1">
+          <BarraBusqueda />
         </div>
-      )}
+      </div>
+    )}
+
+  
+  </>
+)}
+
     </>
   );
 };
