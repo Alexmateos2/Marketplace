@@ -1,31 +1,28 @@
 import { useState } from "react";
 import GlareButton from "../../../shared/utils/GlareButton";
 
-const Filtros = () => {
-  const [filters, setFilters] = useState({
-    price: "",
-    sortBy: "newest"
-  });
+const Filtros = ({ setFilters }) => {
 
+  const [localFilters, setLocalFilters] = useState({
+    price: "",
+    sortBy: "newest",
+  });
   const handleChange = (filterName, value) => {
-    setFilters({
-      price: filterName === "price" ? value : "",
-      sortBy: filterName === "sortBy" ? value : "newest"
-    });
+    setLocalFilters((prev) => ({
+      ...prev,
+      [filterName]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Selected filter:", filters);
-    // Aquí podrías enviar los filtros al backend o actualizar productos
+    setFilters(localFilters);
+    console.log(setFilters)
+    
   };
-
   return (
     <aside className="w-full lg:w-1/4 xl:w-1/5">
-      <form
-        className="sticky top-24 space-y-6"
-        onSubmit={handleSubmit}
-      >
+      <form className="sticky top-24 space-y-6" onSubmit={handleSubmit}>
         <h3 className="text-xl font-bold text-gray-900 dark:text-white">
           Filters
         </h3>
@@ -36,24 +33,23 @@ const Filtros = () => {
               Price
             </span>
             <select
-              value={filters.price}
+              value={localFilters.price}
               onChange={(e) => handleChange("price", e.target.value)}
               className="form-select p-2 mt-1 block w-full rounded border-gray-300 dark:border-dark bg-background-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
               <option value="">All Prices</option>
-              <option value="$0 - $100">$0 - $100</option>
-              <option value="$100 - $500">$100 - $500</option>
-              <option value="$500+">$500+</option>
+              <option value="0-100">$0 - $100</option>
+              <option value="100-500">$100 - $500</option>
+              <option value="500+">$500+</option>
             </select>
           </label>
 
-        
           <label className="block">
             <span className="text-sm font-medium text-content-light dark:text-content-dark">
               Sort By
             </span>
             <select
-              value={filters.sortBy}
+              value={localFilters.sortBy}
               onChange={(e) => handleChange("sortBy", e.target.value)}
               className="form-select p-2 mt-1 block w-full rounded border-gray-300 dark:border-gray-700 bg-background-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
