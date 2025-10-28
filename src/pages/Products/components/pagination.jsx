@@ -27,17 +27,17 @@ const Pagination = ({
 
   const handlePageClick = (selectedItem) => {
     onPageChange(selectedItem.selected + 1); // react-paginate usa índice 0
-    window.scrollTo({ top: 20, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePrev = () => {
     if (currentPage > 1) onPageChange(currentPage - 1);
-    window.scrollTo({ top: 20, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleNext = () => {
     if (currentPage < pageCount) onPageChange(currentPage + 1);
-    window.scrollTo({ top: 20, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
