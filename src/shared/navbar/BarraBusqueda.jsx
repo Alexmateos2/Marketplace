@@ -6,27 +6,27 @@ const BarraBusqueda = () => {
   const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef(null); // referencia al contenedor
-
+  const containerRef = useRef(null);
+  const visibleResults = results.slice(0, 4);
   const products = ProductsItemList;
 
- useEffect(() => {
-  if (inputValue.trim() === "") {
-    setResults([]);
-    setIsOpen(false);
-    return;
-  }
+  useEffect(() => {
+    if (inputValue.trim() === "") {
+      setResults([]);
+      setIsOpen(false);
+      return;
+    }
 
-  const handler = setTimeout(() => {
-    const filtered = products.filter((product) =>
-      product.name.toLowerCase().includes(inputValue.toLowerCase())
-    );
-    setResults(filtered);
-    setIsOpen(true); 
-  }, 300);
+    const handler = setTimeout(() => {
+      const filtered = products.filter((product) =>
+        product.name.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      setResults(filtered);
+      setIsOpen(true);
+    }, 300);
 
-  return () => clearTimeout(handler);
-}, [inputValue, products]);
+    return () => clearTimeout(handler);
+  }, [inputValue, products]);
 
   // Cerrar al hacer click fuera
   useEffect(() => {
@@ -68,12 +68,12 @@ const BarraBusqueda = () => {
         placeholder="Search products..."
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        className="w-full rounded-lg border border-subtle-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+        className="w-full h-12 rounded-lg border border-subtle-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
       />
 
       {isOpen && (
         <div className="absolute mt-2 w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-2 z-50  overflow-y-auto">
-          {(results.length > 5 ? results.slice(0, 4) : results).map(
+          {(results.length >= 4 ? results.slice(0, 4) : results).map(
             (product, index) => (
               <div key={product.id}>
                 <NavLink
@@ -97,14 +97,16 @@ const BarraBusqueda = () => {
                     </span>
                   </div>
                 </NavLink>
-                {index < 4  && (
-                  <div className=" h-px w-full bg-content-light/30 dark:bg-content-dark/20 my-2"></div>
+                {(index < visibleResults.length - 1 ||
+                  (results.length >= 5 &&
+                    index === visibleResults.length - 1)) && (
+                  <div className="h-px w-full bg-content-light/30 dark:bg-content-dark/20 my-2"></div>
                 )}
               </div>
             )
           )}
 
-          {results.length > 5 && (
+          {results.length >= 5 && (
             <NavLink
               to={`/search?query=${encodeURIComponent(inputValue)}`}
               className="block text-center mt-2 p-2 text-sm text-primary hover:underline"
@@ -113,11 +115,7 @@ const BarraBusqueda = () => {
               Ver más resultados...
             </NavLink>
           )}
-          {results.length === 0 && (
-            <div className="p-4">
-              No hay resultados
-            </div>
-          )}
+          {results.length === 0 && <div className="p-4">No hay resultados</div>}
         </div>
       )}
     </div>

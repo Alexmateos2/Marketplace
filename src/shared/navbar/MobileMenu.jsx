@@ -44,7 +44,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
     ];
 
   return (
-    <div className="fixed top-5 left-1 z-40">
+    <div className="fixed top-8 left-1 z-40">
       <AnimatePresence>
         {isOpen && (
           <motion.div
