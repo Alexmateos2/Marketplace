@@ -4,7 +4,7 @@ import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
 
 const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
-  const products = ProductsItemList;
+  const products = ProductsItemList.toReversed();
   const { cart, addToCart } = useCart();
 
   const filteredProducts = useMemo(() => {
@@ -23,23 +23,32 @@ const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
 
     // Filtrar por precio
     if (filters?.price) {
-      if (filters.price === "0-100") result = result.filter((p) => p.price <= 100);
-      else if (filters.price === "100-500") result = result.filter((p) => p.price > 100 && p.price <= 500);
-      else if (filters.price === "500+") result = result.filter((p) => p.price > 500);
+      if (filters.price === "0-100")
+        result = result.filter((p) => p.price <= 100);
+      else if (filters.price === "100-500")
+        result = result.filter((p) => p.price > 100 && p.price <= 500);
+      else if (filters.price === "500+")
+        result = result.filter((p) => p.price > 500);
     }
 
     // Ordenar
     if (filters?.sortBy) {
-      if (filters.sortBy === "low-high") result.sort((a, b) => a.price - b.price);
-      else if (filters.sortBy === "high-low") result.sort((a, b) => b.price - a.price);
+      if (filters.sortBy === "low-high")
+        result.sort((a, b) => a.price - b.price);
+      else if (filters.sortBy === "high-low")
+        result.sort((a, b) => b.price - a.price);
       else if (filters.sortBy === "newest") result.sort((a, b) => b.id - a.id);
+      else if (filters.sortBy === "oldest") result.sort((a, b) => a.id - b.id);
     }
 
     return result;
   }, [products, category, search, filters]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentProducts = filteredProducts.slice(startIndex, startIndex + itemsPerPage);
+  const currentProducts = filteredProducts.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
     <div className="grid grid-cols-2 gap-6 font-display mx-auto mt-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full">
@@ -57,8 +66,14 @@ const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
         };
 
         return (
-          <div key={product.id} className="h-full flex flex-col bg-background-light dark:bg-background-dark rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
-            <NavLink to={`/product/${product.id}`} className="flex flex-col flex-grow">
+          <div
+            key={product.id}
+            className="h-full flex flex-col bg-background-light dark:bg-background-dark rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+          >
+            <NavLink
+              to={`/product/${product.id}`}
+              className="flex flex-col flex-grow"
+            >
               <img
                 src={product.image || "../unnamed(6).png"}
                 alt={product.name}
@@ -73,7 +88,10 @@ const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
             </NavLink>
             <div className="px-4 pb-4 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto relative">
               <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg mt-1 truncate">
-                ${product.price.toLocaleString("es-ES", { minimumFractionDigits: 2 })}
+                $
+                {product.price.toLocaleString("es-ES", {
+                  minimumFractionDigits: 2,
+                })}
               </p>
               <div className="relative">
                 <button
