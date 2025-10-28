@@ -143,13 +143,13 @@ const Navbar = () => {
 {!isLoginPage && (
   <>
 
-    <div className="lg:hidden h-10" /> 
+    <div className="lg:hidden h-5" /> 
 
 
    <div className="lg:hidden relative">
 
   <button
-    className="fixed top-[120px] left-3 z-50 p-3 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary dark:border-border-dark dark:bg-surface-dark dark:text-primary transition-transform duration-300"
+    className="fixed top-[100px] left-3 z-50 p-3 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary dark:border-border-dark dark:bg-surface-dark dark:text-primary transition-transform duration-300"
     onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
     aria-label="Toggle mobile menu"
   >
