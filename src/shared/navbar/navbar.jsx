@@ -30,9 +30,9 @@ const Navbar = () => {
                   <img
                     src="/logo2.svg"
                     alt="Tekia logo"
-                    className="w-8 xxs:w-6 h-auto object-contain"
+                    className="w-8  h-auto object-contain"
                   />
-                  <span className="hidden xxs:block font-display font-semibold tracking-tight">
+                  <span className="hidden xxs:block text-2xl font-display font-semibold tracking-tight">
                     Tekia
                   </span>
                 </NavLink>
