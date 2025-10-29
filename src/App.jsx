@@ -6,7 +6,7 @@ import ProductPage from "./pages/Product/layout/ProductLayout";
 import CarritoPage from "./pages/Cart/layout/layoutCarrito";
 import NotFound from "./shared/utils/NotFound.jsx";
 import LoginPage from "./pages/Login/layout/LoginLayout.jsx";
-import NewPage from "./pages/New/layout/newLayout.jsx";
+import NewPage from "./pages/New/layout/NewLayout.jsx";
 import CategoryPage from "./pages/Categories/layout/categoryLayout";
 import ScrollToTop from "./shared/utils/ScrollToTop.jsx";
 import AddProduct from "./pages/Add-Product/layout/addProduct.jsx";
