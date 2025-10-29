@@ -48,7 +48,7 @@ const AllCategoriesPage = () => {
               <div className="absolute inset-0 z-0">
                 <img
                   alt="Keyboards"
-                  className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
+                  className="h-full  w-full object-cover object-center transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRYp1AoRf_Zefizn299S8H_b0IddBYZJvzrV51SSo6x2Zq5u3ge2wPGsmggVf05JQYsxWx9Hw3eN4Fokl3Y9j4vgHrPI-m3G05MxspXKeRSDJW8jtOZ463H2Y9DdvS_gsND47-rKR94LiptDNTjM1OpahNPiOdUgzKW4x1rQeIgXp4Zbt4C0PuTHaPKS_9ThV7kLE_DnmacqQ9YO3jRER870eYHdzTJUOQeQhhCIxkrP3JeIB4pL5uKR2mhN4oYZzUzbDUdtyFWOo"
                 />
               </div>
@@ -62,14 +62,14 @@ const AllCategoriesPage = () => {
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Mouse"
             >
-              <div className="absolute inset-0 z-0">
+              <div className="absolute inset-0  z-0">
                 <img
                   alt="Mouse"
-                  className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7iA-wiUD-hzvwIDKpwEriTYurAqCpuyHaT_7099KVym89-fJpdTeOl50kasZIpiMttY-ToDof1hM7MWSUN8VTDvH5iWVDSVOf1VpUjtHVeMX-RKtXBVfqTHR0Ujx3pZ4srJQITBV10w-Tq53OUjIOfebbeYyFAc56vaWU1CBXPIzDnH4EvoREsSacPRny8toJ8Nb0t7dHMvKNQxOe5VkvJcAG9_8w78fbjXBqMzQt4PF0ljrmnt2AQlGOnxQs-WmBrH5QIMl5Quk"
+                  className="h-full saturate-200 w-full object-cover object-center transition-transform group-hover:scale-105"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCImcWzp1Tybhp4xGfvdl8znQXSB5R-AU1GxAnEIGeqO8U9KBPlQ9_DQuZbNYAx0b1SqYsfFZq4pM1Qx_Jgqzp_9tyDlr0vxG6cGjh-aVNhCTCJq_t2dL2tpykvK-2LHbQ4AYAdo5jQU7tf5LGg8hI-igRqYymvBRjjgpynTkbEZENOQUWY48Bimq9OXI3qwH-J2p7hAogNAEU3Dvr6hBjQv15XuWrIJIxUE_3S-AuMevuwc6LdPmGhfLI3rtx5GtTdfi8dgEnYwyk"
                 />
               </div>
-              <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
+              <div className="relative  z-10 w-full bg-gradient-to-t from-black/70 to-transparent p-6 text-center">
                 <h3 className="text-lg font-bold text-white">Mouse</h3>
               </div>
             </NavLink>
@@ -82,7 +82,7 @@ const AllCategoriesPage = () => {
               <div className="absolute inset-0 z-0">
                 <img
                   alt="Monitors"
-                  className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
+                  className="h-full   w-full object-cover object-center transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_oQwvllipXr7mCki-z_Cvu6xkjX7vrtPdCp1UrTMj0Zg_-VQjAQZFWkLHX0aDi2zepJIiuN4oeVgm43mb2bbD3UEiQV_B6W4QsQNmstCy6uIHucLvulKhSYAQ6aX_Vgn6CEsxPTKWZHhSd5VH4CysD_ydU2wniZqFomrycfazNmxACGLCEhpK-6GuXx9NrlktfunQf6jPtH1ZFq5cBLET3iHKQx4Nkpt8Tb7Ize-bXF1-BEpbf3WVk_DxgtesQCIuMgDbYY0NuY4"
                 />
               </div>
