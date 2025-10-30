@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // React Router
 import Footer from "../../../shared/utils/Footer";
 import Navbar from "../../../shared/navbar/navbar";
 
 const LoginPage = () => {
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate(); 
+
+  const handleChangeInput = (e) => {
+    setFormValue({
+      ...formValue,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+    const { email, password } = formValue;
+
+    try {
+      const res = await fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Correo o contraseña incorrecta");
+      } else {
+        console.log("Login exitoso:", data);
+        localStorage.setItem("usuario", JSON.stringify(data.usuario));
+        navigate("/"); 
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error de conexión al servidor");
+    }
+  };
+
   return (
     <div className="dark:bg-background-dark dark:text-white bg-background-light min-h-screen flex flex-col font-display transition-colors">
       <Navbar />
@@ -20,20 +61,23 @@ const LoginPage = () => {
           </div>
 
           {/* Form */}
-          <form className="space-y-6 sm:space-y-8">
+          <form className="space-y-6 sm:space-y-8" onSubmit={handleSubmit}>
             {/* Email */}
             <div>
               <label
                 className="text-sm sm:text-base font-medium text-foreground-light dark:text-foreground-dark"
                 htmlFor="email"
               >
-                Email or username
+                Email
               </label>
               <input
                 id="email"
                 type="text"
+                value={formValue.email}
+                onChange={handleChangeInput}
                 placeholder="you@example.com"
                 className="mt-2 w-full px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary placeholder:text-gray-500 dark:placeholder:text-subtle-dark/60 dark:text-subtle-dark/80"
+                required
               />
             </div>
 
@@ -46,15 +90,21 @@ const LoginPage = () => {
                 >
                   Password
                 </label>
-                <a className="text-sm sm:text-base text-primary hover:underline" href="#">
+                <a
+                  className="text-sm sm:text-base text-primary hover:underline"
+                  href="#"
+                >
                   Forgot password?
                 </a>
               </div>
               <input
                 id="password"
                 type="password"
+                value={formValue.password}
+                onChange={handleChangeInput}
                 placeholder="••••••••"
                 className="w-full px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary placeholder:text-gray-500 dark:placeholder:text-subtle-dark/60 dark:text-subtle-dark/80"
+                required
               />
             </div>
 
@@ -68,7 +118,6 @@ const LoginPage = () => {
           </form>
 
           {/* Optional OAuth Buttons */}
-          {/* 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-border-light dark:border-border-dark"></div>
@@ -88,7 +137,6 @@ const LoginPage = () => {
               </button>
             </div>
           </div>
-          */}
 
           {/* Sign Up Link */}
           <div className="text-center text-sm sm:text-base mt-6">
