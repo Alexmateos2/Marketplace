@@ -51,7 +51,7 @@ const ProfileNavbar = () => {
           rounded-lg shadow-lg overflow-hidden z-50"
         >
           <NavLink
-            to={"/profile"}
+            to={user ? "/profile" : "/login"}
             className={({ isActive }) =>
               `block px-4 py-4 text-base border-b border-border-light dark:border-border-dark transition-colors 
                ${
