@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const ProfileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
+  const user = localStorage.getItem("usuario");
 
+  const navigate = useNavigate();
   const handleMouseEnter = () => {
     if (closeTimeout) clearTimeout(closeTimeout);
     setIsOpen(true);
   };
-
+  const handleLogout = () => {
+    localStorage.removeItem("usuario");
+    navigate("/login");
+  };
   const handleMouseLeave = () => {
     const timeout = setTimeout(() => setIsOpen(false), 200);
     setCloseTimeout(timeout);
@@ -49,30 +54,38 @@ const ProfileNavbar = () => {
             to={"/profile"}
             className={({ isActive }) =>
               `block px-4 py-4 text-base border-b border-border-light dark:border-border-dark transition-colors 
-               ${isActive
-                ? "text-primary bg-primary/10 dark:bg-primary/20"
-                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
+               ${
+                 isActive
+                   ? "text-primary bg-primary/10 dark:bg-primary/20"
+                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+               }`
             }
           >
             Profile
           </NavLink>
-          <NavLink
-            to={"/login"}
-            className={({ isActive }) =>
-              `block px-4 py-4 text-base  border-b border-border-light dark:border-border-dark transition-colors 
-               ${isActive
-                ? "text-primary bg-primary/10 dark:bg-primary/20"
-                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
-            }
-          >
-            Log in
-          </NavLink>
-          <button
-            className="block w-full text-left px-4 py-4 text-base  text-content-light dark:text-content-dark 
+          {!user ? (
+            <NavLink
+              to={"/login"}
+              className={({ isActive }) =>
+                `block px-4 py-4 text-base  border-b border-border-light dark:border-border-dark transition-colors 
+               ${
+                 isActive
+                   ? "text-primary bg-primary/10 dark:bg-primary/20"
+                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+               }`
+              }
+            >
+              Log in
+            </NavLink>
+          ) : (
+            <button
+              onClick={handleLogout}
+              className="block w-full text-left px-4 py-4 text-base  text-content-light dark:text-content-dark 
             hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
-          >
-            Logout
-          </button>
+            >
+              Logout
+            </button>
+          )}
         </div>
       )}
     </div>
