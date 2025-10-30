@@ -4,8 +4,11 @@ import {
   MdReceiptLong,
   MdLogout,
 } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const AsideProfile = () => {
+  
+  const navigate = useNavigate()
   return (
     <aside className="w-80 py-12 bg-white dark:bg-background-dark/50 p-6 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark min-h-screen">
           <div>
@@ -48,7 +51,14 @@ const AsideProfile = () => {
             </nav>
           </div>
          
-            <button className="mt-auto flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-background-dark text-content-light-600 dark:text-content-dark text-sm font-medium cursor-pointer">
+            <button 
+            onClick={()=>{
+              localStorage.removeItem('usuario')
+              navigate('/login')
+            }
+              
+            }
+            className="mt-auto flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-background-dark text-content-light-600 dark:text-content-dark text-sm font-medium cursor-pointer">
               <MdLogout className="material-symbols-outlined mr-2" />
               Logout
             </button>
