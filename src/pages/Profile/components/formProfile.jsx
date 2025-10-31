@@ -1,15 +1,15 @@
 import React from "react";
 import { useState } from "react";
-const FormProfile = ({ setIsMenuOpen, isOpen }) => {
+const FormProfile = ({ usuario }) => {
   const [disabled, setDisabled] = useState(true);
+  const { nombre, email, direccion, telefono } = usuario || {};
+
   const changeHandle = () => {
     setDisabled(!disabled);
   };
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="lg:hidden flex justify-end items-center mb-6">
-       
-      </div>
+      <div className="lg:hidden flex justify-end items-center mb-6"></div>
       <div className="mb-8">
         <p className="text-4xl font-black text-content-light dark:text-content-dark">
           Personal Information
@@ -27,10 +27,10 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
           ></div>
           <div className="flex flex-col justify-center flex-1 ">
             <p className="text-[22px] font-bold tracking-[-0.015em] text-content-light dark:text-content-dark">
-              John Doe
+              {nombre}
             </p>
             <p className="text-base text-content-light-500 dark:text-content-dark">
-              john.doe@email.com
+              {email}
             </p>
             <button
               onClick={changeHandle}
@@ -52,8 +52,8 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
             </label>
             <input
               id="fullName"
-               readOnly={disabled}
-               placeholder="John Doe"
+              readOnly={disabled}
+              placeholder={nombre}
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
@@ -66,8 +66,8 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
             </label>
             <input
               id="emailAddress"
-               readOnly={disabled}
-              placeholder="john.doe@email.com"
+              readOnly={disabled}
+              placeholder={email}
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
@@ -81,10 +81,10 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
           </label>
           <textarea
             id="shippingAddress"
-             readOnly={disabled}
+            readOnly={disabled}
             rows={3}
             className="form-textarea w-full rounded-lg p-4 border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark"
-            placeholder="123 Tech Lane, Silicon Valley, CA 94043"
+            placeholder={direccion}
           />
         </div>
         <div className="border-t border-border-light dark:border-border-dark my-6"></div>
@@ -102,8 +102,8 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
               </label>
               <input
                 id="phoneNumber"
-                 readOnly={disabled}
-                placeholder="+34 654 897 357"
+                readOnly={disabled}
+                placeholder={telefono}
                 className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
               />
             </div>
@@ -116,7 +116,7 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
               </label>
               <input
                 id="password"
-                 readOnly={disabled}
+                readOnly={disabled}
                 type="password"
                 placeholder="••••••••"
                 className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
@@ -126,8 +126,7 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
         </div>
         <div className="flex justify-end gap-3 pt-4">
           <button
-           onClick={() => setDisabled(true)}
-
+            onClick={() => setDisabled(true)}
             disabled={disabled}
             className={
               disabled
@@ -138,10 +137,8 @@ const FormProfile = ({ setIsMenuOpen, isOpen }) => {
             <span className="truncate">Cancel</span>
           </button>
           <button
-         
             disabled={disabled}
             onClick={() => setDisabled(true)}
-
             className="flex min-w-[84px] disabled:cursor-not-allowed disabled:bg-primary/50 cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]"
           >
             <span className="truncate">Save Changes</span>

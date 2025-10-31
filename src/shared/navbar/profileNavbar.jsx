@@ -63,6 +63,19 @@ const ProfileNavbar = () => {
           >
             Profile
           </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `block px-4 py-4 text-base border-b border-border-light dark:border-border-dark transition-colors 
+               ${
+                 isActive
+                   ? "text-primary bg-primary/10 dark:bg-primary/20"
+                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+               }`
+            }
+            to="/add"
+          >
+            Add product
+          </NavLink>
           {!user ? (
             <NavLink
               to={"/login"}
