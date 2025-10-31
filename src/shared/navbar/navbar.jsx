@@ -105,7 +105,7 @@ const Navbar = () => {
 
                 <DarkMode />
                 <ProfileNavbar />
-                <NavLink to="/add">Add product</NavLink>
+                
               </div>
             </div>
           </div>

@@ -6,8 +6,9 @@ import {
 } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
-const AsideProfile = () => {
-  
+const AsideProfile = ({usuario}) => {
+ const { nombre, email } = usuario || {};
+
   const navigate = useNavigate()
   return (
     <aside className="w-80 py-12 bg-white dark:bg-background-dark/50 p-6 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark min-h-screen">
@@ -23,10 +24,10 @@ const AsideProfile = () => {
               ></div>
               <div>
                 <h1 className="text-base font-bold text-content-light dark:text-content-dark">
-                  John Doe
+                  {nombre}
                 </h1>
                 <p className="text-sm text-content-light-500 dark:text-content-dark-400">
-                  <a href="mailto:john.doe@email.com">john.doe@email.com</a>
+                  <a>{email}</a>
                 </p>
               </div>
             </div>

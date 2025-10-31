@@ -37,7 +37,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
         { label: "Productos", to: "/products" },
         { label: "About us", to: "/about" },
         { label: "Cart", to: "/cart", totalItems },
-        { label: "Add product", to: "/add" },
+
       ];
 
   return (
