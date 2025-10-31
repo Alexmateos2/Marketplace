@@ -1,16 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // React Router
+import { useNavigate, Link } from "react-router-dom";
 import Footer from "../../../shared/utils/Footer";
 import Navbar from "../../../shared/navbar/navbar";
-
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 const LoginPage = () => {
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
   });
-
-  const navigate = useNavigate(); 
-
+  const [isMayus, setIsMayus] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const onKeyDown = (keyEvent) => {
+    if (keyEvent.getModifierState("CapsLock")) {
+      setIsMayus(true);
+    } else {
+      setIsMayus(false);
+    }
+  };
   const handleChangeInput = (e) => {
     setFormValue({
       ...formValue,
@@ -19,8 +27,9 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     const { email, password } = formValue;
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:3000/login", {
@@ -36,11 +45,13 @@ const LoginPage = () => {
       } else {
         console.log("Login exitoso:", data);
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
-        navigate("/"); 
+        navigate("/");
       }
     } catch (err) {
       console.error(err);
       alert("Error de conexión al servidor");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,14 +76,14 @@ const LoginPage = () => {
             {/* Email */}
             <div>
               <label
-                className="text-sm sm:text-base font-medium text-foreground-light dark:text-foreground-dark"
                 htmlFor="email"
+                className="text-sm sm:text-base font-medium text-foreground-light dark:text-foreground-dark"
               >
                 Email
               </label>
               <input
                 id="email"
-                type="text"
+                type="email"
                 value={formValue.email}
                 onChange={handleChangeInput}
                 placeholder="you@example.com"
@@ -85,39 +96,58 @@ const LoginPage = () => {
             <div>
               <div className="flex justify-between items-center mb-1 sm:mb-2">
                 <label
-                  className="text-sm sm:text-base font-medium text-foreground-light dark:text-foreground-dark"
                   htmlFor="password"
+                  className="text-sm sm:text-base font-medium text-foreground-light dark:text-foreground-dark"
                 >
                   Password
                 </label>
-                <a
-                  className="text-sm sm:text-base text-primary hover:underline"
-                  href="#"
-                >
-                  Forgot password?
-                </a>
+                <div className="flex items-center pr-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className={`${
+                      formValue.password !== "" ? "block" : "hidden"
+                    } text-xl text-content-light hover:underline`}
+                  >
+                    {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                  </button>
+                </div>
               </div>
               <input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 value={formValue.password}
                 onChange={handleChangeInput}
+                onKeyDown={onKeyDown}
                 placeholder="••••••••"
                 className="w-full px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary placeholder:text-gray-500 dark:placeholder:text-subtle-dark/60 dark:text-subtle-dark/80"
                 required
               />
+              {isMayus && (
+                <p className="text-red-500 dark:text-red-400 text-sm mt-2">⚠️ Caps Lock is ON</p>
+              )}
+
+              <div className="flex mt-3">
+                <Link
+                  className="text-sm sm:text-base text-primary hover:underline"
+                  to="/forgot-password"
+                >
+                  Forgot password?
+                </Link>
+              </div>
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-primary text-white font-bold py-3 sm:py-4 px-4 sm:px-5 rounded-lg hover:bg-primary/90 transition-colors text-base sm:text-lg"
+              disabled={loading}
+              className="w-full bg-primary text-white font-bold py-3 sm:py-4 px-4 sm:px-5 rounded-lg hover:bg-primary/90 transition-colors text-base sm:text-lg disabled:opacity-60"
             >
-              Log In
+              {loading ? "Logging in..." : "Log In"}
             </button>
           </form>
 
-          {/* Optional OAuth Buttons */}
+          {/* Optional OAuth */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-border-light dark:border-border-dark"></div>
@@ -142,9 +172,12 @@ const LoginPage = () => {
           <div className="text-center text-sm sm:text-base mt-6">
             <p className="text-muted-light dark:text-muted-dark">
               Don't have an account?{" "}
-              <a className="font-medium text-primary hover:underline" href="#">
+              <Link
+                className="font-medium text-primary hover:underline"
+                to="/signup"
+              >
                 Sign Up
-              </a>
+              </Link>
             </p>
           </div>
         </div>
