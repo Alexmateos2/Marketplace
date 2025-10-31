@@ -7,7 +7,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 const AsideProfile = ({usuario}) => {
- const { nombre, email } = usuario || {};
+ const { nombre, email } = usuario || {nombre:"John Doe",email:"johndoe@gmail.com"};
 
   const navigate = useNavigate()
   return (

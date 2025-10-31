@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 const FormProfile = ({ usuario }) => {
   const [disabled, setDisabled] = useState(true);
-  const { nombre, email, direccion, telefono } = usuario || {};
+  const { nombre, email, direccion, telefono } = usuario || {nombre:"John Doe",email:"johndoe@gmail.com",direccion:"C/Example 123",telefono:"(+55) 623723721"};
 
   const changeHandle = () => {
     setDisabled(!disabled);
