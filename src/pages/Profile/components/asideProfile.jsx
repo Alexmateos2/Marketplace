@@ -5,7 +5,7 @@ import {
   MdLogout,
 } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
 const AsideProfile = ({usuario}) => {
  const { nombre, email } = usuario || {};
 
@@ -42,13 +42,13 @@ const AsideProfile = ({usuario}) => {
                   Personal Information
                 </span>
               </a>
-              <a
+              <NavLink
                 className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate text-content-light-600 dark:text-content-dark"
-                href="#"
+                to="/pedidos/historial"
               >
                 <MdReceiptLong className="material-symbols-outlined" />
                 <span className="text-sm font-medium">Order History</span>
-              </a>
+              </NavLink>
             </nav>
           </div>
          

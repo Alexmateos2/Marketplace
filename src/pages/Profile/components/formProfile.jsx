@@ -26,7 +26,7 @@ const FormProfile = ({ usuario }) => {
             }}
           ></div>
           <div className="flex flex-col justify-center flex-1 ">
-            <p className="text-[22px] font-bold tracking-[-0.015em] text-content-light dark:text-content-dark">
+            <p className="text-[22px] text-center sm:text-start font-bold tracking-[-0.015em] text-content-light dark:text-content-dark">
               {nombre}
             </p>
             <p className="text-base text-content-light-500 dark:text-content-dark">

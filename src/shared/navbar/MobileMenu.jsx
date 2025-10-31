@@ -28,7 +28,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
   const menuItems = isProfilePage
     ? [
         { icon: <MdPerson className="w-5 h-5 flex-shrink-0" />, label: "Personal Information", to: "/profile" },
-        { icon: <MdReceiptLong className="w-5 h-5 flex-shrink-0" />, label: "Order History", to: "/profile/orders" },
+        { icon: <MdReceiptLong className="w-5 h-5 flex-shrink-0" />, label: "Order History", to: "/pedidos/historial" },
         { icon: <MdLogout className="w-5 h-5 flex-shrink-0 translate-x-[3px]" />, label: "Logout", onClick: handleLogout },
       ]
     : [
@@ -41,7 +41,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
       ];
 
   return (
-    <div className="fixed top-8 left-1 z-40">
+    <div className="fixed top-2 left-1 z-40">
       <AnimatePresence>
         {isOpen && (
           <motion.div
