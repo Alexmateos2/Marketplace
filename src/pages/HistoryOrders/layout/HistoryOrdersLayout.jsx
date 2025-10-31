@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
 import { NavLink } from "react-router-dom";
+
 const HistoryOrdersPage = () => {
   const orders = [
     {
@@ -64,13 +65,18 @@ const HistoryOrdersPage = () => {
   ];
 
   return (
-    <div className="bg-background-light dark:bg-background-dark">
+    <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col transition-colors">
       <Navbar />
-      <main className="px-6 sm:px-10 lg:px-20 py-8 flex flex-1 justify-center  bg-background-light dark:bg-background-dark min-h-screen font-display">
-        <div className="flex flex-col w-full max-w-4xl ">
-              <NavLink to="/profile" className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark cursor-pointer "> Back to profile</NavLink>
+      <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center bg-background-light dark:bg-background-dark font-display">
+        <div className="flex flex-col w-full max-w-4xl">
+          <NavLink
+            to="/profile"
+            className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+          >
+            Back to profile
+          </NavLink>
+
           <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-          
             <h1 className="text-content-light dark:text-content-dark text-4xl font-black leading-tight">
               Order History
             </h1>
@@ -80,13 +86,13 @@ const HistoryOrdersPage = () => {
             {orders.map((order) => (
               <div
                 key={order.id}
-                className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-white dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all "
+                className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-white dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
               >
                 <div className="flex items-center -space-x-4">
                   {order.items.map((item, idx) => (
                     <div
                       key={idx}
-                      className="bg-center bg-no-repeat bg-cover rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1 ring-gray-200 "
+                      className="bg-center bg-no-repeat bg-cover rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1 ring-gray-200"
                       style={{ backgroundImage: `url("${item.image}")` }}
                       title={item.name}
                     />
@@ -109,9 +115,12 @@ const HistoryOrdersPage = () => {
                   <p className="text-content-light dark:text-content-dark text-lg font-bold">
                     ${order.price.toFixed(2)}
                   </p>
-                  <button className="text-primary text-sm font-bold hover:underline cursor-pointer">
+                  <NavLink
+                    to='/pedidos/historial/details/'
+                    className="text-primary text-sm font-bold hover:underline cursor-pointer"
+                  >
                     View Details
-                  </button>
+                  </NavLink>
                 </div>
               </div>
             ))}
