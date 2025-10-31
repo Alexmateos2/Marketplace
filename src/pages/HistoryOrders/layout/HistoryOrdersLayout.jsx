@@ -65,7 +65,7 @@ const HistoryOrdersPage = () => {
   ];
 
   return (
-    <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col transition-colors">
+    <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center bg-background-light dark:bg-background-dark font-display">
         <div className="flex flex-col w-full max-w-4xl">
@@ -99,11 +99,11 @@ const HistoryOrdersPage = () => {
                   ))}
                 </div>
 
-                <div className="flex flex-1 flex-col justify-center items-center md:items-start">
+                <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
                   <p className="text-content-light dark:text-content-dark text-lg font-bold">
                     Order #{order.id}
                   </p>
-                  <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
+                  <p className="text-subtle-light  dark:text-subtle-dark text-sm font-normal mt-1">
                     {order.description}
                   </p>
                   <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
@@ -116,7 +116,7 @@ const HistoryOrdersPage = () => {
                     ${order.price.toFixed(2)}
                   </p>
                   <NavLink
-                    to='/pedidos/historial/details/'
+                    to="/pedidos/historial/details/"
                     className="text-primary text-sm font-bold hover:underline cursor-pointer"
                   >
                     View Details
