@@ -14,6 +14,7 @@ import AllCategoriesPage from "./pages/Categories/layout/allCategoriesLayout.jsx
 import ProfilePage from "./pages/Profile/layout/profileLayout.jsx";
 import { CartProvider } from "./shared/hooks/CartProvider.jsx";
 import BusquedaPage from "./pages/Busqueda/layout/BusquedaLayout.jsx";
+import HistoryOrdersPage from "./pages/HistoryOrders/layout/HistoryOrdersLayout.jsx";
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
@@ -35,6 +36,7 @@ function App() {
           <Route path="/categories" element={<AllCategoriesPage />} />
           <Route path="/add" element={<AddProduct />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/pedidos/historial" element={<HistoryOrdersPage />} />
         </Routes>
       </Router>
           </CartProvider>
