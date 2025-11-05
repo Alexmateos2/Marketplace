@@ -4,8 +4,18 @@ import Footer from "../../../shared/utils/Footer";
 import { MdVerified, MdThumbUp, MdRocketLaunch } from "react-icons/md";
 import { Link } from "react-router-dom";
 import GlareButton from "../../../shared/utils/GlareButton";
+import { AdvancedImage } from "@cloudinary/react";
+import { cld } from "../../../shared/utils/cloudinary";
+import { auto as fAuto } from "@cloudinary/url-gen/qualifiers/format";
+import { auto as qAuto } from "@cloudinary/url-gen/qualifiers/quality";
 
 const AboutUsPage = () => {
+  const img = cld
+    .image("ee1ylswxgjhkckryvdn6")
+    // ⚡ Optimizaciones automáticas
+    .format(fAuto())
+    .format(qAuto())
+
   return (
     <div className="flex flex-col min-h-screen  bg-background-light dark:bg-background-dark dark:text-content-dark  text-content-light font-display transition-colors">
       <Navbar />
@@ -15,6 +25,19 @@ const AboutUsPage = () => {
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-4">
               Tech, Perfected.
             </h1>
+            <AdvancedImage
+              cldImg={img}
+            
+              loading="lazy" // Carga diferida para imágenes fuera de pantalla
+              fetchPriority="high" // Prioriza si es la imagen principal (puedes quitarlo si no lo es)
+              alt="Producto optimizado"
+              style={{
+                width: "400px",
+                height: "400px",
+                objectFit: "contain",
+              }}
+            />
+            
             <p className="text-lg md:text-xl text-gray-600 dark:text-subtle-dark">
               Tekia is not just a marketplace. It's a statement. We believe in
               the power of expertly chosen technology to enhance life, not

@@ -16,6 +16,8 @@ import { CartProvider } from "./shared/hooks/CartProvider.jsx";
 import BusquedaPage from "./pages/Busqueda/layout/BusquedaLayout.jsx";
 import HistoryOrdersPage from "./pages/HistoryOrders/layout/HistoryOrdersLayout.jsx";
 import OrderDetailsPage from "./pages/OrderDetails/layout/OrderDetailsLayout.jsx";
+
+
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
