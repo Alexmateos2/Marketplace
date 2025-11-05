@@ -3,11 +3,12 @@ import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer.jsx";
 import CarritoItem from "../components/carritoItem";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
 const CarritoPage = () => {
-  const { cart, totalPrice } = useCart();
-
+  const { cart, totalPrice, clearCart } = useCart();
+  const navigate = useNavigate();
   return (
     <div className="dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors min-h-screen flex flex-col">
       <Navbar />
@@ -19,7 +20,9 @@ const CarritoPage = () => {
           </h1>
 
           {cart.length === 0 ? (
-            <p className="px-2 pb-4 font-medium border-b border-border-dark/40 dark:border-border-dark">- Tu carrito está vacío.</p>
+            <p className="px-2 pb-4 font-medium border-b border-border-dark/40 dark:border-border-dark">
+              - Tu carrito está vacío.
+            </p>
           ) : (
             cart.map((item) => <CarritoItem key={item.id} item={item} />)
           )}
@@ -55,7 +58,11 @@ const CarritoPage = () => {
                 </div>
               </div>
               <button
-                onClick={() => console.log(cart)}
+                onClick={() => {
+                  navigate("/");
+                  clearCart();
+                  alert('Pedido realizado')
+                }}
                 className="w-full mt-8 bg-primary text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-primary/90 transition-colors"
               >
                 Proceed to Checkout
