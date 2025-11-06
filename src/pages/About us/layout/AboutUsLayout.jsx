@@ -1,21 +1,13 @@
 import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
-import { MdVerified, MdThumbUp, MdRocketLaunch } from "react-icons/md";
+import { BadgeCheck, ThumbsUp, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
 import GlareButton from "../../../shared/utils/GlareButton";
-import { AdvancedImage } from "@cloudinary/react";
-import { cld } from "../../../shared/utils/cloudinary";
-import { auto as fAuto } from "@cloudinary/url-gen/qualifiers/format";
-import { auto as qAuto } from "@cloudinary/url-gen/qualifiers/quality";
+
 
 const AboutUsPage = () => {
-  const img = cld
-    .image("ee1ylswxgjhkckryvdn6")
-    // ⚡ Optimizaciones automáticas
-    .format(fAuto())
-    .format(qAuto())
-
+ 
   return (
     <div className="flex flex-col min-h-screen  bg-background-light dark:bg-background-dark dark:text-content-dark  text-content-light font-display transition-colors">
       <Navbar />
@@ -25,19 +17,9 @@ const AboutUsPage = () => {
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter mb-4">
               Tech, Perfected.
             </h1>
-            <AdvancedImage
-              cldImg={img}
+           
             
-              loading="lazy" // Carga diferida para imágenes fuera de pantalla
-              fetchPriority="high" // Prioriza si es la imagen principal (puedes quitarlo si no lo es)
-              alt="Producto optimizado"
-              style={{
-                width: "400px",
-                height: "400px",
-                objectFit: "contain",
-              }}
-            />
-            
+
             <p className="text-lg md:text-xl text-gray-600 dark:text-subtle-dark">
               Tekia is not just a marketplace. It's a statement. We believe in
               the power of expertly chosen technology to enhance life, not
@@ -60,7 +42,7 @@ const AboutUsPage = () => {
             </div>
             <div className="flex flex-col gap-5 md:gap-6">
               <div className="flex items-start gap-4">
-                <MdVerified className="text-4xl text-primary mt-1" />
+                <BadgeCheck className="w-8 h-8 text-primary mt-1" />
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold">
                     Uncompromising Quality
@@ -71,8 +53,9 @@ const AboutUsPage = () => {
                   </p>
                 </div>
               </div>
+
               <div className="flex items-start gap-4">
-                <MdThumbUp className="text-4xl text-primary mt-1" />
+                <ThumbsUp className="w-8 h-8 text-primary mt-1" />
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold">
                     Radical Simplicity
@@ -83,8 +66,9 @@ const AboutUsPage = () => {
                   </p>
                 </div>
               </div>
+
               <div className="flex items-start gap-4">
-                <MdRocketLaunch className="text-4xl text-primary mt-1" />
+                <Rocket className="w-8 h-8 text-primary mt-1" />
                 <div>
                   <h3 className="text-lg md:text-xl font-semibold">
                     Future-Proofed
