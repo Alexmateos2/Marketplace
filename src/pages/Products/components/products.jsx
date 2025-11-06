@@ -149,10 +149,10 @@ const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
                   .format("auto")}
                 alt={product.nombre}
                 fecthpriority="high"
-                className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-300"
+                className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-300 border-b border-border-light dark:border-border-dark rounded"
                 loading="lazy"
               />
-              <div className="px-4 py-5 flex flex-col flex-grow">
+              <div className="px-4 py-5 flex flex-col flex-grow ">
                 <h4 className="font-bold text-md lg:text-lg text-gray-800 dark:text-gray-100 text-center sm:text-start flex-grow">
                   {product.nombre}
                 </h4>

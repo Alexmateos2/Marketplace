@@ -102,6 +102,17 @@ const CategoriesNavbar = () => {
           >
             Audio
           </NavLink>
+          <NavLink
+            to="/products/Laptops"
+            className={({ isActive }) =>
+              `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
+                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
+                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+              }`
+            }
+          >
+            Laptops
+          </NavLink>
         </div>
       )}
     </div>
