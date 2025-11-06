@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Footer from "../../../shared/utils/Footer";
 import Navbar from "../../../shared/navbar/navbar";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { Eye, EyeOff } from "lucide-react";
 const LoginPage = () => {
   const [formValue, setFormValue] = useState({
     email: "",
@@ -105,11 +105,14 @@ const LoginPage = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
-                    className={`${
-                      formValue.password !== "" ? "block" : "hidden"
-                    } text-xl text-content-light hover:underline`}
+                    className="text-xl text-content-light dark:text-content-dark hover:opacity-80 transition-opacity"
                   >
-                    {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                    {" "}
+                    {showPassword ? (
+                      <EyeOff size={20} />
+                    ) : (
+                      <Eye size={20} />
+                    )}{" "}
                   </button>
                 </div>
               </div>
@@ -124,7 +127,9 @@ const LoginPage = () => {
                 required
               />
               {isMayus && (
-                <p className="text-red-500 dark:text-red-400 text-sm mt-2">⚠️ Caps Lock is ON</p>
+                <p className="text-red-500 dark:text-red-400 text-sm mt-2">
+                  ⚠️ Caps Lock is ON
+                </p>
               )}
 
               <div className="flex mt-3">

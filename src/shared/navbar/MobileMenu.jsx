@@ -2,7 +2,16 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import { MdPerson, MdReceiptLong, MdLogout } from "react-icons/md";
+import {
+  User,
+  FileText,
+  LogOut,
+  ShoppingCart,
+  LayoutGrid,
+  Sparkles,
+  Package,
+  Info,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/CartContext";
 
@@ -27,17 +36,41 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
 
   const menuItems = isProfilePage
     ? [
-        { icon: <MdPerson className="w-5 h-5 flex-shrink-0" />, label: "Personal Information", to: "/profile" },
-        { icon: <MdReceiptLong className="w-5 h-5 flex-shrink-0" />, label: "Order History", to: "/pedidos/historial" },
-        { icon: <MdLogout className="w-5 h-5 flex-shrink-0 translate-x-[3px]" />, label: "Logout", onClick: handleLogout },
+        {
+          icon: <User className="w-5 h-5" />,
+          label: "Personal Information",
+          to: "/profile",
+        },
+        {
+          icon: <FileText className="w-5 h-5" />,
+          label: "Order History",
+          to: "/pedidos/historial",
+        },
+        {
+          icon: <LogOut className="w-5 h-5" />,
+          label: "Logout",
+          onClick: handleLogout,
+        },
       ]
     : [
-        { label: "Categorías", to: "/categories" },
-        { label: "Nuevo", to: "/new" },
-        { label: "Productos", to: "/products" },
-        { label: "About us", to: "/about" },
-        { label: "Cart", to: "/cart", totalItems },
-
+        {
+          icon: <LayoutGrid className="w-5 h-5" />,
+          label: "Categorías",
+          to: "/categories",
+        },
+        { icon: <Sparkles className="w-5 h-5" />, label: "Nuevo", to: "/new" },
+        {
+          icon: <Package className="w-5 h-5" />,
+          label: "Productos",
+          to: "/products",
+        },
+        { icon: <Info className="w-5 h-5" />, label: "About us", to: "/about" },
+        {
+          icon: <ShoppingCart className="w-5 h-5" />,
+          label: "Cart",
+          to: "/cart",
+          totalItems,
+        },
       ];
 
   return (

@@ -146,6 +146,7 @@ const ProductPages = () => {
                       .quality("auto")
                       .format("auto")}
                     alt={product.nombre}
+                    fecthPriority="high"
                     className="w-full h-full object-cover object-center"
                   />
                 ) : (
