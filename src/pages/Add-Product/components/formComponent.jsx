@@ -291,8 +291,8 @@ const FormComponent = () => {
       )}
 
       <div className="space-y-8">
-        <div>
-          <label className="block text-sm font-medium mb-2 text-foreground-light dark:text-foreground-dark">
+        <div className="w-6/7 px-4 mx-auto">
+          <label className="block text-sm font-medium mb-4 text-foreground-light dark:text-foreground-dark">
             Imagen del Producto
           </label>
           <div
@@ -375,7 +375,7 @@ const FormComponent = () => {
               onChange={handleFormChange}
               placeholder="ej. Auriculares Inalámbricos"
               disabled={isLoading}
-              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
 
@@ -392,12 +392,14 @@ const FormComponent = () => {
               value={formData.id_categoria}
               onChange={handleFormChange}
               disabled={isLoading}
-              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Selecciona una categoría</option>
               <option value="1">Audio</option>
               <option value="2">Ratones</option>
               <option value="3">Teclados</option>
+              <option value="4">Laptops</option>
+              <option value="5">Wearables</option>
             </select>
           </div>
 
@@ -421,13 +423,13 @@ const FormComponent = () => {
                 onChange={handleFormChange}
                 placeholder="299.00"
                 disabled={isLoading}
-                className="block w-full pl-7 py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="block w-full pl-7 py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1  md:grid-cols-2 gap-6">
           <div>
             <label
               htmlFor="stock"
@@ -444,11 +446,11 @@ const FormComponent = () => {
               onChange={handleFormChange}
               placeholder="50"
               disabled={isLoading}
-              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
 
-          <div className="flex items-center pt-6">
+          <div className="flex items-center pt-4">
             <input
               id="oferta"
               name="oferta"
@@ -456,7 +458,7 @@ const FormComponent = () => {
               checked={formData.oferta}
               onChange={handleFormChange}
               disabled={isLoading}
-              className="h-4 w-4 rounded border-border-light dark:border-border-dark text-primary focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              className="h-4 w-4 ml-2 rounded border-border-light dark:border-border-dark text-primary focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <label
               htmlFor="oferta"
@@ -482,7 +484,7 @@ const FormComponent = () => {
             onChange={handleFormChange}
             placeholder="Una breve descripción del producto..."
             disabled={isLoading}
-            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -502,7 +504,7 @@ const FormComponent = () => {
                       handleSpecChange(index, "attribute", e.target.value)
                     }
                     disabled={isLoading}
-                    className="flex-1  w-full block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1  w-full block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <input
                     type="text"
@@ -512,7 +514,7 @@ const FormComponent = () => {
                       handleSpecChange(index, "value", e.target.value)
                     }
                     disabled={isLoading}
-                    className="flex-1 w-full block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex-1 w-full bg-background-light block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark  dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   {index !== 0 ? (
                     <button
@@ -578,7 +580,7 @@ const FormComponent = () => {
             onChange={handleFormChange}
             placeholder="Comparte tus opiniones detalladas sobre el producto..."
             disabled={isLoading}
-            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />
 
           <div className="mt-4">
@@ -598,7 +600,7 @@ const FormComponent = () => {
               value={formData.valoracion}
               onChange={handleFormChange}
               disabled={isLoading}
-              className="block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
         </div>

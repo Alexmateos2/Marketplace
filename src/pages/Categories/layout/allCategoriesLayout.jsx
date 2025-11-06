@@ -131,13 +131,13 @@ const AllCategoriesPage = () => {
             >
               <div className="absolute inset-0 z-0">
                 <img
-                  alt="Smart Watches"
+                  alt="Wearables"
                   className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTRRw3qd5NHJ88Acm7jTGtVugcRH6tBx33gpFYrzfafzdnzIDIkqtg0S9zAP0O7zGmBbDP_XMYC7G1s4YjIwZrqosTgt2kvmZFOnb5yp9_B-hK4fM2IBVlYulkoEkRa_ajdPBN5IqiuuVS5ZUC0U4PbVsrPHthxrBx5JgTw4p0Tbl3KRIxWWWaunrbKXpCj4kJvRzCQxxaxZvth0gAaap1cWVXjNqnzdDN4lcY0QoBkmMwnzeLbMAbb3l58UqzWbHlKVEUYiUwbtg"
                 />
               </div>
               <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
-                <h3 className="text-lg font-bold text-white">Smart Watches</h3>
+                <h3 className="text-lg font-bold text-white">Wearables</h3>
               </div>
             </NavLink>
 
