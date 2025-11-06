@@ -12,7 +12,9 @@ const FormComponent = () => {
     valoracion: 5,
   });
 
-  const [specifications, setSpecifications] = useState([{ attribute: "", value: "" }]);
+  const [specifications, setSpecifications] = useState([
+    { attribute: "", value: "" },
+  ]);
   const [files, setFiles] = useState([]);
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
@@ -98,7 +100,9 @@ const FormComponent = () => {
   const addSpecification = () => {
     const firstSpec = specifications[0];
     if (!firstSpec.attribute.trim() || !firstSpec.value.trim()) {
-      setMessage("Introduce los campos requeridos arriba antes de agregar otra especificación.");
+      setMessage(
+        "Introduce los campos requeridos arriba antes de agregar otra especificación."
+      );
       setMessageType("warning");
       return;
     }
@@ -185,7 +189,7 @@ const FormComponent = () => {
       let resenaData = null;
       if (formData.resena.trim()) {
         resenaData = {
-          valoracion: parseInt(formData.valoracion),
+          valoracion: parseFloat(formData.valoracion),
           descripcion: formData.resena,
         };
       }
@@ -588,6 +592,7 @@ const FormComponent = () => {
               type="number"
               id="valoracion"
               name="valoracion"
+              step="0.1"
               min="1"
               max="10"
               value={formData.valoracion}
