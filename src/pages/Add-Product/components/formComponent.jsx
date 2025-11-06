@@ -17,6 +17,7 @@ const FormComponent = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
   const [isDragActive, setIsDragActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (message) {
@@ -153,6 +154,7 @@ const FormComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
+    setIsLoading(true);
 
     try {
       if (!formData.nombre.trim()) {
@@ -190,6 +192,7 @@ const FormComponent = () => {
 
       const payload = {
         nombre: formData.nombre.trim(),
+        descripcion: formData.descripcion,
         id_categoria: parseInt(formData.id_categoria),
         precio: parseFloat(formData.precio),
         stock: parseInt(formData.stock),
@@ -231,6 +234,8 @@ const FormComponent = () => {
     } catch (err) {
       setMessage(err.message);
       setMessageType("error");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -269,6 +274,15 @@ const FormComponent = () => {
             {messageType === "warning" && "!"}
           </span>
           <span className="text-sm font-medium">{message}</span>
+        </div>
+      )}
+
+      {isLoading && (
+        <div className="p-4 rounded-lg flex items-center gap-3 bg-blue-500/10 border border-blue-500/30 text-blue-700 dark:text-blue-400">
+          <div className="flex items-center gap-2">
+            <div className="w-5 h-5 border-2 border-blue-400 border-t-blue-700 dark:border-t-blue-400 rounded-full animate-spin"></div>
+            <span className="text-sm font-medium">Cargando producto...</span>
+          </div>
         </div>
       )}
 
@@ -356,7 +370,8 @@ const FormComponent = () => {
               value={formData.nombre}
               onChange={handleFormChange}
               placeholder="ej. Auriculares Inalámbricos"
-              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+              disabled={isLoading}
+              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
 
@@ -372,12 +387,13 @@ const FormComponent = () => {
               name="id_categoria"
               value={formData.id_categoria}
               onChange={handleFormChange}
-              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+              disabled={isLoading}
+              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Selecciona una categoría</option>
-              <option value="1">Electrónica</option>
-              <option value="2">Audio</option>
-              <option value="3">Accesorios</option>
+              <option value="1">Audio</option>
+              <option value="2">Ratones</option>
+              <option value="3">Teclados</option>
             </select>
           </div>
 
@@ -400,7 +416,8 @@ const FormComponent = () => {
                 value={formData.precio}
                 onChange={handleFormChange}
                 placeholder="299.00"
-                className="block w-full pl-7 py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+                disabled={isLoading}
+                className="block w-full pl-7 py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
           </div>
@@ -422,7 +439,8 @@ const FormComponent = () => {
               value={formData.stock}
               onChange={handleFormChange}
               placeholder="50"
-              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+              disabled={isLoading}
+              className="mt-1 block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
 
@@ -433,7 +451,8 @@ const FormComponent = () => {
               type="checkbox"
               checked={formData.oferta}
               onChange={handleFormChange}
-              className="h-4 w-4 rounded border-border-light dark:border-border-dark text-primary focus:ring-primary"
+              disabled={isLoading}
+              className="h-4 w-4 rounded border-border-light dark:border-border-dark text-primary focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <label
               htmlFor="oferta"
@@ -458,7 +477,8 @@ const FormComponent = () => {
             value={formData.descripcion}
             onChange={handleFormChange}
             placeholder="Una breve descripción del producto..."
-            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+            disabled={isLoading}
+            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -477,7 +497,8 @@ const FormComponent = () => {
                     onChange={(e) =>
                       handleSpecChange(index, "attribute", e.target.value)
                     }
-                    className="flex-1  w-full block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+                    disabled={isLoading}
+                    className="flex-1  w-full block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   <input
                     type="text"
@@ -486,13 +507,15 @@ const FormComponent = () => {
                     onChange={(e) =>
                       handleSpecChange(index, "value", e.target.value)
                     }
-                    className="flex-1 w-full block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+                    disabled={isLoading}
+                    className="flex-1 w-full block py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                   {index !== 0 ? (
                     <button
                       type="button"
                       onClick={() => removeSpecification(index)}
-                      className="p-2 text-muted-light dark:text-muted-dark hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                      disabled={isLoading}
+                      className="p-2 text-muted-light dark:text-muted-dark hover:text-red-500 dark:hover:text-red-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <svg
                         className="h-5 w-5"
@@ -514,7 +537,8 @@ const FormComponent = () => {
                   <button
                     type="button"
                     onClick={addSpecification}
-                    className="flex items-center gap-2 text-sm font-medium text-primary hover:brightness-110 transition-all"
+                    disabled={isLoading}
+                    className="flex items-center gap-2 text-sm font-medium text-primary hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <svg
                       className="h-5 w-5"
@@ -549,7 +573,8 @@ const FormComponent = () => {
             value={formData.resena}
             onChange={handleFormChange}
             placeholder="Comparte tus opiniones detalladas sobre el producto..."
-            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+            disabled={isLoading}
+            className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />
 
           <div className="mt-4">
@@ -567,7 +592,8 @@ const FormComponent = () => {
               max="10"
               value={formData.valoracion}
               onChange={handleFormChange}
-              className="block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors"
+              disabled={isLoading}
+              className="block w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </div>
         </div>
@@ -576,16 +602,21 @@ const FormComponent = () => {
           <button
             type="button"
             onClick={handleCancel}
-            className="px-6 py-2 text-sm font-medium rounded-lg text-foreground-light dark:text-foreground-dark hover:bg-background-light dark:hover:bg-background-dark transition-colors border border-border-light dark:border-border-dark"
+            disabled={isLoading}
+            className="px-6 py-2 text-sm font-medium rounded-lg text-foreground-light dark:text-foreground-dark hover:bg-background-light dark:hover:bg-background-dark transition-colors border border-border-light dark:border-border-dark disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Cancelar
           </button>
           <button
             type="button"
             onClick={handleSubmit}
-            className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-content-dark dark:text-content-dark hover:brightness-110 disabled:brightness-50 disabled:cursor-not-allowed transition-all"
+            disabled={isLoading}
+            className="px-6 py-2 text-sm font-medium rounded-lg bg-primary text-content-dark dark:text-content-dark hover:brightness-110 disabled:brightness-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
           >
-            Agregar Producto
+            {isLoading && (
+              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            )}
+            {isLoading ? "Cargando..." : "Agregar Producto"}
           </button>
         </div>
       </div>

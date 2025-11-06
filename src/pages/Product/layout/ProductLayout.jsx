@@ -10,7 +10,7 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 
 const ProductPages = () => {
   const { id } = useParams();
-  const { cart, addToCart } = useCart();
+  const { cart, addToCart, updateQuantity } = useCart();
 
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -41,18 +41,19 @@ const ProductPages = () => {
     return <Navigate to="/noProduct" replace />;
 
   const product = producto || localProduct;
-  const productInCart = cart.find((item) => item.id === product?.id);
+  const productInCart = cart.find(
+    (item) => item.id === (product?.id_producto || product?.id)
+  );
 
   const handleAddToCart = () => {
     addToCart({
-      id: product.id_producto,
+      id: product.id_producto || product.id,
       name: product.nombre,
       price: product.precio,
       image: product.imagen,
       quantity: 1,
     });
   };
-
   if (loading)
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -76,7 +77,7 @@ const ProductPages = () => {
                 to={`/products/${product.categoria}`}
                 className="text-gray-700 dark:text-gray-300 hover:text-primary"
               >
-                {product.id_categoria === 1 ? "Audio" : ""}
+                {product.categoria}
               </NavLink>
             </nav>
           </div>
@@ -89,8 +90,8 @@ const ProductPages = () => {
                   {product.nombre}
                 </h1>
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
-                  {product.desc
-                    ? product.desc
+                  {product.descripcion
+                    ? product.descripcion
                     : " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam repellat consequuntur beatae excepturi labore expedita vitae tempora a eum consectetur molestiae provident ipsa ipsum eius, blanditiis veritatis eligendi qui. Necessitatibus?"}
                 </p>
                 <div className="flex items-baseline gap-2 mb-6">
@@ -105,14 +106,30 @@ const ProductPages = () => {
                   >
                     Add to Cart
                   </button>
-                  <div className="min-h-[28px]">
-                    <span
-                      className={`text-xl px-2 font-semibold transition-opacity duration-300 ${
-                        productInCart ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      Quantity: {productInCart?.quantity ?? ""}
-                    </span>
+                  <div className="min-h-[48px] flex items-center gap-3 mt-2">
+                    {productInCart ? (
+                      <div className="flex items-center rounded-lg px-4 py-2  transition-all">
+                        <button
+                          onClick={() =>
+                            updateQuantity(
+                              product.id_producto || product.id,
+                              productInCart.quantity - 1
+                            )
+                          }
+                          className="w-8 h-8 flex items-center justify-center rounded-md bg-primary  text-white text-lg font-bold hover:bg-primary/90 transition-colors"
+                        >
+                          −
+                        </button>
+
+                        <span className="text-lg font-semibold text-subtle-light dark:text-subtle-dark px-4">
+                          Cantidad: {productInCart.quantity}
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-subtle-light dark:text-subtle-dark font-semibold">
+                        No añadido al carrito
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
