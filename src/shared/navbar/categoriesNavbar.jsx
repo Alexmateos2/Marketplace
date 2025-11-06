@@ -70,7 +70,7 @@ const CategoriesNavbar = () => {
             All categories
           </NavLink>
           <NavLink
-            to="/products/Keyboards"
+            to="/products/Teclados"
             className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
                 isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
@@ -78,10 +78,10 @@ const CategoriesNavbar = () => {
               }`
             }
           >
-            Keyboards
+            Teclados
           </NavLink>
           <NavLink
-            to="/products/Mouse"
+            to="/products/Ratones"
            className={({ isActive }) =>
               `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
                 isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
@@ -89,7 +89,7 @@ const CategoriesNavbar = () => {
               }`
             }
           >
-            Mouse
+            Ratones
           </NavLink>
           <NavLink
             to="/products/Audio"
