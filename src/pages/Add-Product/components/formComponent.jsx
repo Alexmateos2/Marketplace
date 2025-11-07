@@ -400,6 +400,9 @@ const FormComponent = () => {
               <option value="3">Teclados</option>
               <option value="4">Laptops</option>
               <option value="5">Wearables</option>
+              <option value="6">Monitores</option>
+              <option value="7">Smartphones</option>
+              <option value="8">Accesorios</option>
             </select>
           </div>
 
