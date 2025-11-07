@@ -6,8 +6,42 @@ import { useCart } from "../../../shared/hooks/CartContext.jsx";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
+
 const CarritoPage = () => {
   const { cart, totalPrice, clearCart } = useCart();
+
+  const usuario = localStorage.getItem('usuario') || null
+   
+     const handleSubmit = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/pedido", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id_usuario: usuario, 
+        productos: cart.map(item => ({
+          id_producto: item.id,
+          cantidad: item.quantity
+        })),
+        total: totalPrice,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert("Pedido realizado con éxito. ID: " + data.id_pedido);
+      clearCart();
+      navigate("/");
+    } else {
+      alert("Error: " + data.message);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error al realizar el pedido");
+  }
+};
+
   const navigate = useNavigate();
   return (
     <div className="dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors min-h-screen flex flex-col">
@@ -58,11 +92,7 @@ const CarritoPage = () => {
                 </div>
               </div>
               <button
-                onClick={() => {
-                  navigate("/");
-                  clearCart();
-                  alert('Pedido realizado')
-                }}
+                onClick={handleSubmit}
                 className="w-full mt-8 bg-primary text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-primary/90 transition-colors"
               >
                 Proceed to Checkout
