@@ -1,14 +1,70 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 const FormProfile = ({ usuario }) => {
   const [disabled, setDisabled] = useState(true);
-  const { nombre, email, direccion, telefono } = usuario || {nombre:"John Doe",email:"johndoe@gmail.com",direccion:"C/Example 123",telefono:"(+55) 623723721"};
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    direccion: "",
+    telefono: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    if (usuario) {
+      setFormData({
+        nombre: usuario.nombre || "John Doe",
+        email: usuario.email || "johndoe@gmail.com",
+        direccion: usuario.direccion || "C/Example 123",
+        telefono: usuario.telefono || "(+55) 623723721",
+        password: usuario.password,
+      });
+    }
+  }, [usuario]);
 
   const changeHandle = () => {
     setDisabled(!disabled);
   };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setDisabled(true);
+
+ 
+    const dataToSend = { ...formData };
+
+ 
+    if (!dataToSend.password) {
+      delete dataToSend.password;
+    }
+
+    fetch(`http://localhost:3000/usuarios/${usuario.id_usuario}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataToSend),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Usuario actualizado:", data);
+      })
+      .catch((err) => {
+        console.error("Error actualizando usuario:", err);
+      });
+  };
+
   return (
-    <div className="max-w-4xl mx-auto">
+    <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
       <div className="lg:hidden flex justify-end items-center mb-6"></div>
       <div className="mb-8">
         <p className="text-4xl font-black text-content-light dark:text-content-dark">
@@ -27,16 +83,19 @@ const FormProfile = ({ usuario }) => {
           ></div>
           <div className="flex flex-col justify-center flex-1 ">
             <p className="text-[22px] text-center sm:text-start font-bold tracking-[-0.015em] text-content-light dark:text-content-dark">
-              {nombre}
+              {formData.nombre}
             </p>
             <p className="text-base text-content-light-500 dark:text-content-dark">
-              {email}
+              {formData.email}
             </p>
             <button
+              type="button"
               onClick={changeHandle}
               className="mt-4 flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto hover:bg-primary/20 dark:hover:bg-primary/30"
             >
-              <span className="truncate">Edit Profile</span>
+              <span className="truncate">
+                {disabled ? "Edit Profile" : "Cancel"}
+              </span>
             </button>
           </div>
         </div>
@@ -45,46 +104,49 @@ const FormProfile = ({ usuario }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col">
             <label
-              htmlFor="fullName"
+              htmlFor="nombre"
               className="text-base font-medium pb-2 text-content-light dark:text-content-dark"
             >
               Full Name
             </label>
             <input
-              id="fullName"
+              id="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
               readOnly={disabled}
-              placeholder={nombre}
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
           <div className="flex flex-col">
             <label
-              htmlFor="emailAddress"
+              htmlFor="email"
               className="text-base font-medium pb-2 text-content-light dark:text-content-dark"
             >
               Email Address
             </label>
             <input
-              id="emailAddress"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
               readOnly={disabled}
-              placeholder={email}
               className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
         </div>
         <div className="flex flex-col">
           <label
-            htmlFor="shippingAddress"
+            htmlFor="direccion"
             className="text-base font-medium pb-2 text-content-light dark:text-content-dark"
           >
             Shipping Address
           </label>
           <textarea
-            id="shippingAddress"
+            id="direccion"
+            value={formData.direccion}
+            onChange={handleChange}
             readOnly={disabled}
             rows={3}
             className="form-textarea w-full rounded-lg p-4 border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark"
-            placeholder={direccion}
           />
         </div>
         <div className="border-t border-border-light dark:border-border-dark my-6"></div>
@@ -95,15 +157,16 @@ const FormProfile = ({ usuario }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="flex flex-col">
               <label
-                htmlFor="phoneNumber"
+                htmlFor="telefono"
                 className="text-base font-medium pb-2 text-content-light dark:text-content-dark"
               >
                 Phone Number
               </label>
               <input
-                id="phoneNumber"
+                id="telefono"
+                value={formData.telefono}
+                onChange={handleChange}
                 readOnly={disabled}
-                placeholder={telefono}
                 className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
               />
             </div>
@@ -116,8 +179,10 @@ const FormProfile = ({ usuario }) => {
               </label>
               <input
                 id="password"
-                readOnly={disabled}
                 type="password"
+                value={formData.password}
+                onChange={handleChange}
+                readOnly={disabled}
                 placeholder="••••••••"
                 className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
               />
@@ -126,26 +191,19 @@ const FormProfile = ({ usuario }) => {
         </div>
         <div className="flex justify-end gap-3 pt-4">
           <button
-            onClick={() => setDisabled(true)}
+            type="submit"
             disabled={disabled}
             className={
               disabled
                 ? " hidden"
-                : "flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10  px-4 bg-slate dark:bg-background-dark text-content-light   dark:text-content-dark text-sm font-medium leading-normal tracking-[0.015em]"
+                : "flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10  px-4 bg-slate dark:bg-background-dark text-white dark:bg-primary bg-primary  dark:text-content-dark text-sm font-medium leading-normal tracking-[0.015em]"
             }
-          >
-            <span className="truncate">Cancel</span>
-          </button>
-          <button
-            disabled={disabled}
-            onClick={() => setDisabled(true)}
-            className="flex min-w-[84px] disabled:cursor-not-allowed disabled:bg-primary/50 cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em]"
           >
             <span className="truncate">Save Changes</span>
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

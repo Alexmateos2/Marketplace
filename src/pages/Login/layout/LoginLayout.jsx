@@ -87,7 +87,7 @@ const LoginPage = () => {
                 value={formValue.email}
                 onChange={handleChangeInput}
                 placeholder="you@example.com"
-                className="mt-2 w-full px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary placeholder:text-gray-500 dark:placeholder:text-subtle-dark/60 dark:text-subtle-dark/80"
+                className="mt-2 w-full px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary placeholder:text-gray-500 dark:placeholder:text-subtle-dark/60 dark:text-foreground-dark"
                 required
               />
             </div>
@@ -123,7 +123,7 @@ const LoginPage = () => {
                 onChange={handleChangeInput}
                 onKeyDown={onKeyDown}
                 placeholder="••••••••"
-                className="w-full px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary placeholder:text-gray-500 dark:placeholder:text-subtle-dark/60 dark:text-subtle-dark/80"
+                className="w-full px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:ring-primary focus:border-primary placeholder:text-gray-500 dark:placeholder:text-subtle-dark/60 dark:text-foreground-dark"
                 required
               />
               {isMayus && (
