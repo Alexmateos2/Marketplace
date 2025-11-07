@@ -1,8 +1,76 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Navbar from "../../../shared/navbar/navbar";
+import { useEffect, useState } from "react";
+import { cld } from "../../../shared/utils/cloudinary.js";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { AdvancedImage } from "@cloudinary/react";
 
 const OrderDetailsPage = () => {
+  const { id } = useParams();
+  const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const user = localStorage.getItem("usuario");
+
+  useEffect(() => {
+   
+
+    const fetchOrderDetails = async () => {
+  try {
+    setLoading(true);
+    setError(null);
+    let response;
+    if (user) {
+      response = await fetch(`http://localhost:3000/detallesPedidos/${user}/${id}`);
+    } else {
+      response = await fetch(`http://localhost:3000/detallesPedidos/${id}`);
+    }
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    setOrder(data);
+  } catch (err) {
+    console.error("Error fetching order details:", err);
+    setError("Failed to load order details. Please try again later.");
+    setOrder(null);
+  } finally {
+    setLoading(false);
+  }
+};
+
+    fetchOrderDetails();
+  }, [user, id]);
+
+  if (loading) {
+    return (
+      <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen">
+        <Navbar />
+        <main className="px-6 sm:px-10 lg:px-20 py-8 flex flex-1 justify-center">
+          <p className="text-center text-subtle-light dark:text-subtle-dark">
+            Loading order details...
+          </p>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !order) {
+    return (
+      <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen">
+        <Navbar />
+        <main className="px-6 sm:px-10 lg:px-20 py-8 flex flex-1 justify-center">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded">
+            {error}
+          </div>
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen">
       <Navbar />
@@ -19,9 +87,16 @@ const OrderDetailsPage = () => {
               Order Details
             </h1>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-2 text-subtle-light dark:text-subtle-dark text-sm">
-              <p>Order #TK-1234567</p>
+              <p>Order #{order.id_pedido}</p>
               <div className="size-1 rounded-full bg-border-light dark:bg-border-dark hidden sm:block"></div>
-              <p>Placed on October 26, 2023</p>
+              <p>
+                Placed on{" "}
+                {new Date(order.fecha).toLocaleDateString("es-ES", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
             </div>
           </div>
 
@@ -29,79 +104,49 @@ const OrderDetailsPage = () => {
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark">
                 <h2 className="text-lg font-bold text-content-light dark:text-content-dark mb-4">
-                  Items in this Order (3)
+                  Items in this Order ({order.detalles?.length || 0})
                 </h2>
                 <div className="space-y-4">
-                  {/* Item 1 */}
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-20 shrink-0"
-                      style={{
-                        backgroundImage:
-                          'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBW9PMJEGXf6jaqPL0kyRDRlc7Sz-VsKH7UGt_c_A88e66TT0o__Ugao1ULkFDpfDm6YHb56KCF6WsaSluvJWZp8PMZKr21Sy5jXsMipdyvO7WflEab75i2c04T2aLkUpmaZdVXEiaYVallFYZLG5p04alANTIXLNgHpC0Z15Bwx2s2co8W-VPuZZpX5RCETTbGPzqi2kFYd04kPGsGrRHTwqSeHX-hPsigVyuAyCq5MICP1eqnJFX1hbGr0Eq4XZhG31T7G_ZFtJ8")',
-                      }}
-                      title="Logitech MX Master 3S Mouse"
-                    />
-                    <div className="flex-grow">
-                      <p className="font-semibold text-content-light dark:text-content-dark">
-                        Logitech MX Master 3S Mouse
-                      </p>
-                      <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                        Qty: 1
-                      </p>
-                    </div>
-                    <p className="font-semibold text-content-light dark:text-content-dark">
-                      $99.00
+                  {order.detalles && order.detalles.length > 0 ? (
+                    order.detalles.map((item, idx) => (
+                      <div key={item.id_detalle}>
+                        <div className="flex items-center gap-4">
+                          <div className="rounded-lg size-20 shrink-0 overflow-hidden bg-background-light dark:bg-gray-700">
+                            <AdvancedImage
+                              cldImg={cld
+                                .image(item.imagen)
+                                .resize(
+                                  fill().width(80).height(80).gravity("auto")
+                                )
+                                .quality("auto")
+                                .format("auto")}
+                              alt={item.nombre_producto || "Product"}
+                              loading="lazy"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="flex-grow">
+                            <p className="font-semibold text-content-light dark:text-content-dark">
+                              {item.nombre_producto}
+                            </p>
+                            <p className="text-sm text-subtle-light dark:text-subtle-dark">
+                              Qty: {item.cantidad}
+                            </p>
+                          </div>
+                          <p className="font-semibold text-content-light dark:text-content-dark">
+                            ${item.precio_unitario * item.cantidad}
+                          </p>
+                        </div>
+                        {idx < order.detalles.length - 1 && (
+                          <div className="border-t border-border-light dark:border-border-dark mt-4"></div>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-center text-subtle-light dark:text-subtle-dark">
+                      No items in this order
                     </p>
-                  </div>
-                  <div className="border-t border-border-light dark:border-border-dark"></div>
-
-                  {/* Item 2 */}
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-20 shrink-0"
-                      style={{
-                        backgroundImage:
-                          'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqkWHYFmhVauUQJSTA76Rd8B8Fjjx9W7fecbvNTN61egSsAvNLbIglJ556_Q5qcbL-wg-T-BmrjNuwJjhhEuYC3Vsa-rpw9k3HfJfqsE8ekNB6Ezw-_WXPmLLtyyv3m8NzMau4iYDzFYUpOYvC1zzds8iRaW8orywt6LPFCnX3b3xQl0TwGVEWAQyfrqfxxPWVnpz_Ri1tDr9_ukGCPtO_dX5g7gxEi_4fZG-5VRQuOkMg5xYhUZ-10i0sgIPgRFnY3-LSKN-NaXI")',
-                      }}
-                      title="Mechanical Keyboard"
-                    />
-                    <div className="flex-grow">
-                      <p className="font-semibold text-content-light dark:text-content-dark">
-                        Mechanical Keyboard
-                      </p>
-                      <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                        Qty: 1
-                      </p>
-                    </div>
-                    <p className="font-semibold text-content-light dark:text-content-dark">
-                      $150.00
-                    </p>
-                  </div>
-                  <div className="border-t border-border-light dark:border-border-dark"></div>
-
-                  {/* Item 3 */}
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-20 shrink-0"
-                      style={{
-                        backgroundImage:
-                          'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBzApzFSt217ctzApv_zEu7PzXd6hJmhWvQdSyHTEiXPKQqETMAdK54Y97OEB5mzbAFXLGUnodYIfewFYiRFD8Zc6STKtuaX8FmEZYQ5CZIIlxd9xSsaR7T-fumUSwbmWgY8E4W0tcACXT3FPuI9Sd-h298p6zN7tpn3A7LQaPAvKpHtVfikkeulow4SCMaooIQ3q1i62tO9N4_1YBBb08eUdXyM03h_YjLfbGTznS7mUPtqo5HSAT06kqg-G_tFLYunZtwIt41DxY")',
-                      }}
-                      title="Sony WH-1000XM5 Headphones"
-                    />
-                    <div className="flex-grow">
-                      <p className="font-semibold text-content-light dark:text-content-dark">
-                        Sony WH-1000XM5 Headphones
-                      </p>
-                      <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                        Qty: 1
-                      </p>
-                    </div>
-                    <p className="font-semibold text-content-light dark:text-content-dark">
-                      $250.00
-                    </p>
-                  </div>
+                  )}
                 </div>
               </div>
 
@@ -112,13 +157,9 @@ const OrderDetailsPage = () => {
                       Shipping Address
                     </h3>
                     <p className="text-sm text-subtle-light dark:text-subtle-dark leading-relaxed">
-                      Jane Doe
+                     {order.nombre_usuario}
                       <br />
-                      123 Tech Lane
-                      <br />
-                      Silicon Valley, CA 94043
-                      <br />
-                      United States
+                      {order.direccion}
                     </p>
                   </div>
                   <div>
@@ -138,7 +179,7 @@ const OrderDetailsPage = () => {
                         </svg>
                       </div>
                       <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                        Visa ending in 1234
+                        Payment processed
                       </p>
                     </div>
                   </div>
@@ -157,7 +198,7 @@ const OrderDetailsPage = () => {
                       Subtotal
                     </p>
                     <p className="font-medium text-content-light dark:text-content-dark">
-                      $449.00
+                      ${order.total}
                     </p>
                   </div>
                   <div className="flex justify-between">
@@ -183,7 +224,7 @@ const OrderDetailsPage = () => {
                     Total
                   </p>
                   <p className="text-xl font-bold text-content-light dark:text-content-dark">
-                    $499.00
+                    ${order.total}
                   </p>
                 </div>
               </div>
