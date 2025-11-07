@@ -190,8 +190,8 @@ const ProductPages = () => {
             </div>
 
             {/* Review */}
-            <div className="flex flex-col max-h-[360px] ">
-              <div className="bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm h-full">
+            <div className="flex flex-col h-fit">
+              <div className="bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm h-fit">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   Expert Review
                 </h2>
@@ -202,7 +202,7 @@ const ProductPages = () => {
                       className="w-12 h-12 rounded-full flex-shrink-0"
                       src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnPDzJcMZziYykcoTL8J0llTXjQhuVgoFS5kaRslcUxTveESdKSoIeOWOZkXuY0Tz-MTgebtvZ7QCNLiHPFUq9GtchxXFaj9vudR_T10GJdBqrkYLFBjrFk6o9RZr0ewMDdQuOhT3-Ycr7AHSQs5sEa8HO_1FkaD9bKZO_S82ZQQdeNdwmD6exVcr4YhNUOyVKTc8WRSo_3ezwYk3iE4znU53VV29a2ikgoVrbKeK6Vwe1ShJCMb5nbKClDiQMGADJGhvG8QtlA8s"
                     />
-                    <div className="flex-1 ">
+                    <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
                         <div>
                           <p className="text-lg font-semibold text-gray-900 dark:text-white">

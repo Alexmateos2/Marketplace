@@ -6,7 +6,6 @@ import { NavLink } from "react-router-dom";
 const AllCategoriesPage = () => {
   return (
     <div className="flex flex-col min-h-screen dark:bg-background-dark bg-background-light dark:text-white font-display transition-colors">
-
       <Navbar />
 
       <main className="flex-1">
@@ -21,9 +20,7 @@ const AllCategoriesPage = () => {
             </p>
           </div>
 
-
           <div className="mt-16 grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-8">
-
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
               to="/products/Audio"
@@ -40,57 +37,53 @@ const AllCategoriesPage = () => {
               </div>
             </NavLink>
 
-
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
-              to="/products/Keyboards"
+              to="/products/Teclados"
             >
               <div className="absolute inset-0 z-0">
                 <img
-                  alt="Keyboards"
+                  alt="Teclados overlay"
                   className="h-full  w-full object-cover object-center transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRYp1AoRf_Zefizn299S8H_b0IddBYZJvzrV51SSo6x2Zq5u3ge2wPGsmggVf05JQYsxWx9Hw3eN4Fokl3Y9j4vgHrPI-m3G05MxspXKeRSDJW8jtOZ463H2Y9DdvS_gsND47-rKR94LiptDNTjM1OpahNPiOdUgzKW4x1rQeIgXp4Zbt4C0PuTHaPKS_9ThV7kLE_DnmacqQ9YO3jRER870eYHdzTJUOQeQhhCIxkrP3JeIB4pL5uKR2mhN4oYZzUzbDUdtyFWOo"
                 />
               </div>
               <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
-                <h3 className="text-lg font-bold text-white">Keyboards</h3>
+                <h3 className="text-lg font-bold text-white">Teclados</h3>
               </div>
             </NavLink>
 
-
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
-              to="/products/Mouse"
+              to="/products/Ratones"
             >
               <div className="absolute inset-0  z-0">
                 <img
-                  alt="Mouse"
+                  alt="Raton overlay"
                   className="h-full saturate-200 w-full object-cover object-center transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCImcWzp1Tybhp4xGfvdl8znQXSB5R-AU1GxAnEIGeqO8U9KBPlQ9_DQuZbNYAx0b1SqYsfFZq4pM1Qx_Jgqzp_9tyDlr0vxG6cGjh-aVNhCTCJq_t2dL2tpykvK-2LHbQ4AYAdo5jQU7tf5LGg8hI-igRqYymvBRjjgpynTkbEZENOQUWY48Bimq9OXI3qwH-J2p7hAogNAEU3Dvr6hBjQv15XuWrIJIxUE_3S-AuMevuwc6LdPmGhfLI3rtx5GtTdfi8dgEnYwyk"
                 />
               </div>
               <div className="relative  z-10 w-full bg-gradient-to-t from-black/70 to-transparent p-6 text-center">
-                <h3 className="text-lg font-bold text-white">Mouse</h3>
+                <h3 className="text-lg font-bold text-white">Ratones</h3>
               </div>
             </NavLink>
 
-
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
-              to="/products/Monitors"
+              to="/products/Monitores"
             >
               <div className="absolute inset-0 z-0">
                 <img
-                  alt="Monitors"
+                  alt="Monitores oberlay"
                   className="h-full   w-full object-cover object-center transition-transform group-hover:scale-105"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_oQwvllipXr7mCki-z_Cvu6xkjX7vrtPdCp1UrTMj0Zg_-VQjAQZFWkLHX0aDi2zepJIiuN4oeVgm43mb2bbD3UEiQV_B6W4QsQNmstCy6uIHucLvulKhSYAQ6aX_Vgn6CEsxPTKWZHhSd5VH4CysD_ydU2wniZqFomrycfazNmxACGLCEhpK-6GuXx9NrlktfunQf6jPtH1ZFq5cBLET3iHKQx4Nkpt8Tb7Ize-bXF1-BEpbf3WVk_DxgtesQCIuMgDbYY0NuY4"
                 />
               </div>
               <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
-                <h3 className="text-lg font-bold text-white">Monitors</h3>
+                <h3 className="text-lg font-bold text-white">Monitores</h3>
               </div>
             </NavLink>
-
 
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
@@ -108,20 +101,19 @@ const AllCategoriesPage = () => {
               </div>
             </NavLink>
 
-
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
-              to="/products/Tablets"
+              to="/products/Smartphones"
             >
               <div className="absolute inset-0 z-0">
                 <img
-                  alt="Tablets"
+                  alt="Phones"
                   className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa4jQhi4btW1F4oDOWiksSUX4kUoZsSKkTK57hTonQn2_Bb0emLfP1zpHAX_yezVWDRlG03t_EM_Cj6HqfGF5hecGQEPsjBwfkj27O_fXTddEmqHy8eU4CjwlMXWdhcICZLJLObFerFHDPWLa3W3RPpYRcUrHjfLhNMTJBrCLdoNQfSEOtPk4UPFDj9IkKLzJ98N2aN0PhjYDL7DXDp4_rTTtiTaPKsuJ2cRMYpR9yD1-Fe42kXsviVaBsLWBcZljlV4nxnu1kQDU"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkmVgdtJKHZcQtl1brncTcd8KBKIaWWYQ6Od1fxA4yZfWRo_JG1I8pXZmTYgsIUbpxLHQ4u1-Hx1dH47xNhbnLsMN2yWOe3lMYB-MOGTIq0qlQAtHlSbgZX99tV8TubfReSDyrVO2M_ab_eXf62YCnwc6jnx85SJgDCRQMbT1kb1Cf8tOIldPYZq0hqSxnIDW6F0r0DRSrVPPV13-6BR4OxtId--8av-VGkVpNPdt92GLV4rXDZut2zoshMTqWqYVFF63y26HCceo"
                 />
               </div>
               <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
-                <h3 className="text-lg font-bold text-white">Tablets</h3>
+                <h3 className="text-lg font-bold text-white">Smartphones</h3>
               </div>
             </NavLink>
 
@@ -141,26 +133,24 @@ const AllCategoriesPage = () => {
               </div>
             </NavLink>
 
-
             <NavLink
               className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
-              to="/products/Accessories"
+              to="/products/Accesorios"
             >
               <div className="absolute inset-0 z-0">
                 <img
-                  alt="Phones"
-                  className="h-full w-full object-cover object-center transition-transform group-hover:scale-105"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkmVgdtJKHZcQtl1brncTcd8KBKIaWWYQ6Od1fxA4yZfWRo_JG1I8pXZmTYgsIUbpxLHQ4u1-Hx1dH47xNhbnLsMN2yWOe3lMYB-MOGTIq0qlQAtHlSbgZX99tV8TubfReSDyrVO2M_ab_eXf62YCnwc6jnx85SJgDCRQMbT1kb1Cf8tOIldPYZq0hqSxnIDW6F0r0DRSrVPPV13-6BR4OxtId--8av-VGkVpNPdt92GLV4rXDZut2zoshMTqWqYVFF63y26HCceo"
+                  alt="Accesorios overlay"
+                  className="h-full w-full object-cover object-[center_90%] transition-transform group-hover:scale-105"
+                  src="/public/unnamed(9).png"
                 />
               </div>
               <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
-                <h3 className="text-lg font-bold text-white">Phones</h3>
+                <h3 className="text-lg font-bold text-white">Accesorios</h3>
               </div>
             </NavLink>
           </div>
         </div>
       </main>
-
 
       <Footer />
     </div>

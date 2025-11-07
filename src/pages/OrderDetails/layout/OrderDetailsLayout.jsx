@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../../shared/navbar/navbar";
 import { useEffect, useState } from "react";
 import { cld } from "../../../shared/utils/cloudinary.js";
@@ -12,38 +12,44 @@ const OrderDetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const user = localStorage.getItem("usuario");
-
+const navigate = useNavigate()
   useEffect(() => {
-   
+    if (!user) {
+      setError("Please log in to view your orders");
+         setTimeout(() => {
+        navigate("/");
+      },1000);
+
+      setLoading(false);
+      return;
+    }
 
     const fetchOrderDetails = async () => {
-  try {
-    setLoading(true);
-    setError(null);
-    let response;
-    if (user) {
-      response = await fetch(`http://localhost:3000/detallesPedidos/${user}/${id}`);
-    } else {
-      response = await fetch(`http://localhost:3000/detallesPedidos/${id}`);
-    }
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await fetch(
+          `http://localhost:3000/detallesPedidos/${user}/${id}`
+        );
 
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
 
-    const data = await response.json();
-    setOrder(data);
-  } catch (err) {
-    console.error("Error fetching order details:", err);
-    setError("Failed to load order details. Please try again later.");
-    setOrder(null);
-  } finally {
-    setLoading(false);
-  }
-};
+        const data = await response.json();
+        // Aquí no buscamos en un array ni en 'pedidos', porque el backend responde con un objeto
+        setOrder(data); // Usa el objeto directamente
+      } catch (err) {
+        console.error("Error fetching order details:", err);
+        setError("Failed to load order details. Please try again later.");
+        setOrder(null);
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchOrderDetails();
-  }, [user, id]);
+  }, [user, id, navigate]);
 
   if (loading) {
     return (

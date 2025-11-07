@@ -6,17 +6,21 @@ import Footer from "../../../shared/utils/Footer";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-
+import { useNavigate } from "react-router-dom";
 const HistoryOrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const user = localStorage.getItem("usuario");
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (!user) {
       setError("Please log in to view your orders");
       setLoading(false);
+      setTimeout(() => {
+        navigate("/");
+      },1000);
+
       return;
     }
 
@@ -43,7 +47,7 @@ const HistoryOrdersPage = () => {
     };
 
     fetchProductos();
-  }, [user]);
+  }, [navigate, user]);
 
   return (
     <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
@@ -88,12 +92,14 @@ const HistoryOrdersPage = () => {
                         {order.detalles.slice(0, 3).map((item, idx) => (
                           <div
                             key={idx}
-                            className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 overflow-hidden bg-background-light dark:bg-gray-700"
+                            className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 overflow-hidden bg-background-light dark:bg-surface-dark"
                           >
                             <AdvancedImage
                               cldImg={cld
                                 .image(item.imagen)
-                                .resize(fill().width(70).height(70).gravity("auto"))
+                                .resize(
+                                  fill().width(70).height(70).gravity("auto")
+                                )
                                 .quality("auto")
                                 .format("auto")}
                               alt={item.nombre_producto || "Product"}
@@ -103,7 +109,7 @@ const HistoryOrdersPage = () => {
                           </div>
                         ))}
                         {order.detalles.length > 3 && (
-                          <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 bg-background-light dark:bg-gray-700 flex items-center justify-center">
+                          <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-100 bg-white dark:bg-gray-700 flex items-center justify-center">
                             <p className="text-content-light dark:text-content-dark font-bold text-sm">
                               +{order.detalles.length - 3}
                             </p>
@@ -121,11 +127,15 @@ const HistoryOrdersPage = () => {
                     </p>
                     <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
                       {order.detalles && order.detalles.length > 0
-                        ? `${order.detalles[0].nombre_producto}${order.detalles.length > 1 ? ` + ${order.detalles.length - 1} more` : ""}`
+                        ? `${order.detalles[0].nombre_producto}${
+                            order.detalles.length > 1
+                              ? ` + ${order.detalles.length - 1} more`
+                              : ""
+                          }`
                         : "No description"}
                     </p>
                     <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
-                      Placed on {" "}
+                      Placed on{" "}
                       {new Date(order.fecha).toLocaleDateString("es-ES", {
                         year: "numeric",
                         month: "short",

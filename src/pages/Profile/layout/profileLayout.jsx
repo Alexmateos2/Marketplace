@@ -2,14 +2,20 @@
 
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
-
+import { useNavigate } from "react-router-dom";
 import AsideProfile from "../components/asideProfile";
 import FormProfile from "../components/formProfile";
 import { useEffect, useState } from "react";
 const ProfilePage = () => {
+  const navigate = useNavigate()
   const userId = localStorage.getItem("usuario");
   const [usuario, setUsuario] = useState(null);
   useEffect(() => {
+    if(!userId){
+      navigate('/')
+      return
+    }else
+
     fetch(`http://localhost:3000/usuarios/${userId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -18,7 +24,7 @@ const ProfilePage = () => {
       .catch((error) => {
         console.error("Error al obtener el usuario:", error);
       });
-  }, [userId]);
+  }, [navigate, userId]);
 
   return (
     <div className="bg-background-light dark:bg-background-dark">
