@@ -1,68 +1,49 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
-import { NavLink } from "react-router-dom";
+import { cld } from "../../../shared/utils/cloudinary.js";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { AdvancedImage } from "@cloudinary/react";
 
 const HistoryOrdersPage = () => {
-  const orders = [
-    {
-      id: "TK-1234567",
-      items: [
-        {
-          name: "Logitech MX Master 3S Mouse",
-          image:
-            "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200",
-        },
-        {
-          name: "Mechanical Keyboard",
-          image:
-            "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=200",
-        },
-        {
-          name: "Sony WH-1000XM5 Headphones",
-          image:
-            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200",
-        },
-      ],
-      description: "Logitech MX Master 3S + 2 other items",
-      date: "October 26, 2023",
-      price: 499.0,
-      status: "Delivered",
-    },
-    {
-      id: "TK-1234560",
-      items: [
-        {
-          name: "Dell UltraSharp Monitor",
-          image:
-            "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200",
-        },
-      ],
-      description: 'Dell 32" 4K Monitor',
-      date: "September 15, 2023",
-      price: 899.99,
-      status: "Shipped",
-    },
-    {
-      id: "TK-1234505",
-      items: [
-        {
-          name: "Anker Power Bank",
-          image:
-            "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=200",
-        },
-        {
-          name: "USB-C Cable",
-          image:
-            "https://images.unsplash.com/photo-1625948515291-69613efd103f?w=200",
-        },
-      ],
-      description: "Anker PowerCore 20000 + 1 other item",
-      date: "August 02, 2023",
-      price: 75.5,
-      status: "Canceled",
-    },
-  ];
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const user = localStorage.getItem("usuario");
+
+  useEffect(() => {
+    if (!user) {
+      setError("Please log in to view your orders");
+      setLoading(false);
+      return;
+    }
+
+    const fetchProductos = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await fetch(`http://localhost:3000/pedidos/${user}`);
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setOrders(data || []);
+      } catch (err) {
+        console.error("Error fetching productos:", err);
+        setError("Failed to load orders. Please try again later.");
+        setOrders([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductos();
+  }, [user]);
 
   return (
     <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
@@ -82,49 +63,92 @@ const HistoryOrdersPage = () => {
             </h1>
           </div>
 
-          <div className="flex flex-col gap-4">
-            {orders.map((order) => (
-              <div
-                key={order.id}
-                className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-white dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
-              >
-                <div className="flex items-center -space-x-4">
-                  {order.items.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="bg-center bg-no-repeat bg-cover rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1 ring-gray-200"
-                      style={{ backgroundImage: `url("${item.image}")` }}
-                      title={item.name}
-                    />
-                  ))}
-                </div>
+          {loading ? (
+            <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+              Loading your orders...
+            </p>
+          ) : error ? (
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded">
+              {error}
+            </div>
+          ) : orders.length === 0 ? (
+            <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+              You have no orders yet.
+            </p>
+          ) : (
+            <div className="flex flex-col gap-4">
+              {orders.map((order) => (
+                <div
+                  key={order.id_pedido}
+                  className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-white dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
+                >
+                  <div className="flex justify-center md:justify-start items-center -space-x-4 w-full sm:w-auto sm:min-w-[250px]">
+                    {order.detalles && order.detalles.length > 0 ? (
+                      <>
+                        {order.detalles.slice(0, 3).map((item, idx) => (
+                          <div
+                            key={idx}
+                            className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 overflow-hidden bg-background-light dark:bg-gray-700"
+                          >
+                            <AdvancedImage
+                              cldImg={cld
+                                .image(item.imagen)
+                                .resize(fill().width(70).height(70).gravity("auto"))
+                                .quality("auto")
+                                .format("auto")}
+                              alt={item.nombre_producto || "Product"}
+                              loading="lazy"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ))}
+                        {order.detalles.length > 3 && (
+                          <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 bg-background-light dark:bg-gray-700 flex items-center justify-center">
+                            <p className="text-content-light dark:text-content-dark font-bold text-sm">
+                              +{order.detalles.length - 3}
+                            </p>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <div className="bg-gray-300 rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1 ring-gray-200" />
+                    )}
+                  </div>
 
-                <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
-                  <p className="text-content-light dark:text-content-dark text-lg font-bold">
-                    Order #{order.id}
-                  </p>
-                  <p className="text-subtle-light  dark:text-subtle-dark text-sm font-normal mt-1">
-                    {order.description}
-                  </p>
-                  <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
-                    Placed on {order.date}
-                  </p>
-                </div>
+                  <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
+                    <p className="text-content-light dark:text-content-dark text-lg font-bold">
+                      Order #{order.id_pedido}
+                    </p>
+                    <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
+                      {order.detalles && order.detalles.length > 0
+                        ? `${order.detalles[0].nombre_producto}${order.detalles.length > 1 ? ` + ${order.detalles.length - 1} more` : ""}`
+                        : "No description"}
+                    </p>
+                    <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
+                      Placed on {" "}
+                      {new Date(order.fecha).toLocaleDateString("es-ES", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}
+                    </p>
+                  </div>
 
-                <div className="flex flex-col items-center md:items-start justify-between gap-2">
-                  <p className="text-content-light dark:text-content-dark text-lg font-bold">
-                    ${order.price.toFixed(2)}
-                  </p>
-                  <NavLink
-                    to="/pedidos/historial/details/"
-                    className="text-primary text-sm font-bold hover:underline cursor-pointer"
-                  >
-                    View Details
-                  </NavLink>
+                  <div className="flex flex-col items-center md:items-start justify-between gap-2">
+                    <p className="text-content-light dark:text-content-dark text-lg font-bold">
+                      ${order.total}
+                    </p>
+                    <NavLink
+                      to={`/pedidos/historial/details/${order.id_pedido}`}
+                      className="text-primary text-sm font-bold hover:underline cursor-pointer"
+                    >
+                      View Details
+                    </NavLink>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
       <Footer />

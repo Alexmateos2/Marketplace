@@ -32,7 +32,12 @@ const CarritoPage = () => {
     if (response.ok) {
       alert("Pedido realizado con éxito. ID: " + data.id_pedido);
       clearCart();
-      navigate("/");
+      if(usuario){
+      navigate(`/pedidos/historial/details/${data.id_pedido}`);
+      }
+      else{
+        navigate('/')
+      }
     } else {
       alert("Error: " + data.message);
     }

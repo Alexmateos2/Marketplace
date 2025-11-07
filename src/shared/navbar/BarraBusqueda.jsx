@@ -29,9 +29,10 @@ const BarraBusqueda = () => {
     if (inputValue.trim() === "") {
       setResults([]);
       setIsOpen(false);
-      return;
+      return; // Salir si no hay texto para buscar
     }
 
+    // Si hay texto, hacer el fetch o filtrado
     const handler = setTimeout(() => {
       const filtered = productos.filter((p) =>
         p.nombre.toLowerCase().includes(inputValue.toLowerCase())
@@ -42,7 +43,7 @@ const BarraBusqueda = () => {
 
     return () => clearTimeout(handler);
   }, [inputValue, productos]);
-
+  
   // Cerrar cuando se hace click fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -103,7 +104,6 @@ const BarraBusqueda = () => {
                     onClick={() => setIsOpen(false)}
                   >
                     <div className="shrink-0">
-                      
                       <AdvancedImage
                         cldImg={cld
                           .image(product.imagen)

@@ -40,7 +40,7 @@ function App() {
           <Route path="/add" element={<AddProduct />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/pedidos/historial" element={<HistoryOrdersPage />} />
-          <Route path = "/pedidos/historial/details/" element={<OrderDetailsPage />} />
+          <Route path = "/pedidos/historial/details/:id" element={<OrderDetailsPage />} />
         </Routes>
       </Router>
           </CartProvider>
