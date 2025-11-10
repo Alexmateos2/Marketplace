@@ -98,7 +98,7 @@ const HistoryOrdersPage = () => {
                 {ordenesActuales.map((order) => (
                   <div
                     key={order.id_pedido}
-                    className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-white dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
+                    className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-surface-light dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
                   >
                     <div className="flex justify-center md:justify-start items-center -space-x-4 w-full sm:w-auto sm:min-w-[250px]">
                       {order.detalles && order.detalles.length > 0 ? (
@@ -123,7 +123,7 @@ const HistoryOrdersPage = () => {
                             </div>
                           ))}
                           {order.detalles.length > 3 && (
-                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-100 bg-white dark:bg-gray-700 flex items-center justify-center">
+                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-100 bg-surface-light dark:bg-gray-700 flex items-center justify-center">
                               <p className="text-content-light dark:text-content-dark font-bold text-sm">
                                 +{order.detalles.length - 3}
                               </p>

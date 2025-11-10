@@ -70,7 +70,7 @@ useEffect(() => {
           Personal Information
         </p>
       </div>
-      <div className="flex flex-col @container items-start  gap-6 p-4 mb-8 bg-white dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark">
+      <div className="flex flex-col @container items-start  gap-6 p-4 mb-8 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark">
         <div className="flex w-full flex-col sm:flex-row gap-6 items-center sm:items-start ">
           <div
             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-32 h-32"
@@ -113,7 +113,7 @@ useEffect(() => {
               value={formData.nombre}
               onChange={handleChange}
               readOnly={disabled}
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
+              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
           <div className="flex flex-col">
@@ -128,7 +128,7 @@ useEffect(() => {
               value={formData.email}
               onChange={handleChange}
               readOnly={disabled}
-              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
+              className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
             />
           </div>
         </div>
@@ -145,7 +145,7 @@ useEffect(() => {
             onChange={handleChange}
             readOnly={disabled}
             rows={3}
-            className="form-textarea w-full rounded-lg p-4 border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark"
+            className="form-textarea w-full rounded-lg p-4 border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark"
           />
         </div>
         <div className="border-t border-border-light dark:border-border-dark my-6"></div>
@@ -166,7 +166,7 @@ useEffect(() => {
                 value={formData.telefono}
                 onChange={handleChange}
                 readOnly={disabled}
-                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
+                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
               />
             </div>
             <div className="flex flex-col">
@@ -183,7 +183,7 @@ useEffect(() => {
                 onChange={handleChange}
                 readOnly={disabled}
                 placeholder="••••••••"
-                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-white dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
+                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark h-14 placeholder:text-content-light-400 p-4 text-base font-normal"
               />
             </div>
           </div>

@@ -93,7 +93,7 @@ const BarraBusqueda = () => {
 
       {/* Resultados */}
       {isOpen && (
-        <div className="absolute mt-2 w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-2 z-50 overflow-y-auto">
+        <div className="absolute mt-2 w-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-2 z-50 overflow-y-auto">
           {results.length > 0 ? (
             <>
               {visibleResults.map((product, index) => (

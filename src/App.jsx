@@ -24,7 +24,7 @@ import AdminUsersLayout from "./pages/Admin/layout/AdminUsersLayout.jsx";
 
 function App() {
   return (
-    <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
+    <div className="min-h-screen bg-surface-light dark:bg-background-dark dark:text-white transition-colors">
       <CartProvider>
         <Router>
           <ScrollToTop />

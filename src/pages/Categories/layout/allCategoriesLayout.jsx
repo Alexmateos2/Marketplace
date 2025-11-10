@@ -22,7 +22,7 @@ const AllCategoriesPage = () => {
 
           <div className="mt-16 grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-8">
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Audio"
             >
               <div className="absolute inset-0 z-0">
@@ -38,7 +38,7 @@ const AllCategoriesPage = () => {
             </NavLink>
 
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Teclados"
             >
               <div className="absolute inset-0 z-0">
@@ -54,7 +54,7 @@ const AllCategoriesPage = () => {
             </NavLink>
 
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Ratones"
             >
               <div className="absolute inset-0  z-0">
@@ -70,7 +70,7 @@ const AllCategoriesPage = () => {
             </NavLink>
 
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Monitores"
             >
               <div className="absolute inset-0 z-0">
@@ -86,7 +86,7 @@ const AllCategoriesPage = () => {
             </NavLink>
 
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Laptops"
             >
               <div className="absolute inset-0 z-0">
@@ -102,7 +102,7 @@ const AllCategoriesPage = () => {
             </NavLink>
 
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Smartphones"
             >
               <div className="absolute inset-0 z-0">
@@ -118,7 +118,7 @@ const AllCategoriesPage = () => {
             </NavLink>
 
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Wearables"
             >
               <div className="absolute inset-0 z-0">
@@ -134,7 +134,7 @@ const AllCategoriesPage = () => {
             </NavLink>
 
             <NavLink
-              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-white shadow-sm transition-all hover:shadow-lg"
+              className="group relative aspect-[4/3] flex flex-col items-center justify-end overflow-hidden rounded-xl bg-surface-light shadow-sm transition-all hover:shadow-lg"
               to="/products/Accesorios"
             >
               <div className="absolute inset-0 z-0">

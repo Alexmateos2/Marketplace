@@ -191,7 +191,7 @@ const ProductPages = () => {
 
             {/* Review */}
             <div className="flex flex-col h-fit">
-              <div className="bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm h-fit">
+              <div className="bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm h-fit">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   Expert Review
                 </h2>
