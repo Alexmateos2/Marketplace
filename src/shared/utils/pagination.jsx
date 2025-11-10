@@ -1,29 +1,13 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
-import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
 
 const Pagination = ({
-  category,
-  search,
   currentPage,
   itemsPerPage,
   onPageChange,
+  totalItems, 
 }) => {
-  const products = ProductsItemList;
-  const filteredProducts = products.filter((product) => {
-    const matchesCategory = category ? product.category === category : true;
-
-    const matchesSearch = search
-      ? search
-          .toLowerCase()
-          .split(" ") 
-          .every((word) => product.name.toLowerCase().includes(word))
-      : true;
-
-    return matchesCategory && matchesSearch;
-  });
-
-  const pageCount = Math.ceil(filteredProducts.length / itemsPerPage);
+  const pageCount = Math.ceil(totalItems / itemsPerPage);
 
   const handlePageClick = (selectedItem) => {
     onPageChange(selectedItem.selected + 1); // react-paginate usa índice 0
@@ -40,8 +24,10 @@ const Pagination = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  if (pageCount === 0) return null; // No mostrar si no hay páginas
+
   return (
-    <div className="flex justify-center mt-8 items-center gap-2">
+    <div className="flex justify-center  items-center gap-2">
       {/* Flecha anterior */}
       <button
         onClick={handlePrev}

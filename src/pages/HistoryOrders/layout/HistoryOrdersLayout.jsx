@@ -7,24 +7,37 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../../../shared/utils/pagination.jsx";
+
 const HistoryOrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const user = localStorage.getItem("usuario");
   const navigate = useNavigate();
+
+  // Calcular órdenes para la página actual
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const ordenesActuales = orders.slice(startIndex, endIndex);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   useEffect(() => {
     if (!user) {
       setError("Please log in to view your orders");
       setLoading(false);
       setTimeout(() => {
         navigate("/");
-      },1000);
-
+      }, 1000);
       return;
     }
 
-    const fetchProductos = async () => {
+    const fetchOrders = async () => {
       try {
         setLoading(true);
         setError(null);
@@ -38,7 +51,7 @@ const HistoryOrdersPage = () => {
         console.log(data);
         setOrders(data || []);
       } catch (err) {
-        console.error("Error fetching productos:", err);
+        console.error("Error fetching orders:", err);
         setError("Failed to load orders. Please try again later.");
         setOrders([]);
       } finally {
@@ -46,7 +59,7 @@ const HistoryOrdersPage = () => {
       }
     };
 
-    fetchProductos();
+    fetchOrders();
   }, [navigate, user]);
 
   return (
@@ -80,84 +93,97 @@ const HistoryOrdersPage = () => {
               You have no orders yet.
             </p>
           ) : (
-            <div className="flex flex-col gap-4">
-              {orders.map((order) => (
-                <div
-                  key={order.id_pedido}
-                  className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-white dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
-                >
-                  <div className="flex justify-center md:justify-start items-center -space-x-4 w-full sm:w-auto sm:min-w-[250px]">
-                    {order.detalles && order.detalles.length > 0 ? (
-                      <>
-                        {order.detalles.slice(0, 3).map((item, idx) => (
-                          <div
-                            key={idx}
-                            className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 overflow-hidden bg-background-light dark:bg-surface-dark"
-                          >
-                            <AdvancedImage
-                              cldImg={cld
-                                .image(item.imagen)
-                                .resize(
-                                  fill().width(70).height(70).gravity("auto")
-                                )
-                                .quality("auto")
-                                .format("auto")}
-                              alt={item.nombre_producto || "Product"}
-                              loading="lazy"
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        ))}
-                        {order.detalles.length > 3 && (
-                          <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-100 bg-white dark:bg-gray-700 flex items-center justify-center">
-                            <p className="text-content-light dark:text-content-dark font-bold text-sm">
-                              +{order.detalles.length - 3}
-                            </p>
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="bg-gray-300 rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1 ring-gray-200" />
-                    )}
-                  </div>
+            <>
+              <div className="flex flex-col gap-4">
+                {ordenesActuales.map((order) => (
+                  <div
+                    key={order.id_pedido}
+                    className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-white dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
+                  >
+                    <div className="flex justify-center md:justify-start items-center -space-x-4 w-full sm:w-auto sm:min-w-[250px]">
+                      {order.detalles && order.detalles.length > 0 ? (
+                        <>
+                          {order.detalles.slice(0, 3).map((item, idx) => (
+                            <div
+                              key={idx}
+                              className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 overflow-hidden bg-background-light dark:bg-surface-dark"
+                            >
+                              <AdvancedImage
+                                cldImg={cld
+                                  .image(item.imagen)
+                                  .resize(
+                                    fill().width(70).height(70).gravity("auto")
+                                  )
+                                  .quality("auto")
+                                  .format("auto")}
+                                alt={item.nombre_producto || "Product"}
+                                loading="lazy"
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ))}
+                          {order.detalles.length > 3 && (
+                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-100 bg-white dark:bg-gray-700 flex items-center justify-center">
+                              <p className="text-content-light dark:text-content-dark font-bold text-sm">
+                                +{order.detalles.length - 3}
+                              </p>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <div className="bg-gray-300 rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1 ring-gray-200" />
+                      )}
+                    </div>
 
-                  <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
-                    <p className="text-content-light dark:text-content-dark text-lg font-bold">
-                      Order #{order.id_pedido}
-                    </p>
-                    <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
-                      {order.detalles && order.detalles.length > 0
-                        ? `${order.detalles[0].nombre_producto}${
-                            order.detalles.length > 1
-                              ? ` + ${order.detalles.length - 1} more`
-                              : ""
-                          }`
-                        : "No description"}
-                    </p>
-                    <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
-                      Placed on{" "}
-                      {new Date(order.fecha).toLocaleDateString("es-ES", {
-                        year: "numeric",
-                        month: "short",
-                        day: "2-digit",
-                      })}
-                    </p>
-                  </div>
+                    <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
+                      <p className="text-content-light dark:text-content-dark text-lg font-bold">
+                        Order #{order.id_pedido}
+                      </p>
+                      <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
+                        {order.detalles && order.detalles.length > 0
+                          ? `${order.detalles[0].nombre_producto}${
+                              order.detalles.length > 1
+                                ? ` + ${order.detalles.length - 1} more`
+                                : ""
+                            }`
+                          : "No description"}
+                      </p>
+                      <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
+                        Placed on{" "}
+                        {new Date(order.fecha).toLocaleDateString("es-ES", {
+                          year: "numeric",
+                          month: "short",
+                          day: "2-digit",
+                        })}
+                      </p>
+                    </div>
 
-                  <div className="flex flex-col items-center md:items-start justify-between gap-2">
-                    <p className="text-content-light dark:text-content-dark text-lg font-bold">
-                      ${order.total}
-                    </p>
-                    <NavLink
-                      to={`/pedidos/historial/details/${order.id_pedido}`}
-                      className="text-primary text-sm font-bold hover:underline cursor-pointer"
-                    >
-                      View Details
-                    </NavLink>
+                    <div className="flex flex-col items-center md:items-start justify-between gap-2">
+                      <p className="text-content-light dark:text-content-dark text-lg font-bold">
+                        ${order.total}
+                      </p>
+                      <NavLink
+                        to={`/pedidos/historial/details/${order.id_pedido}`}
+                        className="text-primary text-sm font-bold hover:underline cursor-pointer"
+                      >
+                        View Details
+                      </NavLink>
+                    </div>
                   </div>
+                ))}
+              </div>
+
+              {orders.length > itemsPerPage && (
+                <div className="mt-8">
+                <Pagination
+                  currentPage={currentPage}
+                  itemsPerPage={itemsPerPage}
+                  onPageChange={handlePageChange}
+                  totalItems={orders.length}
+                />
                 </div>
-              ))}
-            </div>
+              )}
+            </>
           )}
         </div>
       </main>
