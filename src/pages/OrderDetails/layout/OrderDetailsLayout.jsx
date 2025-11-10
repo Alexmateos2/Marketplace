@@ -29,7 +29,7 @@ const navigate = useNavigate()
         setLoading(true);
         setError(null);
         const response = await fetch(
-          `http://localhost:3000/detallesPedidos/${user}/${id}`
+          `http://localhost:3000/pedidos/detalles/${user}/${id}`
         );
 
         if (!response.ok) {

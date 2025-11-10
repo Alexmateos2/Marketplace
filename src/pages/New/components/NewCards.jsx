@@ -13,7 +13,7 @@ const NewCards = () => {
     const fetchNewProductos = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://localhost:3000/productos-nuevos");
+        const response = await fetch("http://localhost:3000/productos/nuevos");
 
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
