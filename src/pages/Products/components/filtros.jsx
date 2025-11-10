@@ -35,7 +35,7 @@ const Filtros = ({ setFilters }) => {
             <select
               value={localFilters.price}
               onChange={(e) => handleChange("price", e.target.value)}
-              className="form-select p-2 mt-1 block w-full rounded border border-border-light dark:border-dark bg-white dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+              className="form-select p-2 mt-1 block w-full rounded border border-border-light dark:border-dark bg-surface-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
               <option value="">All Prices</option>
               <option value="0-100">$0 - $100</option>
@@ -51,7 +51,7 @@ const Filtros = ({ setFilters }) => {
             <select
               value={localFilters.sortBy}
               onChange={(e) => handleChange("sortBy", e.target.value)}
-              className="form-select p-2 mt-1 block w-full rounded border border-border-light dark:border-gray-700 bg-white dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+              className="form-select p-2 mt-1 block w-full rounded border border-border-light dark:border-gray-700 bg-surface-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
               <option value="">Newest</option>
               <option value="oldest">Oldest</option>

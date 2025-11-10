@@ -60,7 +60,7 @@ const AdminProductsLayout = () => {
           key: "nombre",
           label: "Product",
           render: (p) => (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center lg:justify-start justify-center gap-2">
               {p.imagen && (
                 <AdvancedImage
                   cldImg={cld

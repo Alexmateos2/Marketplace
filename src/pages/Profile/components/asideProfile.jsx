@@ -12,7 +12,7 @@ const AsideProfile = ({ usuario }) => {
   const navigate = useNavigate();
 
   return (
-    <aside className="w-80 py-6 px-6 bg-white dark:bg-background-dark/50 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark fixed left-0 top-20 bottom-0 z-30 overflow-y-auto">
+    <aside className="w-80 py-6 px-6 bg-surface-light dark:bg-background-dark/50 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark fixed left-0 top-20 bottom-0 z-30 overflow-y-auto">
       <div>
         <div className="flex items-center gap-3 mb-10">
           <div

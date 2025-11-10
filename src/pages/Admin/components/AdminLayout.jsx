@@ -17,7 +17,7 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin", pagination }) =
         <AsideAdmin />
         
         {/* Main content */}
-        <main className="flex flex-1 min-h-screen flex-col p-6 lg:p-8 bg-background-light dark:bg-background-dark lg:ml-80">
+        <main className="flex flex-1 min-h-screen lg:text-start text-center flex-col p-6 lg:p-8 bg-background-light dark:bg-background-dark ">
           <div className="flex flex-col mx-auto w-full max-w-7xl gap-6">
             {!hasData ? (
               <div className="flex items-center justify-center h-96 text-4xl text-subtle-light dark:text-subtle-dark">
@@ -25,6 +25,7 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin", pagination }) =
               </div>
             ) : (
               <>
+                {/* Header */}
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <h1 className="text-3xl font-bold leading-tight tracking-tight text-content-light dark:text-content-dark">
                     {title}
@@ -35,23 +36,23 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin", pagination }) =
                   </button>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-4">
+                {/* Search + Pagination */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4">
                   <div className="relative w-full max-w-lg">
                     <BarraBusqueda />
                   </div>
-                    {pagination && (
-                    
-                  <Pagination
-                    currentPage={pagination.currentPage}
-                    itemsPerPage={pagination.itemsPerPage}
-                    onPageChange={pagination.onPageChange}
-                    totalItems={pagination.totalItems}
-                  />
-                 
-                )}
+                  {pagination && (
+                    <Pagination
+                      currentPage={pagination.currentPage}
+                      itemsPerPage={pagination.itemsPerPage}
+                      onPageChange={pagination.onPageChange}
+                      totalItems={pagination.totalItems}
+                    />
+                  )}
                 </div>
 
-                <div className="w-full overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark">
+                {/* Desktop: Table view */}
+                <div className="hidden lg:block w-full overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left">
                       <thead>
@@ -101,7 +102,40 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin", pagination }) =
                   </div>
                 </div>
 
-              
+                {/* Mobile & Tablet: Card view */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4">
+                  {data.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-5 space-y-3 hover:shadow-md transition-shadow"
+                    >
+                      {columns.map((col, cidx) => (
+                        <div key={cidx} className="flex flex-col gap-1">
+                          <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+                            {col.label}
+                          </span>
+                          <span className="text-sm text-slate-900 dark:text-slate-100 font-medium">
+                            {col.render ? col.render(item) : col.key === "precio" ? `${item[col.key]} $` : item[col.key]}
+                          </span>
+                        </div>
+                      ))}
+                     <div className="flex gap-2 pt-3 border-t border-gray-200 dark:border-slate-800">
+                        <button 
+                          className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
+                        >
+                          <Edit2 size={16} />
+                          Edit
+                        </button>
+                        <button 
+                          className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-all"
+                        >
+                          <Trash2 size={16} />
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </>
             )}
           </div>

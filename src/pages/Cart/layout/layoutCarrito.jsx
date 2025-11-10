@@ -77,7 +77,7 @@ const CarritoPage = () => {
               </NavLink>
             </div>
           ) : (
-            <div className="mt-12 p-6 bg-white dark:bg-background-dark/50 rounded-lg">
+            <div className="mt-12 p-6 bg-surface-light dark:bg-background-dark/50 rounded-lg">
               <h2 className="text-2xl font-bold text-black dark:text-white mb-6">
                 Summary
               </h2>

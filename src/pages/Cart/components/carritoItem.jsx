@@ -26,7 +26,7 @@ console.log(item)
   };
 
   return (
-    <div className="flex items-center flex-col xxs:flex-row xxs:gap-2  gap-6 space-x-4 p-4 border-b bg-white dark:bg-surface-dark mb-4 border-border-light dark:border-border-dark">
+    <div className="flex items-center flex-col xxs:flex-row xxs:gap-2  gap-6 space-x-4 p-4 border-b bg-surface-light dark:bg-surface-dark mb-4 border-border-light dark:border-border-dark">
       {item.image && (
         <NavLink to={`/product/${item.id}`}>
           <AdvancedImage
