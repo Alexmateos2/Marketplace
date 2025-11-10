@@ -1,14 +1,9 @@
 import React from "react";
-import { User, FileText, LogOut,UserStar } from "lucide-react";
+import { LayoutDashboard, Users, Package, BarChart3, Settings, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-const AsideProfile = ({ usuario }) => {
-  const { nombre, email } = usuario || {
-    nombre: "John Doe",
-    email: "johndoe@gmail.com",
-  };
-
+const AsideAdmin = () => {
   const navigate = useNavigate();
 
   return (
@@ -17,7 +12,7 @@ const AsideProfile = ({ usuario }) => {
         <div className="flex items-center gap-3 mb-10">
           <div
             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 h-12 flex-shrink-0"
-            data-alt="User avatar"
+            data-alt="Admin avatar"
             style={{
               backgroundImage:
                 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBnPDzJcMZziYykcoTL8J0llTXjQhuVgoFS5kaRslcUxTveESdKSoIeOWOZkXuY0Tz-MTgebtvZ7QCNLiHPFUq9GtchxXFaj9vudR_T10GJdBqrkYLFBjrFk6o9RZr0ewMDdQuOhT3-Ycr7AHSQs5sEa8HO_1FkaD9bKZO_S82ZQQdeNdwmD6exVcr4YhNUOyVKTc8WRSo_3ezwYk3iE4znU53VV29a2ikgoVrbKeK6Vwe1ShJCMb5nbKClDiQMGADJGhvG8QtlA8s")',
@@ -25,10 +20,13 @@ const AsideProfile = ({ usuario }) => {
           ></div>
           <div className="min-w-0">
             <h1 className="text-base font-bold text-content-light dark:text-content-dark truncate">
-              {nombre}
+              Admin User
             </h1>
             <p className="text-xs text-content-light-500 dark:text-content-dark-400 truncate">
-              {email}
+              Administrator
+            </p>
+            <p className="text-xs text-content-light-500 dark:text-content-dark-400 truncate">
+              admin@gmail.com
             </p>
           </div>
         </div>
@@ -42,10 +40,10 @@ const AsideProfile = ({ usuario }) => {
                   : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
               }`
             }
-            to="#"
+            to="/admin/dashboard"
           >
-            <User size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Personal Information</span>
+            <LayoutDashboard size={20} className="flex-shrink-0" />
+            <span className="text-sm font-medium">Dashboard</span>
           </NavLink>
 
           <NavLink
@@ -56,12 +54,12 @@ const AsideProfile = ({ usuario }) => {
                   : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
               }`
             }
-            to="/pedidos/historial"
+            to="/admin/products"
           >
-            <FileText size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Order History</span>
+            <Package size={20} className="flex-shrink-0" />
+            <span className="text-sm font-medium">Products</span>
           </NavLink>
-          
+
           <NavLink
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
@@ -70,17 +68,45 @@ const AsideProfile = ({ usuario }) => {
                   : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
               }`
             }
-            to="/admin"
+            to="/admin/users"
           >
-            <UserStar size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Admin</span>
+            <Users size={20} className="flex-shrink-0" />
+            <span className="text-sm font-medium">Users</span>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                isActive
+                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
+                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
+              }`
+            }
+            to="/admin/reportes"
+          >
+            <BarChart3 size={20} className="flex-shrink-0" />
+            <span className="text-sm font-medium">Reports</span>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                isActive
+                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
+                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
+              }`
+            }
+            to="/admin/configuracion"
+          >
+            <Settings size={20} className="flex-shrink-0" />
+            <span className="text-sm font-medium">Settings</span>
           </NavLink>
         </nav>
       </div>
 
       <button
         onClick={() => {
-          localStorage.removeItem("usuario");
+          localStorage.removeItem("admin");
           navigate("/login");
         }}
         className="mt-auto flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-background-dark text-content-light-600 dark:text-content-dark text-sm font-medium cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
@@ -92,4 +118,4 @@ const AsideProfile = ({ usuario }) => {
   );
 };
 
-export default AsideProfile;
+export default AsideAdmin;

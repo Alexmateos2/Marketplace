@@ -17,35 +17,43 @@ import BusquedaPage from "./pages/Busqueda/layout/BusquedaLayout.jsx";
 import HistoryOrdersPage from "./pages/HistoryOrders/layout/HistoryOrdersLayout.jsx";
 import OrderDetailsPage from "./pages/OrderDetails/layout/OrderDetailsLayout.jsx";
 import SignUpLayout from "./pages/SignUp/SignUpLayout.jsx";
+import AdminLayout from "./pages/Admin/components/AdminLayout.jsx";
+import AdminProductsLayout from "./pages/Admin/layout/AdminProductsLayout.jsx";
+import AdminUsersLayout from "./pages/Admin/layout/AdminUsersLayout.jsx";
 
 
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
-          <CartProvider>
-
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/about" element={<AboutUsPage />} />
-          <Route path="/product/:id" element={<ProductPage />} />
-          <Route path="/cart" element={<CarritoPage />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/new" element={<NewPage />} />
-          <Route path="/products/:category?" element={<CategoryPage />} />
-          <Route path = "/search/:search?" element={<BusquedaPage />} />
-          <Route path="/categories" element={<AllCategoriesPage />} />
-          <Route path="/add" element={<AddProduct />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/pedidos/historial" element={<HistoryOrdersPage />} />
-          <Route path = "/pedidos/historial/details/:id" element={<OrderDetailsPage />} />
-          <Route path = "/signup" element={<SignUpLayout />} />
-        </Routes>
-      </Router>
-          </CartProvider>
+      <CartProvider>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/cart" element={<CarritoPage />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/new" element={<NewPage />} />
+            <Route path="/products/:category?" element={<CategoryPage />} />
+            <Route path="/search/:search?" element={<BusquedaPage />} />
+            <Route path="/categories" element={<AllCategoriesPage />} />
+            <Route path="/add" element={<AddProduct />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/pedidos/historial" element={<HistoryOrdersPage />} />
+            <Route
+              path="/pedidos/historial/details/:id"
+              element={<OrderDetailsPage />}
+            />
+            <Route path="/signup" element={<SignUpLayout />} />
+            <Route path="/admin" element = {<AdminLayout/>} />
+            <Route path="/admin/products" element={<AdminProductsLayout/>} />
+            <Route path="/admin/users" element={<AdminUsersLayout/>} />
+          </Routes>
+        </Router>
+      </CartProvider>
     </div>
   );
 }

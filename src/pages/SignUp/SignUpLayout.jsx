@@ -73,7 +73,7 @@ const onKeyDown = (e) => {
   };
 
   return (
-    <div className="font-display transition-colors bg-background-light">
+    <div className="font-display transition-colors bg-background-light dark:bg-background-dark">
       <Navbar />
       <main className="md:w-full w-4/5 max-w-lg bg-white dark:bg-surface-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark p-6 my-24 mx-auto">
         <div className="flex flex-col gap-2 text-center p-2 mb-8">
