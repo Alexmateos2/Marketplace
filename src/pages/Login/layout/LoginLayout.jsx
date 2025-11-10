@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import Footer from "../../../shared/utils/Footer";
 import Navbar from "../../../shared/navbar/navbar";
 import { Eye, EyeOff } from "lucide-react";
@@ -133,12 +133,12 @@ const LoginPage = () => {
               )}
 
               <div className="flex mt-3">
-                <Link
+                <NavLink
                   className="text-sm sm:text-base text-primary hover:underline"
                   to="/forgot-password"
                 >
                   Forgot password?
-                </Link>
+                </NavLink>
               </div>
             </div>
 
@@ -152,37 +152,16 @@ const LoginPage = () => {
             </button>
           </form>
 
-          {/* Optional OAuth */}
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border-light dark:border-border-dark"></div>
-            </div>
-            <div className="relative flex justify-center text-base">
-              <span className="px-3 bg-card-light dark:bg-card-dark text-muted-light dark:text-muted-dark">
-                Or continue with
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-              <button className="flex items-center justify-center gap-2 w-full border border-border-light dark:border-border-dark py-4 px-5 rounded-lg hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors text-base">
-                Google
-              </button>
-              <button className="flex items-center justify-center gap-2 w-full border border-border-light dark:border-border-dark py-4 px-5 rounded-lg hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors text-base">
-                Apple
-              </button>
-            </div>
-          </div>
-
           {/* Sign Up Link */}
           <div className="text-center text-sm sm:text-base mt-6">
             <p className="text-muted-light dark:text-muted-dark">
               Don't have an account?{" "}
-              <Link
+              <NavLink
                 className="font-medium text-primary hover:underline"
                 to="/signup"
               >
                 Sign Up
-              </Link>
+              </NavLink>
             </p>
           </div>
         </div>
