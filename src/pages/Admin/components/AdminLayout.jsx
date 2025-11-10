@@ -4,8 +4,9 @@ import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
 import BarraBusqueda from "../../../shared/navbar/BarraBusqueda";
 import AsideAdmin from "./AsideAdmin";
+import Pagination from "../../../shared/utils/pagination";
 
-const AdminLayout = ({ data = [], columns = [], title = "Admin" }) => {
+const AdminLayout = ({ data = [], columns = [], title = "Admin", pagination }) => {
   const hasData = data && data.length > 0;
 
   return (
@@ -16,7 +17,7 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin" }) => {
         <AsideAdmin />
         
         {/* Main content */}
-        <main className="flex flex-1   min-h-screen flex-col p-6 lg:p-8 bg-background-light dark:bg-background-dark lg:ml-80">
+        <main className="flex flex-1 min-h-screen flex-col p-6 lg:p-8 bg-background-light dark:bg-background-dark lg:ml-80">
           <div className="flex flex-col mx-auto w-full max-w-7xl gap-6">
             {!hasData ? (
               <div className="flex items-center justify-center h-96 text-4xl text-subtle-light dark:text-subtle-dark">
@@ -38,6 +39,16 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin" }) => {
                   <div className="relative w-full max-w-lg">
                     <BarraBusqueda />
                   </div>
+                    {pagination && (
+                    
+                  <Pagination
+                    currentPage={pagination.currentPage}
+                    itemsPerPage={pagination.itemsPerPage}
+                    onPageChange={pagination.onPageChange}
+                    totalItems={pagination.totalItems}
+                  />
+                 
+                )}
                 </div>
 
                 <div className="w-full overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark">
@@ -67,7 +78,6 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin" }) => {
                                 className="px-6 py-4 text-sm whitespace-nowrap text-slate-900 dark:text-slate-100"
                               >
                                 {col.render ? col.render(item) : col.key === "precio" ? `${item[col.key]} $` : item[col.key]}
-
                               </td>
                             ))}
                             <td className="px-2 py-4 whitespace-nowrap text-right flex gap-2 justify-end">
@@ -90,6 +100,8 @@ const AdminLayout = ({ data = [], columns = [], title = "Admin" }) => {
                     </table>
                   </div>
                 </div>
+
+              
               </>
             )}
           </div>

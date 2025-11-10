@@ -8,6 +8,8 @@ const AdminProductsLayout = () => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -34,20 +36,31 @@ const AdminProductsLayout = () => {
     fetchProductos();
   }, []);
 
-  if (loading) return <p>Cargando productos...</p>;
-  if (error) return <p>Error: {error}</p>;
+  // Calcular productos para la página actual
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const productosActuales = productos.slice(startIndex, endIndex);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  if (loading) return <p className="text-center mt-8">Cargando productos...</p>;
+  if (error) return <p className="text-center mt-8 text-red-500">Error: {error}</p>;
+
   console.log(productos);
+
   return (
     <AdminLayout
       title="Manage Products"
-      data={productos}
+      data={productosActuales}
       columns={[
         { key: "id_producto", label: "ID" },
         {
           key: "nombre",
           label: "Product",
           render: (p) => (
-            <div className="flex items-center gap-4 ">
+            <div className="flex items-center gap-4">
               {p.imagen && (
                 <AdvancedImage
                   cldImg={cld
@@ -75,15 +88,15 @@ const AdminProductsLayout = () => {
             let statusText = "";
 
             if (p.stock > 10) {
-              bgClass = "bg-green-100 text-green-800";
+              bgClass = "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
               dotClass = "bg-green-500";
               statusText = "Decent stock";
             } else if (p.stock > 0) {
-              bgClass = "bg-yellow-100 text-yellow-800";
+              bgClass = "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
               dotClass = "bg-yellow-500";
               statusText = "Low stock";
             } else {
-              bgClass = "bg-red-100 text-red-800";
+              bgClass = "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300";
               dotClass = "bg-red-500";
               statusText = "Out of stock";
             }
@@ -99,6 +112,12 @@ const AdminProductsLayout = () => {
           },
         },
       ]}
+      pagination={{
+        currentPage,
+        itemsPerPage,
+        onPageChange: handlePageChange,
+        totalItems: productos.length,
+      }}
     />
   );
 };

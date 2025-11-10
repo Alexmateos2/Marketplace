@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Pagination from './pagination'
-const ProductsHero = ({ category,search, currentPage, itemsPerPage ,onPageChange}) => {
+import Pagination from '../../../shared/utils/pagination'
+const ProductsHero = ({ category,search, currentPage, itemsPerPage ,onPageChange,totalItems}) => {
   return (
     <div className="flex items-center justify-between mb-8">
       <div className="text-left">
@@ -20,6 +20,7 @@ const ProductsHero = ({ category,search, currentPage, itemsPerPage ,onPageChange
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
           onPageChange={onPageChange}
+          totalItems={totalItems}
         />
       </div>
     </div>

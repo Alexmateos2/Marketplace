@@ -1,94 +1,13 @@
-import { useMemo, useEffect, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
-  const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
+const Products = ({ loading, error, currentProducts }) => {
   const { cart, addToCart } = useCart();
 
-  useEffect(() => {
-    const fetchProductos = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("http://localhost:3000/productos");
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setProductos(data || []);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching productos:", err);
-        setError(err.message);
-        setProductos([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProductos();
-  }, []);
-
-  // Invertir productos (los más nuevos primero)
-  const products = useMemo(() => {
-    return productos.length > 0 ? [...productos].reverse() : [];
-  }, [productos]);
-
-  // Aplicar filtros y ordenamiento
-  const filteredProducts = useMemo(() => {
-    let result = [...products];
-
-    // Filtrar por categoría
-    if (category) {
-      result = result.filter((p) => p.categoria === category);
-    }
-
-    // Filtrar por búsqueda
-    if (search) {
-      const query = search.toLowerCase().trim();
-      result = result.filter((p) => p.nombre.toLowerCase().includes(query));
-    }
-
-    // Filtrar por rango de precio
-    if (filters?.price) {
-      if (filters.price === "0-100")
-        result = result.filter((p) => p.precio <= 100);
-      else if (filters.price === "100-500")
-        result = result.filter((p) => p.precio > 100 && p.precio <= 500);
-      else if (filters.price === "500+")
-        result = result.filter((p) => p.precio > 500);
-    }
-
-    // Ordenar
-    if (filters?.sortBy) {
-      if (filters.sortBy === "low-high")
-        result.sort((a, b) => a.precio - b.precio);
-      else if (filters.sortBy === "high-low")
-        result.sort((a, b) => b.precio - a.precio);
-      else if (filters.sortBy === "newest")
-        result.sort((a, b) => b.id_producto - a.id_producto);
-      else if (filters.sortBy === "oldest")
-        result.sort((a, b) => a.id_producto - b.id_producto);
-    }
-
-    return result;
-  }, [products, category, search, filters]);
-
-  // Paginación
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentProducts = filteredProducts.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
-
-  // Estados de carga y error
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -137,10 +56,7 @@ const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
             key={product.id_producto}
             className="h-full flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
           >
-            <NavLink
-              to={`/product/${product.id_producto}`}
-              className="flex flex-col flex-grow"
-            >
+            <NavLink to={`/product/${product.id_producto}`} className="flex flex-col flex-grow">
               <AdvancedImage
                 cldImg={cld
                   .image(product.imagen)
@@ -148,22 +64,20 @@ const Products = ({ category, search, currentPage, itemsPerPage, filters }) => {
                   .quality("auto")
                   .format("auto")}
                 alt={product.nombre}
-                fecthpriority="high"
+                fetchPriority="high"
                 className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-300 border-b border-border-light dark:border-border-dark rounded"
                 loading="lazy"
               />
-              <div className="px-4 py-5 flex flex-col flex-grow ">
+              <div className="px-4 py-5 flex flex-col flex-grow">
                 <h4 className="font-bold text-md lg:text-lg text-gray-800 dark:text-gray-100 text-center sm:text-start flex-grow">
                   {product.nombre}
                 </h4>
               </div>
             </NavLink>
+
             <div className="px-4 pb-4 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto relative">
               <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg mt-1 truncate">
-                $
-                {product.precio.toLocaleString("es-ES", {
-                  minimumFractionDigits: 2,
-                })}
+                ${product.precio.toLocaleString("es-ES", { minimumFractionDigits: 2 })}
               </p>
               <div className="relative">
                 <button
