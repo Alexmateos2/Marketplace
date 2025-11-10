@@ -9,18 +9,17 @@ const FormProfile = ({ usuario }) => {
     telefono: "",
     password: "",
   });
-
-  useEffect(() => {
-    if (usuario) {
-      setFormData({
-        nombre: usuario.nombre || "John Doe",
-        email: usuario.email || "johndoe@gmail.com",
-        direccion: usuario.direccion || "C/Example 123",
-        telefono: usuario.telefono || "(+55) 623723721",
-        password: usuario.password,
-      });
-    }
-  }, [usuario]);
+useEffect(() => {
+  if (usuario) {
+    setFormData({
+      nombre: usuario.nombre || "John Doe",
+      email: usuario.email || "johndoe@gmail.com",
+      direccion: usuario.direccion || "C/Example 123",
+      telefono: usuario.telefono || "(+55) 623723721",
+      password: "", 
+    });
+  }
+}, [usuario]);
 
   const changeHandle = () => {
     setDisabled(!disabled);
