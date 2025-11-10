@@ -16,6 +16,7 @@ import { CartProvider } from "./shared/hooks/CartProvider.jsx";
 import BusquedaPage from "./pages/Busqueda/layout/BusquedaLayout.jsx";
 import HistoryOrdersPage from "./pages/HistoryOrders/layout/HistoryOrdersLayout.jsx";
 import OrderDetailsPage from "./pages/OrderDetails/layout/OrderDetailsLayout.jsx";
+import SignUpLayout from "./pages/SignUp/SignUpLayout.jsx";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/pedidos/historial" element={<HistoryOrdersPage />} />
           <Route path = "/pedidos/historial/details/:id" element={<OrderDetailsPage />} />
+          <Route path = "/signup" element={<SignUpLayout />} />
         </Routes>
       </Router>
           </CartProvider>
