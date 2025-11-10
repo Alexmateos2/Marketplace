@@ -1,5 +1,12 @@
 import React from "react";
-import { LayoutDashboard, Users, Package, BarChart3, Settings, LogOut } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  Package,
+  BarChart3,
+  Settings,
+  LogOut,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
@@ -30,21 +37,14 @@ const AsideAdmin = () => {
             </p>
           </div>
         </div>
-
         <nav className="flex flex-col gap-2 flex-1 overflow-y-auto">
-          <NavLink
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                isActive
-                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
-                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
-              }`
-            }
-            to="/admin/dashboard"
+           <button
+            disabled
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-content-light-400 dark:text-content-dark-400 cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
           >
             <LayoutDashboard size={20} className="flex-shrink-0" />
             <span className="text-sm font-medium">Dashboard</span>
-          </NavLink>
+          </button>
 
           <NavLink
             className={({ isActive }) =>
@@ -74,33 +74,23 @@ const AsideAdmin = () => {
             <span className="text-sm font-medium">Users</span>
           </NavLink>
 
-          <NavLink
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                isActive
-                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
-                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
-              }`
-            }
-            to="/admin/reportes"
+          {/* Disabled Reports */}
+          <button
+            disabled
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-content-light-400 dark:text-content-dark-400 cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
           >
             <BarChart3 size={20} className="flex-shrink-0" />
             <span className="text-sm font-medium">Reports</span>
-          </NavLink>
+          </button>
 
-          <NavLink
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                isActive
-                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
-                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
-              }`
-            }
-            to="/admin/configuracion"
+          {/* Disabled Settings */}
+          <button
+            disabled
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-content-light-400 dark:text-content-dark-400 cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
           >
             <Settings size={20} className="flex-shrink-0" />
             <span className="text-sm font-medium">Settings</span>
-          </NavLink>
+          </button>
         </nav>
       </div>
 
