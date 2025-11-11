@@ -8,28 +8,29 @@ const AdminUsersLayout = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("http://localhost:3000/usuarios");
 
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("http://localhost:3000/usuarios");
 
-        const data = await response.json();
-        setUsers(data || []);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching usuarios:", err);
-        setError(err.message);
-        setUsers([]);
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
       }
-    };
 
+      const data = await response.json();
+      setUsers(data || []);
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching usuarios:", err);
+      setError(err.message);
+      setUsers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchUsers();
   }, []);
 
@@ -49,6 +50,8 @@ const AdminUsersLayout = () => {
     <AdminLayout
       title="Manage Users"
       data={usuariosActuales}
+      idKey="id_usuario"
+      onDeleteSuccess={fetchUsers} // ✅ callback para refrescar la lista
       columns={[
         { key: "nombre", label: "Name" },
         { key: "email", label: "Email" },

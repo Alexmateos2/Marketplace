@@ -7,13 +7,18 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 
 const OrderDetailsPage = () => {
-  const { id } = useParams();
+  const { id,id_usuario } = useParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const user = localStorage.getItem("usuario");
+  const [user,setUser] = useState(localStorage.getItem("usuario"));
+
 const navigate = useNavigate()
   useEffect(() => {
+   console.log(id_usuario)
+if (id_usuario){
+  setUser(id_usuario)
+}
     if (!user) {
       setError("Please log in to view your orders");
          setTimeout(() => {
@@ -49,7 +54,7 @@ const navigate = useNavigate()
     };
 
     fetchOrderDetails();
-  }, [user, id, navigate]);
+  }, [user, id, navigate,id_usuario]);
 
   if (loading) {
     return (

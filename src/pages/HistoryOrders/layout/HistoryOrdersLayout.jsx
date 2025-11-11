@@ -6,29 +6,37 @@ import Footer from "../../../shared/utils/Footer";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "../../../shared/utils/pagination.jsx";
 
 const HistoryOrdersPage = () => {
+  const [user, setUser] = useState(localStorage.getItem("usuario"));
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const user = localStorage.getItem("usuario");
+
   const navigate = useNavigate();
 
   // Calcular órdenes para la página actual
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const ordenesActuales = orders.slice(startIndex, endIndex);
-
+  const { id } = useParams();
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
-    if (!user) {
+    if (id) setUser(id);
+
+    // Resetear estado al cambiar de usuario
+    setOrders([]);
+    setError(null);
+    setLoading(true);
+
+    if (!user && !id) {
       setError("Please log in to view your orders");
       setLoading(false);
       setTimeout(() => {
@@ -39,16 +47,15 @@ const HistoryOrdersPage = () => {
 
     const fetchOrders = async () => {
       try {
-        setLoading(true);
-        setError(null);
-        const response = await fetch(`http://localhost:3000/pedidos/${user}`);
+        const response = await fetch(
+          `http://localhost:3000/pedidos/${id || user}`
+        );
 
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log(data);
         setOrders(data || []);
       } catch (err) {
         console.error("Error fetching orders:", err);
@@ -60,19 +67,32 @@ const HistoryOrdersPage = () => {
     };
 
     fetchOrders();
-  }, [navigate, user]);
+  }, [navigate, user, id]);
 
   return (
     <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center bg-background-light dark:bg-background-dark font-display">
         <div className="flex flex-col w-full max-w-4xl">
-          <NavLink
-            to="/profile"
-            className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
-          >
-            Back to profile
-          </NavLink>
+          {!id ? (
+            <>
+              <NavLink
+                to="/profile"
+                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+              >
+                Back to profile
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/admin/users"
+                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+              >
+                Back to users
+              </NavLink>
+            </>
+          )}
 
           <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
             <h1 className="text-content-light dark:text-content-dark text-4xl font-black leading-tight">
@@ -89,9 +109,15 @@ const HistoryOrdersPage = () => {
               {error}
             </div>
           ) : orders.length === 0 ? (
-            <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
-              You have no orders yet.
-            </p>
+            !id ? (
+              <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+                You have no orders yet.
+              </p>
+            ) : (
+              <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+                This user has no orders yet.
+              </p>
+            )
           ) : (
             <>
               <div className="flex flex-col gap-4">
@@ -163,7 +189,11 @@ const HistoryOrdersPage = () => {
                         ${order.total}
                       </p>
                       <NavLink
-                        to={`/pedidos/historial/details/${order.id_pedido}`}
+                        to={
+                          id
+                            ? `/pedidos/historial/details/${id}/${order.id_pedido}` 
+                            : `/pedidos/historial/details/${order.id_pedido}` 
+                        }
                         className="text-primary text-sm font-bold hover:underline cursor-pointer"
                       >
                         View Details
@@ -175,12 +205,12 @@ const HistoryOrdersPage = () => {
 
               {orders.length > itemsPerPage && (
                 <div className="mt-8">
-                <Pagination
-                  currentPage={currentPage}
-                  itemsPerPage={itemsPerPage}
-                  onPageChange={handlePageChange}
-                  totalItems={orders.length}
-                />
+                  <Pagination
+                    currentPage={currentPage}
+                    itemsPerPage={itemsPerPage}
+                    onPageChange={handlePageChange}
+                    totalItems={orders.length}
+                  />
                 </div>
               )}
             </>
