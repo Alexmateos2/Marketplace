@@ -24,7 +24,7 @@ import AdminUsersLayout from "./pages/Admin/layout/AdminUsersLayout.jsx";
 
 function App() {
   return (
-    <div className="min-h-screen bg-surface-light dark:bg-background-dark dark:text-white transition-colors">
+    <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
       <CartProvider>
         <Router>
           <ScrollToTop />
@@ -42,9 +42,9 @@ function App() {
             <Route path="/categories" element={<AllCategoriesPage />} />
             <Route path="/add" element={<AddProduct />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/pedidos/historial" element={<HistoryOrdersPage />} />
+            <Route path="/pedidos/historial/:id?" element={<HistoryOrdersPage />} />
             <Route
-              path="/pedidos/historial/details/:id"
+              path="/pedidos/historial/details/:id_usuario?/:id"
               element={<OrderDetailsPage />}
             />
             <Route path="/signup" element={<SignUpLayout />} />
