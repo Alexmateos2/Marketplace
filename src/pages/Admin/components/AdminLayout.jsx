@@ -56,7 +56,7 @@ const AdminLayout = ({
               </div>
             ) : (
               <>
-                {/* Header */}
+             
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <h1 className="text-3xl font-bold leading-tight tracking-tight text-content-light dark:text-content-dark">
                     {title}
@@ -70,7 +70,6 @@ const AdminLayout = ({
                   
                 </div>
 
-                {/* Search + Pagination */}
                 <div className="flex flex-wrap items-center justify-center lg:justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4">
                   <div className="relative w-full max-w-lg">
                     <BarraBusqueda />
