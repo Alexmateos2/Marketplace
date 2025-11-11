@@ -20,7 +20,7 @@ import SignUpLayout from "./pages/SignUp/SignUpLayout.jsx";
 import AdminLayout from "./pages/Admin/components/AdminLayout.jsx";
 import AdminProductsLayout from "./pages/Admin/layout/AdminProductsLayout.jsx";
 import AdminUsersLayout from "./pages/Admin/layout/AdminUsersLayout.jsx";
-
+import AdminProductEditLayout from "./pages/Admin/layout/AdminProductEditLayout.jsx";
 
 function App() {
   return (
@@ -42,15 +42,19 @@ function App() {
             <Route path="/categories" element={<AllCategoriesPage />} />
             <Route path="/add" element={<AddProduct />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/pedidos/historial/:id?" element={<HistoryOrdersPage />} />
+            <Route
+              path="/pedidos/historial/:id?"
+              element={<HistoryOrdersPage />}
+            />
             <Route
               path="/pedidos/historial/details/:id_usuario?/:id"
               element={<OrderDetailsPage />}
             />
             <Route path="/signup" element={<SignUpLayout />} />
-            <Route path="/admin" element = {<AdminLayout/>} />
-            <Route path="/admin/products" element={<AdminProductsLayout/>} />
-            <Route path="/admin/users" element={<AdminUsersLayout/>} />
+            <Route path="/admin" element={<AdminLayout />} />
+            <Route path="/admin/products" element={<AdminProductsLayout />} />
+            <Route path="/admin/users" element={<AdminUsersLayout />} />
+            <Route path="/admin/products/edit/:id" element={<AdminProductEditLayout />} />
           </Routes>
         </Router>
       </CartProvider>

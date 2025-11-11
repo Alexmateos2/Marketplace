@@ -89,7 +89,7 @@ const HistoryOrdersPage = () => {
                 to="/admin/users"
                 className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
               >
-                Back to users
+                Back to Users
               </NavLink>
             </>
           )}

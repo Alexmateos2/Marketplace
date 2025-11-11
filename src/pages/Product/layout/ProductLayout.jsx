@@ -18,7 +18,6 @@ const ProductPages = () => {
   const products = ProductsItemList;
   const localProduct = products.find((p) => String(p.id) === id);
 
-  // 🔹 Cargar producto desde backend
   useEffect(() => {
     const fetchProduct = async () => {
       try {
