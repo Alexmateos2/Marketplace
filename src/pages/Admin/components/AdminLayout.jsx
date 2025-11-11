@@ -61,10 +61,13 @@ const AdminLayout = ({
                   <h1 className="text-3xl font-bold leading-tight tracking-tight text-content-light dark:text-content-dark">
                     {title}
                   </h1>
+                  {isProductPage ? <>
                   <button className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-blue-700 transition-colors">
                     <Plus size={20} />
-                    <span className="truncate">Add New</span>
+                    <NavLink to="/add" className="truncate">Add New</NavLink>
                   </button>
+                  </> : null}
+                  
                 </div>
 
                 {/* Search + Pagination */}
@@ -122,12 +125,13 @@ const AdminLayout = ({
                             <td className="px-2 py-4 whitespace-nowrap text-right flex gap-2 justify-end">
                               {isProductPage ? (
                                 <>
-                                  <button
+                                  <NavLink
                                     className="p-2 cursor-pointer text-slate-500 hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                    to={`edit/${item[idKey]}`}
                                     title="Edit"
                                   >
                                     <Edit2 size={18} />
-                                  </button>
+                                  </NavLink>
                                   <button
                                     className="p-2 cursor-pointer text-slate-500 hover:text-red-500 dark:hover:text-red-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                     onClick={() => deleteItem(item[idKey])}

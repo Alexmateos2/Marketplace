@@ -7,23 +7,21 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 
 const OrderDetailsPage = () => {
-  const { id,id_usuario } = useParams();
+  const { id, id_usuario } = useParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [user,setUser] = useState(localStorage.getItem("usuario"));
+ const user = id_usuario || localStorage.getItem("usuario");
 
-const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
-   console.log(id_usuario)
-if (id_usuario){
-  setUser(id_usuario)
-}
+  
+    
     if (!user) {
       setError("Please log in to view your orders");
-         setTimeout(() => {
+      setTimeout(() => {
         navigate("/");
-      },1000);
+      }, 1000);
 
       setLoading(false);
       return;
@@ -54,7 +52,7 @@ if (id_usuario){
     };
 
     fetchOrderDetails();
-  }, [user, id, navigate,id_usuario]);
+  }, [user, id, navigate, id_usuario]);
 
   if (loading) {
     return (
@@ -90,7 +88,11 @@ if (id_usuario){
           <div className="mb-8">
             <NavLink
               className="flex items-center gap-2 text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors w-fit"
-              to="/pedidos/historial"
+              to={
+                id_usuario
+                  ? `/pedidos/historial/${id_usuario}`
+                  : "/pedidos/historial"
+              }
             >
               <span className="text-sm font-medium">Back to Order History</span>
             </NavLink>
@@ -168,7 +170,7 @@ if (id_usuario){
                       Shipping Address
                     </h3>
                     <p className="text-sm text-subtle-light dark:text-subtle-dark leading-relaxed">
-                     {order.nombre_usuario}
+                      {order.nombre_usuario}
                       <br />
                       {order.direccion}
                     </p>
