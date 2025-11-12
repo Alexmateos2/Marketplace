@@ -1,5 +1,5 @@
 import React from "react";
-import { User, FileText, LogOut,UserStar } from "lucide-react";
+import { User, FileText, LogOut, UserStar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
@@ -61,7 +61,7 @@ const AsideProfile = ({ usuario }) => {
             <FileText size={20} className="flex-shrink-0" />
             <span className="text-sm font-medium">Order History</span>
           </NavLink>
-          
+
           <NavLink
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
@@ -70,7 +70,7 @@ const AsideProfile = ({ usuario }) => {
                   : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
               }`
             }
-            to="/admin"
+            to="/admin/dashboard"
           >
             <UserStar size={20} className="flex-shrink-0" />
             <span className="text-sm font-medium">Admin</span>

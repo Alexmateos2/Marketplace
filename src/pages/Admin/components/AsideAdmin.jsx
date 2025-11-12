@@ -3,9 +3,9 @@ import {
   LayoutDashboard,
   Users,
   Package,
-  BarChart3,
   Settings,
   LogOut,
+  FileText,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
@@ -16,17 +16,21 @@ const AsideAdmin = () => {
   return (
     <aside className="w-80 py-6 px-6 bg-surface-light dark:bg-background-dark/50 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark  z-30 ">
       <div>
-        <div className="flex items-center gap-3 mb-10">
-         
-        </div>
+        <div className="flex items-center gap-3 mb-10"></div>
         <nav className="flex flex-col gap-2 flex-1 overflow-y-auto">
-           <button
-            disabled
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-500 cursor-not-allowed cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
+          <NavLink
+            to="/admin/dashboard"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                isActive
+                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
+                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
+              }`
+            }
           >
             <LayoutDashboard size={20} className="flex-shrink-0" />
             <span className="text-sm font-medium">Dashboard</span>
-          </button>
+          </NavLink>
 
           <NavLink
             className={({ isActive }) =>
@@ -56,14 +60,19 @@ const AsideAdmin = () => {
             <span className="text-sm font-medium">Users</span>
           </NavLink>
 
-          {/* Disabled Reports */}
-          <button
-            disabled
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-500 cursor-not-allowed cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
+          <NavLink
+            to="/admin/orders"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                isActive
+                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
+                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
+              }`
+            }
           >
-            <BarChart3 size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Reports</span>
-          </button>
+            <FileText size={20} className="flex-shrink-0" />
+            <span className="text-sm font-medium">Orders</span>
+          </NavLink>
 
           {/* Disabled Settings */}
           <button

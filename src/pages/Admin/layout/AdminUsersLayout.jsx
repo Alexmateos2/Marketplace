@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import AdminLayout from '../components/AdminLayout';
+import React, { useEffect, useState } from "react";
+import AdminLayout from "../components/AdminLayout";
 
 const AdminUsersLayout = () => {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]); // 🔍 estado para búsqueda
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
 
   const fetchUsers = async () => {
     try {
@@ -20,11 +20,13 @@ const AdminUsersLayout = () => {
 
       const data = await response.json();
       setUsers(data || []);
+      setFilteredUsers(data || []); // 👈 inicializar también los filtrados
       setError(null);
     } catch (err) {
       console.error("Error fetching usuarios:", err);
       setError(err.message);
       setUsers([]);
+      setFilteredUsers([]);
     } finally {
       setLoading(false);
     }
@@ -37,21 +39,23 @@ const AdminUsersLayout = () => {
   // Calcular usuarios para la página actual
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const usuariosActuales = users.slice(startIndex, endIndex);
+  const usuariosActuales = filteredUsers.slice(startIndex, endIndex);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   if (loading) return <p className="text-center mt-8">Cargando usuarios...</p>;
-  if (error) return <p className="text-center mt-8 text-red-500">Error: {error}</p>;
+  if (error)
+    return <p className="text-center mt-8 text-red-500">Error: {error}</p>;
 
   return (
     <AdminLayout
       title="Manage Users"
       data={usuariosActuales}
+      originalData={users} // 🔹 por si necesitás la lista completa en la búsqueda
       idKey="id_usuario"
-      onDeleteSuccess={fetchUsers} // ✅ callback para refrescar la lista
+      onDeleteSuccess={fetchUsers}
       columns={[
         { key: "nombre", label: "Name" },
         { key: "email", label: "Email" },
@@ -61,7 +65,12 @@ const AdminUsersLayout = () => {
         currentPage,
         itemsPerPage,
         onPageChange: handlePageChange,
-        totalItems: users.length,
+        totalItems: filteredUsers.length,
+      }}
+    
+      onFilterChange={(results) => {
+        setFilteredUsers(results);
+        setCurrentPage(1);
       }}
     />
   );

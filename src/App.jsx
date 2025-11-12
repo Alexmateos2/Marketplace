@@ -21,6 +21,8 @@ import AdminLayout from "./pages/Admin/components/AdminLayout.jsx";
 import AdminProductsLayout from "./pages/Admin/layout/AdminProductsLayout.jsx";
 import AdminUsersLayout from "./pages/Admin/layout/AdminUsersLayout.jsx";
 import AdminProductEditLayout from "./pages/Admin/layout/AdminProductEditLayout.jsx";
+import AdminDashboardLayout from "./pages/Admin/layout/AdminDashboardLayout.jsx";
+import AdminOrdersLayout from "./pages/Admin/layout/AdminOrdersLayout.jsx";
 
 function App() {
   return (
@@ -53,8 +55,13 @@ function App() {
             <Route path="/signup" element={<SignUpLayout />} />
             <Route path="/admin" element={<AdminLayout />} />
             <Route path="/admin/products" element={<AdminProductsLayout />} />
+            <Route path="/admin/orders" element={<AdminOrdersLayout />} />
             <Route path="/admin/users" element={<AdminUsersLayout />} />
-            <Route path="/admin/products/edit/:id" element={<AdminProductEditLayout />} />
+            <Route
+              path="/admin/products/edit/:id"
+              element={<AdminProductEditLayout />}
+            />
+            <Route path="/admin/dashboard" element={<AdminDashboardLayout />} />
           </Routes>
         </Router>
       </CartProvider>
