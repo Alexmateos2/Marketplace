@@ -13,7 +13,6 @@ import {
   Info,
   LayoutDashboard,
   Users,
-  BarChart3,
   Settings,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -64,7 +63,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
       {
         icon: <LayoutDashboard className="w-5 h-5" />,
         label: "Dashboard",
-               to: "/admin/dashboard",
+        to: "/admin/dashboard",
       },
       {
         icon: <Package className="w-5 h-5" />,
@@ -77,9 +76,10 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
         to: "/admin/users",
       },
       {
-        icon: <BarChart3 className="w-5 h-5" />,
-        label: "Reports",
-        disabled: true,
+        icon: <FileText className="w-5 h-5" />,
+        label: "Orders",
+           to: "/admin/orders",
+        
       },
       {
         icon: <Settings className="w-5 h-5" />,
