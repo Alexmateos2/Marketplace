@@ -2,7 +2,6 @@ import React from "react";
 import { Edit2, Trash2, Plus, FileText } from "lucide-react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
-import BarraBusqueda from "../../../shared/navbar/BarraBusqueda";
 import AsideAdmin from "./AsideAdmin";
 import Pagination from "../../../shared/utils/pagination";
 import { NavLink, useLocation } from "react-router-dom";
@@ -17,6 +16,8 @@ const AdminLayout = ({
   onDeleteSuccess,
   onFilterChange,
   originalData = [],
+  onSort,
+  sortConfig,
 }) => {
   const location = useLocation();
   const hasData = data && data.length > 0;
@@ -100,9 +101,21 @@ const AdminLayout = ({
                           {columns.map((col, idx) => (
                             <th
                               key={idx}
-                              className="px-6 py-4 text-sm font-semibold text-slate-600 dark:text-slate-300"
+                              className={`px-6 py-4 text-sm font-semibold text-slate-600 dark:text-slate-300 cursor-pointer select-none ${
+                                col.sortable
+                                  ? "hover:text-primary transition-colors"
+                                  : ""
+                              }`}
+                              onClick={() => col.sortable && onSort(col.key)}
                             >
-                              {col.label}
+                              <div className="flex items-center gap-1">
+                                {col.label}
+                                {sortConfig?.key === col.key && (
+                                  <span>
+                                    {sortConfig.direction === "asc" ? "▲" : "▼"}
+                                  </span>
+                                )}
+                              </div>
                             </th>
                           ))}
                           <th className="px-6 py-4 text-sm font-semibold text-slate-600 dark:text-slate-300 text-right">
@@ -220,7 +233,7 @@ const AdminLayout = ({
                             className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
                           >
                             <FileText size={16} />
-                            View orders
+                            View order
                           </NavLink>
                         )}
                       </div>

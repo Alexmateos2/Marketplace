@@ -8,13 +8,12 @@ const BusquedaAdmin = ({ data = [], onFilterChange }) => {
     setInputValue(value);
 
     const filteredData = data.filter((item) =>
-      item.nombre.toLowerCase().includes(value)
+      // fallback seguro para nombres nulos
+      (item.nombre || "invitado").toLowerCase().includes(value)
     );
-   if (filteredData.length === 0) {
-      onFilterChange(data);
-    } else {
-      onFilterChange(filteredData);
-    }
+
+    // siempre enviar la lista filtrada, incluso si está vacía
+    onFilterChange(filteredData);
   };
 
   return (
