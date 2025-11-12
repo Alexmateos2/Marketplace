@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import {
-  ChevronDown,
-  User,
-  UserStar,
-  LogIn,
-  LogOut,
-} from "lucide-react";
+import { ChevronDown, User, UserStar, LogIn, LogOut } from "lucide-react";
 
 const ProfileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +47,9 @@ const ProfileNavbar = () => {
         />
         <ChevronDown
           size={18}
-          className={`transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
+          className={`transition-transform ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
         />
       </div>
 
@@ -80,8 +76,6 @@ const ProfileNavbar = () => {
             Profile
           </NavLink>
 
-          
-
           {!user ? (
             <NavLink
               to="/login"
@@ -99,28 +93,28 @@ const ProfileNavbar = () => {
             </NavLink>
           ) : (
             <div>
-            <NavLink
-            to="/admin"
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
+              <NavLink
+                to="/admin/dashboard"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
                ${
                  isActive
                    ? "text-primary bg-primary/10 dark:bg-primary/20"
                    : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
                }`
-            }
-          >
-            <UserStar size={18} />
-            Admin
-          </NavLink>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-3 w-full text-left px-4 py-3 text-base text-content-light dark:text-content-dark 
+                }
+              >
+                <UserStar size={18} />
+                Admin
+              </NavLink>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-3 w-full text-left px-4 py-3 text-base text-content-light dark:text-content-dark 
             hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
-            >
-              <LogOut size={18} />
-              Logout
-            </button>
+              >
+                <LogOut size={18} />
+                Logout
+              </button>
             </div>
           )}
         </div>

@@ -6,6 +6,7 @@ import BarraBusqueda from "../../../shared/navbar/BarraBusqueda";
 import AsideAdmin from "./AsideAdmin";
 import Pagination from "../../../shared/utils/pagination";
 import { NavLink, useLocation } from "react-router-dom";
+import BusquedaAdmin from "./BusquedaAdmin";
 
 const AdminLayout = ({
   data = [],
@@ -14,10 +15,13 @@ const AdminLayout = ({
   pagination,
   idKey = "id",
   onDeleteSuccess,
+  onFilterChange,
+  originalData = [],
 }) => {
   const location = useLocation();
   const hasData = data && data.length > 0;
   const isProductPage = location.pathname.includes("/products");
+  const isUsersPage = location.pathname.includes("/users");
 
   const deleteItem = async (id) => {
     const url = isProductPage ? "productos" : "usuarios";
@@ -56,24 +60,27 @@ const AdminLayout = ({
               </div>
             ) : (
               <>
-             
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <h1 className="text-3xl font-bold leading-tight tracking-tight text-content-light dark:text-content-dark">
                     {title}
                   </h1>
-                  {isProductPage ? <>
-                  <button className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-blue-700 transition-colors">
-                    <Plus size={20} />
-                    <NavLink to="/add" className="truncate">Add New</NavLink>
-                  </button>
-                  </> : null}
-                  
+                  {isProductPage ? (
+                    <>
+                      <button className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 transition-colors">
+                        <Plus size={20} />
+                        <NavLink to="/add" className="truncate">
+                          Add New
+                        </NavLink>
+                      </button>
+                    </>
+                  ) : null}
                 </div>
 
                 <div className="flex flex-wrap items-center justify-center lg:justify-between gap-4 rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-4">
-                  <div className="relative w-full max-w-lg">
-                    <BarraBusqueda />
-                  </div>
+                  <BusquedaAdmin
+                    data={originalData}
+                    onFilterChange={onFilterChange}
+                  />
                   {pagination && (
                     <Pagination
                       currentPage={pagination.currentPage}
@@ -116,7 +123,7 @@ const AdminLayout = ({
                               >
                                 {col.render
                                   ? col.render(item)
-                                  : col.key === "precio"
+                                  : col.key === "precio" || col.key === "total"
                                   ? `${item[col.key]} $`
                                   : item[col.key]}
                               </td>
@@ -139,16 +146,22 @@ const AdminLayout = ({
                                     <Trash2 size={18} />
                                   </button>
                                 </>
+                              ) : isUsersPage ? (
+                                <NavLink
+                                  to={`/pedidos/historial/${item.id_usuario}`}
+                                  className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                  title="View orders"
+                                >
+                                  <FileText size={18} />
+                                </NavLink>
                               ) : (
-                                <>
-                                  <NavLink
-                                   to={`/pedidos/historial/${item.id_usuario}`}
-                                    className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md  cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                                    title="View orders"
-                                  >
-                                    <FileText size={18} />
-                                  </NavLink>
-                                </>
+                                <NavLink
+                                  to={`/pedidos/historial/details/${item.id_usuario}/${item.id_pedido}`}
+                                  className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                  title="View order details"
+                                >
+                                  <FileText size={18} />
+                                </NavLink>
                               )}
                             </td>
                           </tr>
@@ -172,7 +185,7 @@ const AdminLayout = ({
                           <span className="text-sm text-slate-900 dark:text-slate-100 font-medium">
                             {col.render
                               ? col.render(item)
-                              : col.key === "precio"
+                              : col.key === "precio" || col.key === "total"
                               ? `${item[col.key]} $`
                               : item[col.key]}
                           </span>
@@ -181,8 +194,7 @@ const AdminLayout = ({
                       <div className="flex gap-2 pt-3 border-t border-gray-200 dark:border-slate-800">
                         {isProductPage ? (
                           <>
-                            {" "}
-                            <button className="flex-1  cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all">
+                            <button className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all">
                               <Edit2 size={16} />
                               Edit
                             </button>
@@ -194,17 +206,22 @@ const AdminLayout = ({
                               Delete
                             </button>
                           </>
+                        ) : isUsersPage ? (
+                          <NavLink
+                            to={`/pedidos/historial/${item.id_usuario}`}
+                            className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
+                          >
+                            <FileText size={16} />
+                            View orders
+                          </NavLink>
                         ) : (
-                          <>
-                            <NavLink
-                              
-                              to={`/pedidos/historial/${item.id_usuario}`}
-                              className="flex-1  cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
-                            >
-                              <FileText size={16} />
-                              View orders
-                            </NavLink>
-                          </>
+                          <NavLink
+                            to={`/pedidos/historial/details${item.id_usuario}/${item.id_pedido}`}
+                            className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
+                          >
+                            <FileText size={16} />
+                            View orders
+                          </NavLink>
                         )}
                       </div>
                     </div>

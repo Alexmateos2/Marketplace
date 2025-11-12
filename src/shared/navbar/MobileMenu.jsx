@@ -64,7 +64,7 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
       {
         icon: <LayoutDashboard className="w-5 h-5" />,
         label: "Dashboard",
-        disabled: true,
+               to: "/admin/dashboard",
       },
       {
         icon: <Package className="w-5 h-5" />,

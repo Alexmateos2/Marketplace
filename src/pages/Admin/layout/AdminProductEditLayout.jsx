@@ -135,7 +135,7 @@ const AdminProductEditLayout = () => {
       <Navbar />
       <div className="flex gap-2">
         <AsideAdmin />
-        <main className="flex flex-1 flex-col p-6 lg:p-6">
+        <main className="flex flex-1 flex-col p-4 sm:p-6 lg:p-6 overflow-hidden">
           <div className="flex flex-col mx-auto w-full max-w-4xl gap-8">
             {/* Header */}
             <div className="flex flex-col gap-2">
@@ -155,9 +155,9 @@ const AdminProductEditLayout = () => {
 
             {/* Formulario */}
             <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 items-start">
                 {/* Imagen */}
-                <div className="lg:col-span-1">
+                 <div className="lg:col-span-1 flex flex-col">
                   <div className="flex flex-col gap-4 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                     <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
                       Product Image
@@ -208,7 +208,7 @@ const AdminProductEditLayout = () => {
                 </div>
 
                 {/* Detalles */}
-                <div className="lg:col-span-2">
+                <div className="md:col-span-2">
                   <div className="flex flex-col gap-6 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                     <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
                       Product Details
@@ -237,10 +237,10 @@ const AdminProductEditLayout = () => {
                             onChange={(e) =>
                               setProducto({
                                 ...producto,
-                                categoria: e.target.value,
+                                id_categoria: e.target.value,
                               })
                             }
-                            className="w-full py-2 px-3 rounded-lg border border-border-light  dark:border-border-dark bg-background-light  text-foreground-light dark:text-foreground-dark dark:bg-background-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full py-2 px-3 rounded-lg border border-border-light dark:border-border-dark bg-background-light text-foreground-light dark:text-foreground-dark dark:bg-background-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <option value="">Selecciona una categoría</option>
                             <option value="1">Audio</option>
@@ -300,7 +300,7 @@ const AdminProductEditLayout = () => {
                               descripcion: e.target.value,
                             })
                           }
-                          className="w-full bg-background-light dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark py-2 px-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground-light dark:text-foreground-dark"
+                          className="w-full bg-background-light  h-60 md:h-auto dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark p-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground-light dark:text-foreground-dark"
                         />
                       </div>
                     </div>
@@ -363,7 +363,10 @@ const AdminProductEditLayout = () => {
                 </div>
                 <div className="space-y-4">
                   {producto.resenas.map((res, idx) => (
-                    <div key={idx} className="flex flex-col gap-4 p-4 border-t border-border-light dark:border-border-dark ">
+                    <div
+                      key={idx}
+                      className="flex flex-col gap-4 p-4 border-t border-border-light dark:border-border-dark  bg-surface-light dark:bg-surface-dark"
+                    >
                       <div className="flex items-center justify-between gap-4">
                         <div>
                           <p className="text-sm font-medium text-content-light dark:text-surface-light">
@@ -379,10 +382,14 @@ const AdminProductEditLayout = () => {
                             min="1"
                             max="10"
                             step="0.1"
-                            className="text-sm rounded-lg py-2 px-3 font-bold text-content-light dark:text-content-dark w-24 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark text-center focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                            className="text-sm rounded-lg py-2 px-3 font-bold text-subtle-light dark:text-subtle-dark w-24 bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark text-center focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                             value={res.valoracion}
                             onChange={(e) =>
-                              handleReviewChange(idx, "valoracion", e.target.value)
+                              handleReviewChange(
+                                idx,
+                                "valoracion",
+                                e.target.value
+                              )
                             }
                           />
                         </div>
@@ -392,13 +399,17 @@ const AdminProductEditLayout = () => {
                           Review
                         </label>
                         <textarea
-                          className="text-sm w-full rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark  p-4 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-content-light dark:text-content-dark"
+                          className="text-sm w-full h-60 md:h-full bg-background-light dark:bg-background-dark p-4 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-content-light dark:text-content-dark"
                           placeholder="Review description"
                           rows="4"
                           maxLength={500}
                           value={res.descripcion}
                           onChange={(e) =>
-                            handleReviewChange(idx, "descripcion", e.target.value)
+                            handleReviewChange(
+                              idx,
+                              "descripcion",
+                              e.target.value
+                            )
                           }
                         />
                       </div>
