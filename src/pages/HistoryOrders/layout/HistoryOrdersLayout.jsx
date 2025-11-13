@@ -1,65 +1,60 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "../../../shared/utils/pagination.jsx";
 
 const HistoryOrdersPage = () => {
-  const [user, setUser] = useState(localStorage.getItem("usuario"));
+  const navigate = useNavigate();
+  const { id: id_usuario } = useParams(); // id del usuario desde params (si es admin)
+  const user= (localStorage.getItem("usuario"));
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  const navigate = useNavigate();
+  const rol = JSON.parse(localStorage.getItem("rol"));
+  const isAdmin = rol === "admin";
 
-  // Calcular órdenes para la página actual
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const ordenesActuales = orders.slice(startIndex, endIndex);
-  const { id } = useParams();
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  // Validación de permisos
+  const usuarioActual = isAdmin ? id_usuario || user : user;
+
 
   useEffect(() => {
-    if (id) setUser(id);
-
-    // Resetear estado al cambiar de usuario
-    setOrders([]);
-    setError(null);
-    setLoading(true);
-
-    if (!user && !id) {
-      setError("Please log in to view your orders");
+    // Si no hay sesión
+    if (!user) {
+      setError("Por favor inicia sesión para ver tus pedidos");
       setLoading(false);
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
+      setTimeout(() => navigate("/login"), 1000);
+      return;
+    }
+
+    // Bloquear acceso a usuarios normales que intenten ver otros
+    if (!isAdmin && id_usuario && id_usuario !== user) {
+      setError("No tienes permiso para ver estos pedidos");
+      setLoading(false);
+      setTimeout(() => navigate("/"), 1500);
       return;
     }
 
     const fetchOrders = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const response = await fetch(
-          `http://localhost:3000/pedidos/${id || user}`
+          `http://localhost:3000/pedidos/${usuarioActual}`
         );
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
         setOrders(data || []);
       } catch (err) {
         console.error("Error fetching orders:", err);
-        setError("Failed to load orders. Please try again later.");
+        setError("No se pudieron cargar los pedidos. Intenta de nuevo más tarde.");
         setOrders([]);
       } finally {
         setLoading(false);
@@ -67,38 +62,38 @@ const HistoryOrdersPage = () => {
     };
 
     fetchOrders();
-  }, [navigate, user, id]);
+  }, [navigate, user, id_usuario, usuarioActual, isAdmin]);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const ordenesActuales = orders.slice(startIndex, endIndex);
+
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center bg-background-light dark:bg-background-dark font-display">
+      <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center font-display">
         <div className="flex flex-col w-full max-w-4xl">
-          {!id ? (
-            <>
-              <NavLink
-                to="/profile"
-                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
-              >
-                Back to profile
-              </NavLink>
-            </>
+          {!id_usuario ? (
+            <NavLink
+              to="/profile"
+              className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+            >
+              Back to profile
+            </NavLink>
           ) : (
-            <>
-              <NavLink
-                to="/admin/users"
-                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
-              >
-                Back to Users
-              </NavLink>
-            </>
+            <NavLink
+              to="/admin/users"
+              className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+            >
+              Back to Users
+            </NavLink>
           )}
 
-          <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
-            <h1 className="text-content-light dark:text-content-dark text-4xl font-black leading-tight">
-              Order History
-            </h1>
-          </div>
+          <h1 className="text-content-light dark:text-content-dark text-4xl font-black mb-6">
+            Order History
+          </h1>
 
           {loading ? (
             <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
@@ -109,15 +104,9 @@ const HistoryOrdersPage = () => {
               {error}
             </div>
           ) : orders.length === 0 ? (
-            !id ? (
-              <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
-                You have no orders yet.
-              </p>
-            ) : (
-              <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
-                This user has no orders yet.
-              </p>
-            )
+            <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+              {isAdmin ? "This user has no orders yet." : "You have no orders yet."}
+            </p>
           ) : (
             <>
               <div className="flex flex-col gap-4">
@@ -132,14 +121,12 @@ const HistoryOrdersPage = () => {
                           {order.detalles.slice(0, 3).map((item, idx) => (
                             <div
                               key={idx}
-                              className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-200 overflow-hidden bg-background-light dark:bg-surface-dark"
+                              className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 overflow-hidden bg-background-light dark:bg-surface-dark"
                             >
                               <AdvancedImage
                                 cldImg={cld
                                   .image(item.imagen)
-                                  .resize(
-                                    fill().width(70).height(70).gravity("auto")
-                                  )
+                                  .resize(fill().width(70).height(70).gravity("auto"))
                                   .quality("auto")
                                   .format("auto")}
                                 alt={item.nombre_producto || "Product"}
@@ -149,7 +136,7 @@ const HistoryOrdersPage = () => {
                             </div>
                           ))}
                           {order.detalles.length > 3 && (
-                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-gray-100 bg-surface-light dark:bg-gray-700 flex items-center justify-center">
+                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 bg-surface-light dark:bg-gray-700 flex items-center justify-center">
                               <p className="text-content-light dark:text-content-dark font-bold text-sm">
                                 +{order.detalles.length - 3}
                               </p>
@@ -157,7 +144,7 @@ const HistoryOrdersPage = () => {
                           )}
                         </>
                       ) : (
-                        <div className="bg-gray-300 rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1 ring-gray-200" />
+                        <div className="bg-gray-300 rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1" />
                       )}
                     </div>
 
@@ -190,9 +177,9 @@ const HistoryOrdersPage = () => {
                       </p>
                       <NavLink
                         to={
-                          id
-                            ? `/pedidos/historial/details/${id}/${order.id_pedido}` 
-                            : `/pedidos/historial/details/${order.id_pedido}` 
+                          isAdmin
+                            ? `/pedidos/historial/details/${id_usuario}/${order.id_pedido}`
+                            : `/pedidos/historial/details/${order.id_pedido}`
                         }
                         className="text-primary text-sm font-bold hover:underline cursor-pointer"
                       >

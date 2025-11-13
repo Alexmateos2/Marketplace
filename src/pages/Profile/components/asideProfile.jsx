@@ -81,6 +81,7 @@ const AsideProfile = ({ usuario }) => {
       <button
         onClick={() => {
           localStorage.removeItem("usuario");
+          localStorage.removeItem("rol");
           navigate("/login");
         }}
         className="mt-auto flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-background-dark text-content-light-600 dark:text-content-dark text-sm font-medium cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"

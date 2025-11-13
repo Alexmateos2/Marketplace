@@ -12,13 +12,13 @@ const CarritoPage = () => {
 
   const usuario = localStorage.getItem('usuario') || null
    
-     const handleSubmit = async () => {
+    const handleSubmit = async () => {
   try {
     const response = await fetch("http://localhost:3000/pedidos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id_usuario: usuario, 
+        id_usuario: usuario, // null si es invitado
         productos: cart.map(item => ({
           id_producto: item.id,
           cantidad: item.quantity
@@ -30,14 +30,17 @@ const CarritoPage = () => {
     const data = await response.json();
 
     if (response.ok) {
+      // Guardar ID del pedido para que el invitado pueda consultarlo
+      if (!usuario) {
+        localStorage.setItem("ultimoPedidoInvitado", JSON.stringify({
+          id_pedido: data.id_pedido,
+          fecha: Date.now()
+        }));
+      }
+
       alert("Pedido realizado con éxito. ID: " + data.id_pedido);
       clearCart();
-      if(usuario){
       navigate(`/pedidos/historial/details/${data.id_pedido}`);
-      }
-      else{
-        navigate('/')
-      }
     } else {
       alert("Error: " + data.message);
     }
@@ -46,6 +49,7 @@ const CarritoPage = () => {
     alert("Error al realizar el pedido");
   }
 };
+
 
   const navigate = useNavigate();
   return (
