@@ -12,8 +12,8 @@ const BusquedaAdmin = ({ data = [], onFilterChange }) => {
       (item.nombre || "invitado").toLowerCase().includes(value)
     );
 
-    // siempre enviar la lista filtrada, incluso si está vacía
-    onFilterChange(filteredData);
+    // si no hay coincidencias, devolver todo el array
+    onFilterChange(filteredData.length > 0 ? filteredData : data);
   };
 
   return (
@@ -37,7 +37,7 @@ const BusquedaAdmin = ({ data = [], onFilterChange }) => {
 
         <input
           type="text"
-          placeholder="Search by name"
+          placeholder="Busca por nombre"
           onChange={onChangeInput}
           value={inputValue}
           className="w-full h-12 rounded-lg border border-subtle-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"

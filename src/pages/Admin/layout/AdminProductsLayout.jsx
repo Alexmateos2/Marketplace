@@ -27,7 +27,7 @@ const AdminProductsLayout = () => {
       setFilteredProductos(sortedData);
       setError(null);
     } catch (err) {
-      console.error("Error fetching productos:", err);
+      console.error("Error al obtener productos:", err);
       setError(err.message);
       setProductos([]);
       setFilteredProductos([]);
@@ -86,7 +86,7 @@ const AdminProductsLayout = () => {
 
   return (
     <AdminLayout
-      title="Manage Products"
+      title="Administrar Productos"
       data={productosActuales}
       originalData={productos}
       idKey="id_producto"
@@ -97,7 +97,7 @@ const AdminProductsLayout = () => {
         { key: "id_producto", label: "ID", sortable: true },
         {
           key: "nombre",
-          label: "Product",
+          label: "Producto",
           sortable: true,
           render: (p) => (
             <div className="flex items-center lg:justify-start justify-center gap-2">
@@ -117,11 +117,11 @@ const AdminProductsLayout = () => {
             </div>
           ),
         },
-        { key: "precio", label: "Price", sortable: true },
+        { key: "precio", label: "Precio", sortable: true },
         { key: "stock", label: "Stock", sortable: true },
         {
           key: "status",
-          label: "Status",
+          label: "Estado",
           render: (p) => {
             let bgClass = "";
             let dotClass = "";
@@ -131,17 +131,17 @@ const AdminProductsLayout = () => {
               bgClass =
                 "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
               dotClass = "bg-green-500";
-              statusText = "Decent stock";
+              statusText = "Stock suficiente";
             } else if (p.stock > 0) {
               bgClass =
                 "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
               dotClass = "bg-yellow-500";
-              statusText = "Low stock";
+              statusText = "Stock bajo";
             } else {
               bgClass =
                 "bg-red-100 text-red-800 dark:bg-red-600/30 dark:text-red-400";
               dotClass = "bg-red-500";
-              statusText = "Out of stock";
+              statusText = "Agotado";
             }
 
             return (

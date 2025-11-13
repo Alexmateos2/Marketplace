@@ -11,19 +11,15 @@ import Pagination from "../../../shared/utils/pagination.jsx";
 const HistoryOrdersPage = () => {
   const navigate = useNavigate();
   const { id: id_usuario } = useParams(); // id del usuario desde params (si es admin)
-  const user= (localStorage.getItem("usuario"));
+  const user = localStorage.getItem("usuario");
+  const rol = JSON.parse(localStorage.getItem("rol"));
+  const isAdmin = rol === "admin";
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
-  const rol = JSON.parse(localStorage.getItem("rol"));
-  const isAdmin = rol === "admin";
-
-  // Validación de permisos
-  const usuarioActual = isAdmin ? id_usuario || user : user;
-
 
   useEffect(() => {
     // Si no hay sesión
@@ -47,14 +43,16 @@ const HistoryOrdersPage = () => {
         setLoading(true);
         setError(null);
         const response = await fetch(
-          `http://localhost:3000/pedidos/${usuarioActual}`
+          `http://localhost:3000/pedidos/${id_usuario || user}`
         );
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
         setOrders(data || []);
       } catch (err) {
         console.error("Error fetching orders:", err);
-        setError("No se pudieron cargar los pedidos. Intenta de nuevo más tarde.");
+        setError(
+          "No se pudieron cargar los pedidos. Intenta de nuevo más tarde."
+        );
         setOrders([]);
       } finally {
         setLoading(false);
@@ -62,7 +60,7 @@ const HistoryOrdersPage = () => {
     };
 
     fetchOrders();
-  }, [navigate, user, id_usuario, usuarioActual, isAdmin]);
+  }, [navigate, user, id_usuario, isAdmin]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -80,24 +78,24 @@ const HistoryOrdersPage = () => {
               to="/profile"
               className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
             >
-              Back to profile
+              Volver al perfil
             </NavLink>
           ) : (
             <NavLink
               to="/admin/users"
               className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
             >
-              Back to Users
+              Volver a Usuarios
             </NavLink>
           )}
 
           <h1 className="text-content-light dark:text-content-dark text-4xl font-black mb-6">
-            Order History
+            Historial de Pedidos
           </h1>
 
           {loading ? (
             <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
-              Loading your orders...
+              Cargando tus pedidos...
             </p>
           ) : error ? (
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded">
@@ -105,7 +103,9 @@ const HistoryOrdersPage = () => {
             </div>
           ) : orders.length === 0 ? (
             <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
-              {isAdmin ? "This user has no orders yet." : "You have no orders yet."}
+              {isAdmin
+                ? "Este usuario aún no tiene pedidos."
+                : "Aún no tienes pedidos."}
             </p>
           ) : (
             <>
@@ -121,22 +121,24 @@ const HistoryOrdersPage = () => {
                           {order.detalles.slice(0, 3).map((item, idx) => (
                             <div
                               key={idx}
-                              className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 overflow-hidden bg-background-light dark:bg-surface-dark"
+                              className="rounded-lg w-[70px] h-[70px] border-1 border-border-light dark:border-border-dark ring-1 ring-border-light dark:ring-border-dark overflow-hidden bg-background-light dark:bg-surface-dark"
                             >
                               <AdvancedImage
                                 cldImg={cld
                                   .image(item.imagen)
-                                  .resize(fill().width(70).height(70).gravity("auto"))
+                                  .resize(
+                                    fill().width(70).height(70).gravity("auto")
+                                  )
                                   .quality("auto")
                                   .format("auto")}
-                                alt={item.nombre_producto || "Product"}
+                                alt={item.nombre_producto || "Producto"}
                                 loading="lazy"
                                 className="w-full h-full object-cover"
                               />
                             </div>
                           ))}
                           {order.detalles.length > 3 && (
-                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 bg-surface-light dark:bg-gray-700 flex items-center justify-center">
+                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-border-light bg-surface-light dark:bg-gray-700 flex items-center justify-center">
                               <p className="text-content-light dark:text-content-dark font-bold text-sm">
                                 +{order.detalles.length - 3}
                               </p>
@@ -150,19 +152,19 @@ const HistoryOrdersPage = () => {
 
                     <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
                       <p className="text-content-light dark:text-content-dark text-lg font-bold">
-                        Order #{order.id_pedido}
+                        Pedido #{order.id_pedido}
                       </p>
                       <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
                         {order.detalles && order.detalles.length > 0
                           ? `${order.detalles[0].nombre_producto}${
                               order.detalles.length > 1
-                                ? ` + ${order.detalles.length - 1} more`
+                                ? ` + ${order.detalles.length - 1} más`
                                 : ""
                             }`
-                          : "No description"}
+                          : "Sin descripción"}
                       </p>
                       <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
-                        Placed on{" "}
+                        Realizado el{" "}
                         {new Date(order.fecha).toLocaleDateString("es-ES", {
                           year: "numeric",
                           month: "short",
@@ -178,12 +180,14 @@ const HistoryOrdersPage = () => {
                       <NavLink
                         to={
                           isAdmin
-                            ? `/pedidos/historial/details/${id_usuario}/${order.id_pedido}`
+                            ? `/pedidos/historial/details/${
+                                id_usuario || user
+                              }/${order.id_pedido}`
                             : `/pedidos/historial/details/${order.id_pedido}`
                         }
                         className="text-primary text-sm font-bold hover:underline cursor-pointer"
                       >
-                        View Details
+                        Ver Detalles
                       </NavLink>
                     </div>
                   </div>

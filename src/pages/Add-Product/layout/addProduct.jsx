@@ -9,14 +9,14 @@ const AddProduct = () => {
       <Navbar />
       <main className="flex-1 px-4 sm:px-10 py-12 max-w-4xl mx-auto">
         <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold">Add a New Product</h1>
+          <h1 className="text-4xl font-bold">Agregar un Nuevo Producto</h1>
           <p className="mt-2 text-lg text-s-light dark:text-content-dark">
-            Share your expertise and help others discover great tech.
+            Comparte tu experiencia y ayuda a otros a descubrir excelente tecnología.
           </p>
         </header>
 
-        <section className=" px-4 bg-card-light dark:bg-card-dark p-8 rounded-xl shadow-sm border border-border-light dark:border-border-dark transition-colors">
-            <FormComponent />
+        <section className="px-4 bg-card-light dark:bg-card-dark p-8 rounded-xl shadow-sm border border-border-light dark:border-border-dark transition-colors">
+          <FormComponent />
         </section>
       </main>
       <Footer />

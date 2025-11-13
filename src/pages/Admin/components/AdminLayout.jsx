@@ -10,7 +10,7 @@ import BusquedaAdmin from "./BusquedaAdmin";
 const AdminLayout = ({
   data = [],
   columns = [],
-  title = "Admin",
+  title = "Administrador",
   pagination,
   idKey = "id",
   onDeleteSuccess,
@@ -27,7 +27,7 @@ const AdminLayout = ({
   const deleteItem = async (id) => {
     const url = isProductPage ? "productos" : "usuarios";
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this item?"
+      "¿Estás seguro de que deseas eliminar este elemento?"
     );
     if (!confirmDelete) return;
 
@@ -36,14 +36,14 @@ const AdminLayout = ({
         method: "DELETE",
       });
 
-      if (!response.ok) throw new Error("Error deleting item");
+      if (!response.ok) throw new Error("Error al eliminar el elemento");
 
-      alert("Item deleted successfully");
+      alert("Elemento eliminado correctamente");
 
       if (onDeleteSuccess) onDeleteSuccess();
     } catch (error) {
-      console.error("Error deleting item:", error);
-      alert("Failed to delete item");
+      console.error("Error al eliminar el elemento:", error);
+      alert("No se pudo eliminar el elemento");
     }
   };
 
@@ -57,7 +57,7 @@ const AdminLayout = ({
           <div className="flex flex-col mx-auto w-full max-w-7xl gap-6">
             {!hasData ? (
               <div className="flex items-center justify-center h-96 text-4xl text-subtle-light dark:text-subtle-dark">
-                Welcome to admin dashboard
+                Bienvenido al panel de administración
               </div>
             ) : (
               <>
@@ -70,7 +70,7 @@ const AdminLayout = ({
                       <button className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 transition-colors">
                         <Plus size={20} />
                         <NavLink to="/add" className="truncate">
-                          Add New
+                          Agregar nuevo
                         </NavLink>
                       </button>
                     </>
@@ -92,7 +92,7 @@ const AdminLayout = ({
                   )}
                 </div>
 
-                {/* Desktop Table */}
+                {/* Tabla Desktop */}
                 <div className="hidden lg:block w-full overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
                   <div className="overflow-x-auto">
                     <table className="w-full text-left">
@@ -119,7 +119,7 @@ const AdminLayout = ({
                             </th>
                           ))}
                           <th className="px-6 py-4 text-sm font-semibold text-slate-600 dark:text-slate-300 text-right">
-                            Actions
+                            Acciones
                           </th>
                         </tr>
                       </thead>
@@ -147,14 +147,14 @@ const AdminLayout = ({
                                   <NavLink
                                     className="p-2 cursor-pointer text-slate-500 hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                     to={`edit/${item[idKey]}`}
-                                    title="Edit"
+                                    title="Editar"
                                   >
                                     <Edit2 size={18} />
                                   </NavLink>
                                   <button
                                     className="p-2 cursor-pointer text-slate-500 hover:text-red-500 dark:hover:text-red-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                     onClick={() => deleteItem(item[idKey])}
-                                    title="Delete"
+                                    title="Eliminar"
                                   >
                                     <Trash2 size={18} />
                                   </button>
@@ -163,7 +163,7 @@ const AdminLayout = ({
                                 <NavLink
                                   to={`/pedidos/historial/${item.id_usuario}`}
                                   className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                                  title="View orders"
+                                  title="Ver pedidos"
                                 >
                                   <FileText size={18} />
                                 </NavLink>
@@ -171,7 +171,7 @@ const AdminLayout = ({
                                 <NavLink
                                   to={`/pedidos/historial/details/${item.id_usuario}/${item.id_pedido}`}
                                   className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                                  title="View order details"
+                                  title="Ver detalles del pedido"
                                 >
                                   <FileText size={18} />
                                 </NavLink>
@@ -183,7 +183,7 @@ const AdminLayout = ({
                     </table>
                   </div>
                 </div>
-                {/* Mobile & Tablet: Card view */}
+                {/* Mobile & Tablet: Vista en tarjetas */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4">
                   {data.map((item, idx) => (
                     <div
@@ -209,14 +209,14 @@ const AdminLayout = ({
                           <>
                             <button className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all">
                               <Edit2 size={16} />
-                              Edit
+                              Editar
                             </button>
                             <button
                               onClick={() => deleteItem(item[idKey])}
                               className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-600/30 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-all"
                             >
                               <Trash2 size={16} />
-                              Delete
+                              Eliminar
                             </button>
                           </>
                         ) : isUsersPage ? (
@@ -225,7 +225,7 @@ const AdminLayout = ({
                             className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
                           >
                             <FileText size={16} />
-                            View orders
+                            Ver pedidos
                           </NavLink>
                         ) : (
                           <NavLink
@@ -233,7 +233,7 @@ const AdminLayout = ({
                             className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
                           >
                             <FileText size={16} />
-                            View order
+                            Ver pedido
                           </NavLink>
                         )}
                       </div>

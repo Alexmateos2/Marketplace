@@ -23,7 +23,7 @@ const AdminUsersLayout = () => {
       setFilteredUsers(data || []); // 👈 inicializar también los filtrados
       setError(null);
     } catch (err) {
-      console.error("Error fetching usuarios:", err);
+      console.error("Error al obtener usuarios:", err);
       setError(err.message);
       setUsers([]);
       setFilteredUsers([]);
@@ -51,15 +51,15 @@ const AdminUsersLayout = () => {
 
   return (
     <AdminLayout
-      title="Manage Users"
+      title="Administrar Usuarios"
       data={usuariosActuales}
-      originalData={users} // 🔹 por si necesitás la lista completa en la búsqueda
+      originalData={users} // 🔹 por si necesitas la lista completa en la búsqueda
       idKey="id_usuario"
       onDeleteSuccess={fetchUsers}
       columns={[
-        { key: "nombre", label: "Name" },
-        { key: "email", label: "Email" },
-        { key: "rol", label: "Role" },
+        { key: "nombre", label: "Nombre" },
+        { key: "email", label: "Correo electrónico" },
+        { key: "rol", label: "Rol" },
       ]}
       pagination={{
         currentPage,
@@ -67,7 +67,6 @@ const AdminUsersLayout = () => {
         onPageChange: handlePageChange,
         totalItems: filteredUsers.length,
       }}
-    
       onFilterChange={(results) => {
         setFilteredUsers(results);
         setCurrentPage(1);

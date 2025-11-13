@@ -13,7 +13,6 @@ const AdminOrdersLayout = () => {
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const itemsPerPage = 10;
 
-
   const fetchPedidos = async () => {
     try {
       setLoading(true);
@@ -26,7 +25,7 @@ const AdminOrdersLayout = () => {
       setFilteredPedidos(sortedData);
       setError(null);
     } catch (err) {
-      console.error("Error fetching pedidos:", err);
+      console.error("Error al obtener los pedidos:", err);
       setError(err.message);
       setPedidos([]);
       setFilteredPedidos([]);
@@ -45,42 +44,40 @@ const AdminOrdersLayout = () => {
     setCurrentPage(1);
   };
 
-  // Sort
+  // Ordenamiento
   const handleSort = (key) => {
-  let direction = "asc";
-  if (sortConfig.key === key && sortConfig.direction === "asc") {
-    direction = "desc";
-  }
-  setSortConfig({ key, direction });
-
-  const sorted = [...filteredPedidos].sort((a, b) => {
-    let aVal = a[key] ?? "";
-    let bVal = b[key] ?? "";
-
-    if (key === "total") {
-      aVal = parseFloat(aVal) || 0;
-      bVal = parseFloat(bVal) || 0;
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
     }
+    setSortConfig({ key, direction });
 
-   
-    if (typeof aVal === "string" && typeof bVal === "string") {
-      return direction === "asc"
-        ? aVal.toLowerCase().localeCompare(bVal.toLowerCase())
-        : bVal.toLowerCase().localeCompare(aVal.toLowerCase());
-    }
+    const sorted = [...filteredPedidos].sort((a, b) => {
+      let aVal = a[key] ?? "";
+      let bVal = b[key] ?? "";
 
+      if (key === "total") {
+        aVal = parseFloat(aVal) || 0;
+        bVal = parseFloat(bVal) || 0;
+      }
 
-    if (typeof aVal === "number" && typeof bVal === "number") {
-      return direction === "asc" ? aVal - bVal : bVal - aVal;
-    }
+      if (typeof aVal === "string" && typeof bVal === "string") {
+        return direction === "asc"
+          ? aVal.toLowerCase().localeCompare(bVal.toLowerCase())
+          : bVal.toLowerCase().localeCompare(aVal.toLowerCase());
+      }
 
-    return 0;
-  });
+      if (typeof aVal === "number" && typeof bVal === "number") {
+        return direction === "asc" ? aVal - bVal : bVal - aVal;
+      }
 
-  setFilteredPedidos(sorted);
-};
+      return 0;
+    });
 
-  //  Paginación
+    setFilteredPedidos(sorted);
+  };
+
+  // Paginación
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const pedidosActuales = filteredPedidos.slice(startIndex, endIndex);
@@ -91,7 +88,7 @@ const AdminOrdersLayout = () => {
 
   return (
     <AdminLayout
-      title="Pedidos"
+      title="Administrar Pedidos"
       data={pedidosActuales}
       originalData={pedidos}
       onFilterChange={handleFilterChange}

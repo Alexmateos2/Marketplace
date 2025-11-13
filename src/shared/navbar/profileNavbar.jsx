@@ -6,6 +6,7 @@ const ProfileNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
   const user = localStorage.getItem("usuario");
+  const rol = JSON.parse(localStorage.getItem("rol"));
   const navigate = useNavigate();
 
   const handleMouseEnter = () => {
@@ -15,6 +16,7 @@ const ProfileNavbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("usuario");
+    localStorage.removeItem("rol");
     navigate("/login");
   };
 
@@ -42,22 +44,20 @@ const ProfileNavbar = () => {
       >
         <img
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnPDzJcMZziYykcoTL8J0llTXjQhuVgoFS5kaRslcUxTveESdKSoIeOWOZkXuY0Tz-MTgebtvZ7QCNLiHPFUq9GtchxXFaj9vudR_T10GJdBqrkYLFBjrFk6o9RZr0ewMDdQuOhT3-Ycr7AHSQs5sEa8HO_1FkaD9bKZO_S82ZQQdeNdwmD6exVcr4YhNUOyVKTc8WRSo_3ezwYk3iE4znU53VV29a2ikgoVrbKeK6Vwe1ShJCMb5nbKClDiQMGADJGhvG8QtlA8s"
-          alt="User avatar"
+          alt="Avatar del usuario"
           className="object-cover rounded-full w-10 h-10 border-2 border-primary/50"
         />
         <ChevronDown
           size={18}
-          className={`transition-transform ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
+          className={`transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
         />
       </div>
 
-      {/* Dropdown */}
+      {/* Menú desplegable */}
       {isOpen && (
         <div
-          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 
-          w-60 max-w-xs bg-background-light dark:bg-background-dark 
+          className="absolute top-full -translate-x-12 md:-translate-x-20 mt-4
+           w-30  md:w-60 max-w-xs bg-background-light dark:bg-background-dark 
           border border-border-light dark:border-border-dark 
           rounded-lg shadow-lg overflow-hidden z-50"
         >
@@ -65,15 +65,13 @@ const ProfileNavbar = () => {
             to={user ? "/profile" : "/login"}
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
-               ${
-                 isActive
-                   ? "text-primary bg-primary/10 dark:bg-primary/20"
-                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-               }`
+               ${isActive
+                 ? "text-primary bg-primary/10 dark:bg-primary/20"
+                 : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
             }
           >
             <User size={18} />
-            Profile
+            Perfil
           </NavLink>
 
           {!user ? (
@@ -81,39 +79,38 @@ const ProfileNavbar = () => {
               to="/login"
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
-               ${
-                 isActive
-                   ? "text-primary bg-primary/10 dark:bg-primary/20"
-                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-               }`
+               ${isActive
+                 ? "text-primary bg-primary/10 dark:bg-primary/20"
+                 : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
               }
             >
               <LogIn size={18} />
-              Log in
+              Iniciar Sesión
             </NavLink>
           ) : (
             <div>
-              <NavLink
-                to="/admin/dashboard"
-                className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
-               ${
-                 isActive
-                   ? "text-primary bg-primary/10 dark:bg-primary/20"
-                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-               }`
-                }
-              >
-                <UserStar size={18} />
-                Admin
-              </NavLink>
+              {rol === "admin" && (
+                <NavLink
+                  to="/admin/dashboard"
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
+               ${isActive
+                 ? "text-primary bg-primary/10 dark:bg-primary/20"
+                 : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
+                  }
+                >
+                  <UserStar size={18} />
+                  Admin
+                </NavLink>
+              )}
+
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-3 w-full text-left px-4 py-3 text-base text-content-light dark:text-content-dark 
             hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors"
               >
                 <LogOut size={18} />
-                Logout
+                Cerrar Sesión
               </button>
             </div>
           )}

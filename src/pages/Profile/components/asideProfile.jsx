@@ -8,7 +8,7 @@ const AsideProfile = ({ usuario }) => {
     nombre: "John Doe",
     email: "johndoe@gmail.com",
   };
-
+  const rol = JSON.parse(localStorage.getItem("rol"));
   const navigate = useNavigate();
 
   return (
@@ -17,7 +17,7 @@ const AsideProfile = ({ usuario }) => {
         <div className="flex items-center gap-3 mb-10">
           <div
             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 h-12 flex-shrink-0"
-            data-alt="User avatar"
+            data-alt="Avatar del usuario"
             style={{
               backgroundImage:
                 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBnPDzJcMZziYykcoTL8J0llTXjQhuVgoFS5kaRslcUxTveESdKSoIeOWOZkXuY0Tz-MTgebtvZ7QCNLiHPFUq9GtchxXFaj9vudR_T10GJdBqrkYLFBjrFk6o9RZr0ewMDdQuOhT3-Ycr7AHSQs5sEa8HO_1FkaD9bKZO_S82ZQQdeNdwmD6exVcr4YhNUOyVKTc8WRSo_3ezwYk3iE4znU53VV29a2ikgoVrbKeK6Vwe1ShJCMb5nbKClDiQMGADJGhvG8QtlA8s")',
@@ -45,7 +45,7 @@ const AsideProfile = ({ usuario }) => {
             to="#"
           >
             <User size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Personal Information</span>
+            <span className="text-sm font-medium">Información personal</span>
           </NavLink>
 
           <NavLink
@@ -59,22 +59,24 @@ const AsideProfile = ({ usuario }) => {
             to="/pedidos/historial"
           >
             <FileText size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Order History</span>
+            <span className="text-sm font-medium">Historial de pedidos</span>
           </NavLink>
 
-          <NavLink
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
-                isActive
-                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
-                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
-              }`
-            }
-            to="/admin/dashboard"
-          >
-            <UserStar size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Admin</span>
-          </NavLink>
+          {rol === "admin" ? (
+            <NavLink
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                  isActive
+                    ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
+                    : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
+                }`
+              }
+              to="/admin/dashboard"
+            >
+              <UserStar size={20} className="flex-shrink-0" />
+              <span className="text-sm font-medium">Admin</span>
+            </NavLink>
+          ) : null}
         </nav>
       </div>
 
@@ -87,7 +89,7 @@ const AsideProfile = ({ usuario }) => {
         className="mt-auto flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-background-dark text-content-light-600 dark:text-content-dark text-sm font-medium cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
       >
         <LogOut size={18} className="mr-2 flex-shrink-0" />
-        Logout
+        Cerrar sesión
       </button>
     </aside>
   );

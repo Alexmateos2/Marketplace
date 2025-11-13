@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
+const categorias = [
+  { nombre: "Todas las categorías", ruta: "/categories" },
+  { nombre: "Teclados", ruta: "/products/Teclados" },
+  { nombre: "Ratones", ruta: "/products/Ratones" },
+  { nombre: "Audio", ruta: "/products/Audio" },
+  { nombre: "Laptops", ruta: "/products/Laptops" },
+];
+
 const CategoriesNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
@@ -21,6 +29,13 @@ const CategoriesNavbar = () => {
     };
   }, [closeTimeout]);
 
+  const clasesLink = (isActive) =>
+    `block px-4 py-4 text-sm border border-border-light dark:border-border-dark rounded transition-colors ${
+      isActive
+        ? "text-primary bg-primary/10 dark:bg-primary/20"
+        : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+    }`;
+
   return (
     <div
       className="relative"
@@ -31,22 +46,15 @@ const CategoriesNavbar = () => {
         onClick={() => setIsOpen((prev) => !prev)}
         className="flex items-center gap-1 text-sm font-medium text-content-light dark:text-content-dark hover:text-primary transition-colors"
       >
-        Categories
+        Categorías
         <svg
-          className={`h-4 w-4 transition-transform ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
+          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-             d="M19 9l-7 7-7-7"
-          />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
@@ -56,63 +64,11 @@ const CategoriesNavbar = () => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {" "}
-          <NavLink
-            to="/categories"
-            end 
-            className={({ isActive }) =>
-              `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? " bg-primary/10 dark:bg-primary/20" 
-                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-              }`
-            }
-          >
-            All categories
-          </NavLink>
-          <NavLink
-            to="/products/Teclados"
-            className={({ isActive }) =>
-              `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
-                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-              }`
-            }
-          >
-            Teclados
-          </NavLink>
-          <NavLink
-            to="/products/Ratones"
-           className={({ isActive }) =>
-              `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
-                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-              }`
-            }
-          >
-            Ratones
-          </NavLink>
-          <NavLink
-            to="/products/Audio"
-            className={({ isActive }) =>
-              `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
-                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-              }`
-            }
-          >
-            Audio
-          </NavLink>
-          <NavLink
-            to="/products/Laptops"
-            className={({ isActive }) =>
-              `block px-4 py-4 text-sm text-content-light dark:text-content-dark border border-border-light dark:border-border-dark hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors ${
-                isActive ? "text-primary bg-primary/10 dark:bg-primary/20" 
-                : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
-              }`
-            }
-          >
-            Laptops
-          </NavLink>
+          {categorias.map((cat) => (
+            <NavLink key={cat.ruta} to={cat.ruta} className={({ isActive }) => clasesLink(isActive)}>
+              {cat.nombre}
+            </NavLink>
+          ))}
         </div>
       )}
     </div>
