@@ -32,7 +32,7 @@ const AdminDashboardLayout = () => {
     fetchStats();
   }, []);
 
-  if (loading) return <div className="p-10">Cargando estadísticas...</div>;
+  if (loading) return <div className="p-10 flex items-center justify-center h-screen">Cargando estadísticas...</div>;
   if (!stats)
     return <div className="p-10">No se pudieron cargar las estadísticas</div>;
 
