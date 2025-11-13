@@ -19,25 +19,25 @@ const Navbar = () => {
     <>
       <header className="flex items-center bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50 border-b border-primary/20 dark:border-primary/10">
         {!isLoginPage ? (
-          <div className="container mx-auto px-4  py-2">
+          <div className="container mx-auto px-4 py-2">
             <div className="flex items-center justify-between h-16 w-full">
               <div className="flex items-center gap-2 lg:gap-8">
                 <NavLink
                   to="/"
                   aria-label="Inicio Tekia"
-                  className="flex  items-center gap-2 text-xl font-bold text-content-light dark:text-content-dark hover:opacity-80 transition-opacity"
+                  className="flex items-center gap-2 text-xl font-bold text-content-light dark:text-content-dark hover:opacity-80 transition-opacity"
                 >
                   <img
                     src="/logo2.svg"
-                    alt="Tekia logo"
-                    className="w-8  h-auto object-contain"
+                    alt="Logo de Tekia"
+                    className="w-8 h-auto object-contain"
                   />
                   <span className="hidden xxs:block text-2xl font-display font-semibold tracking-tight">
                     Tekia
                   </span>
                 </NavLink>
 
-                {/* Nav principal */}
+                {/* Navegación principal */}
                 <nav className="hidden lg:flex items-center gap-8">
                   <CategoriesNavbar />
                   <NavLink
@@ -48,7 +48,7 @@ const Navbar = () => {
                       }`
                     }
                   >
-                    Nuevo
+                    Novedades
                   </NavLink>
                   <NavLink
                     to="/products"
@@ -69,7 +69,7 @@ const Navbar = () => {
                       }`
                     }
                   >
-                    About us
+                    Sobre nosotros
                   </NavLink>
                 </nav>
               </div>
@@ -105,47 +105,41 @@ const Navbar = () => {
 
                 <DarkMode />
                 <ProfileNavbar />
-                
               </div>
             </div>
           </div>
         ) : (
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2  transition-colors">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-2 transition-colors">
             <div className="flex items-center justify-between h-16 w-full">
-              <div className="flex items-center gap-2 lg:gap-8">
-                <NavLink
-                  to="/"
-                  aria-label="Inicio Tekia"
-                  className="flex  items-center gap-2 text-xl font-bold text-content-light dark:text-content-dark hover:opacity-80 transition-opacity"
-                >
-                  <img
-                    src="/logo2.svg"
-                    alt="Tekia logo"
-                    className="w-8  h-auto object-contain"
-                  />
-                  <span className="hidden xxs:block text-2xl font-display font-semibold tracking-tight">
-                    Tekia
-                  </span>
-                </NavLink>
-
-              </div>
+              <NavLink
+                to="/"
+                aria-label="Inicio Tekia"
+                className="flex items-center gap-2 text-xl font-bold text-content-light dark:text-content-dark hover:opacity-80 transition-opacity"
+              >
+                <img
+                  src="/logo2.svg"
+                  alt="Logo de Tekia"
+                  className="w-8 h-auto object-contain"
+                />
+                <span className="hidden xxs:block text-2xl font-display font-semibold tracking-tight">
+                  Tekia
+                </span>
+              </NavLink>
               <DarkMode />
             </div>
           </div>
         )}
       </header>
 
-      {/* Menu móvil */}
+      {/* Menú móvil */}
       {!isLoginPage && (
         <>
           <div className="lg:hidden h-5" />
-
           <div className="lg:hidden relative">
             <button
               className={`fixed ${isProfilePage ? "top-[85px]" : "top-[100px]"} left-3 z-50 p-3 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary dark:border-border-dark dark:bg-surface-dark dark:text-primary transition-transform duration-300`}
-
               onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle mobile menu"
+              aria-label="Alternar menú móvil"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

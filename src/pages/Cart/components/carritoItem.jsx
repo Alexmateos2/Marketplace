@@ -4,9 +4,10 @@ import { NavLink } from "react-router-dom";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
+
 const CartItem = ({ item }) => {
   const { addToCart, removeFromCart, updateQuantity } = useCart();
-console.log(item)
+
   if (!item) return null; // Evita error si item no está definido
 
   const handleIncrease = () => {
@@ -26,7 +27,7 @@ console.log(item)
   };
 
   return (
-    <div className="flex items-center flex-col xxs:flex-row xxs:gap-2  gap-6 space-x-4 p-4 border-b bg-surface-light dark:bg-surface-dark mb-4 border-border-light dark:border-border-dark">
+    <div className="flex items-center flex-col xxs:flex-row xxs:gap-2 gap-6 space-x-4 p-4 border-b bg-surface-light dark:bg-surface-dark mb-4 border-border-light dark:border-border-dark">
       {item.image && (
         <NavLink to={`/product/${item.id}`}>
           <AdvancedImage
@@ -40,12 +41,11 @@ console.log(item)
             className="w-1/2 h-1/2 mx-auto xxs:w-30 xxs:h-30 object-cover rounded"
             loading="lazy"
           />
-       
         </NavLink>
       )}
       <div className="flex-1">
         <NavLink to={`/product/${item.id}`}>
-          <h3 className="text-center xxs:text-start font-semibold ">
+          <h3 className="text-center xxs:text-start font-semibold">
             {item.name}
           </h3>
         </NavLink>
@@ -62,7 +62,7 @@ console.log(item)
           <span>{item.quantity}</span>
           <button
             onClick={handleIncrease}
-            className="w-6 h-6  flex items-center justify-center border dark:border-border-dark dark:bg-surface-dark rounded-full hover:bg-gray-200"
+            className="w-6 h-6 flex items-center justify-center border dark:border-border-dark dark:bg-surface-dark rounded-full hover:bg-gray-200"
           >
             +
           </button>
@@ -70,7 +70,7 @@ console.log(item)
       </div>
       <button
         onClick={handleRemove}
-        className="text-red-500  hover:text-red-700   font-bold"
+        className="text-red-500 hover:text-red-700 font-bold"
       >
         Eliminar
       </button>

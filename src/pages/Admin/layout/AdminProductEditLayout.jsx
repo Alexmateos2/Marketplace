@@ -141,7 +141,7 @@ const AdminProductEditLayout = () => {
             <div className="flex flex-col gap-2">
               <nav className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400 pb-2">
                 <NavLink className="hover:text-primary" to="/admin/products">
-                  Products
+                  Productos
                 </NavLink>
                 <span className="mx-2">/</span>
                 <span className="text-gray-700 dark:text-gray-300">
@@ -149,7 +149,7 @@ const AdminProductEditLayout = () => {
                 </span>
               </nav>
               <h1 className="text-3xl font-bold leading-tight tracking-tight text-content-light dark:text-surface-light">
-                Edit Product
+                Editar producto
               </h1>
             </div>
 
@@ -157,10 +157,10 @@ const AdminProductEditLayout = () => {
             <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 items-start">
                 {/* Imagen */}
-                 <div className="lg:col-span-1 flex flex-col">
+                <div className="lg:col-span-1 flex flex-col">
                   <div className="flex flex-col gap-4 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                     <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
-                      Product Image
+                      Imagen del producto
                     </h3>
                     <div className="flex flex-col items-center gap-4">
                       <div className="relative w-full">
@@ -176,7 +176,7 @@ const AdminProductEditLayout = () => {
                             alt={producto.nombre}
                             className="bg-center bg-no-repeat mx-auto aspect-square bg-cover rounded-lg"
                           />
-                        )}{" "}
+                        )}
                         {preview && (
                           <>
                             <img src={preview} alt="" />
@@ -189,7 +189,7 @@ const AdminProductEditLayout = () => {
                       <div className="text-center">
                         <div className="flex flex-col text-sm text-subtle-light dark:text-subtle-dark justify-center">
                           <label className="relative cursor-pointer font-medium text-primary hover:brightness-110 transition-all">
-                            <span>Subir un archivo</span>
+                            <span>Subir archivo</span>
                             <input
                               accept="image/*"
                               className="hidden"
@@ -211,12 +211,12 @@ const AdminProductEditLayout = () => {
                 <div className="md:col-span-2">
                   <div className="flex flex-col gap-6 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                     <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
-                      Product Details
+                      Detalles del producto
                     </h3>
                     <div className="grid grid-cols-1 gap-y-4 gap-x-4">
                       <div>
                         <label className="block text-sm font-medium text-subtle-light dark:text-subtle-dark mb-1.5">
-                          Product Name
+                          Nombre del producto
                         </label>
                         <input
                           type="text"
@@ -230,7 +230,7 @@ const AdminProductEditLayout = () => {
                       <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-4">
                         <div>
                           <label className="block text-sm font-medium text-subtle-light dark:text-subtle-dark mb-1.5">
-                            Category
+                            Categoría
                           </label>
                           <select
                             value={producto.id_categoria}
@@ -255,7 +255,7 @@ const AdminProductEditLayout = () => {
                         </div>
                         <div>
                           <label className="block text-sm font-medium text-subtle-light dark:text-subtle-dark mb-1.5">
-                            Price
+                            Precio
                           </label>
                           <input
                             type="number"
@@ -289,7 +289,7 @@ const AdminProductEditLayout = () => {
 
                       <div>
                         <label className="block text-sm font-medium text-subtle-light dark:text-subtle-dark mb-1.5">
-                          Description
+                          Descripción
                         </label>
                         <textarea
                           rows="4"
@@ -300,7 +300,7 @@ const AdminProductEditLayout = () => {
                               descripcion: e.target.value,
                             })
                           }
-                          className="w-full bg-background-light  h-60 md:h-auto dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark p-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground-light dark:text-foreground-dark"
+                          className="w-full bg-background-light h-60 md:h-auto dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark p-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground-light dark:text-foreground-dark"
                         />
                       </div>
                     </div>
@@ -312,7 +312,7 @@ const AdminProductEditLayout = () => {
               <div className="flex flex-col gap-6 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
-                    Specifications
+                    Especificaciones
                   </h3>
                   <button
                     onClick={addSpec}
@@ -320,7 +320,7 @@ const AdminProductEditLayout = () => {
                     className="flex h-9 items-center justify-center gap-2 rounded-lg bg-primary px-3 text-sm font-bold text-surface-light hover:bg-primary/90 transition-colors"
                   >
                     <Plus className="w-4 h-4" />
-                    <span className="truncate">Add Attribute</span>
+                    <span className="truncate">Agregar atributo</span>
                   </button>
                 </div>
                 <div className="space-y-4">
@@ -328,7 +328,7 @@ const AdminProductEditLayout = () => {
                     <div key={idx} className="flex items-center gap-2">
                       <input
                         className="flex-1 w-1/3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2 px-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground-light dark:text-foreground-dark"
-                        placeholder="Attribute"
+                        placeholder="Atributo"
                         value={spec.nombre}
                         onChange={(e) =>
                           handleSpecChange(idx, "nombre", e.target.value)
@@ -336,7 +336,7 @@ const AdminProductEditLayout = () => {
                       />
                       <input
                         className="flex-1 w-2/3 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2 px-3 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-foreground-light dark:text-foreground-dark"
-                        placeholder="Value"
+                        placeholder="Valor"
                         value={spec.descripcion}
                         onChange={(e) =>
                           handleSpecChange(idx, "descripcion", e.target.value)
@@ -358,14 +358,14 @@ const AdminProductEditLayout = () => {
               <div className="flex flex-col gap-6 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
-                    Expert Review
+                    Reseñas de expertos
                   </h3>
                 </div>
                 <div className="space-y-4">
                   {producto.resenas.map((res, idx) => (
                     <div
                       key={idx}
-                      className="flex flex-col gap-4 p-4 border-t border-border-light dark:border-border-dark  bg-surface-light dark:bg-surface-dark"
+                      className="flex flex-col gap-4 p-4 border-t border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark"
                     >
                       <div className="flex items-center justify-between gap-4">
                         <div>
@@ -375,7 +375,7 @@ const AdminProductEditLayout = () => {
                         </div>
                         <div className="flex flex-col gap-1.5">
                           <label className="text-xs font-medium text-subtle-light dark:text-subtle-dark">
-                            Rating (1-10)
+                            Valoración (1-10)
                           </label>
                           <input
                             type="number"
@@ -396,11 +396,11 @@ const AdminProductEditLayout = () => {
                       </div>
                       <div>
                         <label className="text-xs font-medium text-subtle-light dark:text-subtle-dark mb-1.5 block">
-                          Review
+                          Reseña
                         </label>
                         <textarea
                           className="text-sm w-full h-60 md:h-full bg-background-light dark:bg-background-dark p-4 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary text-content-light dark:text-content-dark"
-                          placeholder="Review description"
+                          placeholder="Descripción de la reseña"
                           rows="4"
                           maxLength={500}
                           value={res.descripcion}
@@ -425,14 +425,14 @@ const AdminProductEditLayout = () => {
                   type="button"
                   onClick={() => navigate("/admin/products")}
                 >
-                  Cancel
+                  Cancelar
                 </button>
                 <button
                   className="flex h-10 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-surface-light hover:bg-primary/90 transition-colors"
                   type="submit"
                 >
                   <Save className="w-4 h-4" />
-                  Save Changes
+                  Guardar cambios
                 </button>
               </div>
             </form>

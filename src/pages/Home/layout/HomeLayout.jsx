@@ -6,8 +6,6 @@ import ProductosExpertos from "../components/productosExpertos";
 import Card from "../components/card";
 import Navbar from "../../../shared/navbar/navbar";
 
-
-
 export default function HomePage() {
   return (
     <div className="font-display bg-background-light text-content-light dark:bg-background-dark dark:text-content-dark min-h-screen transition-colors flex flex-col">
@@ -20,25 +18,25 @@ export default function HomePage() {
         <section className="py-12 sm:py-16 text-center">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Why Choose Us?
+              ¿Por qué elegirnos?
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-subtle-light dark:text-subtle-dark">
-              Discover the Tekia difference. We're more than just a marketplace.
+              Vive la experiencia Tekia. Más que un marketplace, somos tu guía en tecnología de calidad.
             </p>
             <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3 p-10 md:p-2">
               <Card
-                title="Expert Curation"
-                text="Every product is handpicked and tested by experts."
+                title="Selección de Expertos"
+                text="Cada producto es cuidadosamente seleccionado y probado por especialistas."
                 icon="M5 13l4 4L19 7"
               />
               <Card
-                title="Quality Guaranteed"
-                text="We stand behind our products with a satisfaction guarantee."
+                title="Calidad Garantizada"
+                text="Respaldamos cada producto con nuestra promesa de satisfacción total."
                 icon="M5 13l4 4L19 7"
               />
               <Card
-                title="Seamless Experience"
-                text="Smooth shopping journey with fast shipping and support."
+                title="Compra sin Complicaciones"
+                text="Disfruta de una experiencia de compra fluida con envío rápido y soporte confiable."
                 icon="M13 10V3L4 14h7v7l9-11h-7z"
               />
             </div>
@@ -48,7 +46,7 @@ export default function HomePage() {
         {/* Expert Picks */}
         <section className="py-12 sm:py-16">
           <h2 className="mb-8 text-center text-2xl font-bold tracking-tight sm:text-3xl">
-            Expert Picks
+            Selecciones de Nuestros Expertos
           </h2>
           <ProductosExpertos />
         </section>
@@ -56,7 +54,7 @@ export default function HomePage() {
         {/* Featured Categories */}
         <section className="py-12 sm:py-16">
           <h2 className="mb-8 text-center text-2xl font-bold tracking-tight sm:text-3xl">
-            Featured Categories
+            Categorías Destacadas
           </h2>
           <CategoriaDestacada />
         </section>
@@ -64,19 +62,19 @@ export default function HomePage() {
         {/* Stay Updated */}
         <section className="bg-surface-light w-full  xl:w-3/5 mx-auto rounded-lg py-12 dark:bg-surface-dark sm:py-16 text-center mb-20">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Stay Updated
+            Mantente Conectado
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-subtle-light dark:text-subtle-dark">
-            Subscribe to our newsletter for the latest updates.
+            Suscríbete a nuestro boletín y no te pierdas las últimas novedades y lanzamientos.
           </p>
           <form className="mx-auto mt-8 flex max-w-md gap-2">
             <input
               className="flex-1 rounded-lg border-border-light bg-background-light px-4 py-3 text-sm focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark"
-              placeholder="Enter your email"
+              placeholder="Introduce tu correo electrónico"
               type="email"
             />
             <button className="rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition hover:bg-primary/90">
-              Subscribe
+              Suscribirse
             </button>
           </form>
         </section>

@@ -29,7 +29,7 @@ const AsideAdmin = () => {
             }
           >
             <LayoutDashboard size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Dashboard</span>
+            <span className="text-sm font-medium">Panel</span>
           </NavLink>
 
           <NavLink
@@ -43,7 +43,7 @@ const AsideAdmin = () => {
             to="/admin/products"
           >
             <Package size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Products</span>
+            <span className="text-sm font-medium">Productos</span>
           </NavLink>
 
           <NavLink
@@ -57,7 +57,7 @@ const AsideAdmin = () => {
             to="/admin/users"
           >
             <Users size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Users</span>
+            <span className="text-sm font-medium">Usuarios</span>
           </NavLink>
 
           <NavLink
@@ -71,16 +71,16 @@ const AsideAdmin = () => {
             }
           >
             <FileText size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Orders</span>
+            <span className="text-sm font-medium">Pedidos</span>
           </NavLink>
 
-          {/* Disabled Settings */}
+          {/* Configuración deshabilitada */}
           <button
             disabled
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-500 cursor-not-allowed cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
+            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-500 cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
           >
             <Settings size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Settings</span>
+            <span className="text-sm font-medium">Configuración</span>
           </button>
         </nav>
       </div>
@@ -93,7 +93,7 @@ const AsideAdmin = () => {
         className="mt-auto flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-background-dark text-content-light-600 dark:text-content-dark text-sm font-medium cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
       >
         <LogOut size={18} className="mr-2 flex-shrink-0" />
-        Logout
+        Cerrar sesión
       </button>
     </aside>
   );

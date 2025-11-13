@@ -53,10 +53,11 @@ const ProductPages = () => {
       quantity: 1,
     });
   };
+
   if (loading)
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500 dark:text-gray-300">Loading product...</p>
+        <p className="text-gray-500 dark:text-gray-300">Cargando producto...</p>
       </div>
     );
 
@@ -69,7 +70,7 @@ const ProductPages = () => {
           <div className="mb-6">
             <nav className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
               <NavLink to="/products" className="hover:text-primary">
-                Tech
+                Tecnología
               </NavLink>
               <span className="mx-2">/</span>
               <NavLink
@@ -81,8 +82,8 @@ const ProductPages = () => {
             </nav>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 mt-10 ">
-            {/* Producto */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 mt-10">
+            {/* Información del Producto */}
             <div className="flex flex-col order-1 lg:order-2">
               <div className="rounded-xl px-6 mb-8 lg:mb-0">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -91,7 +92,7 @@ const ProductPages = () => {
                 <p className="text-gray-600 dark:text-gray-300 mb-6">
                   {product.descripcion
                     ? product.descripcion
-                    : " Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam repellat consequuntur beatae excepturi labore expedita vitae tempora a eum consectetur molestiae provident ipsa ipsum eius, blanditiis veritatis eligendi qui. Necessitatibus?"}
+                    : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam repellat consequuntur beatae excepturi labore expedita vitae tempora a eum consectetur."}
                 </p>
                 <div className="flex items-baseline gap-2 mb-6">
                   <span className="text-4xl font-black text-gray-900 dark:text-white">
@@ -103,11 +104,11 @@ const ProductPages = () => {
                     onClick={handleAddToCart}
                     className="cursor-pointer sm:w-full md:w-2/3 lg:w-full flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-all"
                   >
-                    Add to Cart
+                    Añadir al carrito
                   </button>
                   <div className="min-h-[48px] flex items-center gap-3 mt-2">
                     {productInCart ? (
-                      <div className="flex items-center rounded-lg px-4 py-2  transition-all">
+                      <div className="flex items-center rounded-lg px-4 py-2 transition-all">
                         <button
                           onClick={() =>
                             updateQuantity(
@@ -115,7 +116,7 @@ const ProductPages = () => {
                               productInCart.quantity - 1
                             )
                           }
-                          className="w-8 h-8 flex items-center justify-center rounded-md bg-primary  text-white text-lg font-bold hover:bg-primary/90 transition-colors"
+                          className="w-8 h-8 flex items-center justify-center rounded-md bg-primary text-white text-lg font-bold hover:bg-primary/90 transition-colors"
                         >
                           −
                         </button>
@@ -134,7 +135,7 @@ const ProductPages = () => {
               </div>
             </div>
 
-            {/* Imagen */}
+            {/* Imagen del Producto */}
             <div className="flex flex-col order-2 lg:order-1">
               <div className="w-full max-w-[400px] mx-auto relative overflow-hidden rounded-xl aspect-square">
                 {product?.imagen ? (
@@ -160,7 +161,7 @@ const ProductPages = () => {
             </div>
           </div>
 
-          {/* Especificaciones + Review Grid 2x2 */}
+          {/* Especificaciones + Reseña */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
             {/* Especificaciones */}
             <div className="flex flex-col">
@@ -188,11 +189,11 @@ const ProductPages = () => {
               </div>
             </div>
 
-            {/* Review */}
+            {/* Reseña */}
             <div className="flex flex-col h-fit">
               <div className="bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm h-fit">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  Expert Review
+                  Reseña de Experto
                 </h2>
                 {product?.resenas && product.resenas.length > 0 ? (
                   <div className="flex items-start gap-4">
@@ -208,7 +209,7 @@ const ProductPages = () => {
                             {product.resenas[0].autor || "Ethan Carter"}
                           </p>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {`${product.categoria} Specialist`}
+                            Especialista en {product.categoria}
                           </p>
                         </div>
                         <div className="text-subtle-light dark:text-subtle-dark text-lg font-bold">

@@ -7,7 +7,7 @@ import { AdvancedImage } from "@cloudinary/react";
 
 const OrderDetailsPage = () => {
   const { id, id_usuario } = useParams();
-  const [order, setOrder] = useState(null);
+  const [pedido, setPedido] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,8 +17,13 @@ const OrderDetailsPage = () => {
 
   const navigate = useNavigate();
 
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    }).format(value);
+
   useEffect(() => {
-    // 🧱 Verificación de sesión
     if (!usuario) {
       setError("Por favor inicia sesión para ver tus pedidos");
       setTimeout(() => navigate("/login"), 1000);
@@ -26,10 +31,10 @@ const OrderDetailsPage = () => {
       return;
     }
 
-    const isAdmin = rol && rol === "admin";
-    const isOwner = id_usuario === usuario?.toString() || !id_usuario;
+    const esAdmin = rol && rol === "admin";
+    const esPropietario = id_usuario === usuario?.toString() || !id_usuario;
 
-    if (!isAdmin && !isOwner) {
+    if (!esAdmin && !esPropietario) {
       setError("No tienes permiso para ver este pedido");
       setTimeout(() => navigate("/"), 1500);
       setLoading(false);
@@ -47,11 +52,11 @@ const OrderDetailsPage = () => {
         const response = await fetch(endpoint);
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
-        setOrder(data);
+        setPedido(data);
       } catch (err) {
         console.error("Error fetching order details:", err);
         setError("No se pudieron cargar los detalles del pedido.");
-        setOrder(null);
+        setPedido(null);
       } finally {
         setLoading(false);
       }
@@ -66,14 +71,14 @@ const OrderDetailsPage = () => {
         <Navbar />
         <main className="px-6 sm:px-10 lg:px-20 py-8 flex flex-1 justify-center">
           <p className="text-center text-subtle-light dark:text-subtle-dark">
-            Loading order details...
+            Cargando detalles del pedido...
           </p>
         </main>
       </div>
     );
   }
 
-  if (error || !order) {
+  if (error || !pedido) {
     return (
       <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen">
         <Navbar />
@@ -100,17 +105,19 @@ const OrderDetailsPage = () => {
                   : "/pedidos/historial"
               }
             >
-              <span className="text-sm font-medium">Back to Order History</span>
+              <span className="text-sm font-medium">
+                Volver al Historial de Pedidos
+              </span>
             </NavLink>
             <h1 className="text-content-light dark:text-content-dark text-4xl font-black leading-tight tracking-[-0.033em] mt-4">
-              Order Details
+              Detalles del Pedido
             </h1>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-2 text-subtle-light dark:text-subtle-dark text-sm">
-              <p>Order #{order.id_pedido}</p>
+              <p>Pedido #{pedido.id_pedido}</p>
               <div className="size-1 rounded-full bg-border-light dark:bg-border-dark hidden sm:block"></div>
               <p>
-                Placed on{" "}
-                {new Date(order.fecha).toLocaleDateString("es-ES", {
+                Realizado el{" "}
+                {new Date(pedido.fecha).toLocaleDateString("es-ES", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -123,11 +130,11 @@ const OrderDetailsPage = () => {
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark">
                 <h2 className="text-lg font-bold text-content-light dark:text-content-dark mb-4">
-                  Items in this Order ({order.detalles?.length || 0})
+                  Productos en este Pedido ({pedido.detalles?.length || 0})
                 </h2>
                 <div className="space-y-4">
-                  {order.detalles && order.detalles.length > 0 ? (
-                    order.detalles.map((item, idx) => (
+                  {pedido.detalles && pedido.detalles.length > 0 ? (
+                    pedido.detalles.map((item, idx) => (
                       <div key={item.id_detalle}>
                         <div className="flex items-center gap-4">
                           <div className="rounded-lg size-20 shrink-0 overflow-hidden bg-background-light dark:bg-gray-700">
@@ -139,7 +146,7 @@ const OrderDetailsPage = () => {
                                 )
                                 .quality("auto")
                                 .format("auto")}
-                              alt={item.nombre_producto || "Product"}
+                              alt={item.nombre_producto || "Producto"}
                               loading="lazy"
                               className="w-full h-full object-cover"
                             />
@@ -149,23 +156,24 @@ const OrderDetailsPage = () => {
                               {item.nombre_producto}
                             </p>
                             <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                              Qty: {Number(item.cantidad)}
+                              Cantidad: {Number(item.cantidad)}
                             </p>
                           </div>
                           <p className="font-semibold text-content-light dark:text-content-dark">
-                            $
-                            {Number(item.precio_unitario) *
-                              Number(item.cantidad)}
+                            {formatCurrency(
+                              Number(item.precio_unitario) *
+                                Number(item.cantidad)
+                            )}
                           </p>
                         </div>
-                        {idx < order.detalles.length - 1 && (
+                        {idx < pedido.detalles.length - 1 && (
                           <div className="border-t border-border-light dark:border-border-dark mt-4"></div>
                         )}
                       </div>
                     ))
                   ) : (
                     <p className="text-center text-subtle-light dark:text-subtle-dark">
-                      No items in this order
+                      No hay productos en este pedido
                     </p>
                   )}
                 </div>
@@ -175,16 +183,16 @@ const OrderDetailsPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <h3 className="text-base font-bold text-content-light dark:text-content-dark mb-2">
-                      Shipping Address
+                      Dirección de Envío
                     </h3>
                     <p className="text-sm text-subtle-light dark:text-subtle-dark leading-relaxed">
-                      {order.nombre_usuario} <br />
-                      {order.direccion}
+                      {pedido.nombre_usuario} <br />
+                      {pedido.direccion}
                     </p>
                   </div>
                   <div>
                     <h3 className="text-base font-bold text-content-light dark:text-content-dark mb-2">
-                      Payment Method
+                      Método de Pago
                     </h3>
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-6 bg-gray-200 dark:bg-gray-700 rounded-md flex items-center justify-center">
@@ -199,7 +207,7 @@ const OrderDetailsPage = () => {
                         </svg>
                       </div>
                       <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                        Payment processed
+                        Pago procesado
                       </p>
                     </div>
                   </div>
@@ -210,7 +218,7 @@ const OrderDetailsPage = () => {
             <div className="lg:col-span-1">
               <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark sticky top-28">
                 <h2 className="text-lg font-bold text-content-light dark:text-content-dark mb-4">
-                  Order Summary
+                  Resumen del Pedido
                 </h2>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
@@ -218,23 +226,23 @@ const OrderDetailsPage = () => {
                       Subtotal
                     </p>
                     <p className="font-medium text-content-light dark:text-content-dark">
-                      ${order.total}
+                      {formatCurrency(pedido.total)}
                     </p>
                   </div>
                   <div className="flex justify-between">
                     <p className="text-content-light dark:text-subtle-dark">
-                      Shipping
+                      Envío
                     </p>
                     <p className="font-medium text-primary dark:text-primary-dark">
-                      FREE
+                      GRATIS
                     </p>
                   </div>
                   <div className="flex justify-between">
                     <p className="text-content-light dark:text-subtle-dark">
-                      Taxes
+                      Impuestos
                     </p>
                     <p className="font-medium text-primary dark:text-primary-dark">
-                      FREE
+                      GRATIS
                     </p>
                   </div>
                 </div>
@@ -244,7 +252,7 @@ const OrderDetailsPage = () => {
                     Total
                   </p>
                   <p className="text-xl font-bold text-content-light dark:text-content-dark">
-                    ${order.total}
+                    {formatCurrency(pedido.total)}
                   </p>
                 </div>
               </div>

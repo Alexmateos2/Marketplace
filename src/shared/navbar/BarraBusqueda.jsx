@@ -83,7 +83,7 @@ const BarraBusqueda = () => {
       {/* Campo de búsqueda */}
       <input
         type="text"
-        placeholder="Search products..."
+        placeholder="Busca productos..."
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         className="w-full h-12 rounded-lg border border-subtle-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
