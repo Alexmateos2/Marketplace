@@ -59,6 +59,7 @@ const onKeyDown = (e) => {
         } else {
           console.log("Usuario creado exitosamente:", data);
           localStorage.setItem("usuario", JSON.stringify(data.usuario));
+          localStorage.setItem("rol", JSON.stringify(data.rol));
           navigate("/");
         }
       } catch (err) {

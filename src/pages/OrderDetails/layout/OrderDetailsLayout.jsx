@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../../shared/navbar/navbar";
-import { useEffect, useState } from "react";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
@@ -11,40 +10,47 @@ const OrderDetailsPage = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
- const user = id_usuario || localStorage.getItem("usuario");
+
+  const usuario = localStorage.getItem("usuario");
+  const storedRol = localStorage.getItem("rol");
+  const rol = storedRol ? JSON.parse(storedRol) : null;
 
   const navigate = useNavigate();
-  useEffect(() => {
-  
-    
-    if (!user) {
-      setError("Please log in to view your orders");
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
 
+  useEffect(() => {
+    // 🧱 Verificación de sesión
+    if (!usuario) {
+      setError("Por favor inicia sesión para ver tus pedidos");
+      setTimeout(() => navigate("/login"), 1000);
       setLoading(false);
       return;
     }
+
+    const isAdmin = rol && rol === "admin";
+    const isOwner = id_usuario === usuario?.toString() || !id_usuario;
+
+    if (!isAdmin && !isOwner) {
+      setError("No tienes permiso para ver este pedido");
+      setTimeout(() => navigate("/"), 1500);
+      setLoading(false);
+      return;
+    }
+
+    const endpoint = `http://localhost:3000/pedidos/detalles/${
+      id_usuario || usuario
+    }/${id}`;
 
     const fetchOrderDetails = async () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch(
-          `http://localhost:3000/pedidos/detalles/${user}/${id}`
-        );
-
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
-        // Aquí no buscamos en un array ni en 'pedidos', porque el backend responde con un objeto
-        setOrder(data); // Usa el objeto directamente
+        setOrder(data);
       } catch (err) {
         console.error("Error fetching order details:", err);
-        setError("Failed to load order details. Please try again later.");
+        setError("No se pudieron cargar los detalles del pedido.");
         setOrder(null);
       } finally {
         setLoading(false);
@@ -52,7 +58,7 @@ const OrderDetailsPage = () => {
     };
 
     fetchOrderDetails();
-  }, [user, id, navigate, id_usuario]);
+  }, [id, id_usuario, usuario, rol, navigate]);
 
   if (loading) {
     return (
@@ -143,11 +149,13 @@ const OrderDetailsPage = () => {
                               {item.nombre_producto}
                             </p>
                             <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                              Qty: {item.cantidad}
+                              Qty: {Number(item.cantidad)}
                             </p>
                           </div>
                           <p className="font-semibold text-content-light dark:text-content-dark">
-                            ${item.precio_unitario * item.cantidad}
+                            $
+                            {Number(item.precio_unitario) *
+                              Number(item.cantidad)}
                           </p>
                         </div>
                         {idx < order.detalles.length - 1 && (
@@ -163,15 +171,14 @@ const OrderDetailsPage = () => {
                 </div>
               </div>
 
-              <div className="bg-card-light dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark">
+              <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <h3 className="text-base font-bold text-content-light dark:text-content-dark mb-2">
                       Shipping Address
                     </h3>
                     <p className="text-sm text-subtle-light dark:text-subtle-dark leading-relaxed">
-                      {order.nombre_usuario}
-                      <br />
+                      {order.nombre_usuario} <br />
                       {order.direccion}
                     </p>
                   </div>
@@ -201,7 +208,7 @@ const OrderDetailsPage = () => {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="bg-card-light dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark sticky top-28">
+              <div className="bg-card-light dark:bg-card-dark p-6 rounded-lg border border-border-light dark:border-border-dark sticky top-28">
                 <h2 className="text-lg font-bold text-content-light dark:text-content-dark mb-4">
                   Order Summary
                 </h2>

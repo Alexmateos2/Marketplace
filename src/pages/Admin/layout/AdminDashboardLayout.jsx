@@ -33,13 +33,30 @@ const AdminDashboardLayout = () => {
   }, []);
 
   if (loading) return <div className="p-10">Cargando estadísticas...</div>;
-  if (!stats) return <div className="p-10">No se pudieron cargar las estadísticas</div>;
+  if (!stats)
+    return <div className="p-10">No se pudieron cargar las estadísticas</div>;
 
   const cards = [
-    { label: "Total Revenue", value: `$${stats.revenue.total.toLocaleString()}`, change: stats.revenue.change },
-    { label: "Total Orders", value: stats.orders.total, change: stats.orders.change },
-    { label: "Total Products", value: stats.products.total, change: stats.products.new || 0 },
-    { label: "Total Users", value: stats.users.total, change: stats.users.change },
+    {
+      label: "Total Revenue",
+      value: `$${stats.revenue.total.toLocaleString()}`,
+      change: stats.revenue.change,
+    },
+    {
+      label: "Total Orders",
+      value: stats.orders.total,
+      change: stats.orders.change,
+    },
+    {
+      label: "Total Products",
+      value: stats.products.total,
+      change: stats.products.new || 0,
+    },
+    {
+      label: "Total Users",
+      value: stats.users.total,
+      change: stats.users.change,
+    },
   ];
 
   return (
@@ -74,8 +91,15 @@ const AdminDashboardLayout = () => {
                       {card.value}
                     </p>
                     <p className={`flex items-center gap-1 font-bold ${color}`}>
-                      {positive ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                      {card.change >= 0 ? card.change.toFixed(1) : card.change.toFixed(1)}%
+                      {positive ? (
+                        <ArrowUp className="w-4 h-4" />
+                      ) : (
+                        <ArrowDown className="w-4 h-4" />
+                      )}
+                      {card.change >= 0
+                        ? card.change.toFixed(1)
+                        : card.change.toFixed(1)}
+                      %
                     </p>
                   </div>
                 );
@@ -96,25 +120,52 @@ const AdminDashboardLayout = () => {
                         <th className="px-6 py-3 font-medium">Date</th>
                         <th className="px-6 py-3 font-medium">Sales Amount</th>
                         <th className="px-6 py-3 font-medium">Orders</th>
-                        <th className="px-6 py-3 font-medium text-right">Change</th>
+                        <th className="px-6 py-3 font-medium text-right">
+                          Change
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       {stats.salesTrends.map((day, idx, arr) => {
-                        const next = idx < arr.length - 1 ? arr[idx + 1].totalRevenue : null;
-                        const change = next !== null ? ((day.totalRevenue - next) / next) * 100 : null;
+                        const next =
+                          idx < arr.length - 1
+                            ? arr[idx + 1].totalRevenue
+                            : null;
+                        const divisor = next !== 0 ? next : 1;
+                        const change =
+                          next !== null
+                            ? ((day.totalRevenue - next) / divisor) * 100
+                            : null;
                         const direction = change >= 0 ? "up" : "down";
-                        const Color = direction === "up" ? "text-green-500" : "text-red-500";
+                        const Color =
+                          direction === "up"
+                            ? "text-green-500"
+                            : "text-red-500";
 
                         return (
-                          <tr key={day.date} className="border-b border-border-light dark:border-border-dark">
-                            <td className="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap">{day.date}</td>
-                            <td className="px-6 py-4">${day.totalRevenue.toLocaleString()}</td>
+                          <tr
+                            key={day.date}
+                            className="border-b border-border-light dark:border-border-dark"
+                          >
+                            <td className="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap">
+                              {day.date}
+                            </td>
+                            <td className="px-6 py-4">
+                              ${day.totalRevenue.toLocaleString()}
+                            </td>
                             <td className="px-6 py-4">{day.orders}</td>
-                            <td className={`px-6 py-4 text-right flex justify-end items-center gap-1 ${Color}`}>
-                              {change === null ? "-" : (
+                            <td
+                              className={`px-6 py-4 text-right flex justify-end items-center gap-1 ${Color}`}
+                            >
+                              {change === null ? (
+                                "-"
+                              ) : (
                                 <>
-                                  {direction === "up" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
+                                  {direction === "up" ? (
+                                    <ArrowUp className="w-4 h-4" />
+                                  ) : (
+                                    <ArrowDown className="w-4 h-4" />
+                                  )}
                                   {Math.abs(change).toFixed(1)}%
                                 </>
                               )}
@@ -134,9 +185,24 @@ const AdminDashboardLayout = () => {
                 </h2>
                 <div className="space-y-4">
                   {[
-                    { icon: <PlusCircle />, title: "Add New Product", desc: "Create a new product listing.", to: "/add" },
-                    { icon: <UserCog />, title: "Manage Users", desc: "View and manage all registered users.", to: "/admin/users" },
-                    { icon: <List />, title: "View All Orders", desc: "Browse the complete order history.", to: "/admin/orders" },
+                    {
+                      icon: <PlusCircle />,
+                      title: "Add New Product",
+                      desc: "Create a new product listing.",
+                      to: "/add",
+                    },
+                    {
+                      icon: <UserCog />,
+                      title: "Manage Users",
+                      desc: "View and manage all registered users.",
+                      to: "/admin/users",
+                    },
+                    {
+                      icon: <List />,
+                      title: "View All Orders",
+                      desc: "Browse the complete order history.",
+                      to: "/admin/orders",
+                    },
                   ].map((item, idx) => (
                     <NavLink
                       key={idx}
@@ -147,8 +213,12 @@ const AdminDashboardLayout = () => {
                         {item.icon}
                       </div>
                       <div>
-                        <p className="font-semibold text-text-light dark:text-text-dark">{item.title}</p>
-                        <p className="text-sm text-text-muted-light dark:text-text-muted-dark">{item.desc}</p>
+                        <p className="font-semibold text-text-light dark:text-text-dark">
+                          {item.title}
+                        </p>
+                        <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
+                          {item.desc}
+                        </p>
                       </div>
                     </NavLink>
                   ))}
@@ -175,39 +245,78 @@ const AdminDashboardLayout = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {stats.recentOrders.map(({ id_pedido, id_usuario, nombre_usuario, fecha, total }) => (
-                      <tr key={id_pedido} className="border-b border-border-light dark:border-border-dark">
-                        <td className="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap">#TEK00{id_pedido}</td>
-                        <td className="px-6 py-4">{nombre_usuario}</td>
-                        <td className="px-6 py-4">{new Date(fecha).toLocaleDateString("es-ES")}</td>
-                        <td className="px-6 py-4 font-bold text-text-light dark:text-text-dark">${total}</td>
-                        <td className="px-6 py-4 text-right">
-                          <NavLink className="font-medium text-primary hover:underline" to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`}>
-                            View
-                          </NavLink>
-                        </td>
-                      </tr>
-                    ))}
+                    {stats.recentOrders.map(
+                      ({
+                        id_pedido,
+                        id_usuario,
+                        nombre_usuario,
+                        fecha,
+                        total,
+                      }) => (
+                        <tr
+                          key={id_pedido}
+                          className="border-b border-border-light dark:border-border-dark"
+                        >
+                          <td className="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap">
+                            #TEK00{id_pedido}
+                          </td>
+                          <td className="px-6 py-4">{nombre_usuario || "Invitado"}</td>
+                          <td className="px-6 py-4">
+                            {new Date(fecha).toLocaleDateString("es-ES")}
+                          </td>
+                          <td className="px-6 py-4 font-bold text-text-light dark:text-text-dark">
+                            ${total}
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <NavLink
+                              className="font-medium text-primary hover:underline"
+                              to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`}
+                            >
+                              View
+                            </NavLink>
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </table>
               </div>
 
               {/* Mobile Cards */}
               <div className="grid grid-cols-1 text-center sm:grid-cols-2 gap-6 lg:hidden">
-                {stats.recentOrders.map(({ id_pedido, nombre_usuario, id_usuario, fecha, total }) => {
-                  const fechaFormateada = new Date(fecha).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" });
-                  return (
-                    <div key={id_pedido} className="rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-5 space-y-2 shadow-lg">
-                      <p className="font-semibold text-text-light dark:text-text-dark">ID: #TEK00{id_pedido}</p>
-                      <p className="font-semibold text-text-light dark:text-text-dark">Nombre: {nombre_usuario}</p>
-                      <p className="text-sm text-text-muted-light dark:text-text-muted-dark">{fechaFormateada}</p>
-                      <p className="font-bold text-text-light dark:text-text-dark">${total}</p>
-                      <NavLink to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`} className="text-primary hover:underline inline-block mt-2">
-                        View
-                      </NavLink>
-                    </div>
-                  );
-                })}
+                {stats.recentOrders.map(
+                  ({ id_pedido, nombre_usuario, id_usuario, fecha, total }) => {
+                    const fechaFormateada = new Date(fecha).toLocaleDateString(
+                      "es-ES",
+                      { day: "2-digit", month: "2-digit", year: "numeric" }
+                    );
+                    return (
+                      <div
+                        key={id_pedido}
+                        className="rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-5 space-y-2 shadow-lg"
+                      >
+                        <p className="font-semibold text-text-light dark:text-text-dark">
+                          ID: #TEK00{id_pedido}
+                        </p>
+                        <p className="font-semibold text-text-light dark:text-text-dark">
+                          Nombre: {nombre_usuario}
+                        </p>
+                        <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
+                          {fechaFormateada}
+                        </p>
+                        <p className="font-bold text-text-light dark:text-text-dark">
+                          ${total}
+                        </p>
+                        <NavLink
+                          to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`}
+                          className="text-primary hover:underline inline-block mt-2"
+                        >
+                          View
+                        </NavLink>
+                      </div>
+                    );
+                  }
+                )}
               </div>
             </div>
           </div>

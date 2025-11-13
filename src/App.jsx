@@ -23,7 +23,7 @@ import AdminUsersLayout from "./pages/Admin/layout/AdminUsersLayout.jsx";
 import AdminProductEditLayout from "./pages/Admin/layout/AdminProductEditLayout.jsx";
 import AdminDashboardLayout from "./pages/Admin/layout/AdminDashboardLayout.jsx";
 import AdminOrdersLayout from "./pages/Admin/layout/AdminOrdersLayout.jsx";
-
+import ProtectedRoute from "./shared/utils/ProtectedRoute.jsx";
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
@@ -42,7 +42,14 @@ function App() {
             <Route path="/products/:category?" element={<CategoryPage />} />
             <Route path="/search/:search?" element={<BusquedaPage />} />
             <Route path="/categories" element={<AllCategoriesPage />} />
-            <Route path="/add" element={<AddProduct />} />
+            <Route
+              path="/add"
+              element={
+                <ProtectedRoute role="admin">
+                  <AddProduct />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/profile" element={<ProfilePage />} />
             <Route
               path="/pedidos/historial/:id?"
@@ -53,15 +60,54 @@ function App() {
               element={<OrderDetailsPage />}
             />
             <Route path="/signup" element={<SignUpLayout />} />
-            <Route path="/admin" element={<AdminLayout />} />
-            <Route path="/admin/products" element={<AdminProductsLayout />} />
-            <Route path="/admin/orders" element={<AdminOrdersLayout />} />
-            <Route path="/admin/users" element={<AdminUsersLayout />} />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/products"
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminProductsLayout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/orders"
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminOrdersLayout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminUsersLayout />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/admin/products/edit/:id"
-              element={<AdminProductEditLayout />}
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminProductEditLayout />
+                </ProtectedRoute>
+              }
             />
-            <Route path="/admin/dashboard" element={<AdminDashboardLayout />} />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute role="admin">
+                  <AdminDashboardLayout />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Router>
       </CartProvider>
