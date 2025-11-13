@@ -36,7 +36,7 @@ const Filtros = ({ setFilters }) => {
             <select
               value={localFilters.price}
               onChange={(e) => handleChange("price", e.target.value)}
-              className="form-select p-2 mt-1 block w-full rounded border border-border-light dark:border-dark bg-surface-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+              className="form-select p-2 mt-1 block w-full rounded border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
               <option value="">Todos los precios</option>
               <option value="0-100">$0 - $100</option>
