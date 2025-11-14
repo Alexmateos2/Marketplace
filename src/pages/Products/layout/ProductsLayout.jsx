@@ -5,6 +5,7 @@ import Pagination from "../../../shared/utils/pagination";
 import Products from "../components/products";
 import Filtros from "../components/filtros";
 import ProductsHero from "../components/productsHero";
+import {toast} from 'react-toastify';
 
 const ProductsPage = ({ category, search }) => {
   const itemsPerPage = 12;
@@ -12,7 +13,6 @@ const ProductsPage = ({ category, search }) => {
   const [filters, setFilters] = useState({ price: "", sortBy: "newest" });
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   // Fetch global
   useEffect(() => {
@@ -26,8 +26,8 @@ const ProductsPage = ({ category, search }) => {
         const data = await response.json();
         setProductos(data || []);
       } catch (err) {
-        console.error("Error fetching productos:", err);
-        setError(err.message);
+        toast.error( err.message);
+ 
         setProductos([]);
       } finally {
         setLoading(false);
@@ -88,7 +88,7 @@ const ProductsPage = ({ category, search }) => {
           <div className="flex-1">
             <Products
               loading={loading}
-              error={error}
+      
               currentProducts={currentProducts}
             />
             <div className="block lg:hidden mt-8">

@@ -5,21 +5,13 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 
-const Products = ({ loading, error, currentProducts }) => {
+const Products = ({ loading, currentProducts }) => {
   const { cart, addToCart } = useCart();
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <p className="text-red-600 dark:text-red-400 text-lg">Error: {error}</p>
       </div>
     );
   }
@@ -56,7 +48,10 @@ const Products = ({ loading, error, currentProducts }) => {
             key={product.id_producto}
             className="h-full flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
           >
-            <NavLink to={`/product/${product.id_producto}`} className="flex flex-col flex-grow">
+            <NavLink
+              to={`/product/${product.id_producto}`}
+              className="flex flex-col flex-grow"
+            >
               <AdvancedImage
                 cldImg={cld
                   .image(product.imagen)
@@ -77,7 +72,10 @@ const Products = ({ loading, error, currentProducts }) => {
 
             <div className="px-4 pb-4 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto relative">
               <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg mt-1 truncate">
-                ${product.precio.toLocaleString("es-ES", { minimumFractionDigits: 2 })}
+                $
+                {product.precio.toLocaleString("es-ES", {
+                  minimumFractionDigits: 2,
+                })}
               </p>
               <div className="relative">
                 <button

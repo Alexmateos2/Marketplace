@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { toast } from "react-toastify";
 const FormComponent = () => {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -16,26 +16,15 @@ const FormComponent = () => {
     { attribute: "", value: "" },
   ]);
   const [files, setFiles] = useState([]);
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("");
+
   const [isDragActive, setIsDragActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (message) {
-      const timer = setTimeout(() => {
-        setMessage("");
-        setMessageType("");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [message]);
-
-  useEffect(() => {
-    if (message) {
+    if (toast) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  }, [message]);
+  }, []);
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -100,10 +89,9 @@ const FormComponent = () => {
   const addSpecification = () => {
     const firstSpec = specifications[0];
     if (!firstSpec.attribute.trim() || !firstSpec.value.trim()) {
-      setMessage(
+      toast.warn(
         "Introduce los campos requeridos arriba antes de agregar otra especificación."
       );
-      setMessageType("warning");
       return;
     }
     setSpecifications((prev) => [{ attribute: "", value: "" }, ...prev]);
@@ -111,8 +99,7 @@ const FormComponent = () => {
 
   const removeSpecification = (index) => {
     if (specifications.length === 1) {
-      setMessage("Debe haber al menos un campo.");
-      setMessageType("warning");
+      toast.warn("Debe haber al menos un campo.");
       return;
     }
 
@@ -121,8 +108,7 @@ const FormComponent = () => {
       specifications[0].value === "" &&
       index === 0
     ) {
-      setMessage("No puedes borrar el input vacío");
-      setMessageType("warning");
+      toast.warn("No puedes borrar el input vacío");
       return;
     }
 
@@ -150,14 +136,14 @@ const FormComponent = () => {
       const data = await response.json();
       return data.public_id;
     } catch (error) {
-      console.error("Error subiendo a Cloudinary:", error);
+      toast.error(`Error subiendo a Cloudinary: ${error.message}`);
       throw new Error("Error al procesar la imagen");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
+
     setIsLoading(true);
 
     try {
@@ -220,8 +206,7 @@ const FormComponent = () => {
         throw new Error(result.message || "Error al crear producto");
       }
 
-      setMessage(`${result.message} (ID: ${result.id_producto})`);
-      setMessageType("success");
+      toast.success(`${result.message} (ID: ${result.id_producto})`);
 
       setFormData({
         nombre: "",
@@ -236,8 +221,7 @@ const FormComponent = () => {
       setSpecifications([{ attribute: "", value: "" }]);
       setFiles([]);
     } catch (err) {
-      setMessage(err.message);
-      setMessageType("error");
+      toast.error(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -256,31 +240,11 @@ const FormComponent = () => {
     });
     setSpecifications([{ attribute: "", value: "" }]);
     setFiles([]);
-    setMessage("");
-    setMessageType("");
   };
 
   return (
     <div className="space-y-6">
-      {message && (
-        <div
-          className={`p-4 rounded-lg flex items-center gap-3 animate-fadeIn transition-all ${
-            messageType === "success"
-              ? "bg-green-500/10 border border-green-500/30 text-green-700 dark:text-green-400"
-              : messageType === "error"
-              ? "bg-red-500/10 border border-red-500/30 text-red-700 dark:text-red-400"
-              : "bg-yellow-500/10 border border-yellow-500/30 text-yellow-700 dark:text-yellow-400"
-          }`}
-        >
-          <span className="text-lg">
-            {messageType === "success" && "✓"}
-            {messageType === "error" && "✕"}
-            {messageType === "warning" && "!"}
-          </span>
-          <span className="text-sm font-medium">{message}</span>
-        </div>
-      )}
-
+      
       {isLoading && (
         <div className="p-4 rounded-lg flex items-center gap-3 bg-blue-500/10 border border-blue-500/30 text-blue-700 dark:text-blue-400">
           <div className="flex items-center gap-2">

@@ -24,11 +24,17 @@ import AdminProductEditLayout from "./pages/Admin/layout/AdminProductEditLayout.
 import AdminDashboardLayout from "./pages/Admin/layout/AdminDashboardLayout.jsx";
 import AdminOrdersLayout from "./pages/Admin/layout/AdminOrdersLayout.jsx";
 import ProtectedRoute from "./shared/utils/ProtectedRoute.jsx";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
+
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
       <CartProvider>
+       
         <Router>
+           <ToastContainer />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />

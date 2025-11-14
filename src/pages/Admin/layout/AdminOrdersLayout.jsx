@@ -3,12 +3,12 @@ import AdminLayout from "../components/AdminLayout.jsx";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-
+import {toast} from 'react-toastify';
 const AdminOrdersLayout = () => {
   const [pedidos, setPedidos] = useState([]);
   const [filteredPedidos, setFilteredPedidos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const itemsPerPage = 10;
@@ -23,10 +23,10 @@ const AdminOrdersLayout = () => {
 
       setPedidos(sortedData);
       setFilteredPedidos(sortedData);
-      setError(null);
+    
     } catch (err) {
-      console.error("Error al obtener los pedidos:", err);
-      setError(err.message);
+      toast.error(err.message);
+      
       setPedidos([]);
       setFilteredPedidos([]);
     } finally {
@@ -84,7 +84,7 @@ const AdminOrdersLayout = () => {
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) return <p className="text-center mt-8">Cargando pedidos...</p>;
-  if (error) return <p className="text-center mt-8 text-red-500">Error: {error}</p>;
+
 
   return (
     <AdminLayout

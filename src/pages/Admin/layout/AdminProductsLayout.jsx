@@ -3,12 +3,13 @@ import AdminLayout from "../components/AdminLayout.jsx";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
+import { toast } from "react-toastify";
 
 const AdminProductsLayout = () => {
   const [productos, setProductos] = useState([]);
   const [filteredProductos, setFilteredProductos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const itemsPerPage = 10;
@@ -21,14 +22,15 @@ const AdminProductsLayout = () => {
       if (!response.ok) throw new Error(`Error: ${response.status}`);
 
       const data = await response.json();
-      const sortedData = (data || []).sort((a, b) => a.id_producto - b.id_producto);
+      const sortedData = (data || []).sort(
+        (a, b) => a.id_producto - b.id_producto
+      );
 
       setProductos(sortedData);
       setFilteredProductos(sortedData);
-      setError(null);
     } catch (err) {
-      console.error("Error al obtener productos:", err);
-      setError(err.message);
+      toast.error(err.message);
+
       setProductos([]);
       setFilteredProductos([]);
     } finally {
@@ -82,7 +84,6 @@ const AdminProductsLayout = () => {
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) return <p className="text-center mt-8">Cargando productos...</p>;
-  if (error) return <p className="text-center mt-8 text-red-500">Error: {error}</p>;
 
   return (
     <AdminLayout
