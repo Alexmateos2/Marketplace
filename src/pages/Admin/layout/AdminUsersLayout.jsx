@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
-
+import { toast } from "react-toastify";
 const AdminUsersLayout = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]); // 🔍 estado para búsqueda
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
@@ -20,11 +20,10 @@ const AdminUsersLayout = () => {
 
       const data = await response.json();
       setUsers(data || []);
-      setFilteredUsers(data || []); // 👈 inicializar también los filtrados
-      setError(null);
+      setFilteredUsers(data || []); 
     } catch (err) {
-      console.error("Error al obtener usuarios:", err);
-      setError(err.message);
+      toast.error(err.message);
+
       setUsers([]);
       setFilteredUsers([]);
     } finally {
@@ -46,8 +45,6 @@ const AdminUsersLayout = () => {
   };
 
   if (loading) return <p className="text-center mt-8">Cargando usuarios...</p>;
-  if (error)
-    return <p className="text-center mt-8 text-red-500">Error: {error}</p>;
 
   return (
     <AdminLayout

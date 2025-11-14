@@ -18,7 +18,7 @@ const Filtros = ({ setFilters }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFilters(localFilters);
-    console.log(setFilters)
+
   };
 
   return (

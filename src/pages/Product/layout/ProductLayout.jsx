@@ -7,7 +7,7 @@ import { NavLink, useParams, Navigate } from "react-router-dom";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
-
+import { toast } from "react-toastify";
 const ProductPages = () => {
   const { id } = useParams();
   const { cart, addToCart, updateQuantity } = useCart();
@@ -24,10 +24,10 @@ const ProductPages = () => {
         const res = await fetch(`http://localhost:3000/productos/${id}`);
         if (!res.ok) throw new Error("Producto no encontrado");
         const data = await res.json();
-        console.log(data);
+       
         setProducto(data);
       } catch (err) {
-        console.error("Error cargando producto:", err);
+        toast.error(`Error cargando producto: ${err}`);
       } finally {
         setLoading(false);
       }

@@ -4,10 +4,10 @@ import Footer from "../../../shared/utils/Footer.jsx";
 import CarritoItem from "../components/carritoItem";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
 import { useNavigate, NavLink } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const CarritoPage = () => {
   const { cart, totalPrice, clearCart } = useCart();
-  const usuario = localStorage.getItem('usuario') || null;
+  const usuario = localStorage.getItem("usuario") || null;
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -16,10 +16,10 @@ const CarritoPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id_usuario: usuario, // null si es invitado
-          productos: cart.map(item => ({
+          id_usuario: usuario,
+          productos: cart.map((item) => ({
             id_producto: item.id,
-            cantidad: item.quantity
+            cantidad: item.quantity,
           })),
           total: totalPrice,
         }),
@@ -30,21 +30,24 @@ const CarritoPage = () => {
       if (response.ok) {
         // Guardar ID del pedido para que el invitado pueda consultarlo
         if (!usuario) {
-          localStorage.setItem("ultimoPedidoInvitado", JSON.stringify({
-            id_pedido: data.id_pedido,
-            fecha: Date.now()
-          }));
+          localStorage.setItem(
+            "ultimoPedidoInvitado",
+            JSON.stringify({
+              id_pedido: data.id_pedido,
+              fecha: Date.now(),
+            })
+          );
         }
 
-        alert("Pedido realizado con éxito. ID: " + data.id_pedido);
+        toast.success("Pedido realizado con éxito. ID: " + data.id_pedido);
         clearCart();
         navigate(`/pedidos/historial/details/${data.id_pedido}`);
       } else {
-        alert("Error: " + data.message);
+        toast.error("Error: " + data.message);
       }
     } catch (err) {
       console.error(err);
-      alert("Error al realizar el pedido");
+      toast.error(`Error: ${err.message}`);
     }
   };
 

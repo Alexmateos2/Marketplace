@@ -7,7 +7,7 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-
+import {toast} from 'react-toastify';
 const AdminProductEditLayout = () => {
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -106,11 +106,11 @@ const AdminProductEditLayout = () => {
 
       if (!res.ok) throw new Error("Error al actualizar el producto");
 
-      alert("Producto actualizado correctamente");
+      toast.success("Producto actualizado correctamente");
       navigate(`/product/${id}`);
     } catch (err) {
       console.error("Error actualizando producto:", err);
-      alert("Hubo un error al guardar los cambios");
+      toast.err(err);
     }
   };
 

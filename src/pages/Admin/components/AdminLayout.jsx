@@ -6,6 +6,8 @@ import AsideAdmin from "./AsideAdmin";
 import Pagination from "../../../shared/utils/pagination";
 import { NavLink, useLocation } from "react-router-dom";
 import BusquedaAdmin from "./BusquedaAdmin";
+import { toast } from "react-toastify";
+import { useConfirmDelete } from "./onConfirmDelete"; // Importar el hook
 
 const AdminLayout = ({
   data = [],
@@ -20,15 +22,15 @@ const AdminLayout = ({
   sortConfig,
 }) => {
   const location = useLocation();
+  const { confirm, Modal } = useConfirmDelete(); // Usar el hook
+  
   const hasData = data && data.length > 0;
   const isProductPage = location.pathname.includes("/products");
   const isUsersPage = location.pathname.includes("/users");
 
-  const deleteItem = async (id) => {
+  const deleteItem = async (id, itemName = "este elemento") => {
     const url = isProductPage ? "productos" : "usuarios";
-    const confirmDelete = window.confirm(
-      "¿Estás seguro de que deseas eliminar este elemento?"
-    );
+    const confirmDelete = await confirm(itemName); // Esperar la confirmación
     if (!confirmDelete) return;
 
     try {
@@ -38,12 +40,11 @@ const AdminLayout = ({
 
       if (!response.ok) throw new Error("Error al eliminar el elemento");
 
-      alert("Elemento eliminado correctamente");
+      toast.success("Elemento eliminado correctamente");
 
       if (onDeleteSuccess) onDeleteSuccess();
     } catch (error) {
-      console.error("Error al eliminar el elemento:", error);
-      alert("No se pudo eliminar el elemento");
+      toast.error(error.message);
     }
   };
 
@@ -153,7 +154,7 @@ const AdminLayout = ({
                                   </NavLink>
                                   <button
                                     className="p-2 cursor-pointer text-slate-500 hover:text-red-500 dark:hover:text-red-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                                    onClick={() => deleteItem(item[idKey])}
+                                    onClick={() => deleteItem(item[idKey], item.nombre || "este elemento")}
                                     title="Eliminar"
                                   >
                                     <Trash2 size={18} />
@@ -207,12 +208,15 @@ const AdminLayout = ({
                       <div className="flex gap-2 pt-3 border-t border-gray-200 dark:border-slate-800">
                         {isProductPage ? (
                           <>
-                            <button className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all">
+                            <NavLink
+                              to={`edit/${item[idKey]}`}
+                              className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
+                            >
                               <Edit2 size={16} />
                               Editar
-                            </button>
+                            </NavLink>
                             <button
-                              onClick={() => deleteItem(item[idKey])}
+                              onClick={() => deleteItem(item[idKey], item.nombre || "este elemento")}
                               className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-600/30 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-all"
                             >
                               <Trash2 size={16} />
@@ -229,7 +233,7 @@ const AdminLayout = ({
                           </NavLink>
                         ) : (
                           <NavLink
-                            to={`/pedidos/historial/details${item.id_usuario}/${item.id_pedido}`}
+                            to={`/pedidos/historial/details/${item.id_usuario}/${item.id_pedido}`}
                             className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
                           >
                             <FileText size={16} />
@@ -243,6 +247,8 @@ const AdminLayout = ({
               </>
             )}
           </div>
+          {/* Modal rendereado aquí */}
+          <Modal />
         </main>
       </div>
       <Footer />

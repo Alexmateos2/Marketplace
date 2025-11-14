@@ -3,7 +3,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import Footer from "../../../shared/utils/Footer";
 import Navbar from "../../../shared/navbar/navbar";
 import { Eye, EyeOff } from "lucide-react";
-
+import { toast } from "react-toastify";
 const LoginPage = () => {
   const [formValue, setFormValue] = useState({ email: "", password: "" });
   const [isMayus, setIsMayus] = useState(false);
@@ -33,15 +33,14 @@ const LoginPage = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Correo o contraseña incorrecta");
+        toast.error(data.message || "Correo o contraseña incorrecta");
       } else {
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
         localStorage.setItem("rol", JSON.stringify(data.rol));
         navigate("/");
       }
     } catch (err) {
-      console.error(err);
-      alert("Error de conexión al servidor");
+      toast.error(err);
     } finally {
       setLoading(false);
     }

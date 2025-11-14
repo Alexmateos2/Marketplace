@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../../shared/navbar/navbar";
 import Footer from "../../shared/utils/Footer";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const SignUpLayout = () => {
   const [formValue, setFormValue] = useState({
     nombre: "",
@@ -33,7 +33,7 @@ const SignUpLayout = () => {
     setLoading(true);
 
     if (password !== formValue.passwordCheck) {
-      alert("Las contraseñas no coinciden");
+      toast.error("Las contraseñas no coinciden");
       setLoading(false);
       return;
     }
@@ -48,16 +48,15 @@ const SignUpLayout = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "No se pudo crear el usuario");
+        toast.error(data.message || "No se pudo crear el usuario");
       } else {
-        console.log("Usuario creado exitosamente:", data);
+        toast.success("Usuario creado exitosamente.");
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
         localStorage.setItem("rol", JSON.stringify(data.rol));
         navigate("/");
       }
     } catch (err) {
-      console.error(err);
-      alert("Error de conexión al servidor");
+      toast.error(err);
     } finally {
       setLoading(false);
     }
@@ -199,8 +198,10 @@ const SignUpLayout = () => {
           <p className="mt-4 text-sm text-slate-600 dark:text-slate-300">
             ¿Ya tienes una cuenta?{" "}
             <NavLink
-            to="/login"
-            className="font-bold text-primary hover:underline" href="#">
+              to="/login"
+              className="font-bold text-primary hover:underline"
+              href="#"
+            >
               Iniciar sesión
             </NavLink>
           </p>

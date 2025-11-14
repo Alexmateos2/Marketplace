@@ -8,8 +8,7 @@ import {
   PlusCircle,
   UserCog,
   List,
-  ArrowUp,
-  ArrowDown,
+
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -91,7 +90,7 @@ const AdminDashboardLayout = () => {
                       {tarjeta.value}
                     </p>
                     <p className={`flex items-center gap-1 font-bold ${color}`}>
-                      {positivo ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
+                      {positivo ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                       {tarjeta.change.toFixed(1)}%
                     </p>
                   </div>
@@ -135,7 +134,7 @@ const AdminDashboardLayout = () => {
                             <td className={`px-6 py-4 text-right flex justify-end items-center gap-1 ${colorCambio}`}>
                               {cambio === null ? "-" : (
                                 <>
-                                  {direccion === "up" ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
+                                  {direccion === "up" ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
                                   {Math.abs(cambio).toFixed(1)}%
                                 </>
                               )}

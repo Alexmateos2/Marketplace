@@ -4,7 +4,6 @@ const ProtectedRoute = ({ children, role }) => {
   const userRole = JSON.parse(localStorage.getItem("rol"));
 
   if (user && role && userRole !== role) {
-    console.log("Rol detectado:", userRole);
     return <Navigate to="/" replace />;
   }
 

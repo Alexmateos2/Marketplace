@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { toast } from "react-toastify";
 const FormProfile = ({ usuario }) => {
   const [disabled, setDisabled] = useState(true);
   const [formData, setFormData] = useState({
@@ -45,8 +45,8 @@ const FormProfile = ({ usuario }) => {
         if (!res.ok) throw new Error(res.status);
         return res.json();
       })
-      .then((data) => console.log("Usuario actualizado:", data))
-      .catch((err) => console.error("Error actualizando usuario:", err));
+      .then((data) => toast.success(data.message))
+      .catch((err) => toast.error(err.message));
   };
 
   return (

@@ -67,7 +67,7 @@ export default function HomePage() {
           <p className="mx-auto mt-4 max-w-2xl text-subtle-light dark:text-subtle-dark">
             Suscríbete a nuestro boletín y no te pierdas las últimas novedades y lanzamientos.
           </p>
-          <form className="mx-auto mt-8 flex max-w-md gap-2">
+          <form className="mx-auto mt-8 flex sm:flex-row flex-col max-w-md gap-4 sm:gap-2">
             <input
               className="flex-1 rounded-lg border-border-light bg-background-light px-4 py-3 text-sm focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark"
               placeholder="Introduce tu correo electrónico"
