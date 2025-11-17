@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { AdvancedImage } from "@cloudinary/react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer.jsx";
-import ProductsItemList from "../../../shared/utils/ProductsItemList.jsx";
 import { NavLink, useParams, Navigate } from "react-router-dom";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { toast } from "react-toastify";
+import RelatedProducts from "../components/RelatedProducts.jsx";
 const ProductPages = () => {
   const { id } = useParams();
   const { cart, addToCart, updateQuantity } = useCart();
@@ -15,8 +15,7 @@ const ProductPages = () => {
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const products = ProductsItemList;
-  const localProduct = products.find((p) => String(p.id) === id);
+ 
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -36,10 +35,10 @@ const ProductPages = () => {
   }, [id]);
 
   // 🔹 Si el producto no existe ni en la API ni localmente
-  if (!localProduct && !producto && !loading)
+  if ( !producto && !loading)
     return <Navigate to="/noProduct" replace />;
 
-  const product = producto || localProduct;
+  const product = producto ;
   const productInCart = cart.find(
     (item) => item.id === (product?.id_producto || product?.id)
   );
@@ -229,8 +228,11 @@ const ProductPages = () => {
               </div>
             </div>
           </div>
+         <RelatedProducts category={product.id_categoria} id={product.id_producto} />
         </div>
+        
       </main>
+    
       <Footer />
     </div>
   );
