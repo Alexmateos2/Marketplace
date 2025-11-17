@@ -4,6 +4,7 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
 const AdminProductsLayout = () => {
   const [productos, setProductos] = useState([]);
@@ -111,7 +112,8 @@ const AdminProductsLayout = () => {
           label: "Producto",
           sortable: true,
           render: (p) => (
-            <div className="flex items-center lg:justify-start justify-center gap-2">
+            <NavLink
+            to={`/product/${p.id_producto}`} className="flex items-center w-full lg:justify-start justify-center gap-2">
               {p.imagen && (
                 <AdvancedImage
                   cldImg={cld
@@ -125,7 +127,7 @@ const AdminProductsLayout = () => {
                 />
               )}
               <span>{p.nombre}</span>
-            </div>
+            </NavLink>
           ),
         },
         { key: "precio", label: "Precio", sortable: true },

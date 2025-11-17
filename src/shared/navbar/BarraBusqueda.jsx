@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { cld } from "../utils/cloudinary";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
+
 const BarraBusqueda = () => {
   const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1); // índice del resultado seleccionado
   const [productos, setProductos] = useState([]);
   const containerRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProductos = async () => {
@@ -28,6 +31,7 @@ const BarraBusqueda = () => {
     if (inputValue.trim() === "") {
       setResults([]);
       setIsOpen(false);
+      setSelectedIndex(-1);
       return;
     }
 
@@ -37,6 +41,7 @@ const BarraBusqueda = () => {
       );
       setResults(filtered);
       setIsOpen(true);
+      setSelectedIndex(-1);
     }, 300);
 
     return () => clearTimeout(handler);
@@ -50,6 +55,7 @@ const BarraBusqueda = () => {
         !containerRef.current.contains(event.target)
       ) {
         setIsOpen(false);
+        setSelectedIndex(-1);
       }
     };
 
@@ -60,6 +66,31 @@ const BarraBusqueda = () => {
   }, []);
 
   const visibleResults = results.slice(0, 4);
+
+  // Manejo de teclas
+  const handleKeyDown = (e) => {
+    if (!isOpen) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) =>
+        prev < visibleResults.length - 1 ? prev + 1 : prev
+      );
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : 0));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (selectedIndex >= 0 && visibleResults[selectedIndex]) {
+        navigate(`/product/${visibleResults[selectedIndex].id_producto}`);
+        setIsOpen(false);
+        setSelectedIndex(-1);
+      }
+    } else if (e.key === "Escape") {
+      setIsOpen(false);
+      setSelectedIndex(-1);
+    }
+  };
 
   return (
     <div ref={containerRef} className="relative w-full">
@@ -86,6 +117,7 @@ const BarraBusqueda = () => {
         placeholder="Busca productos..."
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyDown} // <-- aquí manejamos las teclas
         className="w-full h-12 rounded-lg border border-subtle-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
       />
 
@@ -98,14 +130,16 @@ const BarraBusqueda = () => {
                 <div key={product.id_producto}>
                   <NavLink
                     to={`/product/${product.id_producto}`}
-                    className="flex items-center gap-3 p-2 hover:bg-primary/10 dark:hover:bg-primary/20 rounded-md"
+                    className={`flex items-center gap-3 p-2 hover:bg-primary/10 dark:hover:bg-primary/20 rounded-md ${
+                      index === selectedIndex ? "bg-primary/20" : ""
+                    }`} // resaltar con teclado
                     onClick={() => setIsOpen(false)}
                   >
                     <div className="shrink-0">
                       <AdvancedImage
                         cldImg={cld
                           .image(product.imagen)
-                          .resize(fill().width(400).height(400).gravity("auto"))
+                          .resize(fill().width(80).height(80).gravity("auto"))
                           .quality("auto")
                           .format("auto")}
                         alt={product.nombre}
