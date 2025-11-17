@@ -13,7 +13,12 @@ const AdminProductsLayout = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const itemsPerPage = 10;
-
+  const getStatusValue = (p) => {
+    if (p.activo === 0) return 0;
+    if (p.stock === 0) return 1;
+    if (p.stock <= 10) return 2;
+    return 3;
+  };
   const fetchProductos = async () => {
     try {
       setLoading(true);
@@ -42,7 +47,7 @@ const AdminProductsLayout = () => {
     fetchProductos();
   }, []);
 
-  // 🔹 Ordenar columnas
+  // Ordenar columnas
   const handleSort = (key) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -51,13 +56,19 @@ const AdminProductsLayout = () => {
     setSortConfig({ key, direction });
 
     const sorted = [...filteredProductos].sort((a, b) => {
-      let aVal = a[key] ?? "";
-      let bVal = b[key] ?? "";
+      let aVal, bVal;
 
-      // Convertimos "precio" y "stock" a número
-      if (key === "precio" || key === "stock") {
-        aVal = parseFloat(aVal) || 0;
-        bVal = parseFloat(bVal) || 0;
+      if (key === "status") {
+        aVal = getStatusValue(a);
+        bVal = getStatusValue(b);
+      } else {
+        aVal = a[key] ?? "";
+        bVal = b[key] ?? "";
+
+        if (key === "precio" || key === "stock") {
+          aVal = parseFloat(aVal) || 0;
+          bVal = parseFloat(bVal) || 0;
+        }
       }
 
       // Strings
@@ -77,7 +88,6 @@ const AdminProductsLayout = () => {
 
     setFilteredProductos(sorted);
   };
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const productosActuales = filteredProductos.slice(startIndex, endIndex);
@@ -123,22 +133,29 @@ const AdminProductsLayout = () => {
         {
           key: "status",
           label: "Estado",
+          sortable: true,
           render: (p) => {
+            const statusVal = getStatusValue(p); // 🔹 Llamada correcta
             let bgClass = "";
             let dotClass = "";
             let statusText = "";
 
-            if (p.stock > 10) {
+            if (statusVal === 0) {
+              bgClass =
+                "bg-gray-100 text-gray-800 dark:bg-gray-600/30 dark:text-gray-400";
+              dotClass = "bg-gray-500";
+              statusText = "Producto deshabilitado";
+            } else if (statusVal === 3) {
               bgClass =
                 "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
               dotClass = "bg-green-500";
               statusText = "Stock suficiente";
-            } else if (p.stock > 0) {
+            } else if (statusVal === 2) {
               bgClass =
                 "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300";
               dotClass = "bg-yellow-500";
               statusText = "Stock bajo";
-            } else {
+            } else if (statusVal === 1) {
               bgClass =
                 "bg-red-100 text-red-800 dark:bg-red-600/30 dark:text-red-400";
               dotClass = "bg-red-500";
