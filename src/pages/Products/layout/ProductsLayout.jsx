@@ -30,8 +30,8 @@ const ProductsPage = ({ category, search }) => {
           ...p,
           searchableName: p.nombre.toLowerCase(),
         }));
-
-        setProductos(processed);
+        const filter = processed.filter(p => p.activo === 1);
+        setProductos(filter);
       } catch (err) {
         toast.error(err.message);
         setProductos([]);

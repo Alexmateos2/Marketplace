@@ -102,7 +102,7 @@ const AdminLayout = ({
                           {columns.map((col, idx) => (
                             <th
                               key={idx}
-                              className={`px-6 py-4 text-sm font-semibold text-slate-600 dark:text-slate-300 cursor-pointer select-none ${
+                              className={`px-6 py-4 text-sm font-semibold text-subtle-light dark:text-subtle-dark cursor-pointer select-none ${
                                 col.sortable
                                   ? "hover:text-primary transition-colors"
                                   : ""
@@ -124,7 +124,7 @@ const AdminLayout = ({
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                      <tbody className="divide-y divide-border-light dark:divide-border-dark">
                         {data.map((item, idx) => (
                           <tr
                             key={idx}
@@ -133,7 +133,7 @@ const AdminLayout = ({
                             {columns.map((col, cidx) => (
                               <td
                                 key={cidx}
-                                className="px-6 py-4 text-sm whitespace-nowrap text-slate-900 dark:text-slate-100"
+                                className="px-6 py-4 text-sm whitespace-nowrap text-content-light dark:text-content-dark"
                               >
                                 {col.render
                                   ? col.render(item)
@@ -146,14 +146,14 @@ const AdminLayout = ({
                               {isProductPage ? (
                                 <>
                                   <NavLink
-                                    className="p-2 cursor-pointer text-slate-500 hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                    className="p-2 cursor-pointer text-subtle-light dark:text-subtle-dark hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                     to={`edit/${item[idKey]}`}
                                     title="Editar"
                                   >
                                     <Edit2 size={18} />
                                   </NavLink>
                                   <button
-                                    className="p-2 cursor-pointer text-slate-500 hover:text-red-500 dark:hover:text-red-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                    className="p-2 cursor-pointer text-subtle-light dark:text-subtle-dark hover:text-red-500 dark:hover:text-red-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                     onClick={() => deleteItem(item[idKey], item.nombre || "este elemento")}
                                     title="Eliminar"
                                   >
