@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useCart } from "../../../shared/hooks/CartContext.jsx";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
-import { AdvancedImage } from "@cloudinary/react";
+import { AdvancedImage, placeholder } from "@cloudinary/react";
 
 const Products = ({ loading, currentProducts }) => {
   const { cart, addToCart } = useCart();
@@ -28,7 +28,7 @@ const Products = ({ loading, currentProducts }) => {
 
   return (
     <div className="grid grid-cols-2 gap-6 font-display mx-auto mt-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full">
-      {currentProducts.map((product) => {
+      {currentProducts.map((product, idx) => {
         const productInCart = cart.find(
           (item) => item.id === product.id_producto
         );
@@ -55,13 +55,14 @@ const Products = ({ loading, currentProducts }) => {
               <AdvancedImage
                 cldImg={cld
                   .image(product.imagen)
-                  .resize(fill().width(400).height(400).gravity("auto"))
                   .quality("auto")
-                  .format("auto")}
+                  .format("auto")
+                  .resize(fill().width(512).height(512).gravity("auto"))}
+                plugins={[placeholder({ mode: "blur" })]}
                 alt={product.nombre}
-                fetchPriority="high"
+                fetchPriority={idx <= 8 ? "high" : "auto"} 
+                loading={idx <= 8 ? "eager" : "lazy"}
                 className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-300 border-b border-border-light dark:border-border-dark rounded"
-                loading="lazy"
               />
               <div className="px-4 py-5 flex flex-col flex-grow">
                 <h4 className="font-bold text-md lg:text-lg text-gray-800 dark:text-gray-100 text-center sm:text-start flex-grow">

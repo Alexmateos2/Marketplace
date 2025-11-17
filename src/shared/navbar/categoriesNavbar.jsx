@@ -12,15 +12,31 @@ const categorias = [
 const CategoriesNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
+  const [isClickMode, setIsClickMode] = useState(false);
 
   const handleMouseEnter = () => {
     if (closeTimeout) clearTimeout(closeTimeout);
-    setIsOpen(true);
+    if (!isClickMode) {
+      setIsOpen(true);
+    }
   };
 
   const handleMouseLeave = () => {
-    const timeout = setTimeout(() => setIsOpen(false), 200);
-    setCloseTimeout(timeout);
+    if (!isClickMode) {
+      const timeout = setTimeout(() => setIsOpen(false), 200);
+      setCloseTimeout(timeout);
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (closeTimeout) clearTimeout(closeTimeout);
+    setIsClickMode(true);
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+    setIsClickMode(false);
   };
 
   useEffect(() => {
@@ -43,7 +59,7 @@ const CategoriesNavbar = () => {
       onMouseLeave={handleMouseLeave}
     >
       <button
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={handleButtonClick}
         className="flex items-center gap-1 text-sm font-medium text-content-light dark:text-content-dark hover:text-primary transition-colors"
       >
         Categorías
@@ -60,12 +76,18 @@ const CategoriesNavbar = () => {
 
       {isOpen && (
         <div
+          data-testid="categories-container"
           className="absolute mt-2 top-full -left-20 w-60 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg shadow-lg overflow-hidden z-50"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           {categorias.map((cat) => (
-            <NavLink key={cat.ruta} to={cat.ruta} className={({ isActive }) => clasesLink(isActive)}>
+            <NavLink
+              key={cat.ruta}
+              to={cat.ruta}
+              onClick={handleLinkClick}
+              className={({ isActive }) => clasesLink(isActive)}
+            >
               {cat.nombre}
             </NavLink>
           ))}

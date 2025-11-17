@@ -8,7 +8,6 @@ import {
   PlusCircle,
   UserCog,
   List,
-
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -31,7 +30,12 @@ const AdminDashboardLayout = () => {
     fetchStats();
   }, []);
 
-  if (loading) return <div className="p-10 flex items-center justify-center h-screen">Cargando estadísticas...</div>;
+  if (loading)
+    return (
+      <div className="p-10 flex items-center justify-center h-screen">
+        Cargando estadísticas...
+      </div>
+    );
   if (!stats)
     return <div className="p-10">No se pudieron cargar las estadísticas</div>;
 
@@ -90,7 +94,11 @@ const AdminDashboardLayout = () => {
                       {tarjeta.value}
                     </p>
                     <p className={`flex items-center gap-1 font-bold ${color}`}>
-                      {positivo ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+                      {positivo ? (
+                        <TrendingUp className="w-4 h-4" />
+                      ) : (
+                        <TrendingDown className="w-4 h-4" />
+                      )}
                       {tarjeta.change.toFixed(1)}%
                     </p>
                   </div>
@@ -110,31 +118,71 @@ const AdminDashboardLayout = () => {
                     <thead className="text-xs uppercase bg-background-light dark:bg-background-dark">
                       <tr>
                         <th className="px-6 py-3 font-medium">Fecha</th>
-                        <th className="px-6 py-3 font-medium">Total de Ventas</th>
+                        <th className="px-6 py-3 font-medium">
+                          Total de Ventas
+                        </th>
                         <th className="px-6 py-3 font-medium">Pedidos</th>
-                        <th className="px-6 py-3 font-medium text-right">Cambio</th>
+                        <th className="px-6 py-3 font-medium text-right">
+                          Cambio
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       {stats.salesTrends.map((dia, idx, arr) => {
-                        const siguiente = idx < arr.length - 1 ? arr[idx + 1].totalRevenue : null;
-                        const divisor = siguiente !== 0 ? siguiente : 1;
-                        const cambio =
-                          siguiente !== null ? ((dia.totalRevenue - siguiente) / divisor) * 100 : null;
-                        const direccion = cambio >= 0 ? "up" : "down";
-                        const colorCambio = direccion === "up" ? "text-green-500" : "text-red-500";
+                        const siguiente =
+                          idx < arr.length - 1
+                            ? arr[idx + 1].totalRevenue
+                            : null;
+
+                        let cambio = null;
+                        let direccion = null;
+
+                        if (siguiente === null) {
+                          // Último día, no hay siguiente
+                          cambio = null;
+                        } else if (siguiente === 0 && dia.totalRevenue === 0) {
+                          // Ambos días 0 → sin cambio
+                          cambio = 0;
+                          direccion = "up";
+                        } else if (siguiente === 0) {
+                          // Día siguiente 0 → incremento total
+                          cambio = 100;
+                          direccion = "up";
+                        } else {
+                          cambio =
+                            ((dia.totalRevenue - siguiente) / siguiente) * 100;
+                          direccion = cambio >= 0 ? "up" : "down";
+                        }
+
+                        const colorCambio =
+                          direccion === "up"
+                            ? "text-green-500"
+                            : "text-red-500";
 
                         return (
-                          <tr key={dia.date} className="border-b border-border-light dark:border-border-dark">
+                          <tr
+                            key={dia.date}
+                            className="border-b border-border-light dark:border-border-dark"
+                          >
                             <td className="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap">
                               {dia.date}
                             </td>
-                            <td className="px-6 py-4">${dia.totalRevenue.toLocaleString()}</td>
+                            <td className="px-6 py-4">
+                              ${dia.totalRevenue.toLocaleString()}
+                            </td>
                             <td className="px-6 py-4">{dia.orders}</td>
-                            <td className={`px-6 py-4 text-right flex justify-end items-center gap-1 ${colorCambio}`}>
-                              {cambio === null ? "-" : (
+                            <td
+                              className={`px-6 py-4 text-right flex justify-end items-center gap-1 ${colorCambio}`}
+                            >
+                              {cambio === null ? (
+                                "-"
+                              ) : (
                                 <>
-                                  {direccion === "up" ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+                                  {direccion === "up" ? (
+                                    <TrendingUp className="w-4 h-4" />
+                                  ) : (
+                                    <TrendingDown className="w-4 h-4" />
+                                  )}
                                   {Math.abs(cambio).toFixed(1)}%
                                 </>
                               )}
@@ -182,8 +230,12 @@ const AdminDashboardLayout = () => {
                         {item.icon}
                       </div>
                       <div>
-                        <p className="font-semibold text-text-light dark:text-text-dark">{item.title}</p>
-                        <p className="text-sm text-text-muted-light dark:text-text-muted-dark">{item.desc}</p>
+                        <p className="font-semibold text-text-light dark:text-text-dark">
+                          {item.title}
+                        </p>
+                        <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
+                          {item.desc}
+                        </p>
                       </div>
                     </NavLink>
                   ))}
@@ -210,43 +262,84 @@ const AdminDashboardLayout = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {stats.recentOrders.map(({ id_pedido, id_usuario, nombre_usuario, fecha, total }) => (
-                      <tr key={id_pedido} className="border-b border-border-light dark:border-border-dark">
-                        <td className="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap">
-                          #TEK00{id_pedido}
-                        </td>
-                        <td className="px-6 py-4">{nombre_usuario || "Invitado"}</td>
-                        <td className="px-6 py-4">{new Date(fecha).toLocaleDateString("es-ES")}</td>
-                        <td className="px-6 py-4 font-bold text-text-light dark:text-text-dark">${total}</td>
-                        <td className="px-6 py-4 text-right">
-                          <NavLink className="font-medium text-primary hover:underline" to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`}>
-                            Ver
-                          </NavLink>
-                        </td>
-                      </tr>
-                    ))}
+                    {stats.recentOrders.map(
+                      ({
+                        id_pedido,
+                        id_usuario,
+                        nombre_usuario,
+                        fecha,
+                        total,
+                      }) => (
+                        <tr
+                          key={id_pedido}
+                          className="border-b border-border-light dark:border-border-dark"
+                        >
+                          <td className="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap">
+                            #TEK00{id_pedido}
+                          </td>
+                          <td className="px-6 py-4">
+                            {nombre_usuario || "Invitado"}
+                          </td>
+                          <td className="px-6 py-4">
+                            {new Date(fecha).toLocaleDateString("es-ES")}
+                          </td>
+                          <td className="px-6 py-4 font-bold text-text-light dark:text-text-dark">
+                            ${total}
+                          </td>
+                          <td className="px-6 py-4 text-right">
+                            <NavLink
+                              className="font-medium text-primary hover:underline"
+                              to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`}
+                            >
+                              Ver
+                            </NavLink>
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </table>
               </div>
 
               {/* Tarjetas Móvil */}
               <div className="grid grid-cols-1 text-center sm:grid-cols-2 gap-6 lg:hidden">
-                {stats.recentOrders.map(({ id_pedido, nombre_usuario, id_usuario, fecha, total }) => {
-                  const fechaFormateada = new Date(fecha).toLocaleDateString("es-ES", {
-                    day: "2-digit", month: "2-digit", year: "numeric"
-                  });
-                  return (
-                    <div key={id_pedido} className="rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-5 space-y-2 shadow-lg">
-                      <p className="font-semibold text-text-light dark:text-text-dark">ID: #TEK00{id_pedido}</p>
-                      <p className="font-semibold text-text-light dark:text-text-dark">Nombre: {nombre_usuario || "Invitado"}</p>
-                      <p className="text-sm text-text-muted-light dark:text-text-muted-dark">{fechaFormateada}</p>
-                      <p className="font-bold text-text-light dark:text-text-dark">${total}</p>
-                      <NavLink to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`} className="text-primary hover:underline inline-block mt-2">
-                        Ver
-                      </NavLink>
-                    </div>
-                  );
-                })}
+                {stats.recentOrders.map(
+                  ({ id_pedido, nombre_usuario, id_usuario, fecha, total }) => {
+                    const fechaFormateada = new Date(fecha).toLocaleDateString(
+                      "es-ES",
+                      {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                      }
+                    );
+                    return (
+                      <div
+                        key={id_pedido}
+                        className="rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark p-5 space-y-2 shadow-lg"
+                      >
+                        <p className="font-semibold text-text-light dark:text-text-dark">
+                          ID: #TEK00{id_pedido}
+                        </p>
+                        <p className="font-semibold text-text-light dark:text-text-dark">
+                          Nombre: {nombre_usuario || "Invitado"}
+                        </p>
+                        <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
+                          {fechaFormateada}
+                        </p>
+                        <p className="font-bold text-text-light dark:text-text-dark">
+                          ${total}
+                        </p>
+                        <NavLink
+                          to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`}
+                          className="text-primary hover:underline inline-block mt-2"
+                        >
+                          Ver
+                        </NavLink>
+                      </div>
+                    );
+                  }
+                )}
               </div>
             </div>
           </div>

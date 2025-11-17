@@ -1,16 +1,70 @@
-# React + Vite
+# 🛒 Marketplace Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend del **Marketplace**, plataforma de e-commerce construida con **React 19**.  
+Incluye usuarios, administración, carrito de compras, productos y pedidos.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Propósito
+Proveer una SPA con roles diferenciados:  
+- Público (no autenticado)  
+- Usuario autenticado  
+- Administrador  
 
-## React Compiler
+Este documento resume la **arquitectura**, **stack tecnológico**, **rutas**, **estado**, **integraciones externas** y **flujo de desarrollo**.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## 🏗 Arquitectura General
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- SPA construida con React 19 y Tailwind CSS  
+- **Providers jerárquicos**:
+  - `CartProvider` → estado global del carrito  
+  - `ToastContainer` → notificaciones  
+  - `ScrollToTop` → scroll correcto al cambiar de ruta  
+- **Rutas**:
+  - Público: Home, Productos, Carrito, Login/Signup, Categorías
+  - Perfil: Perfil, Historial de pedidos (solo usuarios autenticados)
+  - Admin: CRUD Productos, Usuarios, Pedidos, Dashboard analítico  
+
+**Fuentes:** `src/App.jsx` (31-125)
+
+---
+
+## 🛠 Stack Tecnológico
+
+| Categoría           | Tecnología              | Versión | Propósito                       |
+|--------------------|------------------------|--------|---------------------------------|
+| ⚛️ Framework       | React                  | 19.1.1 | UI component library             |
+| 🏗 Build Tool       | Vite                   | 7.1.7  | Dev server y bundler             |
+| 🖋 CSS             | Tailwind CSS           | 4.1.15 | Utility-first CSS                |
+| 🌐 Routing         | React Router DOM       | 7.9.4  | Navegación cliente               |
+| 📸 Imágenes        | Cloudinary React       | 1.14.3 | CDN y optimización de imágenes   |
+| 🔔 Notificaciones  | React Toastify         | 11.0.5 | Feedback visual                  |
+| 🧪 Testing         | Vitest                 | 4.0.9  | Unit & integration testing       |
+| ⬇️ Drag & Drop     | React Dropzone         | 14.3.8 | Subida de archivos               |
+| 🔢 Paginación       | React Paginate         | 8.3.0  | Listado paginado                 |
+| 🎨 Animaciones      | Framer Motion          | 12.23.24| Transiciones y efectos visuales |
+| 🖼 Icons           | Lucide React           | 0.552.0 | Librería de íconos              |
+
+---
+
+## 📂 Estructura de Proyecto
+
+```text
+src/
+├── App.jsx                    # Root y rutas
+├── pages/                     # Feature pages
+│   ├── Home/                  # Página de inicio
+│   ├── Products/              # Listado de productos
+│   ├── Product/               # Detalle de producto
+│   ├── Cart/                  # Carrito de compras
+│   ├── Login/                 # Autenticación
+│   ├── Profile/               # Perfil de usuario
+│   ├── Admin/                 # Panel de administración
+│   └── ...
+├── shared/
+│   ├── components/            # Componentes reutilizables
+│   ├── hooks/                 # Hooks (CartProvider)
+│   └── utils/                 # Utilities (ProtectedRoute, ScrollToTop)
+└── ...

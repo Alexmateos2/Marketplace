@@ -3,11 +3,10 @@ import { NavLink } from "react-router-dom";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-
+import { toast } from "react-toastify";
 const NewCards = () => {
   const [newProductos, setNewProductos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNewProductos = async () => {
@@ -21,10 +20,9 @@ const NewCards = () => {
 
         const data = await response.json();
         setNewProductos(Array.isArray(data) ? data : []);
-        setError(null);
       } catch (err) {
-        console.error("Error fetching productos:", err);
-        setError(err.message);
+        toast.error("Error: " + err.message);
+
         setNewProductos([]);
       } finally {
         setIsLoading(false);
@@ -38,14 +36,6 @@ const NewCards = () => {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <p className="text-red-600 dark:text-red-400 text-lg">Error: {error}</p>
       </div>
     );
   }

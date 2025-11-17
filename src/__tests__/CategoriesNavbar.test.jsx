@@ -1,6 +1,7 @@
 import React from "react";
-import { render, screen, fireEvent, within } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+
+import { describe, it, expect, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 import CategoriesNavbar from "../shared/navbar/categoriesNavbar";
 
@@ -53,22 +54,23 @@ describe("CategoriesNavbar - funcionalidad y usabilidad", () => {
   });
 
   it("Cierra el menú correctamente y los links desaparecen", () => {
+    vi.useFakeTimers();
     renderNavbar();
-
     const button = screen.getAllByRole("button", { name: /categorías/i })[0];
 
     // Abrir menú
     fireEvent.click(button);
-
-    // Link visible
-    const tecladosLink = screen.getByRole("link", { name: /teclados/i });
-    expect(tecladosLink).toBeDefined();
+    expect(screen.queryByRole("link", { name: /teclados/i })).toBeDefined();
 
     // Cerrar menú
     fireEvent.click(button);
 
-    // Verificar que el link ya no está en el DOM
-    const linkAfterClose = screen.queryByRole("link", { name: /teclados/i });
-    expect(linkAfterClose).toBeNull();
+    // Avanzar tiempo para que se ejecute el setTimeout de 200ms
+    vi.advanceTimersByTime(250);
+
+    // Verificar que desaparece
+    expect(screen.queryByRole("link", { name: /teclados/i })).toBeNull();
+
+    vi.useRealTimers();
   });
 });

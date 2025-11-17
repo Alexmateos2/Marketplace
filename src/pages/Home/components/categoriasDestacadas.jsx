@@ -6,7 +6,7 @@ function CategoriaDestacada() {
     { title: "Laptops", image: "../unnamed(6).png" },
     { title: "Audio", image: "../unnamed(7).png" },
     { title: "Wearables", image: "../unnamed(8).png" },
-    { title: "Accessories", image: "../unnamed(9).png" },
+    { title: "Accesorios", image: "../unnamed(9).png" },
   ];
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

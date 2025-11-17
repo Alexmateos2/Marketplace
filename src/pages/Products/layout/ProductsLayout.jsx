@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback, Suspense } from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
 import Pagination from "../../../shared/utils/pagination";
-import Products from "../components/products";
 import Filtros from "../components/filtros";
 import ProductsHero from "../components/productsHero";
-import {toast} from 'react-toastify';
+import { toast } from "react-toastify";
+
+// Lazy load del componente Products
+const Products = React.lazy(() => import("../components/products"));
 
 const ProductsPage = ({ category, search }) => {
   const itemsPerPage = 12;
@@ -20,38 +22,41 @@ const ProductsPage = ({ category, search }) => {
       try {
         setLoading(true);
         const response = await fetch("http://localhost:3000/productos");
-
         if (!response.ok) throw new Error(`Error: ${response.status}`);
-
         const data = await response.json();
-        setProductos(data || []);
+
+        // Pre-procesar nombres para búsqueda
+        const processed = (data || []).map(p => ({
+          ...p,
+          searchableName: p.nombre.toLowerCase(),
+        }));
+
+        setProductos(processed);
       } catch (err) {
-        toast.error( err.message);
- 
+        toast.error(err.message);
         setProductos([]);
       } finally {
         setLoading(false);
       }
     };
-
     fetchProductos();
   }, []);
 
-  // Filtrar + ordenar (igual que antes)
+  // Memoizar filtrado y ordenamiento
   const filteredProducts = useMemo(() => {
     let result = [...productos];
 
-    if (category) result = result.filter((p) => p.categoria === category);
+    if (category) result = result.filter(p => p.categoria === category);
 
     if (search) {
       const query = search.toLowerCase().trim();
-      result = result.filter((p) => p.nombre.toLowerCase().includes(query));
+      result = result.filter(p => p.searchableName.includes(query));
     }
 
     if (filters.price) {
-      if (filters.price === "0-100") result = result.filter((p) => p.precio <= 100);
-      else if (filters.price === "100-500") result = result.filter((p) => p.precio > 100 && p.precio <= 500);
-      else if (filters.price === "500+") result = result.filter((p) => p.precio > 500);
+      if (filters.price === "0-100") result = result.filter(p => p.precio <= 100);
+      else if (filters.price === "100-500") result = result.filter(p => p.precio > 100 && p.precio <= 500);
+      else if (filters.price === "500+") result = result.filter(p => p.precio > 500);
     }
 
     if (filters.sortBy) {
@@ -66,10 +71,14 @@ const ProductsPage = ({ category, search }) => {
 
   // Paginación
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentProducts = filteredProducts.slice(
-    startIndex,
-    startIndex + itemsPerPage
+  const currentProducts = useMemo(
+    () => filteredProducts.slice(startIndex, startIndex + itemsPerPage),
+    [filteredProducts, startIndex]
   );
+
+  // Callbacks memoizados
+  const handlePageChange = useCallback((page) => setCurrentPage(page), []);
+  const handleSetFilters = useCallback((newFilters) => setFilters(newFilters), []);
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors">
@@ -80,24 +89,22 @@ const ProductsPage = ({ category, search }) => {
           search={search}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
-          onPageChange={setCurrentPage}
-            totalItems={filteredProducts.length}
+          onPageChange={handlePageChange}
+          totalItems={filteredProducts.length}
         />
         <div className="flex flex-col lg:flex-row gap-8">
-          <Filtros setFilters={setFilters} />
+          <Filtros setFilters={handleSetFilters} />
           <div className="flex-1">
-            <Products
-              loading={loading}
-      
-              currentProducts={currentProducts}
-            />
+            <Suspense fallback={<div className="text-center py-20">Cargando productos...</div>}>
+              <Products loading={loading} currentProducts={currentProducts} />
+            </Suspense>
             <div className="block lg:hidden mt-8">
               <Pagination
                 category={category}
                 search={search}
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}
-                onPageChange={setCurrentPage}
+                onPageChange={handlePageChange}
                 totalItems={filteredProducts.length}
               />
             </div>
