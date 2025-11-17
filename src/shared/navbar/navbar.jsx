@@ -30,8 +30,9 @@ const Navbar = () => {
                   <img
                     src="/logo2.svg"
                     alt="Logo de Tekia"
-                    className="w-8 h-auto object-contain"
+                    className="w-8 aspect-square object-contain"
                   />
+
                   <span className="hidden xxs:block text-2xl font-display font-semibold tracking-tight">
                     Tekia
                   </span>
@@ -137,7 +138,9 @@ const Navbar = () => {
           <div className="lg:hidden h-5" />
           <div className="lg:hidden relative">
             <button
-              className={`fixed ${isProfilePage ? "top-[85px]" : "top-[100px]"} left-3 z-50 p-3 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary dark:border-border-dark dark:bg-surface-dark dark:text-primary transition-transform duration-300`}
+              className={`fixed ${
+                isProfilePage ? "top-[85px]" : "top-[100px]"
+              } left-3 z-50 p-3 flex justify-center items-center bg-background-light border border-border-light text-primary rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-primary dark:border-border-dark dark:bg-surface-dark dark:text-primary transition-transform duration-300`}
               onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Alternar menú móvil"
             >

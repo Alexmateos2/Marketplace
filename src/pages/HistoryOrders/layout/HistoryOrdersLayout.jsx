@@ -7,6 +7,7 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import Pagination from "../../../shared/utils/pagination.jsx";
+import { toast } from "react-toastify";
 
 const HistoryOrdersPage = () => {
   const navigate = useNavigate();
@@ -17,14 +18,14 @@ const HistoryOrdersPage = () => {
 
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   useEffect(() => {
     // Si no hay sesión
     if (!user) {
-      setError("Por favor inicia sesión para ver tus pedidos");
+      toast.error("Por favor inicia sesión para ver tus pedidos");
       setLoading(false);
       setTimeout(() => navigate("/login"), 1000);
       return;
@@ -32,7 +33,7 @@ const HistoryOrdersPage = () => {
 
     // Bloquear acceso a usuarios normales que intenten ver otros
     if (!isAdmin && id_usuario && id_usuario !== user) {
-      setError("No tienes permiso para ver estos pedidos");
+      toast.error("No tienes permiso para ver estos pedidos");
       setLoading(false);
       setTimeout(() => navigate("/"), 1500);
       return;
@@ -41,7 +42,7 @@ const HistoryOrdersPage = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        setError(null);
+
         const response = await fetch(
           `http://localhost:3000/pedidos/${id_usuario || user}`
         );
@@ -49,10 +50,7 @@ const HistoryOrdersPage = () => {
         const data = await response.json();
         setOrders(data || []);
       } catch (err) {
-        console.error("Error fetching orders:", err);
-        setError(
-          "No se pudieron cargar los pedidos. Intenta de nuevo más tarde."
-        );
+        toast.error("Error: " + err.message);
         setOrders([]);
       } finally {
         setLoading(false);
@@ -97,10 +95,6 @@ const HistoryOrdersPage = () => {
             <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
               Cargando tus pedidos...
             </p>
-          ) : error ? (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded">
-              {error}
-            </div>
           ) : orders.length === 0 ? (
             <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
               {isAdmin

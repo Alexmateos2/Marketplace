@@ -39,7 +39,7 @@ const CarritoPage = () => {
           );
         }
 
-        toast.success("Pedido realizado con éxito. ID: " + data.id_pedido);
+        toast.success("Pedido realizado con éxito.");
         clearCart();
         navigate(`/pedidos/historial/details/${data.id_pedido}`);
       } else {

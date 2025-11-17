@@ -37,6 +37,7 @@ const LoginPage = () => {
       } else {
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
         localStorage.setItem("rol", JSON.stringify(data.rol));
+        toast.success("¡Bienvenido de nuevo!");
         navigate("/");
       }
     } catch (err) {
@@ -118,12 +119,12 @@ const LoginPage = () => {
                 </p>
               )}
               <div className="flex mt-3">
-                <NavLink
+                <a
                   className="text-sm sm:text-base text-primary hover:underline"
-                  to="/forgot-password"
+                  to="#"
                 >
                   ¿Olvidaste tu contraseña?
-                </NavLink>
+                </a>
               </div>
             </div>
 
@@ -138,7 +139,7 @@ const LoginPage = () => {
           </form>
 
           {/* Sign Up Link */}
-          <div className="text-center text-sm sm:text-base mt-6">
+          <div className="text-center text-sm sm:text-base border-t border-border-light dark:border-border-dark pt-6">
             <p className="text-muted-light dark:text-muted-dark">
               ¿No tienes una cuenta?{" "}
               <NavLink

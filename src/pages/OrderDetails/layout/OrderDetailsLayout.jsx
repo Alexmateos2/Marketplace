@@ -4,12 +4,11 @@ import Navbar from "../../../shared/navbar/navbar";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-
+import { toast } from "react-toastify";
 const OrderDetailsPage = () => {
   const { id, id_usuario } = useParams();
   const [pedido, setPedido] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const usuario = localStorage.getItem("usuario");
   const storedRol = localStorage.getItem("rol");
@@ -25,7 +24,7 @@ const OrderDetailsPage = () => {
 
   useEffect(() => {
     if (!usuario) {
-      setError("Por favor inicia sesión para ver tus pedidos");
+      toast.error("Por favor inicia sesión para ver tus pedidos");
       setTimeout(() => navigate("/login"), 1000);
       setLoading(false);
       return;
@@ -35,7 +34,7 @@ const OrderDetailsPage = () => {
     const esPropietario = id_usuario === usuario?.toString() || !id_usuario;
 
     if (!esAdmin && !esPropietario) {
-      setError("No tienes permiso para ver este pedido");
+      toast.error("No tienes permiso para ver este pedido");
       setTimeout(() => navigate("/"), 1500);
       setLoading(false);
       return;
@@ -48,14 +47,14 @@ const OrderDetailsPage = () => {
     const fetchOrderDetails = async () => {
       try {
         setLoading(true);
-        setError(null);
+
         const response = await fetch(endpoint);
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
         setPedido(data);
       } catch (err) {
         console.error("Error fetching order details:", err);
-        setError("No se pudieron cargar los detalles del pedido.");
+        toast.error("No se pudieron cargar los detalles del pedido.");
         setPedido(null);
       } finally {
         setLoading(false);
@@ -77,16 +76,10 @@ const OrderDetailsPage = () => {
       </div>
     );
   }
-
-  if (error || !pedido) {
+  if (!pedido) {
     return (
       <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen">
-        <Navbar />
-        <main className="px-6 sm:px-10 lg:px-20 py-8 flex flex-1 justify-center">
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded">
-            {error}
-          </div>
-        </main>
+        No se encontraron los detalles del pedido.
       </div>
     );
   }
