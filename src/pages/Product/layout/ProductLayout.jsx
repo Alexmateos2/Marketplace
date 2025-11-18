@@ -105,7 +105,9 @@ const ProductPages = () => {
                   </span>
                 </div>
                 <div className="flex flex-col gap-4">
-                  <button
+                  {product.stock > 0 ? (
+                      <>
+                      <button
                     onClick={handleAddToCart}
                     className="cursor-pointer sm:w-full md:w-2/3 lg:w-full flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-all"
                   >
@@ -136,6 +138,11 @@ const ProductPages = () => {
                       </span>
                     )}
                   </div>
+                  </>
+                  ):(
+                    <span className="text-red-600 font-semibold">Producto agotado</span>
+                  )}
+                
                 </div>
               </div>
             </div>
