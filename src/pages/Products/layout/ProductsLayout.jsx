@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useMemo, useCallback, Suspense } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  Suspense,
+} from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
 import Pagination from "../../../shared/utils/pagination";
@@ -26,11 +32,11 @@ const ProductsPage = ({ category, search }) => {
         const data = await response.json();
 
         // Pre-procesar nombres para búsqueda
-        const processed = (data || []).map(p => ({
+        const processed = (data || []).map((p) => ({
           ...p,
           searchableName: p.nombre.toLowerCase(),
         }));
-        const filter = processed.filter(p => p.activo === 1);
+        const filter = processed.filter((p) => p.activo === 1);
         setProductos(filter);
       } catch (err) {
         toast.error(err.message);
@@ -46,24 +52,31 @@ const ProductsPage = ({ category, search }) => {
   const filteredProducts = useMemo(() => {
     let result = [...productos];
 
-    if (category) result = result.filter(p => p.categoria === category);
+    if (category) result = result.filter((p) => p.categoria === category);
 
     if (search) {
       const query = search.toLowerCase().trim();
-      result = result.filter(p => p.searchableName.includes(query));
+      result = result.filter((p) => p.searchableName.includes(query));
     }
 
     if (filters.price) {
-      if (filters.price === "0-100") result = result.filter(p => p.precio <= 100);
-      else if (filters.price === "100-500") result = result.filter(p => p.precio > 100 && p.precio <= 500);
-      else if (filters.price === "500+") result = result.filter(p => p.precio > 500);
+      if (filters.price === "0-100")
+        result = result.filter((p) => p.precio <= 100);
+      else if (filters.price === "100-500")
+        result = result.filter((p) => p.precio > 100 && p.precio <= 500);
+      else if (filters.price === "500+")
+        result = result.filter((p) => p.precio > 500);
     }
 
     if (filters.sortBy) {
-      if (filters.sortBy === "low-high") result.sort((a, b) => a.precio - b.precio);
-      else if (filters.sortBy === "high-low") result.sort((a, b) => b.precio - a.precio);
-      else if (filters.sortBy === "newest") result.sort((a, b) => b.id_producto - a.id_producto);
-      else if (filters.sortBy === "oldest") result.sort((a, b) => a.id_producto - b.id_producto);
+      if (filters.sortBy === "low-high")
+        result.sort((a, b) => a.precio - b.precio);
+      else if (filters.sortBy === "high-low")
+        result.sort((a, b) => b.precio - a.precio);
+      else if (filters.sortBy === "newest")
+        result.sort((a, b) => b.id_producto - a.id_producto);
+      else if (filters.sortBy === "oldest")
+        result.sort((a, b) => a.id_producto - b.id_producto);
     }
 
     return result;
@@ -78,12 +91,15 @@ const ProductsPage = ({ category, search }) => {
 
   // Callbacks memoizados
   const handlePageChange = useCallback((page) => setCurrentPage(page), []);
-  const handleSetFilters = useCallback((newFilters) => setFilters(newFilters), []);
+  const handleSetFilters = useCallback(
+    (newFilters) => setFilters(newFilters),
+    []
+  );
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-background-dark bg-background-light dark:text-content-dark font-display transition-colors">
       <Navbar />
-      <main className="grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="grow  min-h-[80vh] container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <ProductsHero
           category={category}
           search={search}
@@ -95,9 +111,8 @@ const ProductsPage = ({ category, search }) => {
         <div className="flex flex-col lg:flex-row gap-8">
           <Filtros setFilters={handleSetFilters} />
           <div className="flex-1">
-            <Suspense fallback={<div className="text-center py-20">Cargando productos...</div>}>
-              <Products loading={loading} currentProducts={currentProducts} />
-            </Suspense>
+            <Products loading={loading} currentProducts={currentProducts} />
+
             <div className="block lg:hidden mt-8">
               <Pagination
                 category={category}

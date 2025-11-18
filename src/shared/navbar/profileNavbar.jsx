@@ -1,39 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { ChevronDown, User, UserStar, LogIn, LogOut } from "lucide-react";
 import AVATARS from "../utils/avatars.js";
 
 const ProfileNavbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [closeTimeout, setCloseTimeout] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState(AVATARS[0].url);
-  const [user, setUser] = useState(null);
-  const [rol, setRol] = useState(null);
-
   const navigate = useNavigate();
 
-  // Función para actualizar datos del localStorage
+  // Inicializamos avatar desde localStorage para evitar parpadeos
+  const initialAvatar = AVATARS.find(
+    av => av.value === parseInt(localStorage.getItem("avatar"))
+  )?.url || null;
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [closeTimeout, setCloseTimeout] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState(initialAvatar);
+  const [loaded, setLoaded] = useState(!!initialAvatar);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("usuario")));
+  const [rol, setRol] = useState(JSON.parse(localStorage.getItem("rol")));
+
+  // Actualiza datos solo si cambian
   const updateFromStorage = () => {
+    const storedAvatar = parseInt(localStorage.getItem("avatar")) || 2;
+    const newAvatarUrl = AVATARS.find(av => av.value === storedAvatar)?.url;
+
+    if (newAvatarUrl && newAvatarUrl !== avatarUrl) {
+      setAvatarUrl(newAvatarUrl);
+      setLoaded(true);
+    }
+
     const storedUser = JSON.parse(localStorage.getItem("usuario"));
     const storedRol = JSON.parse(localStorage.getItem("rol"));
-    const storedAvatar = parseInt(localStorage.getItem("avatar")) || 0;
 
-    setUser(storedUser);
-    setRol(storedRol);
-    setAvatarUrl(
-      AVATARS.find((av) => av.value === storedAvatar)?.url || AVATARS[0].url
-    );
+    if (storedUser !== user) setUser(storedUser);
+    if (storedRol !== rol) setRol(storedRol);
   };
 
-  // Cargar al montar y escuchar cambios en localStorage
-  useEffect(() => {
-    updateFromStorage();
-
-    // Escuchar cambios en localStorage (desde otras pestañas/componentes)
-    window.addEventListener("storage", updateFromStorage);
-
-    return () => window.removeEventListener("storage", updateFromStorage);
-  }, []);
 
   const handleMouseEnter = () => {
     if (closeTimeout) clearTimeout(closeTimeout);
@@ -62,13 +63,18 @@ const ProfileNavbar = () => {
       {/* Avatar */}
       <div
         className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => setIsOpen(prev => !prev)}
       >
-        <img
-          src={avatarUrl}
-          alt="Avatar del usuario"
-          className="object-cover rounded-full w-10 h-10 border-2 border-primary/50"
-        />
+        {avatarUrl && (
+          <img
+            src={avatarUrl}
+            alt="Avatar del usuario"
+            className={`object-cover rounded-full w-10 h-10 border-2 border-primary/50 ${
+              !loaded ? "opacity-0" : "opacity-100 transition-opacity"
+            }`}
+            onLoad={() => setLoaded(true)}
+          />
+        )}
         <ChevronDown
           size={18}
           className={`transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
@@ -87,9 +93,11 @@ const ProfileNavbar = () => {
             to={user ? "/profile" : "/login"}
             className={({ isActive }) =>
               `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
-               ${isActive
-                 ? "text-primary bg-primary/10 dark:bg-primary/20"
-                 : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
+               ${
+                 isActive
+                   ? "text-primary bg-primary/10 dark:bg-primary/20"
+                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+               }`
             }
             onClick={() => setIsOpen(false)}
           >
@@ -102,9 +110,11 @@ const ProfileNavbar = () => {
               to="/login"
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
-                 ${isActive
-                   ? "text-primary bg-primary/10 dark:bg-primary/20"
-                   : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
+                 ${
+                   isActive
+                     ? "text-primary bg-primary/10 dark:bg-primary/20"
+                     : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+                 }`
               }
               onClick={() => setIsOpen(false)}
             >
@@ -118,9 +128,11 @@ const ProfileNavbar = () => {
                   to="/admin/dashboard"
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-4 py-3 text-base border-b border-border-light dark:border-border-dark transition-colors 
-                     ${isActive
-                       ? "text-primary bg-primary/10 dark:bg-primary/20"
-                       : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"}`
+                     ${
+                       isActive
+                         ? "text-primary bg-primary/10 dark:bg-primary/20"
+                         : "text-content-light dark:text-content-dark hover:bg-primary/10 dark:hover:bg-primary/20"
+                     }`
                   }
                   onClick={() => setIsOpen(false)}
                 >
