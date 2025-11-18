@@ -2,14 +2,20 @@ import React from "react";
 import { User, FileText, LogOut, UserStar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import AVATARS from "../../../shared/utils/avatars.js";
+const AsideProfile = ({ usuario: propUsuario }) => {
+  const usuario = propUsuario || { 
+    nombre: "", 
+    email: "", 
 
-const AsideProfile = ({ usuario }) => {
-  const { nombre, email } = usuario || {
-    nombre: "John Doe",
-    email: "johndoe@gmail.com",
   };
+
+  const { nombre, email } = usuario;
   const rol = JSON.parse(localStorage.getItem("rol"));
   const navigate = useNavigate();
+  const avatar = parseInt(localStorage.getItem("avatar")) || 0;
+  const avatarUrl = AVATARS.find((av) => av.value === avatar)?.url;
+
 
   return (
     <aside className="w-80 py-6 px-6 bg-surface-light dark:bg-background-dark/50 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark fixed left-0 top-20 bottom-0 z-30 overflow-y-auto">
@@ -18,9 +24,8 @@ const AsideProfile = ({ usuario }) => {
           <div
             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 h-12 flex-shrink-0"
             data-alt="Avatar del usuario"
-            style={{
-              backgroundImage:
-                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBnPDzJcMZziYykcoTL8J0llTXjQhuVgoFS5kaRslcUxTveESdKSoIeOWOZkXuY0Tz-MTgebtvZ7QCNLiHPFUq9GtchxXFaj9vudR_T10GJdBqrkYLFBjrFk6o9RZr0ewMDdQuOhT3-Ycr7AHSQs5sEa8HO_1FkaD9bKZO_S82ZQQdeNdwmD6exVcr4YhNUOyVKTc8WRSo_3ezwYk3iE4znU53VV29a2ikgoVrbKeK6Vwe1ShJCMb5nbKClDiQMGADJGhvG8QtlA8s")',
+              style={{
+              backgroundImage: `url(${avatarUrl})`,
             }}
           ></div>
           <div className="min-w-0">
@@ -42,7 +47,7 @@ const AsideProfile = ({ usuario }) => {
                   : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
               }`
             }
-            to="#"
+            to="/profile"
           >
             <User size={20} className="flex-shrink-0" />
             <span className="text-sm font-medium">Información personal</span>

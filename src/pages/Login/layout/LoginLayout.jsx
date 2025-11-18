@@ -37,6 +37,7 @@ const LoginPage = () => {
       } else {
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
         localStorage.setItem("rol", JSON.stringify(data.rol));
+        localStorage.setItem("avatar", JSON.stringify(data.avatar));
         toast.success("¡Bienvenido de nuevo!");
         navigate("/");
       }

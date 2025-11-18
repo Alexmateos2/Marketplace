@@ -1,16 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import { Eye, EyeOff, Check, X } from "lucide-react";
-
-const AVATARS = [
-  {
-    url: "https://lh3.googleusercontent.com/aida-public/AB6AXuBnPDzJcMZziYykcoTL8J0llTXjQhuVgoFS5kaRslcUxTveESdKSoIeOWOZkXuY0Tz-MTgebtvZ7QCNLiHPFUq9GtchxXFaj9vudR_T10GJdBqrkYLFBjrFk6o9RZr0ewMDdQuOhT3-Ycr7AHSQs5sEa8HO_1FkaD9bKZO_S82ZQQdeNdwmD6exVcr4YhNUOyVKTc8WRSo_3ezwYk3iE4znU53VV29a2ikgoVrbKeK6Vwe1ShJCMb5nbKClDiQMGADJGhvG8QtlA8s",
-    value: 0,
-  },
-  { url: "./unnamed.png", value: 1 },
-];
-
-const API_BASE_URL =  "http://localhost:3000";
+import AVATARS from "../../../shared/utils/avatars.js";
 
 const VALIDATION_RULES = {
   nombre: {
@@ -34,6 +25,8 @@ const VALIDATION_RULES = {
   },
 };
 
+const API_BASE_URL ="http://localhost:3000";
+
 const FormField = ({
   label,
   id,
@@ -47,10 +40,12 @@ const FormField = ({
   rows = 3,
   placeholder,
 }) => (
-  <div>
-    <label htmlFor={id} className="block text-sm font-medium mb-2">
-      {label}
-      {required && <span className="text-red-500">*</span>}
+  <div className="flex flex-col">
+    <label
+      htmlFor={id}
+      className="text-base font-medium pb-2 text-content-light dark:text-content-dark"
+    >
+      {label} {required && <span className="text-red-500">*</span>}
     </label>
     {isTextarea ? (
       <textarea
@@ -60,10 +55,13 @@ const FormField = ({
         readOnly={readOnly}
         rows={rows}
         placeholder={placeholder}
-        className={`form-textarea flex w-full min-w-0 flex-1 rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 resize-none
-          ${error ? "border-red-500" : "border-border-light dark:border-border-dark"}
-          bg-surface-light dark:bg-surface-dark p-4 text-base transition-colors
-          ${readOnly ? "cursor-not-allowed opacity-50" : ""}`}
+        className={`form-textarea w-full rounded-lg p-4 border-2 ${
+          error
+            ? "border-red-500"
+            : "border-border-light dark:border-border-dark"
+        } bg-surface-light dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark transition-colors ${
+          readOnly ? "cursor-not-allowed opacity-50" : ""
+        }`}
       />
     ) : (
       <input
@@ -73,16 +71,18 @@ const FormField = ({
         onChange={onChange}
         readOnly={readOnly}
         placeholder={placeholder}
-        className={`form-input flex w-full min-w-0 flex-1 rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2
-          ${error ? "border-red-500" : "border-border-light dark:border-border-dark"}
-          bg-surface-light dark:bg-surface-dark h-14 p-4 text-base transition-colors
-          ${readOnly ? "cursor-not-allowed opacity-50" : ""}`}
+        className={`form-input flex w-full min-w-0 flex-1 rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 ${
+          error
+            ? "border-red-500"
+            : "border-border-light dark:border-border-dark"
+        } bg-surface-light dark:bg-surface-dark h-14 p-4 text-base transition-colors ${
+          readOnly ? "cursor-not-allowed opacity-50" : ""
+        }`}
       />
     )}
     {error && (
       <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
-        <X size={16} />
-        {error}
+        <X size={16} /> {error}
       </p>
     )}
   </div>
@@ -160,20 +160,20 @@ const FormProfile = ({ usuario }) => {
 
   const handleCancel = useCallback(() => {
     if (usuario) {
-      setFormData((prev) => ({
-        ...prev,
+      setFormData({
         nombre: usuario.nombre || "",
         email: usuario.email || "",
         direccion: usuario.direccion || "",
         telefono: usuario.telefono || "",
         password: "",
         avatar: usuario.avatar ?? 0,
-      }));
+      });
     }
     setIsEditing(false);
     setErrors({});
     setHasChanges(false);
     setShowAvatarPicker(false);
+    toast.info("Cambios descartados");
   }, [usuario]);
 
   const validateForm = useCallback(() => {
@@ -216,6 +216,11 @@ const FormProfile = ({ usuario }) => {
     async (e) => {
       e.preventDefault();
 
+      if (!usuario?.id_usuario) {
+        toast.error("Error: ID de usuario no disponible");
+        return;
+      }
+
       if (!validateForm()) {
         toast.error("Por favor, revisa los errores en el formulario");
         return;
@@ -245,188 +250,220 @@ const FormProfile = ({ usuario }) => {
         setIsEditing(false);
         setHasChanges(false);
         setFormData((prev) => ({ ...prev, password: "" }));
+        localStorage.setItem("avatar", JSON.stringify(formData.avatar));
       } catch (err) {
         toast.error(err.message || "Error al actualizar el perfil");
       } finally {
         setIsLoading(false);
       }
     },
-    [formData, usuario.id_usuario, validateForm]
+    [formData, usuario?.id_usuario, validateForm]
   );
 
   const avatarUrl = AVATARS.find((a) => a.value === formData.avatar)?.url;
 
   return (
-    <div className="space-y-6 p-6 max-w-2xl">
-      <section>
-        <h2 className="text-2xl font-bold mb-4">Información Personal</h2>
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-8">
+        <p className="text-4xl font-black text-content-light dark:text-content-dark">
+          Información Personal
+        </p>
+      </div>
 
-        <div className="relative w-32 h-32 mb-4">
-          <img
-            src={avatarUrl}
-            alt="Avatar"
-            className="w-full h-full rounded-full object-cover border-4 border-primary/20"
-          />
-          {isEditing && (
-            <button
-              onClick={() => setShowAvatarPicker(true)}
-              className="absolute bottom-0 right-0 bg-primary text-white text-xs px-2 py-2 rounded-full shadow-lg hover:bg-primary/90 transition-colors"
-            >
-              Cambiar
-            </button>
-          )}
-        </div>
-
-        {isEditing && showAvatarPicker && (
-          <div className="mb-4 p-4 bg-surface-light dark:bg-surface-dark rounded-lg border-2 border-primary/20">
-            <p className="text-sm font-medium mb-3">Selecciona un avatar:</p>
-            <div className="flex gap-4">
-              {AVATARS.map((a) => (
+      <div className="flex flex-col @container items-start gap-6 p-4 mb-8 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark">
+        <div className="flex w-full flex-col sm:flex-row gap-6 items-center sm:items-start">
+          {!showAvatarPicker && (
+            <div className="relative w-32 h-32">
+              <div
+                className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-32 h-32 flex-shrink-0 border-3 border-primary"
+                role="img"
+                aria-label="Avatar del usuario"
+                style={{ backgroundImage: `url(${avatarUrl})` }}
+              />
+              {isEditing && (
                 <button
-                  key={a.value}
-                  onClick={() => changeAvatar(a.value)}
-                  className={`w-20 h-20 rounded-full border-4 transition-all hover:scale-105
-                    ${
+                  type="button"
+                  onClick={() => setShowAvatarPicker(true)}
+                  className="absolute cursor-pointer bottom-0 right-0 bg-primary text-white text-xs px-2 py-2 rounded-full shadow-lg hover:bg-primary/90 transition-colors"
+                >
+                  Cambiar
+                </button>
+              )}
+            </div>
+          )}
+
+          {isEditing && showAvatarPicker && (
+            <div className="flex flex-col">
+              <div className="text-content-light font-bold text-center dark:text-content-dark mb-4">
+                Selecciona un avatar:
+              </div>
+              <div className="flex gap-4">
+                {AVATARS.map((a) => (
+                  <button
+                    key={a.value}
+                    type="button"
+                    onClick={() => changeAvatar(a.value)}
+                    className={`w-24 h-24 cursor-pointer rounded-full bg-no-repeat aspect-square bg-cover border-4 transition-all hover:scale-105 ${
                       formData.avatar === a.value
                         ? "border-primary"
-                        : "border-transparent opacity-60 hover:opacity-100"
+                        : "border-border-light dark:border-border-dark opacity-60 hover:opacity-100"
                     }`}
-                  style={{ backgroundImage: `url(${a.url})`, backgroundSize: "cover", backgroundPosition: "center" }}
-                  aria-label="Avatar option"
-                />
-              ))}
+                    style={{ backgroundImage: `url(${a.url})` }}
+                    aria-label={`Avatar opción ${a.value}`}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <div className="space-y-4">
-          <div>
-            <p className="text-lg font-semibold text-content-light dark:text-content-dark">
+          <div className="flex flex-col justify-center flex-1 w-full sm:w-auto">
+            <p className="text-[22px] text-center sm:text-start font-bold tracking-[-0.015em] text-content-light dark:text-content-dark">
               {formData.nombre || "Cargando..."}
             </p>
-            <p className="text-sm text-content-light/70 dark:text-content-dark/70">
+            <p className="text-base text-content-light-500 dark:text-content-dark text-center sm:text-start">
               {formData.email}
             </p>
+
+            <button
+              type="button"
+              onClick={() => (!isEditing ? setIsEditing(true) : handleCancel())}
+              className="mt-4 flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
+            >
+              <span className="truncate">
+                {isEditing ? "Cancelar" : "Editar Perfil"}
+              </span>
+            </button>
           </div>
-
-          <button
-            onClick={() => (!isEditing ? setIsEditing(true) : handleCancel())}
-            className="mt-4 flex max-w-[400px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold w-full hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
-          >
-            {isEditing ? "Cancelar" : "Editar Perfil"}
-          </button>
         </div>
-      </section>
+      </div>
 
-      {isEditing && (
-        <section className="space-y-4">
-          <h3 className="text-xl font-bold">Información de Contacto</h3>
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             label="Nombre"
             id="nombre"
             value={formData.nombre}
             onChange={handleChange}
+            readOnly={!isEditing}
             error={errors.nombre}
             required
             placeholder="Tu nombre completo"
           />
           <FormField
-            label="Email"
+            label="Correo Electrónico"
             id="email"
             type="email"
             value={formData.email}
             onChange={handleChange}
+            readOnly={!isEditing}
             error={errors.email}
             required
             placeholder="tu@email.com"
           />
-          <FormField
-            label="Teléfono"
-            id="telefono"
-            value={formData.telefono}
-            onChange={handleChange}
-            error={errors.telefono}
-            placeholder="+34 123 456 789"
-          />
-          <FormField
-            label="Dirección"
-            id="direccion"
-            value={formData.direccion}
-            onChange={handleChange}
-            isTextarea
-            rows={3}
-            placeholder="Tu dirección completa"
-          />
-        </section>
-      )}
+        </div>
 
-      <section>
-        <h3 className="text-xl font-bold mb-4">Seguridad</h3>
-        <div className="relative">
-          <label htmlFor="password" className="block text-sm font-medium mb-2">
-            Contraseña
-            {isEditing && (
-              <span className="text-xs text-gray-500">
-                {" "}
-                (dejar vacío para mantener la actual)
-              </span>
-            )}
-          </label>
-          <div className="relative">
-            <input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              value={formData.password}
+        <FormField
+          label="Dirección de Envío"
+          id="direccion"
+          value={formData.direccion}
+          onChange={handleChange}
+          readOnly={!isEditing}
+          error={errors.direccion}
+          isTextarea
+          rows={3}
+          placeholder="Tu dirección completa"
+        />
+
+        <div className="border-t border-border-light dark:border-border-dark my-6"></div>
+
+        <div className="space-y-6">
+          <h2 className="text-xl font-bold text-content-light dark:text-content-dark">
+            Seguridad
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+              label="Teléfono"
+              id="telefono"
+              value={formData.telefono}
               onChange={handleChange}
               readOnly={!isEditing}
-              placeholder={isEditing ? "Nueva contraseña (opcional)" : "••••••••"}
-              className={`form-input flex w-full min-w-0 flex-1 rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2
-                ${
-                  errors.password
-                    ? "border-red-500"
-                    : "border-border-light dark:border-border-dark"
-                }
-                bg-surface-light dark:bg-surface-dark h-14 p-4 pr-12 text-base transition-colors
-                ${!isEditing ? "cursor-not-allowed opacity-50" : ""}`}
+              error={errors.telefono}
+              placeholder="+34 123 456 789"
             />
-            {isEditing && (
+            <div className="flex flex-col">
+              <label
+                htmlFor="password"
+                className="text-base font-medium pb-2 text-content-light dark:text-content-dark"
+              >
+                Contraseña{" "}
+                {isEditing && (
+                  <span className="text-xs text-content-light-500">
+                    (dejar vacío para mantener la actual)
+                  </span>
+                )}
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={handleChange}
+                  readOnly={!isEditing}
+                  placeholder={isEditing ? "Nueva contraseña (opcional)" : ""}
+                  className={`form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 ${
+                    errors.password
+                      ? "border-red-500"
+                      : "border-border-light dark:border-border-dark"
+                  } bg-surface-light dark:bg-surface-dark h-14 p-4 pr-12 text-base font-normal transition-colors ${
+                    !isEditing ? "cursor-not-allowed opacity-50" : ""
+                  }`}
+                />
+                {isEditing && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-content-light-500 hover:text-content-light transition-colors"
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                )}
+              </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                  <X size={16} /> {errors.password}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 pt-4">
+          {isEditing && (
+            <>
               <button
                 type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-content-light-500 hover:text-content-light transition-colors"
+                onClick={handleCancel}
+                disabled={isLoading}
+                className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 text-sm font-medium tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                Cancelar
               </button>
-            )}
-          </div>
-          {errors.password && (
-            <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
-              <X size={16} />
-              {errors.password}
-            </p>
+              <button
+                onClick={handleSubmit}
+                disabled={isLoading || !hasChanges}
+                className={`flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-medium tracking-[0.015em] gap-2 transition-colors ${
+                  isLoading || !hasChanges
+                    ? "bg-primary/50 text-white cursor-not-allowed opacity-50"
+                    : "bg-primary text-white hover:bg-primary/90 dark:bg-primary dark:text-content-dark"
+                }`}
+              >
+                <Check size={18} />
+                {isLoading ? "Guardando..." : "Guardar Cambios"}
+              </button>
+            </>
           )}
         </div>
-      </section>
-
-      {isEditing && (
-        <div className="flex gap-3 pt-4 border-t border-border-light dark:border-border-dark">
-          <button
-            onClick={handleCancel}
-            disabled={isLoading}
-            className="flex-1 h-10 px-4 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
-          >
-            Cancelar
-          </button>
-          <button
-            onClick={handleSubmit}
-            disabled={isLoading || !hasChanges}
-            className="flex-1 h-10 px-4 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
-          >
-            <Check size={18} />
-            {isLoading ? "Guardando..." : "Guardar Cambios"}
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

@@ -8,10 +8,11 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import Pagination from "../../../shared/utils/pagination.jsx";
 import { toast } from "react-toastify";
+import AsideProfile from "../../Profile/components/asideProfile.jsx";
 
 const HistoryOrdersPage = () => {
   const navigate = useNavigate();
-  const { id: id_usuario } = useParams(); // id del usuario desde params (si es admin)
+  const { id: id_usuario } = useParams(); 
   const user = localStorage.getItem("usuario");
   const rol = JSON.parse(localStorage.getItem("rol"));
   const isAdmin = rol === "admin";
@@ -69,6 +70,7 @@ const HistoryOrdersPage = () => {
   return (
     <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
       <Navbar />
+      <AsideProfile />
       <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center font-display">
         <div className="flex flex-col w-full max-w-4xl">
           {!id_usuario ? (
