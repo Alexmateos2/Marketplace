@@ -23,7 +23,7 @@ const ProductPages = () => {
         const res = await fetch(`http://localhost:3000/productos/${id}`);
         if (!res.ok) throw new Error("Producto no encontrado");
         const data = await res.json();
-       
+       console.log(data)
         setProducto(data);
       } catch (err) {
         toast.error(`Error cargando producto: ${err}`);
@@ -34,7 +34,7 @@ const ProductPages = () => {
     fetchProduct();
   }, [id]);
 
-  // 🔹 Si el producto no existe ni en la API ni localmente
+  //  Si el producto no existe 
   if ( !producto && !loading)
     return <Navigate to="/noProduct" replace />;
 
@@ -43,14 +43,20 @@ const ProductPages = () => {
     (item) => item.id === (product?.id_producto || product?.id)
   );
 
-  const handleAddToCart = () => {
-    addToCart({
-      id: product.id_producto || product.id,
-      name: product.nombre,
-      price: product.precio,
-      image: product.imagen,
-      quantity: 1,
-    });
+ const handleAddToCart = () => {
+    const currentQuantity = productInCart?.quantity || 0;
+    
+    if (product.stock > currentQuantity) {
+      addToCart({
+        id: product.id_producto || product.id,
+        name: product.nombre,
+        price: product.precio,
+        image: product.imagen,
+        quantity: 1,
+      });
+    } else {
+      toast.error(`No hay suficiente stock para ${product.nombre}`);
+    }
   };
 
   if (loading)
