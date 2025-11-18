@@ -3,7 +3,7 @@ import {
   LayoutDashboard,
   Users,
   Package,
-  Settings,
+  User,
   LogOut,
   FileText,
 } from "lucide-react";
@@ -74,20 +74,29 @@ const AsideAdmin = () => {
             <span className="text-sm font-medium">Pedidos</span>
           </NavLink>
 
-          {/* Configuración deshabilitada */}
-          <button
-            disabled
-            className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-500 cursor-not-allowed bg-slate-50 dark:bg-background-dark/30"
+         
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                isActive
+                  ? "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary"
+                  : "hover:bg-slate-100 dark:hover:bg-slate-800 text-content-light-600 dark:text-content-dark"
+              }`
+            }
           >
-            <Settings size={20} className="flex-shrink-0" />
-            <span className="text-sm font-medium">Configuración</span>
-          </button>
+            <User size={20} className="flex-shrink-0" />
+            <span className="text-sm font-medium">Información personal</span>
+          </NavLink>
+
         </nav>
       </div>
 
       <button
         onClick={() => {
-          localStorage.removeItem("admin");
+          localStorage.removeItem("usuario");
+          localStorage.removeItem("rol");
+          localStorage.removeItem("avatar");
           navigate("/login");
         }}
         className="mt-auto flex items-center justify-center w-full h-10 px-4 rounded-lg bg-slate-100 dark:bg-background-dark text-content-light-600 dark:text-content-dark text-sm font-medium cursor-pointer hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
