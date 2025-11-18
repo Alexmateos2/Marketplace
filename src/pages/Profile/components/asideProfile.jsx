@@ -13,7 +13,7 @@ const AsideProfile = ({ usuario: propUsuario }) => {
   const { nombre, email } = usuario;
   const rol = JSON.parse(localStorage.getItem("rol"));
   const navigate = useNavigate();
-  const avatar = parseInt(localStorage.getItem("avatar")) || 0;
+  const avatar = parseInt(localStorage.getItem("avatar")) || 2;
   const avatarUrl = AVATARS.find((av) => av.value === avatar)?.url;
 
 
