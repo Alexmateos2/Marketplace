@@ -131,7 +131,13 @@ const AdminProductsLayout = () => {
           ),
         },
         { key: "precio", label: "Precio", sortable: true },
-        { key: "stock", label: "Stock", sortable: true },
+        { key: "stock", label: "Stock",
+          render: (p) => (
+            <span className="lg:ml-4">
+              {p.stock}
+            </span>
+          ),
+           sortable: true },
         {
           key: "status",
           label: "Estado",
