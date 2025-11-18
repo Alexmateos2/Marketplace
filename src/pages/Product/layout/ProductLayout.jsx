@@ -11,11 +11,11 @@ import RelatedProducts from "../components/RelatedProducts.jsx";
 const ProductPages = () => {
   const { id } = useParams();
   const { cart, addToCart, updateQuantity } = useCart();
-
+  const rol = JSON.parse(localStorage.getItem("rol")) 
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
 
- 
+ console.log(rol)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -67,7 +67,21 @@ const ProductPages = () => {
     );
 
   return (
-    <div className="flex flex-col min-h-screen dark:bg-background-dark dark:text-content-dark bg-background-light text-content-light font-display transition-colors">
+ 
+    <div className="flex flex-col min-h-screen  bg-background-light dark:bg-background-dark dark:text-content-dark text-content-light font-display transition-colors">
+      {product.activo === 0  && rol !=="admin" ? (
+        <div className="px-40">
+        <div className=" dark:bg-yellow-600 bg-yellow-100 w-full border-l-4 border-yellow-500 flex flex-col mt-100 mx-auto text-center dark:text-white text-yellow-700 p-4" role="alert">
+          <p className="font-bold">Producto Deshabilitado:</p>
+          <p>Este producto no está disponible para la venta.</p>
+          <NavLink to="/" className="mt-4 w-40 mx-auto inline-block bg-red-500 text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors">
+            Volver al Inicio
+          </NavLink>
+        </div>
+        </div>
+      ) :  
+      <>
+      
       <Navbar />
       <main className="flex-1 px-4 sm:px-6 lg:px-40 py-8">
         <div className="mx-auto max-w-5xl">
@@ -247,6 +261,8 @@ const ProductPages = () => {
       </main>
     
       <Footer />
+      </>}
+     
     </div>
   );
 };
