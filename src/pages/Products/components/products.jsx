@@ -61,11 +61,13 @@ const ProductImageCard = memo(({ product, idx, imageConfigs }) => {
 ProductImageCard.displayName = "ProductImageCard";
 
 const Products = ({ loading, currentProducts }) => {
-  const { addToCart,cart } = useCart();
+  const { addToCart, cart } = useCart();
 
-   const handleAddToCart = useCallback(
+  const handleAddToCart = useCallback(
     (product) => {
-      const productInCart = cart.find((item) => item.id === product.id_producto);
+      const productInCart = cart.find(
+        (item) => item.id === product.id_producto
+      );
       const currentQuantity = productInCart?.quantity || 0;
 
       if (product.stock > currentQuantity) {
@@ -137,13 +139,20 @@ const Products = ({ loading, currentProducts }) => {
                   minimumFractionDigits: 2,
                 })}
               </p>
-              <div className="relative min-w-[40px] min-h-[40px]">
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  className="bg-primary text-white rounded-full px-4 py-2 text-xs sm:text-md w-full sm:w-auto hover:bg-primary/90 transition-all font-bold cursor-pointer hover:scale-105"
-                >
-                  Add to cart
-                </button>
+              <div className="relative min-w-[40px] min-h-[30px]">
+                {product.stock === 0 ? (
+                  <span className="bg-red-500 text-white rounded-full px-4 py-2 text-xs sm:text-md w-full sm:w-auto font-bold "
+                  >
+                    Producto agotado
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="bg-primary text-white rounded-full px-4 py-2 text-xs sm:text-md w-full sm:w-auto hover:bg-primary/90 transition-all font-bold cursor-pointer hover:scale-105"
+                  >
+                    Add to cart
+                  </button>
+                )}
 
                 <CartBadge productId={product.id_producto} />
               </div>
