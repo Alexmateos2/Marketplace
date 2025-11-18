@@ -15,7 +15,8 @@ const BarraBusqueda = () => {
       try {
         const response = await fetch("http://localhost:3000/productos");
         const data = await response.json();
-        setProductos([...data].reverse() || []);
+        const notDisabled = data.filter((p) => p.activo === 1);
+        setProductos([...notDisabled].reverse() || []);
       } catch (err) {
         console.error("Error al obtener productos:", err);
       }
