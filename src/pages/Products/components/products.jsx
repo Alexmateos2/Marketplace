@@ -85,10 +85,10 @@ const Products = ({ loading, currentProducts }) => {
     [addToCart, cart]
   );
 
-  // Blur plugin memoizado
+  
   const blurPlugin = useMemo(() => [placeholder({ mode: "blur" })], []);
 
-  // Configs de imágenes memoizadas
+  // Configs de imágenes 
   const imageConfigs = useMemo(() => {
     const configs = {};
     currentProducts.forEach((product) => {
@@ -132,7 +132,7 @@ const Products = ({ loading, currentProducts }) => {
               imageConfigs={imageConfigs}
             />
 
-            <div className="px-4 pb-4 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto relative">
+            <div className="px-4 pb-4 flex flex-col  text-center md:text-start sm:flex-row  justify-between gap-2 mt-auto relative ">
               <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg mt-1 truncate">
                 $
                 {product.precio.toLocaleString("es-ES", {
@@ -141,10 +141,10 @@ const Products = ({ loading, currentProducts }) => {
               </p>
               <div className="relative min-w-[40px] min-h-[30px]">
                 {product.stock === 0 ? (
-                  <span className="bg-red-500 text-white rounded-full px-4 py-2 text-xs sm:text-md w-full sm:w-auto font-bold "
+                  <button className="bg-red-500 text-white rounded-full px-4 py-2 text-xs sm:text-md w-full sm:w-auto font-bold "
                   >
                     Producto agotado
-                  </span>
+                  </button>
                 ) : (
                   <button
                     onClick={() => handleAddToCart(product)}

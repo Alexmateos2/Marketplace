@@ -7,9 +7,9 @@ const ProfileNavbar = () => {
   const navigate = useNavigate();
 
   // Inicializamos avatar desde localStorage para evitar parpadeos
-  const initialAvatar = AVATARS.find(
-    av => av.value === parseInt(localStorage.getItem("avatar"))
-  )?.url || null;
+  const initialAvatar =
+    AVATARS.find((av) => av.value === parseInt(localStorage.getItem("avatar")))
+      ?.url || null;
 
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);
@@ -21,7 +21,7 @@ const ProfileNavbar = () => {
   // Actualiza datos solo si cambian
   const updateFromStorage = () => {
     const storedAvatar = parseInt(localStorage.getItem("avatar")) || 2;
-    const newAvatarUrl = AVATARS.find(av => av.value === storedAvatar)?.url;
+    const newAvatarUrl = AVATARS.find((av) => av.value === storedAvatar)?.url;
 
     if (newAvatarUrl && newAvatarUrl !== avatarUrl) {
       setAvatarUrl(newAvatarUrl);
@@ -34,7 +34,6 @@ const ProfileNavbar = () => {
     if (storedUser !== user) setUser(storedUser);
     if (storedRol !== rol) setRol(storedRol);
   };
-
 
   const handleMouseEnter = () => {
     if (closeTimeout) clearTimeout(closeTimeout);
@@ -63,21 +62,27 @@ const ProfileNavbar = () => {
       {/* Avatar */}
       <div
         className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors"
-        onClick={() => setIsOpen(prev => !prev)}
+        onClick={() => setIsOpen((prev) => !prev)}
       >
-        {avatarUrl && (
+        {avatarUrl ? (
           <img
             src={avatarUrl}
             alt="Avatar del usuario"
-            className={`object-cover rounded-full w-10 h-10 border-2 border-primary/50 ${
+            className={`flex-shrink-0 object-cover rounded-full w-10 h-10 border-2 ml-4 border-primary/50 ${
               !loaded ? "opacity-0" : "opacity-100 transition-opacity"
             }`}
             onLoad={() => setLoaded(true)}
           />
+        ) : (
+          <div className="flex-shrink-0 w-10 h-10 ml-4 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center border-2 border-primary/50">
+            <User size={20} className="text-white" />
+          </div>
         )}
         <ChevronDown
           size={18}
-          className={`transition-transform ${isOpen ? "rotate-180" : "rotate-0"}`}
+          className={`flex-shrink-0 transition-transform ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
         />
       </div>
 
