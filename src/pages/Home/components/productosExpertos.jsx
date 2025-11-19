@@ -4,6 +4,7 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 
 import { AdvancedImage } from "@cloudinary/react";
 import { OutlineMode } from "@cloudinary/url-gen/qualifiers";
+import { toast } from "react-toastify";
 
 function ProductosExpertos() {
   const [items, setItems] = useState([]);
@@ -14,9 +15,10 @@ function ProductosExpertos() {
         const response = await fetch("http://localhost:3000/productos/mejores");
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
-        setItems(data); // guardamos los productos obtenidos
+        setItems(data); 
       } catch (err) {
-        console.log(err);
+        toast.error(err.message);
+        setItems([]);
       }
     };
 

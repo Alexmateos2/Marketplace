@@ -46,7 +46,7 @@ const CarritoPage = () => {
         toast.error("Error: " + data.message);
       }
     } catch (err) {
-      console.error(err);
+
       toast.error(`Error: ${err.message}`);
     }
   };

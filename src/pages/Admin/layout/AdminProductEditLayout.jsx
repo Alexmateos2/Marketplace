@@ -24,7 +24,7 @@ const AdminProductEditLayout = () => {
         const data = await res.json();
         setProducto(data);
       } catch (err) {
-        console.error("Error cargando producto:", err);
+        toast.error("Error cargando producto:", err);
       } finally {
         setLoading(false);
       }
@@ -109,7 +109,7 @@ const AdminProductEditLayout = () => {
       toast.success("Producto actualizado correctamente");
       navigate(`/product/${id}`);
     } catch (err) {
-      console.error("Error actualizando producto:", err);
+     
       toast.err(err);
     }
   };

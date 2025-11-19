@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import AsideProfile from "../components/asideProfile";
 import FormProfile from "../components/formProfile";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 const ProfilePage = () => {
   const navigate = useNavigate();
   const userId = localStorage.getItem("usuario");
@@ -21,7 +22,7 @@ const ProfilePage = () => {
           setUsuario(data);
         })
         .catch((error) => {
-          console.error("Error al obtener el usuario:", error);
+          toast.error("Error al obtener el usuario:", error);
         });
   }, [navigate, userId]);
 
