@@ -12,6 +12,9 @@ const Navbar = () => {
   const isProfilePage = location.pathname.startsWith("/profile");
   const isLoginPage = location.pathname.startsWith("/login");
   const isAboutPage = location.pathname.startsWith("/about");
+  const isTermsPage =
+    location.pathname.startsWith("/privacy") ||
+    location.pathname.startsWith("/terms");
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cart } = useCart();
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
@@ -184,7 +187,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {!isProfilePage && !isLoginPage && !isAboutPage && (
+          {!isProfilePage && !isLoginPage && !isAboutPage && !isTermsPage && (
             <div className="lg:hidden mb-5 px-4 flex items-center justify-start sm:justify-center pl-20 sm:pl-0">
               <div className="w-full max-w-sm md:max-w-md">
                 <BarraBusqueda />
