@@ -26,6 +26,8 @@ import AdminOrdersLayout from "./pages/Admin/layout/AdminOrdersLayout.jsx";
 import ProtectedRoute from "./shared/utils/ProtectedRoute.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import PrivacyTerms from "./pages/FooterTerms/Layout/PrivacyTerms.jsx";
+import Terms from "./pages/FooterTerms/Layout/Terms.jsx";
 
 
 function App() {
@@ -114,6 +116,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/privacy" element={<PrivacyTerms />} />
+              <Route path="/terms" element={<Terms />} />
           </Routes>
         </Router>
       </CartProvider>

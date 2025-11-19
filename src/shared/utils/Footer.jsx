@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -8,18 +9,30 @@ const Footer = () => {
           © 2025 Tekia. Todos los derechos reservados.
         </p>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-          <a
-            href="#"
-            className="text-sm text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors"
+          <NavLink
+            to="/privacy"
+            className={({ isActive }) =>
+              `text-sm transition-colors ${
+                isActive
+                  ? "text-primary"
+                  : "text-subtle-light dark:text-subtle-dark hover:text-primary"
+              }`
+            }
           >
             Política de privacidad
-          </a>
-          <a
-            href="#"
-            className="text-sm text-subtle-light dark:text-subtle-dark hover:text-primary transition-colors"
+          </NavLink>
+          <NavLink
+            to="/terms"
+            className={({ isActive }) =>
+              `text-sm transition-colors ${
+                isActive
+                  ? "text-primary"
+                  : "text-subtle-light dark:text-subtle-dark hover:text-primary"
+              }`
+            }
           >
             Términos de servicio
-          </a>
+          </NavLink>
         </div>
       </div>
     </footer>
