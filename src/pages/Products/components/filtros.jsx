@@ -18,7 +18,6 @@ const Filtros = ({ setFilters }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFilters(localFilters);
-
   };
 
   return (
@@ -54,7 +53,7 @@ const Filtros = ({ setFilters }) => {
               onChange={(e) => handleChange("sortBy", e.target.value)}
               className="form-select p-2 mt-1 block w-full rounded border border-border-light dark:border-gray-700 bg-surface-light dark:bg-surface-dark shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
             >
-              <option value="">Más recientes</option>
+              <option value="newest">Más recientes</option>
               <option value="oldest">Más antiguos</option>
               <option value="low-high">Precio: menor a mayor</option>
               <option value="high-low">Precio: mayor a menor</option>

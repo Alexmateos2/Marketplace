@@ -8,6 +8,7 @@ import {
   PlusCircle,
   UserCog,
   List,
+  Plus,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -44,21 +45,25 @@ const AdminDashboardLayout = () => {
       label: "Ingresos Totales",
       value: `$${stats.revenue.total.toLocaleString()}`,
       change: stats.revenue.change,
+      isPercentage: true,
     },
     {
       label: "Pedidos Totales",
       value: stats.orders.total,
       change: stats.orders.change,
+      isPercentage: true,
     },
     {
       label: "Productos Totales",
       value: stats.products.total,
       change: stats.products.new || 0,
+      isPercentage: false,
     },
     {
       label: "Usuarios Totales",
       value: stats.users.total,
       change: stats.users.change,
+      isPercentage: true,
     },
   ];
 
@@ -93,13 +98,24 @@ const AdminDashboardLayout = () => {
                     <p className="text-text-light dark:text-text-dark text-3xl font-bold tracking-tight">
                       {tarjeta.value}
                     </p>
-                    <p className={`flex items-center gap-1 font-bold ${color}`}>
-                      {positivo ? (
-                        <TrendingUp className="w-4 h-4" />
+                    <p className={`text-sm font-medium flex items-center gap-1 ${tarjeta.isPercentage ? color : tarjeta.change > 0 ? 'text-green-500' : 'text-gray-500'}`}>
+                      {tarjeta.isPercentage ? (
+                        <>
+                          {positivo ? (
+                            <TrendingUp className="w-4 h-4" />
+                          ) : (
+                            <TrendingDown className="w-4 h-4" />
+                          )}
+                          {tarjeta.change.toFixed(1)}%
+                        </>
+                      ) : tarjeta.change > 0 ? (
+                        <>
+                          <Plus className="w-4 h-4" />
+                          {tarjeta.change} nuevo/s
+                        </>
                       ) : (
-                        <TrendingDown className="w-4 h-4" />
+                        <>—</>
                       )}
-                      {tarjeta.change.toFixed(1)}%
                     </p>
                   </div>
                 );
