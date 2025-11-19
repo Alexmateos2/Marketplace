@@ -15,7 +15,6 @@ const ProductPages = () => {
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
 
- console.log(rol)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -23,7 +22,6 @@ const ProductPages = () => {
         const res = await fetch(`http://localhost:3000/productos/${id}`);
         if (!res.ok) throw new Error("Producto no encontrado");
         const data = await res.json();
-       console.log(data)
         setProducto(data);
       } catch (err) {
         toast.error(`Error cargando producto: ${err}`);

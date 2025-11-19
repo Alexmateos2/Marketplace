@@ -11,7 +11,7 @@ import {
   Plus,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
-
+import { toast } from "react-toastify";
 const AdminDashboardLayout = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,7 +23,7 @@ const AdminDashboardLayout = () => {
         const data = await res.json();
         setStats(data);
       } catch (err) {
-        console.error("Error al cargar estadísticas:", err);
+       toast.error("Error cargando estadísticas: " + err.message);
       } finally {
         setLoading(false);
       }

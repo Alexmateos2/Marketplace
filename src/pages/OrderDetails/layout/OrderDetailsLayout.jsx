@@ -53,8 +53,8 @@ const OrderDetailsPage = () => {
         const data = await response.json();
         setPedido(data);
       } catch (err) {
-        console.error("Error fetching order details:", err);
-        toast.error("No se pudieron cargar los detalles del pedido.");
+ 
+        toast.error("No se pudieron cargar los detalles del pedido.", err);
         setPedido(null);
       } finally {
         setLoading(false);

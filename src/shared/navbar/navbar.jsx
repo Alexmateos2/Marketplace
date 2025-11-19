@@ -25,6 +25,11 @@ const Navbar = () => {
               <div className="flex items-center gap-2 lg:gap-8">
                 <NavLink
                   to="/"
+                  onClick={() => {
+                    if (location.pathname === "/") {
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }
+                  }}
                   aria-label="Inicio Tekia"
                   className="flex items-center gap-2 text-xl font-bold text-content-light dark:text-content-dark hover:opacity-80 transition-opacity"
                 >
@@ -110,7 +115,7 @@ const Navbar = () => {
                   <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                     <DarkMode />
                   </div>
-                  
+
                   <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                     <ProfileNavbar />
                   </div>

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { cld } from "../utils/cloudinary";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
+import { toast } from "react-toastify";
 const BarraBusqueda = () => {
   const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState([]);
@@ -18,7 +19,7 @@ const BarraBusqueda = () => {
         const notDisabled = data.filter((p) => p.activo === 1);
         setProductos([...notDisabled].reverse() || []);
       } catch (err) {
-        console.error("Error al obtener productos:", err);
+        toast.error("Error al obtener productos:", err);
       }
     };
     fetchProductos();

@@ -17,10 +17,9 @@ const RelatedProducts = ({ category, id }) => {
         const filtered = data.filter(
           (product) => product.id_producto !== id && product.activo === 1
         );
-        console.log(id);
-        // Mezclar y tomar 3 aleatorios
+       
         const shuffled = filtered.sort(() => 0.5 - Math.random());
-        console.log(shuffled);
+    
         setRelatedProductsData(shuffled.slice(0, 3));
       } catch (err) {
         toast.error("Failed to load related products." + err.message);
