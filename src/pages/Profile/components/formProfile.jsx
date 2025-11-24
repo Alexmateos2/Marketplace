@@ -410,7 +410,9 @@ const FormProfile = ({ usuario }) => {
                   value={formData.password}
                   onChange={handleChange}
                   readOnly={!isEditing}
-                  placeholder={isEditing ? "Nueva contraseña (opcional)" : ""}
+                  placeholder={
+                    isEditing ? "Nueva contraseña (opcional)" : "*****"
+                  }
                   className={`form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 ${
                     errors.password
                       ? "border-red-500"
@@ -450,17 +452,17 @@ const FormProfile = ({ usuario }) => {
                 Cancelar
               </button>
               <button
-  onClick={handleSubmit}
-  disabled={isLoading || !hasChanges}
-  className={`flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto gap-2 transition-colors ${
-    isLoading || !hasChanges
-      ? "bg-primary/50 text-white cursor-not-allowed opacity-50"
-      : "bg-primary text-white hover:bg-primary/90 dark:text-content-dark"
-  }`}
->
-  <Check size={18} />
-  {isLoading ? "Guardando..." : "Guardar Cambios"}
-</button>
+                onClick={handleSubmit}
+                disabled={isLoading || !hasChanges}
+                className={`flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto gap-2 transition-colors ${
+                  isLoading || !hasChanges
+                    ? "bg-primary/50 text-white cursor-not-allowed opacity-50"
+                    : "bg-primary text-white hover:bg-primary/90 dark:text-content-dark"
+                }`}
+              >
+                <Check size={18} />
+                {isLoading ? "Guardando..." : "Guardar Cambios"}
+              </button>
             </>
           )}
         </div>
