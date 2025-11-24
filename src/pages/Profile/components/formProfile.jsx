@@ -264,7 +264,7 @@ const FormProfile = ({ usuario }) => {
   const avatarUrl = AVATARS.find((a) => a.value === formData.avatar)?.url;
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto ">
       <div className="mb-8">
         <p className="text-4xl font-black text-content-light dark:text-content-dark">
           Información Personal
@@ -328,7 +328,7 @@ const FormProfile = ({ usuario }) => {
             <button
               type="button"
               onClick={() => (!isEditing ? setIsEditing(true) : handleCancel())}
-              className="mt-4 flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
+              className="mt-4 flex max-w-[400px] cursor-pointer mx-auto  sm:ml-0 items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary text-sm font-bold tracking-[0.015em] w-full hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
             >
               <span className="truncate">
                 {isEditing ? "Cancelar" : "Editar Perfil"}
@@ -438,29 +438,29 @@ const FormProfile = ({ usuario }) => {
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 pt-4">
+        <div className="flex justify-center gap-3 py-2 pb-10">
           {isEditing && (
             <>
               <button
                 type="button"
                 onClick={handleCancel}
                 disabled={isLoading}
-                className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 text-sm font-medium tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
+                className="flex min-w-[150px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 text-sm font-medium tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors disabled:opacity-50"
               >
                 Cancelar
               </button>
               <button
-                onClick={handleSubmit}
-                disabled={isLoading || !hasChanges}
-                className={`flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-medium tracking-[0.015em] gap-2 transition-colors ${
-                  isLoading || !hasChanges
-                    ? "bg-primary/50 text-white cursor-not-allowed opacity-50"
-                    : "bg-primary text-white hover:bg-primary/90 dark:bg-primary dark:text-content-dark"
-                }`}
-              >
-                <Check size={18} />
-                {isLoading ? "Guardando..." : "Guardar Cambios"}
-              </button>
+  onClick={handleSubmit}
+  disabled={isLoading || !hasChanges}
+  className={`flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto gap-2 transition-colors ${
+    isLoading || !hasChanges
+      ? "bg-primary/50 text-white cursor-not-allowed opacity-50"
+      : "bg-primary text-white hover:bg-primary/90 dark:text-content-dark"
+  }`}
+>
+  <Check size={18} />
+  {isLoading ? "Guardando..." : "Guardar Cambios"}
+</button>
             </>
           )}
         </div>

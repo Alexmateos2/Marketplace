@@ -74,7 +74,7 @@ const AdminDashboardLayout = () => {
         <AsideAdmin />
         <main className="flex-1 overflow-y-auto">
           {/* Encabezado */}
-          <header className="flex items-center justify-between border-b border-border-light dark:border-border-dark px-10 py-4 bg-white dark:bg-card-dark/80 backdrop-blur-sm">
+          <header className="flex items-center justify-between border-b border-border-light dark:border-border-dark px-10 py-4 lg:bg-white dark:bg-card-dark/80 backdrop-blur-sm">
             <h1 className="text-2xl font-bold tracking-tight text-text-light dark:text-text-dark">
               Panel de Administración
             </h1>
@@ -95,7 +95,7 @@ const AdminDashboardLayout = () => {
                     <p className="text-text-muted-light dark:text-text-muted-dark text-base font-semibold">
                       {tarjeta.label}
                     </p>
-                    <p className="text-text-light dark:text-text-dark text-3xl font-bold tracking-tight">
+                    <p className="text-text-light dark:text-text-dark  text-2xl xl:text-3xl font-bold tracking-tight">
                       {tarjeta.value}
                     </p>
                     <p className={`text-sm font-medium flex items-center gap-1 ${tarjeta.isPercentage ? color : tarjeta.change > 0 ? 'text-green-500' : 'text-gray-500'}`}>
@@ -122,7 +122,7 @@ const AdminDashboardLayout = () => {
               })}
             </div>
 
-            {/* Tendencias de ventas y acciones rápidas */}
+         
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Tendencias de ventas */}
               <div className="lg:col-span-2">

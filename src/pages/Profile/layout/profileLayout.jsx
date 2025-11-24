@@ -29,12 +29,14 @@ const ProfilePage = () => {
       <Navbar />
       <div className="flex min-h-screen ">
         <AsideProfile usuario={usuario} />
-        <main className="flex-1 p-4 sm:p-10 lg:pl-90  lg:pt-20">
+        <main className="flex-1 p-4 sm:p-10 lg:pl-90 ">
           <FormProfile usuario={usuario} />
         </main>
       </div>
-
-      <Footer />
+    <div className=" lg:ml-80">
+  <Footer />
+</div>
+   
     </div>
   );
 };

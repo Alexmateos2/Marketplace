@@ -13,12 +13,13 @@ const AsideProfile = ({ usuario: propUsuario }) => {
   const { nombre, email } = usuario;
   const rol = JSON.parse(localStorage.getItem("rol"));
   const navigate = useNavigate();
-  const avatar = parseInt(localStorage.getItem("avatar")) || 2;
+  const avatar = parseInt(localStorage.getItem("avatar"));
+  avatar === null ? 2 : avatar;
   const avatarUrl = AVATARS.find((av) => av.value === avatar)?.url;
 
 
   return (
-    <aside className="w-80 py-6 px-6 bg-surface-light dark:bg-background-dark/50 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark fixed left-0 top-20 bottom-0 z-30 overflow-y-auto">
+    <aside className="w-80 py-6 px-6 bg-surface-light dark:bg-background-dark/50 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark fixed left-0 top-20 bottom-0 z-0 overflow-y-auto">
       <div>
         <div className="flex items-center gap-3 mb-10">
           <div

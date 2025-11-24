@@ -12,7 +12,7 @@ import AsideProfile from "../../Profile/components/asideProfile.jsx";
 
 const HistoryOrdersPage = () => {
   const navigate = useNavigate();
-  const { id: id_usuario } = useParams(); 
+  const { id: id_usuario } = useParams();
   const user = localStorage.getItem("usuario");
   const rol = JSON.parse(localStorage.getItem("rol"));
   const isAdmin = rol === "admin";
@@ -24,7 +24,6 @@ const HistoryOrdersPage = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    // Si no hay sesión
     if (!user) {
       toast.error("Por favor inicia sesión para ver tus pedidos");
       setLoading(false);
@@ -68,143 +67,151 @@ const HistoryOrdersPage = () => {
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col">
+    <div className="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display transition-colors">
       <Navbar />
-      <AsideProfile />
-      <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center font-display">
-        <div className="flex flex-col w-full max-w-4xl">
-          {!id_usuario ? (
-            <NavLink
-              to="/profile"
-              className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
-            >
-              Volver al perfil
-            </NavLink>
-          ) : (
-            <NavLink
-              to="/admin/users"
-              className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
-            >
-              Volver a Usuarios
-            </NavLink>
-          )}
+      <div className="flex flex-1">
+        <AsideProfile />
+        <main className="flex-1 lg:ml-80 flex justify-center">
+          <div className="w-full max-w-4xl  py-8 px-4 md:px-8  lg:px-4 xl:px-0">
+            {!id_usuario ? (
+              <NavLink
+                to="/profile"
+                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+              >
+                Volver al perfil
+              </NavLink>
+            ) : (
+              <NavLink
+                to="/admin/users"
+                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+              >
+                Volver a Usuarios
+              </NavLink>
+            )}
 
-          <h1 className="text-content-light dark:text-content-dark text-4xl font-black mb-6">
-            Historial de Pedidos
-          </h1>
+            <h1 className="text-content-light dark:text-content-dark text-4xl font-black mb-6">
+              Historial de Pedidos
+            </h1>
 
-          {loading ? (
-            <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
-              Cargando tus pedidos...
-            </p>
-          ) : orders.length === 0 ? (
-            <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
-              {isAdmin
-                ? "Este usuario aún no tiene pedidos."
-                : "Aún no tienes pedidos."}
-            </p>
-          ) : (
-            <>
-              <div className="flex flex-col gap-4">
-                {ordenesActuales.map((order) => (
-                  <div
-                    key={order.id_pedido}
-                    className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-surface-light dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
-                  >
-                    <div className="flex justify-center md:justify-start items-center -space-x-4 w-full sm:w-auto sm:min-w-[250px]">
-                      {order.detalles && order.detalles.length > 0 ? (
-                        <>
-                          {order.detalles.slice(0, 3).map((item, idx) => (
-                            <div
-                              key={idx}
-                              className="rounded-lg w-[70px] h-[70px] border-1 border-border-light dark:border-border-dark ring-1 ring-border-light dark:ring-border-dark overflow-hidden bg-background-light dark:bg-surface-dark"
-                            >
-                              <AdvancedImage
-                                cldImg={cld
-                                  .image(item.imagen)
-                                  .resize(
-                                    fill().width(70).height(70).gravity("auto")
-                                  )
-                                  .quality("auto")
-                                  .format("auto")}
-                                alt={item.nombre_producto || "Producto"}
-                                loading="lazy"
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          ))}
-                          {order.detalles.length > 3 && (
-                            <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-border-light bg-surface-light dark:bg-gray-700 flex items-center justify-center">
-                              <p className="text-content-light dark:text-content-dark font-bold text-sm">
-                                +{order.detalles.length - 3}
-                              </p>
-                            </div>
-                          )}
-                        </>
-                      ) : (
-                        <div className="bg-gray-300 rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1" />
-                      )}
+            {loading ? (
+              <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+                Cargando tus pedidos...
+              </p>
+            ) : orders.length === 0 ? (
+              <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+                {isAdmin
+                  ? "Este usuario aún no tiene pedidos."
+                  : "Aún no tienes pedidos."}
+              </p>
+            ) : (
+              <>
+                <div className="flex flex-col gap-4  ">
+                  {ordenesActuales.map((order) => (
+                    <div
+                      key={order.id_pedido}
+                      className="flex flex-col sm:flex-row gap-4 items-center md:items-start sm:gap-6 bg-surface-light dark:bg-surface-dark p-6 rounded-lg border border-border-light dark:border-border-dark hover:shadow-md hover:border-blue-500/50 transition-all"
+                    >
+                      <div className="flex justify-center md:justify-start items-center -space-x-4 w-full sm:w-auto sm:min-w-[250px] ">
+                        {order.detalles && order.detalles.length > 0 ? (
+                          <>
+                            {order.detalles.slice(0, 3).map((item, idx) => (
+                              <div
+                                key={idx}
+                                className="rounded-lg w-[70px] h-[70px] border-1 border-border-light dark:border-border-dark ring-1 ring-border-light dark:ring-border-dark overflow-hidden bg-background-light dark:bg-surface-dark"
+                              >
+                                <AdvancedImage
+                                  cldImg={cld
+                                    .image(item.imagen)
+                                    .resize(
+                                      fill()
+                                        .width(70)
+                                        .height(70)
+                                        .gravity("auto")
+                                    )
+                                    .quality("auto")
+                                    .format("auto")}
+                                  alt={item.nombre_producto || "Producto"}
+                                  loading="lazy"
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            ))}
+                            {order.detalles.length > 3 && (
+                              <div className="rounded-lg w-[70px] h-[70px] border-2 border-border-light dark:border-border-dark ring-1 ring-border-light bg-surface-light dark:bg-gray-700 flex items-center justify-center">
+                                <p className="text-content-light dark:text-content-dark font-bold text-sm">
+                                  +{order.detalles.length - 3}
+                                </p>
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <div className="bg-gray-300 rounded-lg w-[70px] h-[70px] border-2 border-border-light ring-1" />
+                        )}
+                      </div>
+
+                      <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
+                        <p className="text-content-light dark:text-content-dark text-lg font-bold">
+                          Pedido #{order.id_pedido}
+                        </p>
+                        <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
+                          {order.detalles && order.detalles.length > 0
+                            ? `${order.detalles[0].nombre_producto}${
+                                order.detalles.length > 1
+                                  ? ` + ${order.detalles.length - 1} más`
+                                  : ""
+                              }`
+                            : "Sin descripción"}
+                        </p>
+                        <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
+                          Realizado el{" "}
+                          {new Date(order.fecha).toLocaleDateString("es-ES", {
+                            year: "numeric",
+                            month: "short",
+                            day: "2-digit",
+                          })}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-col items-center md:items-start justify-between gap-2">
+                        <p className="text-content-light dark:text-content-dark text-lg font-bold">
+                          ${order.total}
+                        </p>
+                        <NavLink
+                          to={
+                            isAdmin
+                              ? `/pedidos/historial/details/${
+                                  id_usuario || user
+                                }/${order.id_pedido}`
+                              : `/pedidos/historial/details/${order.id_pedido}`
+                          }
+                          className="text-primary text-sm font-bold hover:underline cursor-pointer"
+                        >
+                          Ver Detalles
+                        </NavLink>
+                      </div>
                     </div>
-
-                    <div className="flex flex-1 flex-col justify-center sm:text-center items-center md:items-start">
-                      <p className="text-content-light dark:text-content-dark text-lg font-bold">
-                        Pedido #{order.id_pedido}
-                      </p>
-                      <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
-                        {order.detalles && order.detalles.length > 0
-                          ? `${order.detalles[0].nombre_producto}${
-                              order.detalles.length > 1
-                                ? ` + ${order.detalles.length - 1} más`
-                                : ""
-                            }`
-                          : "Sin descripción"}
-                      </p>
-                      <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
-                        Realizado el{" "}
-                        {new Date(order.fecha).toLocaleDateString("es-ES", {
-                          year: "numeric",
-                          month: "short",
-                          day: "2-digit",
-                        })}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col items-center md:items-start justify-between gap-2">
-                      <p className="text-content-light dark:text-content-dark text-lg font-bold">
-                        ${order.total}
-                      </p>
-                      <NavLink
-                        to={
-                          isAdmin
-                            ? `/pedidos/historial/details/${
-                                id_usuario || user
-                              }/${order.id_pedido}`
-                            : `/pedidos/historial/details/${order.id_pedido}`
-                        }
-                        className="text-primary text-sm font-bold hover:underline cursor-pointer"
-                      >
-                        Ver Detalles
-                      </NavLink>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {orders.length > itemsPerPage && (
-                <div className="mt-8">
-                  <Pagination
-                    currentPage={currentPage}
-                    itemsPerPage={itemsPerPage}
-                    onPageChange={handlePageChange}
-                    totalItems={orders.length}
-                  />
+                  ))}
                 </div>
-              )}
-            </>
-          )}
-        </div>
-      </main>
-      <Footer />
+
+                {orders.length > itemsPerPage && (
+                  <div className="mt-8">
+                    <Pagination
+                      currentPage={currentPage}
+                      itemsPerPage={itemsPerPage}
+                      onPageChange={handlePageChange}
+                      totalItems={orders.length}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </main>
+      </div>
+
+      <footer className="lg:ml-80">
+        <Footer />
+      </footer>
     </div>
   );
 };
