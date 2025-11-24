@@ -38,13 +38,12 @@ const AdminOrdersLayout = () => {
     fetchPedidos();
   }, []);
 
-  // 🔹 Búsqueda
+
   const handleFilterChange = (results) => {
     setFilteredPedidos(results);
     setCurrentPage(1);
   };
 
-  // Ordenamiento
   const handleSort = (key) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -77,7 +76,7 @@ const AdminOrdersLayout = () => {
     setFilteredPedidos(sorted);
   };
 
-  // Paginación
+
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const pedidosActuales = filteredPedidos.slice(startIndex, endIndex);

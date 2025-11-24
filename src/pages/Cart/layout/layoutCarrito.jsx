@@ -28,25 +28,16 @@ const CarritoPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Guardar ID del pedido para que el invitado pueda consultarlo
-        if (!usuario) {
-          localStorage.setItem(
-            "ultimoPedidoInvitado",
-            JSON.stringify({
-              id_pedido: data.id_pedido,
-              fecha: Date.now(),
-            })
-          );
-        }
-
         toast.success("Pedido realizado con éxito.");
         clearCart();
-        navigate(`/pedidos/historial/details/${data.id_pedido}`);
+
+        navigate(
+          usuario ? `/pedidos/historial/details/${data.id_pedido}` : "/"
+        );
       } else {
         toast.error("Error: " + data.message);
       }
     } catch (err) {
-
       toast.error(`Error: ${err.message}`);
     }
   };
@@ -87,7 +78,7 @@ const CarritoPage = () => {
               <div className="space-y-4">
                 <div className="flex justify-between text-black/80 dark:text-white/80">
                   <p>Subtotal</p>
-                  <p>${totalPrice.toFixed(2)}</p>
+                  <p>{totalPrice.toFixed(2)} €</p>
                 </div>
                 <div className="flex justify-between text-black/80 dark:text-white/80">
                   <p>Envío</p>
@@ -96,7 +87,7 @@ const CarritoPage = () => {
                 <hr className="border-black/10 dark:border-white/10 my-4" />
                 <div className="flex justify-between font-bold text-xl text-black dark:text-white">
                   <p>Total</p>
-                  <p>${totalPrice.toFixed(2)}</p>
+                  <p>{totalPrice.toFixed(2)} €</p>
                 </div>
               </div>
               <button

@@ -65,7 +65,7 @@ const BarraBusqueda = () => {
 
   return (
     <div ref={containerRef} className="relative w-full">
-      {/* Icono de búsqueda */}
+  
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <svg
           className="h-5 w-5 text-subtle-light dark:text-content-dark"
@@ -82,7 +82,6 @@ const BarraBusqueda = () => {
         </svg>
       </div>
 
-      {/* Campo de búsqueda */}
       <input
         type="text"
         placeholder="Busca productos..."
@@ -91,7 +90,7 @@ const BarraBusqueda = () => {
         className="w-full h-12 rounded-lg border border-subtle-light bg-background-light dark:border-gray-700 dark:bg-background-dark pl-10 pr-4 py-2 text-sm placeholder-subtle-light dark:placeholder-content-dark focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
       />
 
-      {/* Resultados */}
+
       {isOpen && (
         <div className="absolute mt-2 w-full bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg p-2 z-50 overflow-y-auto">
           {results.length > 0 ? (
@@ -121,7 +120,7 @@ const BarraBusqueda = () => {
                         {product.nombre}
                       </span>
                       <span className="text-xs text-gray-500 dark:text-gray-400">
-                        ${product.precio}
+                        {product.precio} €
                       </span>
                     </div>
                   </NavLink>

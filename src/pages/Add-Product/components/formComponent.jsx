@@ -379,7 +379,7 @@ const FormComponent = () => {
             </label>
             <div className="relative mt-1">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-muted-light dark:text-muted-dark">
-                $
+                €
               </span>
               <input
                 id="precio"
@@ -447,9 +447,10 @@ const FormComponent = () => {
             id="descripcion"
             name="descripcion"
             rows={3}
+            maxLength={500}
             value={formData.descripcion}
             onChange={handleFormChange}
-            placeholder="Una breve descripción del producto..."
+            placeholder="Una breve descripción del producto.Máximo 500 caracteres."
             disabled={isLoading}
             className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />
@@ -543,9 +544,10 @@ const FormComponent = () => {
             id="resena"
             name="resena"
             rows={6}
+            maxLength={500}
             value={formData.resena}
             onChange={handleFormChange}
-            placeholder="Comparte tus opiniones detalladas sobre el producto..."
+            placeholder="Comparte tus opiniones detalladas sobre el producto. Máximo 500 caracteres."
             disabled={isLoading}
             className="mt-1 py-2 px-3 block w-full rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-surface-dark text-foreground-light dark:text-foreground-dark placeholder:text-muted-light dark:placeholder:text-muted-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary sm:text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           />

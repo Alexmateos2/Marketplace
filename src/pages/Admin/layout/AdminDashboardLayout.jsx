@@ -43,7 +43,7 @@ const AdminDashboardLayout = () => {
   const tarjetas = [
     {
       label: "Ingresos Totales",
-      value: `$${stats.revenue.total.toLocaleString()}`,
+      value: `${stats.revenue.total.toLocaleString()} €`,
       change: stats.revenue.change,
       isPercentage: true,
     },
@@ -184,7 +184,7 @@ const AdminDashboardLayout = () => {
                               {dia.date}
                             </td>
                             <td className="px-6 py-4">
-                              ${dia.totalRevenue.toLocaleString()}
+                              {dia.totalRevenue.toLocaleString()} €
                             </td>
                             <td className="px-6 py-4">{dia.orders}</td>
                             <td
@@ -211,7 +211,7 @@ const AdminDashboardLayout = () => {
                 </div>
               </div>
 
-              {/* Acciones rápidas */}
+       
               <div>
                 <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-5 border-b border-border-light dark:border-border-dark pb-2">
                   Acciones Rápidas
@@ -259,13 +259,11 @@ const AdminDashboardLayout = () => {
               </div>
             </div>
 
-            {/* Pedidos Recientes */}
             <div className="mt-8">
               <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-5 border-b border-border-light dark:border-border-dark pb-2">
                 Pedidos Recientes
               </h2>
 
-              {/* Tabla Escritorio */}
               <div className="hidden lg:block rounded-xl border border-border-light dark:border-border-dark overflow-hidden bg-card-light dark:bg-card-dark shadow-lg">
                 <table className="w-full text-sm text-left text-text-muted-light dark:text-text-muted-dark">
                   <thead className="text-xs uppercase bg-background-light dark:bg-background-dark">
@@ -300,7 +298,7 @@ const AdminDashboardLayout = () => {
                             {new Date(fecha).toLocaleDateString("es-ES")}
                           </td>
                           <td className="px-6 py-4 font-bold text-text-light dark:text-text-dark">
-                            ${total}
+                            {total} €
                           </td>
                           <td className="px-6 py-4 text-right">
                             <NavLink
@@ -317,7 +315,7 @@ const AdminDashboardLayout = () => {
                 </table>
               </div>
 
-              {/* Tarjetas Móvil */}
+
               <div className="grid grid-cols-1 text-center sm:grid-cols-2 gap-6 lg:hidden">
                 {stats.recentOrders.map(
                   ({ id_pedido, nombre_usuario, id_usuario, fecha, total }) => {
@@ -344,7 +342,7 @@ const AdminDashboardLayout = () => {
                           {fechaFormateada}
                         </p>
                         <p className="font-bold text-text-light dark:text-text-dark">
-                          ${total}
+                          {total} €
                         </p>
                         <NavLink
                           to={`/pedidos/historial/details/${id_usuario}/${id_pedido}`}

@@ -6,7 +6,6 @@ import AVATARS from "../utils/avatars.js";
 const ProfileNavbar = () => {
   const navigate = useNavigate();
 
-  // Inicializamos avatar desde localStorage para evitar parpadeos
   const initialAvatar =
     AVATARS.find((av) => av.value === parseInt(localStorage.getItem("avatar")))
       ?.url || null;
@@ -18,7 +17,7 @@ const ProfileNavbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("usuario")));
   const [rol, setRol] = useState(JSON.parse(localStorage.getItem("rol")));
 
-  // Actualiza datos solo si cambian
+
   const updateFromStorage = () => {
     const storedAvatar = parseInt(localStorage.getItem("avatar")) || 2;
     const newAvatarUrl = AVATARS.find((av) => av.value === storedAvatar)?.url;
@@ -59,7 +58,7 @@ const ProfileNavbar = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Avatar */}
+ 
       <div
         className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors"
         onClick={() => setIsOpen((prev) => !prev)}

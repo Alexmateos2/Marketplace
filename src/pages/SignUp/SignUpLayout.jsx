@@ -12,6 +12,8 @@ const SignUpLayout = () => {
     direccion: "",
     telefono: "",
   });
+  const [nombreError, setNombreError] = useState("");
+
   const [isMayusPassword, setIsMayusPassword] = useState(false);
   const [isMayusPasswordCheck, setIsMayusPasswordCheck] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,9 +25,32 @@ const SignUpLayout = () => {
     else if (e.target.id === "passwordCheck") setIsMayusPasswordCheck(isCaps);
   };
 
-  const handleChangeInput = (e) => {
-    setFormValue({ ...formValue, [e.target.id]: e.target.value });
-  };
+ const handleChangeInput = (e) => {
+  const { id, value } = e.target;
+
+  if (id === "nombre") {
+ 
+    const regex = /^[a-zA-ZÀ-ÿ]*$/;
+    if (!regex.test(value)) {
+      setNombreError("❌ El nombre no puede contener números ni espacios");
+
+
+      setTimeout(() => {
+        setNombreError("");
+      }, 1000);
+    } else {
+      setNombreError(""); 
+    }
+
+    setFormValue({
+      ...formValue,
+      [id]: value.replace(/[^a-zA-ZÀ-ÿ]/g, ""),
+    });
+  } else {
+    setFormValue({ ...formValue, [id]: value });
+  }
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,11 +107,18 @@ const SignUpLayout = () => {
             </p>
             <input
               id="nombre"
+              minLength={3}
+              type="text"
               className="form-input flex w-full rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 p-3 text-sm"
               placeholder="Ingresa tu nombre"
               value={formValue.nombre}
               onChange={handleChangeInput}
             />
+            {nombreError && (
+              <p className="text-red-500 dark:text-red-400 text-sm mt-1">
+                {nombreError}
+              </p>
+            )}
           </label>
 
           <label className="flex flex-col w-full">
@@ -111,8 +143,9 @@ const SignUpLayout = () => {
               <input
                 id="password"
                 type="password"
+                minLength={6}
                 className="form-input flex w-full rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 p-3 pr-10 text-sm"
-                placeholder="Ingresa una contraseña segura"
+                placeholder="Ingresa una contraseña segura. Mínimo 6 caracteres."
                 value={formValue.password}
                 onChange={handleChangeInput}
                 onKeyDown={onKeyDown}
@@ -167,6 +200,7 @@ const SignUpLayout = () => {
             <input
               id="telefono"
               type="tel"
+              minLength={9}
               className="form-input flex w-full rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-12 p-3 text-sm"
               placeholder="Ej: 674 242 532"
               value={formValue.telefono}

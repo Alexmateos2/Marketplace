@@ -22,18 +22,20 @@ export const CartProvider = ({ children }) => {
           // Si ya hay un toast pendiente para este producto, no mostrar otro
           if (!toastTimeoutsRef.current.has(product.id)) {
             toast.error(`Cantidad máxima alcanzada para ${existing.name} (10)`);
-            
+
             // Crear timeout de 2 segundos para evitar toasts duplicados
             const timeout = setTimeout(() => {
               toastTimeoutsRef.current.delete(product.id);
             }, 2000);
-            
+
             toastTimeoutsRef.current.set(product.id, timeout);
           }
           return prevCart;
         }
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
       }
       return [...prevCart, { ...product, quantity: 1 }];

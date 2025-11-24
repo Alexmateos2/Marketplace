@@ -4,14 +4,12 @@ import { Moon, Sun } from "lucide-react";
 export default function DarkMode({ className = "", duration = 400, ...props }) {
   const buttonRef = useRef(null);
 
-
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") return true;
     if (savedTheme === "light") return false;
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
-
 
   useState(() => {
     if (isDark) {
@@ -25,7 +23,8 @@ export default function DarkMode({ className = "", duration = 400, ...props }) {
     if (!buttonRef.current) return;
 
     const newTheme = !isDark;
-    const { top, left, width, height } = buttonRef.current.getBoundingClientRect();
+    const { top, left, width, height } =
+      buttonRef.current.getBoundingClientRect();
     const x = left + width / 2;
     const y = top + height / 2;
     const maxRadius = Math.hypot(

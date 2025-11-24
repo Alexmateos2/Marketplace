@@ -8,7 +8,7 @@ import { AdvancedImage } from "@cloudinary/react";
 const CartItem = ({ item }) => {
   const { addToCart, removeFromCart, updateQuantity } = useCart();
 
-  if (!item) return null; // Evita error si item no está definido
+  if (!item) return null;
 
   const handleIncrease = () => {
     addToCart(item);
@@ -50,7 +50,7 @@ const CartItem = ({ item }) => {
           </h3>
         </NavLink>
         <p className="text-sm flex mt-1 xxs:block justify-center text-content-light dark:text-subtle-dark">
-          ${item.price} x {item.quantity}
+          {item.price} € x {item.quantity}
         </p>
         <div className="flex items-center justify-center xxs:justify-start space-x-2 mt-4">
           <button

@@ -38,7 +38,9 @@ const LoginPage = () => {
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
         localStorage.setItem("rol", JSON.stringify(data.rol));
         localStorage.setItem("avatar", JSON.stringify(data.avatar));
-        toast.success("¡Bienvenido de nuevo!");
+        setTimeout(() => {
+          toast.success("Bienvenido de nuevo!");
+        }, 200);
         navigate("/");
       }
     } catch (err) {
@@ -54,7 +56,6 @@ const LoginPage = () => {
 
       <main className="flex grow items-center justify-center p-4 sm:p-8 lg:p-12">
         <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl p-6 sm:p-10 lg:p-12 space-y-8 sm:space-y-10">
-          {/* Header */}
           <div className="text-center space-y-3 sm:space-y-4">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               Bienvenido de nuevo
@@ -64,7 +65,6 @@ const LoginPage = () => {
             </p>
           </div>
 
-          {/* Form */}
           <form className="space-y-6 sm:space-y-8" onSubmit={handleSubmit}>
             {/* Email */}
             <div>

@@ -62,7 +62,7 @@ const RelatedProducts = ({ category, id }) => {
                 </h3>
                 <div className="opacity-0 max-h-0 group-hover:opacity-100  group-hover:max-h-40 transition-all duration-500 mt-1">
                   <p className="font-bold text-lg text-white">
-                    ${product.precio}
+                    {product.precio} €
                   </p>
                 </div>
               </div>

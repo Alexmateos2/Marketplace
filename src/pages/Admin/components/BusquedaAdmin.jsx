@@ -8,11 +8,11 @@ const BusquedaAdmin = ({ data = [], onFilterChange }) => {
     setInputValue(value);
 
     const filteredData = data.filter((item) =>
-      // fallback seguro para nombres nulos
+ 
       (item.nombre || "invitado").toLowerCase().includes(value)
     );
 
-    // si no hay coincidencias, devolver todo el array
+
     onFilterChange(filteredData.length > 0 ? filteredData : data);
   };
 

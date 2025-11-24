@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../../shared/navbar/navbar";
-import PrivacyTermsAside from "./components/AsideTerms";
+import AsidePrivacyTerms from "./components/AsidePrivacyTerms";
 import Footer from "../../../shared/utils/Footer";
 import { NavLink } from "react-router-dom";
 const PrivacyTerms = () => {
@@ -9,7 +9,7 @@ const PrivacyTerms = () => {
       <Navbar />
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-         <PrivacyTermsAside />
+        <AsidePrivacyTerms />
           <div className="flex-1 min-w-0 ">
             <div className="prose prose-slate max-w-none prose-h1:text-4xl prose-h1:font-black prose-h2:text-2xl prose-h2:font-bold prose-p:leading-relaxed prose-p:text-slate-600 prose-a:text-content-light dark:text-content-dark hover:prose-a:underline prose-li:text-slate-600 prose-h2:text-slate-900 prose-h1:text-slate-900">
               <div className="flex flex-wrap gap-2 pb-6">

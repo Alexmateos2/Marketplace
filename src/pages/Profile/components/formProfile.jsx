@@ -8,7 +8,8 @@ const VALIDATION_RULES = {
     minLength: 3,
     required: true,
     pattern: /^[a-zA-Z\s]{3,}$/,
-    message: "El nombre debe tener al menos 3 caracteres y contener solo letras",
+    message:
+      "El nombre debe tener al menos 3 caracteres y contener solo letras",
   },
   email: {
     required: true,
@@ -20,12 +21,12 @@ const VALIDATION_RULES = {
     message: "Teléfono inválido (mínimo 9 dígitos)",
   },
   password: {
-    minLength: 8,
-    message: "La contraseña debe tener al menos 8 caracteres",
+    minLength: 6,
+    message: "La contraseña debe tener al menos 6 caracteres",
   },
 };
 
-const API_BASE_URL ="http://localhost:3000";
+const API_BASE_URL = "http://localhost:3000";
 
 const FormField = ({
   label,

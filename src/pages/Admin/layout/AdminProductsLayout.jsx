@@ -28,6 +28,7 @@ const AdminProductsLayout = () => {
       if (!response.ok) throw new Error(`Error: ${response.status}`);
 
       const data = await response.json();
+
       const sortedData = (data || []).sort(
         (a, b) => a.id_producto - b.id_producto
       );
@@ -48,7 +49,6 @@ const AdminProductsLayout = () => {
     fetchProductos();
   }, []);
 
-  // Ordenar columnas
   const handleSort = (key) => {
     let direction = "asc";
     if (sortConfig.key === key && sortConfig.direction === "asc") {
@@ -72,14 +72,12 @@ const AdminProductsLayout = () => {
         }
       }
 
-      // Strings
       if (typeof aVal === "string" && typeof bVal === "string") {
         return direction === "asc"
           ? aVal.toLowerCase().localeCompare(bVal.toLowerCase())
           : bVal.toLowerCase().localeCompare(aVal.toLowerCase());
       }
 
-      // Números
       if (typeof aVal === "number" && typeof bVal === "number") {
         return direction === "asc" ? aVal - bVal : bVal - aVal;
       }
@@ -113,7 +111,9 @@ const AdminProductsLayout = () => {
           sortable: true,
           render: (p) => (
             <NavLink
-            to={`/product/${p.id_producto}`} className="flex items-center w-full lg:justify-start justify-center gap-2">
+              to={`/product/${p.id_producto}`}
+              className="flex items-center w-full lg:justify-start justify-center gap-2"
+            >
               {p.imagen && (
                 <AdvancedImage
                   cldImg={cld
@@ -131,13 +131,12 @@ const AdminProductsLayout = () => {
           ),
         },
         { key: "precio", label: "Precio", sortable: true },
-        { key: "stock", label: "Stock",
-          render: (p) => (
-            <span className="lg:ml-4">
-              {p.stock}
-            </span>
-          ),
-           sortable: true },
+        {
+          key: "stock",
+          label: "Stock",
+          render: (p) => <span className="lg:ml-4">{p.stock}</span>,
+          sortable: true,
+        },
         {
           key: "status",
           label: "Estado",

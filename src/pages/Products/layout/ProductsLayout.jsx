@@ -22,7 +22,6 @@ const ProductsPage = ({ category, search }) => {
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch global
   useEffect(() => {
     const fetchProductos = async () => {
       try {

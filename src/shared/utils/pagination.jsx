@@ -24,7 +24,7 @@ const Pagination = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (pageCount === 0) return null; // No mostrar si no hay páginas
+  if (pageCount === 0) return null; 
 
   return (
     <div className="flex justify-center  items-center gap-2">

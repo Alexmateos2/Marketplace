@@ -138,7 +138,7 @@ const AdminLayout = ({
                                 {col.render
                                   ? col.render(item)
                                   : col.key === "precio" || col.key === "total"
-                                  ? `${item[col.key]} $`
+                                  ? `${item[col.key]} €`
                                   : item[col.key]}
                               </td>
                             ))}
@@ -200,7 +200,7 @@ const AdminLayout = ({
                             {col.render
                               ? col.render(item)
                               : col.key === "precio" || col.key === "total"
-                              ? `${item[col.key]} $`
+                              ? `${item[col.key]} €`
                               : item[col.key]}
                           </span>
                         </div>
@@ -247,7 +247,7 @@ const AdminLayout = ({
               </>
             )}
           </div>
-          {/* Modal rendereado aquí */}
+         
           <Modal />
         </main>
       </div>

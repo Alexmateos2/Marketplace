@@ -5,6 +5,7 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import { toast } from "react-toastify";
+import Footer from  "../../../shared/utils/Footer.jsx";
 const OrderDetailsPage = () => {
   const { id, id_usuario } = useParams();
   const [pedido, setPedido] = useState(null);
@@ -85,9 +86,9 @@ const OrderDetailsPage = () => {
   }
 
   return (
-    <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen">
+ <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen flex flex-col">
       <Navbar />
-      <main className="px-6 sm:px-10 lg:px-20 py-8 flex flex-1 justify-center">
+   <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center">
         <div className="layout-content-container flex flex-col w-full max-w-5xl flex-1">
           <div className="mb-8">
             <NavLink
@@ -107,7 +108,7 @@ const OrderDetailsPage = () => {
             </h1>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-2 text-subtle-light dark:text-subtle-dark text-sm">
               <p>Pedido #{pedido.id_pedido}</p>
-              <div className="size-1 rounded-full bg-border-light dark:bg-border-dark hidden sm:block"></div>
+              <div className="size-1 rounded-full bg-gray-600 dark:bg-gray-300 hidden sm:block"></div>
               <p>
                 Realizado el{" "}
                 {new Date(pedido.fecha).toLocaleDateString("es-ES", {
@@ -149,7 +150,8 @@ const OrderDetailsPage = () => {
                               {item.nombre_producto}
                             </p>
                             <p className="text-sm text-subtle-light dark:text-subtle-dark">
-                              Cantidad: {Number(item.cantidad)}
+                              Cantidad: {Number(item.cantidad)} | Precio por unidad:{" "}
+                              {formatCurrency(Number(item.precio_unitario))}
                             </p>
                           </div>
                           <p className="font-semibold text-content-light dark:text-content-dark">
@@ -253,6 +255,7 @@ const OrderDetailsPage = () => {
           </div>
         </div>
       </main>
+      <Footer />  
     </div>
   );
 };

@@ -32,7 +32,7 @@ const CartBadge = ({ productId }) => {
   );
 };
 
-// Componente de imagen memoizado
+// Componente de imagen memoizado para optimizar el rendimiento al clicar en añadir al carrito
 const ProductImageCard = memo(({ product, idx, imageConfigs }) => {
   const cldImgConfig = imageConfigs[product.id_producto];
 
@@ -58,7 +58,7 @@ const ProductImageCard = memo(({ product, idx, imageConfigs }) => {
   );
 });
 
-ProductImageCard.displayName = "ProductImageCard";
+
 
 const Products = ({ loading, currentProducts }) => {
   const { addToCart, cart } = useCart();
@@ -134,10 +134,10 @@ const Products = ({ loading, currentProducts }) => {
 
             <div className="px-4 pb-4 flex flex-col  text-center md:text-start sm:flex-row  justify-between gap-2 mt-auto relative ">
               <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg mt-1 truncate">
-                $
+                
                 {product.precio.toLocaleString("es-ES", {
                   minimumFractionDigits: 2,
-                })}
+                })} €
               </p>
               <div className="relative min-w-[40px] min-h-[30px]">
                 {product.stock === 0 ? (

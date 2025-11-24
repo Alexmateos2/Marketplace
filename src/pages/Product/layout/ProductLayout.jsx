@@ -83,7 +83,7 @@ const ProductPages = () => {
       <Navbar />
       <main className="flex-1 px-4 sm:px-6 lg:px-40 py-8">
         <div className="mx-auto max-w-5xl">
-          {/* Breadcrumb */}
+        
           <div className="mb-6">
             <nav className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400">
               <NavLink to="/products" className="hover:text-primary">
@@ -100,7 +100,7 @@ const ProductPages = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 mt-10">
-            {/* Información del Producto */}
+         
             <div className="flex flex-col order-1 lg:order-2">
               <div className="rounded-xl px-6 mb-8 lg:mb-0">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
@@ -113,7 +113,7 @@ const ProductPages = () => {
                 </p>
                 <div className="flex items-baseline gap-2 mb-6">
                   <span className="text-4xl font-black text-gray-900 dark:text-white">
-                    ${product.precio}
+                  {product.precio} €
                   </span>
                 </div>
                 <div className="flex flex-col gap-4">
@@ -159,7 +159,7 @@ const ProductPages = () => {
               </div>
             </div>
 
-            {/* Imagen del Producto */}
+       
             <div className="flex flex-col order-2 lg:order-1">
               <div className="w-full max-w-[400px] mx-auto relative overflow-hidden rounded-xl aspect-square">
                 {product?.imagen ? (
@@ -187,7 +187,7 @@ const ProductPages = () => {
 
           {/* Especificaciones + Reseña */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
-            {/* Especificaciones */}
+  
             <div className="flex flex-col">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Especificaciones
@@ -213,7 +213,7 @@ const ProductPages = () => {
               </div>
             </div>
 
-            {/* Reseña */}
+       
             <div className="flex flex-col h-fit">
               <div className="bg-surface-light dark:bg-surface-dark border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow-sm h-fit">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">

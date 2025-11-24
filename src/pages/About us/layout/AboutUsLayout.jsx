@@ -46,9 +46,9 @@ const AboutUsPage = () => {
     <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark dark:text-content-dark text-content-light font-display transition-colors">
       <Navbar />
       <main className="flex flex-col flex-1">
-        {/* Hero Section - Compacto */}
+        {/* Hero Section  */}
         <section className="relative w-full py-12 lg:py-16 text-center px-4 md:px-10 lg:px-20 overflow-hidden">
-          {/* Fondo decorativo */}
+        
           <div className="absolute inset-0 -z-10 overflow-hidden">
             <div
               className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 dark:opacity-20"
@@ -84,7 +84,7 @@ const AboutUsPage = () => {
           </div>
         </section>
 
-        {/* Features Section - Principal */}
+        {/* Features Section  */}
         <section className="w-full max-w-6xl mx-auto rounded-2xl border border-border-light dark:border-border-dark py-16 md:py-24 bg-gradient-to-br from-surface-light to-background-light dark:from-gray-800/50 dark:to-gray-900 px-4 md:px-10 lg:px-20 mx-4 md:mx-auto my-8">
           <div className="space-y-12">
             <div>
@@ -99,7 +99,6 @@ const AboutUsPage = () => {
               </p>
             </div>
 
-            {/* Feature Cards con animación mejorada */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {features.map((feature, idx) => {
                 const Icon = feature.icon;
@@ -116,7 +115,7 @@ const AboutUsPage = () => {
                           : "translateY(0) scale(1)",
                     }}
                   >
-                    {/* Gradient background on hover */}
+                 
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
 
                     <div className="relative space-y-4">
@@ -132,7 +131,6 @@ const AboutUsPage = () => {
                         {feature.description}
                       </p>
 
-                      {/* Animated underline */}
                       <div className="h-1 w-0 bg-gradient-to-r from-primary to-primary/60 rounded-full group-hover:w-full transition-all duration-500" />
                     </div>
                   </div>
@@ -159,7 +157,7 @@ const AboutUsPage = () => {
                     onMouseEnter={() => setActiveCard(`stat-${idx}`)}
                     onMouseLeave={() => setActiveCard(null)}
                   >
-                    {/* Gradient background on hover */}
+          
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
 
                     <div className="relative space-y-3">
@@ -208,7 +206,6 @@ const AboutUsPage = () => {
               tu día a día.
             </p>
 
-            {/* CTA Button */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link to="/products" className="w-full sm:w-auto">
                 <GlareButton className="w-full">

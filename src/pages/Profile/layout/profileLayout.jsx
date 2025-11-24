@@ -1,5 +1,3 @@
-// ProfilePage.jsx
-
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +29,7 @@ const ProfilePage = () => {
       <Navbar />
       <div className="flex min-h-screen ">
         <AsideProfile usuario={usuario} />
-    <main className="flex-1 p-4 sm:p-10 lg:pl-90  lg:pt-20">
+        <main className="flex-1 p-4 sm:p-10 lg:pl-90  lg:pt-20">
           <FormProfile usuario={usuario} />
         </main>
       </div>

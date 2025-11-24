@@ -112,7 +112,6 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
       },
     ];
   } else if (location.pathname === "/terms") {
- 
     menuItems = [
       {
         label: "Introducción",
@@ -129,59 +128,55 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
       { label: "8. Ley Aplicable", to: "#section8" },
       { label: "Contacto", to: "#contact", icon: <Mail className="w-5 h-5" /> },
     ];
-  } 
-  else if (location.pathname === "/privacy") {
+  } else if (location.pathname === "/privacy") {
     menuItems = [
       {
-    label: "Introducción",
-    to: "#introduction",
-    icon: <Info className="w-5 h-5" />,
-  },
-  {
-    label: "Información que recopilamos",
-    to: "#info-collect",
-    icon: <Database className="w-5 h-5" />,
-  },
-  {
-    label: "Cómo usamos tu información",
-    to: "#info-use",
-    icon: <Search className="w-5 h-5" />,
-  },
-  {
-    label: "Compartir datos",
-    to: "#data-sharing",
-    icon: <Share2 className="w-5 h-5" />,
-  },
-  {
-    label: "Seguridad de los datos",
-    to: "#data-security",
-    icon: <Shield className="w-5 h-5" />,
-  },
-  {
-    label: "Tus derechos",
-    to: "#your-rights",
-    icon: <Settings className="w-5 h-5" />,
-  },
-  {
-    label: "Cookies",
-    to: "#cookies",
-    icon: <Cookie className="w-5 h-5" />,
-  },
-  {
-    label: "Cambios en la política",
-    to: "#policy-changes",
-    icon: <History className="w-5 h-5" />,
-  },
-  {
-    label: "Contáctanos",
-    to: "#contact",
-    icon: <Mail className="w-5 h-5" />,
-  },
-];
-  }
-
-  
-  else {
+        label: "Introducción",
+        to: "#introduction",
+        icon: <Info className="w-5 h-5" />,
+      },
+      {
+        label: "Información que recopilamos",
+        to: "#info-collect",
+        icon: <Database className="w-5 h-5" />,
+      },
+      {
+        label: "Cómo usamos tu información",
+        to: "#info-use",
+        icon: <Search className="w-5 h-5" />,
+      },
+      {
+        label: "Compartir datos",
+        to: "#data-sharing",
+        icon: <Share2 className="w-5 h-5" />,
+      },
+      {
+        label: "Seguridad de los datos",
+        to: "#data-security",
+        icon: <Shield className="w-5 h-5" />,
+      },
+      {
+        label: "Tus derechos",
+        to: "#your-rights",
+        icon: <Settings className="w-5 h-5" />,
+      },
+      {
+        label: "Cookies",
+        to: "#cookies",
+        icon: <Cookie className="w-5 h-5" />,
+      },
+      {
+        label: "Cambios en la política",
+        to: "#policy-changes",
+        icon: <History className="w-5 h-5" />,
+      },
+      {
+        label: "Contáctanos",
+        to: "#contact",
+        icon: <Mail className="w-5 h-5" />,
+      },
+    ];
+  } else {
     menuItems = [
       {
         icon: <LayoutGrid className="w-5 h-5" />,
@@ -256,8 +251,10 @@ const MobileMenu = ({ isOpen, setIsOpen }) => {
                     );
                   }
 
-          
-                  if (location.pathname === "/terms" || location.pathname === "/privacy") {
+                  if (
+                    location.pathname === "/terms" ||
+                    location.pathname === "/privacy"
+                  ) {
                     return (
                       <a
                         key={label}

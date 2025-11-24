@@ -137,7 +137,7 @@ const AdminProductEditLayout = () => {
         <AsideAdmin />
         <main className="flex flex-1 flex-col p-4 sm:p-6 lg:p-6 overflow-hidden">
           <div className="flex flex-col mx-auto w-full max-w-4xl gap-8">
-            {/* Header */}
+
             <div className="flex flex-col gap-2">
               <nav className="flex items-center text-sm font-medium text-gray-500 dark:text-gray-400 pb-2">
                 <NavLink className="hover:text-primary" to="/admin/products">
@@ -153,10 +153,10 @@ const AdminProductEditLayout = () => {
               </h1>
             </div>
 
-            {/* Formulario */}
+    
             <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 items-start">
-                {/* Imagen */}
+          
                 <div className="lg:col-span-1 flex flex-col">
                   <div className="flex flex-col gap-4 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                     <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
@@ -197,7 +197,6 @@ const AdminProductEditLayout = () => {
                               onChange={handleImageChange}
                             />
                           </label>
-                          <div className="pl-1">o arrastra y suelta</div>
                           <div className="text-xs text-muted-light dark:text-muted-dark pt-1">
                             PNG, JPG, hasta 10MB
                           </div>
@@ -207,7 +206,6 @@ const AdminProductEditLayout = () => {
                   </div>
                 </div>
 
-                {/* Detalles */}
                 <div className="md:col-span-2">
                   <div className="flex flex-col gap-6 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                     <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
@@ -308,7 +306,6 @@ const AdminProductEditLayout = () => {
                 </div>
               </div>
 
-              {/* Especificaciones */}
               <div className="flex flex-col gap-6 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
@@ -354,7 +351,6 @@ const AdminProductEditLayout = () => {
                 </div>
               </div>
 
-              {/* Reseñas */}
               <div className="flex flex-col gap-6 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
@@ -418,7 +414,7 @@ const AdminProductEditLayout = () => {
                 </div>
               </div>
 
-              {/* Botones */}
+    
               <div className="flex justify-end gap-4">
                 <button
                   className="h-10 rounded-lg px-4 text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"

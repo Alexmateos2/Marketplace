@@ -29,14 +29,17 @@ import { ToastContainer } from "react-toastify";
 import PrivacyTerms from "./pages/FooterTerms/Layout/PrivacyTerms.jsx";
 import Terms from "./pages/FooterTerms/Layout/Terms.jsx";
 
-
 function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-background-dark dark:text-white transition-colors">
       <CartProvider>
-       
         <Router>
-           <ToastContainer />
+          <ToastContainer
+            position="top-right"
+            className="fixed top-16 right-4 sm:top-16 sm:right-4 "
+            autoClose={2000}
+          />
+
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -117,7 +120,7 @@ function App() {
               }
             />
             <Route path="/privacy" element={<PrivacyTerms />} />
-              <Route path="/terms" element={<Terms />} />
+            <Route path="/terms" element={<Terms />} />
           </Routes>
         </Router>
       </CartProvider>
