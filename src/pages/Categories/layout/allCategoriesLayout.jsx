@@ -12,7 +12,7 @@ const AllCategoriesPage = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold tracking-tight text-content-light dark:text-content-dark sm:text-5xl">
-              Compra por Categoría
+              Compra por categoría
             </h2>
             <p className="mt-4 text-lg text-subtle-light dark:text-subtle-dark">
               Explora nuestra selección curada de productos tecnológicos, elegidos cuidadosamente por expertos.
