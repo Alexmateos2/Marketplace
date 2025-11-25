@@ -8,7 +8,7 @@
   "description": "Marketplace moderno para comprar productos con facilidad.",
   "icons": [
     {
-      "src": "/logo2.svg",
+      "src": "/images/logo2.svg",
       "sizes": "512x512",
       "type": "image/svg+xml"
     }
