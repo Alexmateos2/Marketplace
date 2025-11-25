@@ -68,12 +68,13 @@ const AdminLayout = ({
                   </h1>
                   {isProductPage ? (
                     <>
-                      <button className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 transition-colors">
+                      <NavLink  to="/add" className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 transition-colors">
                         <Plus size={20} />
-                        <NavLink to="/add" className="truncate">
+                        <span className="truncate">
                           Agregar nuevo
+                          </span>
                         </NavLink>
-                      </button>
+                     
                     </>
                   ) : null}
                 </div>

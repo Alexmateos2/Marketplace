@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
+import { NavLink } from "react-router-dom";
 import { BadgeCheck, ThumbsUp, Rocket, Zap, Target, Users } from "lucide-react";
-import { Link } from "react-router-dom";
-import GlareButton from "../../../shared/utils/GlareButton";
 
 const AboutUsPage = () => {
-  const [scrollY, setScrollY] = useState(0);
   const [activeCard, setActiveCard] = useState(null);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const features = [
     {
@@ -37,7 +29,7 @@ const AboutUsPage = () => {
   ];
 
   const stats = [
-    { number: "10k+", label: "Productos Evaluados", icon: Target },
+    { number: "2k+", label: "Productos Evaluados", icon: Target },
     { number: "50k+", label: "Clientes Felices", icon: Users },
     { number: "99.9%", label: "Satisfacción", icon: Zap },
   ];
@@ -46,21 +38,15 @@ const AboutUsPage = () => {
     <div className="flex flex-col min-h-screen bg-background-light dark:bg-background-dark dark:text-content-dark text-content-light font-display transition-colors">
       <Navbar />
       <main className="flex flex-col flex-1">
-        {/* Hero Section  */}
+        {/* Hero Section */}
         <section className="relative w-full py-12 lg:py-16 text-center px-4 md:px-10 lg:px-20 overflow-hidden">
-        
+       
           <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div
-              className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 dark:opacity-20"
-              style={{ transform: `translateY(${scrollY * 0.3}px)` }}
-            />
-            <div
-              className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 dark:opacity-20"
-              style={{ transform: `translateY(${-scrollY * 0.3}px)` }}
-            />
+            <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 dark:opacity-20" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 dark:opacity-20" />
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-4 animate-fade-in">
+          <div className="max-w-3xl mx-auto space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-tight">
               <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 Tecnología,
@@ -84,8 +70,8 @@ const AboutUsPage = () => {
           </div>
         </section>
 
-        {/* Features Section  */}
-        <section className="w-full max-w-6xl mx-auto rounded-2xl border border-border-light dark:border-border-dark py-16 md:py-24 bg-gradient-to-br from-surface-light to-background-light dark:from-gray-800/50 dark:to-gray-900 px-4 md:px-10 lg:px-20 mx-4 md:mx-auto my-8">
+        {/* Features Section */}
+        <section className="w-full max-w-6xl mx-auto rounded-2xl border border-border-light dark:border-border-dark py-16 md:py-24 bg-gradient-to-br from-surface-light to-background-light dark:from-gray-800/50 dark:to-gray-900 px-4 md:px-10 lg:px-20 my-8 mx-4 md:mx-auto">
           <div className="space-y-12">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
@@ -102,20 +88,16 @@ const AboutUsPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {features.map((feature, idx) => {
                 const Icon = feature.icon;
+                const isActive = activeCard === idx;
                 return (
                   <div
                     key={idx}
                     onMouseEnter={() => setActiveCard(idx)}
                     onMouseLeave={() => setActiveCard(null)}
-                    className="group relative bg-background-light dark:bg-gray-900 border border-border-light dark:border-border-dark rounded-xl p-6 md:p-8 hover:border-primary/50 transition-all duration-300 cursor-pointer overflow-hidden"
-                    style={{
-                      transform:
-                        activeCard === idx
-                          ? "translateY(-8px) scale(1.02)"
-                          : "translateY(0) scale(1)",
-                    }}
+                    className={`group relative bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-xl p-6 md:p-8 hover:border-primary/50 transition-all duration-300 overflow-hidden
+                      ${isActive ? "-translate-y-2 scale-105" : "translate-y-0 scale-100"}
+                    `}
                   >
-                 
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
 
                     <div className="relative space-y-4">
@@ -137,27 +119,25 @@ const AboutUsPage = () => {
                 );
               })}
             </div>
-
           </div>
         </section>
 
-
+        {/* Stats Section */}
         <section className="w-full py-12 md:py-16 px-4 md:px-10 lg:px-20">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {stats.map((stat, idx) => {
                 const Icon = stat.icon;
+                const isActive = activeCard === `stat-${idx}`;
                 return (
                   <div
                     key={idx}
-                    className="group relative bg-surface-light dark:bg-gray-800 border border-border-light dark:border-border-dark rounded-2xl p-6 md:p-8 text-center hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 overflow-hidden"
-                    style={{
-                      transform: activeCard === `stat-${idx}` ? "translateY(-4px)" : "translateY(0)",
-                    }}
                     onMouseEnter={() => setActiveCard(`stat-${idx}`)}
                     onMouseLeave={() => setActiveCard(null)}
+                    className={`group relative bg-surface-light dark:bg-gray-800 border border-border-light dark:border-border-dark rounded-2xl p-6 md:p-8 text-center transition-all duration-300 overflow-hidden cursor-pointer hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10
+                      ${isActive ? "-translate-y-1" : "translate-y-0"}
+                    `}
                   >
-          
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300" />
 
                     <div className="relative space-y-3">
@@ -180,18 +160,13 @@ const AboutUsPage = () => {
           </div>
         </section>
 
-
+        {/* CTA Section */}
         <section className="relative w-full py-16 md:py-20 text-center px-4 md:px-10 lg:px-20 overflow-hidden">
           <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 dark:opacity-20"
-              style={{
-                transform: `translate(calc(-50% + ${scrollY * 0.2}px), -50%)`,
-              }}
-            />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl opacity-50 dark:opacity-20" />
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-8 animate-fade-in">
+          <div className="max-w-3xl mx-auto space-y-8">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
               <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                 Deja de buscar.
@@ -207,20 +182,18 @@ const AboutUsPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link to="/products" className="w-full sm:w-auto">
-                <GlareButton className="w-full">
-                  Explorar Colecciones
-                </GlareButton>
-              </Link>
+              <NavLink to='/products' className="w-full sm:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-colors duration-300">
+                Explorar Colecciones
+              </NavLink>
             </div>
 
-          
             <div className="flex justify-center gap-2 mt-8">
               {[0, 1, 2].map((dot) => (
                 <div
                   key={dot}
-                  className="h-2 bg-primary/40 hover:bg-primary transition-all duration-300  rounded-full"
-                  style={{ width: dot === 1 ? "32px" : "8px" }}
+                  className={`h-2 bg-primary/40 hover:bg-primary transition-all duration-300 rounded-full
+                    ${dot === 1 ? "w-8" : "w-2"}
+                  `}
                 />
               ))}
             </div>
@@ -228,7 +201,6 @@ const AboutUsPage = () => {
         </section>
       </main>
       <Footer />
-
     </div>
   );
 };
