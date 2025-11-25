@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 function CategoriaDestacada() {
   const categories = [
-    { title: "Laptops", image: "../unnamed(6).png" },
-    { title: "Audio", image: "../unnamed(7).png" },
-    { title: "Wearables", image: "../unnamed(8).png" },
-    { title: "Accesorios", image: "../unnamed(9).png" },
+    { title: "Laptops", image: "images/unnamed(6).png" },
+    { title: "Audio", image: "images/unnamed(7).png" },
+    { title: "Wearables", image: "images/unnamed(8).png" },
+    { title: "Accesorios", image: "images/unnamed(9).png" },
   ];
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

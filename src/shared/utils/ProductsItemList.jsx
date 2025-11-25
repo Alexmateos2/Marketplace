@@ -213,7 +213,7 @@ const products = [
     price: 1200.0,
     desc: "Potente laptop de 16 pulgadas con rendimiento superior para trabajo profesional y diseño multimedia. Gran autonomía y pantalla de alta resolución.",
     shortDesc: "Powerful Performance",
-    image: "../unnamed(2).png",
+    image: "images/unnamed(2).png",
   },
   {
     id: 36,
@@ -222,7 +222,7 @@ const products = [
     price: 179.99,
     desc: "Auriculares inalámbricos X50 con sonido envolvente y cancelación activa de ruido para una experiencia auditiva premium sin cables.",
     shortDesc: "Inmersive Sound",
-    image: "../unnamed(3).png",
+    image: "images/unnamed(3).png",
   },
   {
     id: 37,
@@ -231,7 +231,7 @@ const products = [
     price: 249.99,
     desc: "Smartwatch Series 7 con funciones avanzadas de monitoreo de salud, seguimiento de actividad y notificaciones inteligentes en tu muñeca.",
     shortDesc: "Advanced tracking",
-    image: "../unnamed(4).png",
+    image: "images/unnamed(4).png",
   },
   {
     id: 38,

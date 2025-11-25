@@ -37,7 +37,7 @@ const Navbar = () => {
                   className="flex items-center gap-2 text-xl font-bold text-content-light dark:text-content-dark hover:opacity-80 transition-opacity"
                 >
                   <img
-                    src="/logo2.svg"
+                    src="/images/logo2.svg"
                     alt="Logo de Tekia"
                     className="w-8 h-8 object-contain"
                   />

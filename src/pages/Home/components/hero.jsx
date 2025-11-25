@@ -10,7 +10,7 @@ const Hero = () => {
         alt="Desk setup"
         className="absolute inset-0 h-full w-full object-cover brightness-105 contrast-105"
         loading="lazy"
-        src="../unnamed(1).png"
+        src="images/unnamed(1).png"
       />
 
     

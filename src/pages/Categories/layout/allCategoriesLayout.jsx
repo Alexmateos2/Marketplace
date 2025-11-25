@@ -140,7 +140,7 @@ const AllCategoriesPage = () => {
                 <img
                   alt="Accesorios overlay"
                   className="h-full w-full object-cover object-[center_90%] transition-transform group-hover:scale-105"
-                  src="/public/unnamed(9).png"
+                  src="/images/unnamed(9).png"
                 />
               </div>
               <div className="relative z-10 w-full bg-gradient-to-t from-black/60 to-transparent p-6 text-center">
