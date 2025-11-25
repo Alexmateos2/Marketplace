@@ -29,7 +29,7 @@ const ProfilePage = () => {
       <Navbar />
       <div className="flex min-h-screen ">
         <AsideProfile usuario={usuario} />
-        <main className="flex-1 p-4 sm:p-10 lg:pl-90 ">
+        <main className="flex-1 p-4 sm:p-10 lg:pl-90 xl:pl-70 ">
           <FormProfile usuario={usuario} />
         </main>
       </div>

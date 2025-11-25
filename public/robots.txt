@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Bloquear áreas privadas
+Disallow: /admin/
+Disallow: /add/
+
+Sitemap: https://marketplacetfg.netlify.app/sitemap.xml

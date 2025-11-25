@@ -49,7 +49,7 @@ export default function HomePage() {
         {/* Productos Expertos */}
         <section className="py-12 sm:py-16">
           <h2 className="mb-8 text-center text-2xl sm:text-3xl font-bold tracking-tight">
-            Selecciones de Nuestros Expertos
+            Selecciones de nuestros expertos
           </h2>
           <ProductosExpertos />
         </section>
@@ -57,7 +57,7 @@ export default function HomePage() {
         {/* Categorías Destacadas */}
         <section className="py-12 sm:py-16">
           <h2 className="mb-8 text-center text-2xl sm:text-3xl font-bold tracking-tight">
-            Categorías Destacadas
+            Categorías destacadas
           </h2>
           <CategoriaDestacada />
         </section>
@@ -66,7 +66,7 @@ export default function HomePage() {
         <section className="bg-surface-light dark:bg-surface-dark w-full xl:w-3/5 mx-auto rounded-lg py-12 sm:py-16 px-4 text-center mb-20 shadow-lg group border border-border-light dark:border-border-dark hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 overflow-hidden">
           <div className="relative">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-              Mantente Conectado
+              Mantente conectado
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-subtle-light dark:text-subtle-dark">
               Suscríbete a nuestro boletín y no te pierdas las últimas novedades

@@ -52,7 +52,7 @@ const AboutUsPage = () => {
                 Tecnología,
               </span>
               <br />
-              <span>Perfeccionada.</span>
+              <span>perfeccionada.</span>
             </h1>
 
             <p className="text-base md:text-lg text-gray-600 dark:text-subtle-dark max-w-2xl mx-auto leading-relaxed">
@@ -75,7 +75,7 @@ const AboutUsPage = () => {
           <div className="space-y-12">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-                Selección Experta, Sin Compromisos.
+                Selección experta, sin compromisos.
               </h2>
               <p className="text-base md:text-lg leading-relaxed text-gray-600 dark:text-subtle-dark max-w-2xl">
                 Olvídate del scroll infinito y la confusión de productos

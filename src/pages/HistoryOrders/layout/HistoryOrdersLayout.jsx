@@ -71,25 +71,25 @@ const HistoryOrdersPage = () => {
       <Navbar />
       <div className="flex flex-1">
         <AsideProfile />
-        <main className="flex-1 lg:ml-80 flex justify-center">
+        <main className="flex-1 lg:ml-80 xl:ml-60 flex justify-center">
           <div className="w-full max-w-4xl  py-8 px-4 md:px-8  lg:px-4 xl:px-0">
             {!id_usuario ? (
               <NavLink
                 to="/profile"
-                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition "
               >
                 Volver al perfil
               </NavLink>
             ) : (
               <NavLink
                 to="/admin/users"
-                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition"
+                className="text-sm pb-4 font-medium text-subtle-light dark:text-subtle-dark hover:underline transition "
               >
                 Volver a Usuarios
               </NavLink>
             )}
 
-            <h1 className="text-content-light dark:text-content-dark text-4xl font-black mb-6">
+            <h1 className="text-content-light dark:text-content-dark text-4xl font-black pt-2 mb-6">
               Historial de Pedidos
             </h1>
 
@@ -98,7 +98,7 @@ const HistoryOrdersPage = () => {
                 Cargando tus pedidos...
               </p>
             ) : orders.length === 0 ? (
-              <p className="text-center text-subtle-light dark:text-subtle-dark mt-6">
+              <p className="text-center text-subtle-light dark:text-subtle-dark mt-15">
                 {isAdmin
                   ? "Este usuario aún no tiene pedidos."
                   : "Aún no tienes pedidos."}

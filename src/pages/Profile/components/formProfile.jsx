@@ -271,7 +271,7 @@ const FormProfile = ({ usuario }) => {
         </p>
       </div>
 
-      <div className="flex flex-col @container items-start gap-6 p-4 mb-8 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark">
+      <div className="flex flex-col  items-start gap-6 p-4 mb-8 bg-surface-light dark:bg-surface-dark rounded-xl border border-border-light dark:border-border-dark">
         <div className="flex w-full flex-col sm:flex-row gap-6 items-center sm:items-start">
           {!showAvatarPicker && (
             <div className="relative w-32 h-32">
