@@ -131,7 +131,7 @@ const Products = ({ loading, currentProducts }) => {
             />
 
             <div className="px-4 pb-4 flex flex-col  text-center md:text-start sm:flex-row  justify-between gap-2 mt-auto relative items-center ">
-              <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg text-nowrap mt-1 ">
+              <p className="text-gray-700 dark:text-subtle-dark font-bold text-base lg:text-lg text-nowrap mt-1 ">
                 {product.precio.toLocaleString("es-ES", {
                   minimumFractionDigits: 2,
                 })}{" "}
