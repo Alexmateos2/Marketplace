@@ -58,8 +58,6 @@ const ProductImageCard = memo(({ product, idx, imageConfigs }) => {
   );
 });
 
-
-
 const Products = ({ loading, currentProducts }) => {
   const { addToCart, cart } = useCart();
 
@@ -85,10 +83,9 @@ const Products = ({ loading, currentProducts }) => {
     [addToCart, cart]
   );
 
-  
   const blurPlugin = useMemo(() => [placeholder({ mode: "blur" })], []);
 
-  // Configs de imágenes 
+  // Configs de imágenes
   const imageConfigs = useMemo(() => {
     const configs = {};
     currentProducts.forEach((product) => {
@@ -98,6 +95,7 @@ const Products = ({ loading, currentProducts }) => {
         .format("auto")
         .resize(fill().width(512).height(512).gravity("auto"));
     });
+
     return configs;
   }, [currentProducts]);
 
@@ -132,17 +130,16 @@ const Products = ({ loading, currentProducts }) => {
               imageConfigs={imageConfigs}
             />
 
-            <div className="px-4 pb-4 flex flex-col  text-center md:text-start sm:flex-row  justify-between gap-2 mt-auto relative ">
-              <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg mt-1 truncate">
-                
+            <div className="px-4 pb-4 flex flex-col  text-center md:text-start sm:flex-row  justify-between gap-2 mt-auto relative items-center ">
+              <p className="text-gray-700 dark:text-subtle-dark font-bold text-sm lg:text-lg text-nowrap mt-1 ">
                 {product.precio.toLocaleString("es-ES", {
                   minimumFractionDigits: 2,
-                })} €
+                })}{" "}
+                €
               </p>
               <div className="relative min-w-[40px] min-h-[30px]">
                 {product.stock === 0 ? (
-                  <button className="bg-red-500 text-white rounded-full px-4 py-2 text-xs sm:text-md w-full sm:w-auto font-bold "
-                  >
+                  <button className="bg-red-500 text-white rounded-full px-4 py-2 text-xs sm:text-md w-full sm:w-auto font-bold ">
                     Producto agotado
                   </button>
                 ) : (
