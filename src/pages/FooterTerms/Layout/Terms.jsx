@@ -12,13 +12,10 @@ const Terms = () => {
 
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-  
-         <AsideTerms />
-
+          <AsideTerms />
 
           <div className="flex-1 min-w-0 ">
             <div className="prose prose-slate max-w-none dark:text-content-dark">
-        
               <div className="flex flex-wrap gap-2 pb-6">
                 <NavLink
                   to={"/"}
@@ -43,109 +40,107 @@ const Terms = () => {
                 </p>
               </div>
 
-            <div className="bg-white dark:bg-surface-dark px-8 py-6 rounded-lg shadow-sm">
-              <section className="space-y-4 scroll-mt-24" id="introduction">
-                <h2 className="font-bold text-lg">Introducción</h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Bienvenido a Tekia. Estos Términos del Servicio regulan el uso
-                  de nuestro marketplace y servicios. Al acceder o utilizar
-                  Tekia, aceptas quedar sujeto a estos términos. Por favor,
-                  léelos con atención.
-                </p>
-              </section>
+              <div className="bg-white dark:bg-surface-dark px-8 py-6 rounded-lg shadow-sm">
+                <section className="space-y-4 scroll-mt-24" id="introduction">
+                  <h2 className="font-bold text-lg">Introducción</h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Bienvenido a Tekia. Estos Términos del Servicio regulan el
+                    uso de nuestro marketplace y servicios. Al acceder o
+                    utilizar Tekia, aceptas quedar sujeto a estos términos. Por
+                    favor, léelos con atención.
+                  </p>
+                </section>
 
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section1">
-                <h2 className="font-bold text-lg">
-                  1. Cuenta y Responsabilidades del Usuario
-                </h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Debes tener al menos 18 años para crear una cuenta. Eres
-                  responsable de mantener la confidencialidad de tu información,
-                  incluyendo la contraseña, y de todas las actividades
-                  realizadas desde tu cuenta. Debes notificarnos de inmediato
-                  cualquier uso no autorizado.
-                </p>
-              </section>
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section1">
+                  <h2 className="font-bold text-lg">
+                    1. Cuenta y Responsabilidades del Usuario
+                  </h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Eres responsable de mantener la confidencialidad de tu
+                    información, incluyendo la contraseña, y de todas las
+                    actividades realizadas desde tu cuenta. Debes notificarnos
+                    de inmediato cualquier uso no autorizado.
+                  </p>
+                </section>
 
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section2">
-                <h2 className="font-bold text-lg">2. Uso del Marketplace</h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Tekia te otorga una licencia limitada, no exclusiva y
-                  revocable para usar nuestros servicios con fines personales y
-                  no comerciales. Todas las transacciones se realizan entre
-                  comprador y vendedor; Tekia no es parte de dichas
-                  transacciones.
-                </p>
-              </section>
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section2">
+                  <h2 className="font-bold text-lg">2. Uso del Marketplace</h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Tekia te otorga una licencia limitada, no exclusiva y
+                    revocable para usar nuestros servicios con fines personales
+                    y no comerciales. Todas las transacciones se realizan entre
+                    comprador y vendedor; Tekia no es parte de dichas
+                    transacciones.
+                  </p>
+                </section>
 
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section3">
-                <h2 className="font-bold text-lg">
-                  3. Contenido y Propiedad Intelectual
-                </h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Todo el contenido del sitio (textos, logos, gráficos,
-                  software) es propiedad de Tekia o de sus proveedores y está
-                  protegido por leyes internacionales. Los usuarios no deben
-                  publicar contenido ilegal, obsceno o difamatorio.
-                </p>
-              </section>
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section3">
+                  <h2 className="font-bold text-lg">
+                    3. Contenido y Propiedad Intelectual
+                  </h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Todo el contenido del sitio (textos, logos, gráficos,
+                    software) es propiedad de Tekia o de sus proveedores y está
+                    protegido por leyes internacionales. Los usuarios no deben
+                    publicar contenido ilegal, obsceno o difamatorio.
+                  </p>
+                </section>
 
-            
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section4">
-                <h2 className="font-bold text-lg">4. Pagos y Transacciones</h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Los pagos se procesan mediante terceros autorizados. Al
-                  realizar un pago, aceptas los términos de dichos procesadores.
-                  Tekia no es responsable de errores derivados del proceso de
-                  pago.
-                </p>
-              </section>
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section4">
+                  <h2 className="font-bold text-lg">
+                    4. Pagos y Transacciones
+                  </h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Los pagos se procesan mediante terceros autorizados. Al
+                    realizar un pago, aceptas los términos de dichos
+                    procesadores. Tekia no es responsable de errores derivados
+                    del proceso de pago.
+                  </p>
+                </section>
 
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section5">
+                  <h2 className="font-bold text-lg">
+                    5. Actividades Prohibidas
+                  </h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Está prohibido interferir con el funcionamiento del
+                    marketplace, usar sistemas automatizados sin permiso o
+                    recopilar información personal sin autorización.
+                  </p>
+                </section>
 
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section5">
-                <h2 className="font-bold text-lg">5. Actividades Prohibidas</h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Está prohibido interferir con el funcionamiento del
-                  marketplace, usar sistemas automatizados sin permiso o
-                  recopilar información personal sin autorización.
-                </p>
-              </section>
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section6">
+                  <h2 className="font-bold text-lg">
+                    6. Descargos y Limitación de Responsabilidad
+                  </h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Los servicios de Tekia se proporcionan “tal cual”. No
+                    garantizamos funcionamiento ininterrumpido. En la máxima
+                    medida permitida por la ley, Tekia no es responsable de
+                    daños indirectos o consecuentes.
+                  </p>
+                </section>
 
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section7">
+                  <h2 className="font-bold text-lg">
+                    7. Terminación del Servicio
+                  </h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Podemos suspender o cancelar tu cuenta en cualquier momento
+                    si incumples estos términos. Tras la terminación, tu acceso
+                    al servicio cesará inmediatamente.
+                  </p>
+                </section>
 
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section6">
-                <h2 className="font-bold text-lg">
-                  6. Descargos y Limitación de Responsabilidad
-                </h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Los servicios de Tekia se proporcionan “tal cual”. No
-                  garantizamos funcionamiento ininterrumpido. En la máxima
-                  medida permitida por la ley, Tekia no es responsable de daños
-                  indirectos o consecuentes.
-                </p>
-              </section>
-
-              
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section7">
-                <h2 className="font-bold text-lg">
-                  7. Terminación del Servicio
-                </h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Podemos suspender o cancelar tu cuenta en cualquier momento si
-                  incumples estos términos. Tras la terminación, tu acceso al
-                  servicio cesará inmediatamente.
-                </p>
-              </section>
-
-      
-              <section className="space-y-4 scroll-mt-24 pt-12" id="section8">
-                <h2 className="font-bold text-lg">8. Ley Aplicable</h2>
-                <p className="text-content-light/90 dark:text-content-dark/80">
-                  Estos términos se rigen por las leyes del país donde Tekia
-                  tiene sede. Toda disputa será resuelta en los tribunales de
-                  dicha jurisdicción.
-                </p>
-              </section>
-                    </div>
+                <section className="space-y-4 scroll-mt-24 pt-12" id="section8">
+                  <h2 className="font-bold text-lg">8. Ley Aplicable</h2>
+                  <p className="text-content-light/90 dark:text-content-dark/80">
+                    Estos términos se rigen por las leyes del país donde Tekia
+                    tiene sede. Toda disputa será resuelta en los tribunales de
+                    dicha jurisdicción.
+                  </p>
+                </section>
+              </div>
               <section
                 className="mt-12 p-6 rounded-xl bg-primary/20 dark:bg-primary/10"
                 id="contact"
@@ -167,9 +162,7 @@ const Terms = () => {
                 </a>
               </section>
             </div>
-            
           </div>
-          
         </div>
       </main>
 

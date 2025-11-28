@@ -8,7 +8,7 @@ const ProfileNavbar = () => {
 
   const initialAvatar =
     AVATARS.find((av) => av.value === parseInt(localStorage.getItem("avatar")))
-      ?.url || null;
+      ?.url || AVATARS[2].url;
 
   const [isOpen, setIsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState(null);

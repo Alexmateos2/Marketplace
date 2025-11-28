@@ -96,7 +96,7 @@ const AsidePrivacyTerms = () => {
                 >
                   <Mail className="text-content-light dark:text-content-dark w-5 h-5" />
                   <p className="text-content-light dark:text-content-dark text-sm font-medium leading-normal">
-                    Contáctanos
+                    Contacto
                   </p>
                 </a>
               </div>

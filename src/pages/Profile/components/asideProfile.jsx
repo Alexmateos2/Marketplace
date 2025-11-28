@@ -4,20 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import AVATARS from "../../../shared/utils/avatars.js";
 const AsideProfile = ({ usuario: propUsuario }) => {
-  const usuario = propUsuario || { 
-    nombre: "", 
-    email: "", 
-
+  const usuario = propUsuario || {
+    nombre: "",
+    email: "",
   };
 
   const { nombre, email } = usuario;
   const rol = JSON.parse(localStorage.getItem("rol"));
   const navigate = useNavigate();
-  const avatar = parseInt(localStorage.getItem("avatar"));
-  avatar === null ? 2 : avatar;
-  const avatarUrl = AVATARS.find((av) => av.value === avatar)?.url;
-
-
+  const avatarUrl =
+    AVATARS.find((av) => av.value === parseInt(localStorage.getItem("avatar")))
+      ?.url || AVATARS[2].url;
+console.log(avatarUrl)
   return (
     <aside className="w-80 py-6 px-6 bg-surface-light dark:bg-background-dark/50 hidden lg:flex flex-col justify-between border-r border-border-light dark:border-border-dark fixed left-0 top-20 bottom-0 z-0 overflow-y-auto">
       <div>
@@ -25,7 +23,7 @@ const AsideProfile = ({ usuario: propUsuario }) => {
           <div
             className="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-12 h-12 flex-shrink-0"
             data-alt="Avatar del usuario"
-              style={{
+            style={{
               backgroundImage: `url(${avatarUrl})`,
             }}
           ></div>
