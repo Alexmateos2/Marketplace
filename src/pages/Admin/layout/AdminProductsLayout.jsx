@@ -23,7 +23,7 @@ const AdminProductsLayout = () => {
   const fetchProductos = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/productos");
+      const response = await fetch(`${import.meta.env.VITE_API_KEY}productos`);
 
       if (!response.ok) throw new Error(`Error: ${response.status}`);
 
@@ -142,7 +142,7 @@ const AdminProductsLayout = () => {
           label: "Estado",
           sortable: true,
           render: (p) => {
-            const statusVal = getStatusValue(p); // 🔹 Llamada correcta
+            const statusVal = getStatusValue(p); 
             let bgClass = "";
             let dotClass = "";
             let statusText = "";

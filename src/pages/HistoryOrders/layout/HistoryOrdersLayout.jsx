@@ -44,7 +44,7 @@ const HistoryOrdersPage = () => {
         setLoading(true);
 
         const response = await fetch(
-          `http://localhost:3000/pedidos/${id_usuario || user}`
+          `${import.meta.env.VITE_API_KEY}pedidos/${id_usuario || user}`
         );
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();

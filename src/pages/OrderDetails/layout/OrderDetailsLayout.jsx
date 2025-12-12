@@ -41,7 +41,7 @@ const OrderDetailsPage = () => {
       return;
     }
 
-    const endpoint = `http://localhost:3000/pedidos/detalles/${
+    const endpoint = `${import.meta.env.VITE_API_KEY}pedidos/detalles/${
       id_usuario || usuario
     }/${id}`;
 

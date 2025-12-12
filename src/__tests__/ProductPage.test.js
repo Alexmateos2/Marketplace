@@ -26,10 +26,10 @@ describe("ProductPages logic tests", () => {
 
   it("fetchProduct obtiene correctamente los datos", async () => {
     // Simulamos directamente la llamada a fetch
-    const response = await fetch("http://localhost:3000/productos/1");
+    const response = await fetch(`${import.meta.env.VITE_API_KEY}/productos/1`);
     const data = await response.json();
 
-    expect(fetch).toHaveBeenCalledWith("http://localhost:3000/productos/1");
+    expect(fetch).toHaveBeenCalledWith(`${import.meta.env.VITE_API_KEY}productos/1`);
     expect(data).toEqual(mockProduct);
   });
 

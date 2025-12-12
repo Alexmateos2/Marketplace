@@ -19,7 +19,7 @@ const AdminProductEditLayout = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/productos/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_KEY}productos/${id}`);
         if (!res.ok) throw new Error("Producto no encontrado");
         const data = await res.json();
         setProducto(data);
@@ -98,7 +98,7 @@ const AdminProductEditLayout = () => {
         imagen: imageUrl,
       };
 
-      const res = await fetch(`http://localhost:3000/productos/edit/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_KEY}productos/edit/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedProduct),

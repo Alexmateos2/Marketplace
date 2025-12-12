@@ -19,7 +19,7 @@ const ProductPages = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/productos/${id}`);
+        const res = await fetch(`${import.meta.env.VITE_API_KEY}productos/${id}`);
         if (!res.ok) throw new Error("Producto no encontrado");
         const data = await res.json();
         setProducto(data);

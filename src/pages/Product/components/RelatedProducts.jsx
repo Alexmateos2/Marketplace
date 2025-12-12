@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,memo  } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
@@ -11,7 +11,7 @@ const RelatedProducts = ({ category, id }) => {
     const fecthRelatedProducts = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/productos/categoria/${category}`
+          `${import.meta.env.VITE_API_KEY}productos/categoria/${category}`
         );
         const data = await response.json();
         const filtered = data.filter(
@@ -74,4 +74,4 @@ const RelatedProducts = ({ category, id }) => {
   );
 };
 
-export default RelatedProducts;
+export default memo(RelatedProducts);

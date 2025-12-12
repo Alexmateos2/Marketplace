@@ -14,7 +14,7 @@ const BarraBusqueda = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/productos");
+        const response = await fetch(`${import.meta.env.VITE_API_KEY}productos`);
         const data = await response.json();
         const notDisabled = data.filter((p) => p.activo === 1);
         setProductos([...notDisabled].reverse() || []);

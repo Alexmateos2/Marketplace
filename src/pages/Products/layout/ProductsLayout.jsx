@@ -26,7 +26,7 @@ const ProductsPage = ({ category, search }) => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/productos");
+        const response = await fetch(`${import.meta.env.VITE_API_KEY}productos`);
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
 

@@ -233,7 +233,7 @@ const FormProfile = ({ usuario }) => {
 
       try {
         const res = await fetch(
-          `${API_BASE_URL}/usuarios/${usuario.id_usuario}`,
+          `${import.meta.env.VITE_API_KEY}usuarios/${usuario.id_usuario}`,
           {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },

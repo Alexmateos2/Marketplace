@@ -12,7 +12,7 @@ function ProductosExpertos() {
   useEffect(() => {
     const fetchBestProducts = async () => {
       try {
-        const response = await fetch("http://localhost:3000/productos/mejores");
+        const response = await fetch(`${import.meta.env.VITE_API_KEY}productos/mejores`);
         if (!response.ok) throw new Error(`Error: ${response.status}`);
         const data = await response.json();
         setItems(data); 

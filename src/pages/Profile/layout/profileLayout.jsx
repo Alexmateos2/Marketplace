@@ -14,7 +14,7 @@ const ProfilePage = () => {
       navigate("/");
       return;
     } else
-      fetch(`http://localhost:3000/usuarios/${userId}`)
+      fetch(`${import.meta.env.VITE_API_KEY}usuarios/${userId}`)
         .then((response) => response.json())
         .then((data) => {
           setUsuario(data);

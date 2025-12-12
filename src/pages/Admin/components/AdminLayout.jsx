@@ -34,7 +34,7 @@ const AdminLayout = ({
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/${url}/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_KEY}${url}/${id}`, {
         method: "DELETE",
       });
 

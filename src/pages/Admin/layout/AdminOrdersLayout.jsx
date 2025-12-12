@@ -16,7 +16,7 @@ const AdminOrdersLayout = () => {
   const fetchPedidos = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/pedidos");
+      const response = await fetch(`${import.meta.env.VITE_API_KEY}pedidos`);
       if (!response.ok) throw new Error(`Error: ${response.status}`);
       const data = await response.json();
       const sortedData = (data || []).sort((a, b) => a.id_pedido - b.id_pedido);
