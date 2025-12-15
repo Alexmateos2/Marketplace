@@ -54,7 +54,7 @@ const AdminLayout = ({
       <div className="flex flex-1">
         <AsideAdmin />
 
-        <main className="flex flex-1 min-h-screen lg:text-start text-center flex-col p-6 lg:p-8 bg-background-light dark:bg-background-dark">
+        <main className="flex flex-1 min-h-dvh lg:text-start text-center flex-col p-6 lg:p-8 bg-background-light dark:bg-background-dark">
           <div className="flex flex-col mx-auto w-full max-w-7xl gap-6">
             {!hasData ? (
               <div className="flex items-center justify-center h-96 text-4xl text-subtle-light dark:text-subtle-dark">
