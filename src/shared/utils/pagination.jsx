@@ -5,12 +5,14 @@ const Pagination = ({
   currentPage,
   itemsPerPage,
   onPageChange,
-  totalItems, 
+  totalItems,
 }) => {
   const pageCount = Math.ceil(totalItems / itemsPerPage);
+  
+  // Componente de react-paginate
 
   const handlePageClick = (selectedItem) => {
-    onPageChange(selectedItem.selected + 1); // react-paginate usa índice 0
+    onPageChange(selectedItem.selected + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -24,7 +26,7 @@ const Pagination = ({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  if (pageCount === 0) return null; 
+  if (pageCount === 0) return null;
 
   return (
     <div className="flex justify-center  items-center gap-2">

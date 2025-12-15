@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import ProductsPage from '../../Products/layout/ProductsLayout.jsx';
 
 const CategoryPage = () => {
-
-  const {category} = useParams();
+  //Filtrado de productos por categoria 
+  const { category } = useParams();
 
   return (
     <>

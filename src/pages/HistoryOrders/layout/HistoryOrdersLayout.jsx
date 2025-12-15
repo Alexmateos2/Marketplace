@@ -155,11 +155,10 @@ const HistoryOrdersPage = () => {
                         </p>
                         <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal mt-1">
                           {order.detalles && order.detalles.length > 0
-                            ? `${order.detalles[0].nombre_producto}${
-                                order.detalles.length > 1
-                                  ? ` + ${order.detalles.length - 1} más`
-                                  : ""
-                              }`
+                            ? `${order.detalles[0].nombre_producto}${order.detalles.length > 1
+                              ? ` + ${order.detalles.length - 1} más`
+                              : ""
+                            }`
                             : "Sin descripción"}
                         </p>
                         <p className="text-subtle-light dark:text-subtle-dark text-sm font-normal">
@@ -179,9 +178,8 @@ const HistoryOrdersPage = () => {
                         <NavLink
                           to={
                             isAdmin
-                              ? `/pedidos/historial/details/${
-                                  id_usuario || user
-                                }/${order.id_pedido}`
+                              ? `/pedidos/historial/details/${id_usuario || user
+                              }/${order.id_pedido}`
                               : `/pedidos/historial/details/${order.id_pedido}`
                           }
                           className="text-primary text-sm font-bold hover:underline cursor-pointer"

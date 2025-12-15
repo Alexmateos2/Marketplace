@@ -10,6 +10,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
+//Nav lateral administrador
+
 const AsideAdmin = () => {
   const navigate = useNavigate();
 

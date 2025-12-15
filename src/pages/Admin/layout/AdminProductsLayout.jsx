@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { NavLink } from "react-router-dom";
 
 const AdminProductsLayout = () => {
+  //Se envia paginacion y tipos de datos al componente padre
+
   const [productos, setProductos] = useState([]);
   const [filteredProductos, setFilteredProductos] = useState([]);
   const [loading, setLoading] = useState(true);

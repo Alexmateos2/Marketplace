@@ -3,12 +3,13 @@ import React, { useState } from "react";
 const BusquedaAdmin = ({ data = [], onFilterChange }) => {
   const [inputValue, setInputValue] = useState("");
 
+  //Busqueda por nombre reutilizable
   const onChangeInput = (e) => {
     const value = e.target.value.toLowerCase();
     setInputValue(value);
 
     const filteredData = data.filter((item) =>
- 
+
       (item.nombre || "invitado").toLowerCase().includes(value)
     );
 

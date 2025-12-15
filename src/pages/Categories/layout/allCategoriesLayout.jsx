@@ -3,6 +3,9 @@ import Navbar from "../../../shared/navbar/navbar";
 import Footer from "../../../shared/utils/Footer";
 import { NavLink } from "react-router-dom";
 
+
+//Todas las categorias disponibles
+
 const AllCategoriesPage = () => {
   return (
     <div className="flex flex-col min-h-screen dark:bg-background-dark bg-background-light dark:text-white font-display transition-colors">

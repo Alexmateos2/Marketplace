@@ -2,6 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 function CategoriaDestacada() {
+  
+  //Datos de categorias destacadas actualmente
+
   const categories = [
     { title: "Laptops", image: "images/unnamed(6).png" },
     { title: "Audio", image: "images/unnamed(7).png" },

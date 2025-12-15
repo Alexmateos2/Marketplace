@@ -1,5 +1,5 @@
 import { useRef } from "react";
-
+// Componente de react.bits
 const GlareHover = ({
   width = "auto",
   height = "auto",

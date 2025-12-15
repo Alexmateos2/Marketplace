@@ -1,4 +1,4 @@
-import { useState, useEffect,memo  } from "react";
+import { useState, useEffect, memo } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import { AdvancedImage, placeholder } from "@cloudinary/react";
 
 const RelatedProducts = ({ category, id }) => {
+
+  //Usando categoria del producto se da otros 3 productos relacionados
+
   const [relatedProductsData, setRelatedProductsData] = useState([]);
   useEffect(() => {
     const fecthRelatedProducts = async () => {
@@ -17,9 +20,9 @@ const RelatedProducts = ({ category, id }) => {
         const filtered = data.filter(
           (product) => product.id_producto !== id && product.activo === 1
         );
-       
+
         const shuffled = filtered.sort(() => 0.5 - Math.random());
-    
+
         setRelatedProductsData(shuffled.slice(0, 3));
       } catch (err) {
         toast.error("Failed to load related products." + err.message);
@@ -43,7 +46,7 @@ const RelatedProducts = ({ category, id }) => {
             <NavLink
               to={`/product/${product.id_producto}`}
               key={idx}
-              className="group relative overflow-hidden rounded-xl w-80 " 
+              className="group relative overflow-hidden rounded-xl w-80 "
             >
               <AdvancedImage
                 cldImg={cld

@@ -6,6 +6,8 @@ import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 
 const CartItem = ({ item }) => {
+  //Manejo de item de carrito
+
   const { addToCart, removeFromCart, updateQuantity } = useCart();
 
   if (!item) return null;

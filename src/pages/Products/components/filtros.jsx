@@ -2,7 +2,7 @@ import { useState } from "react";
 import GlareButton from "../../../shared/utils/GlareButton";
 
 const Filtros = ({ setFilters }) => {
-
+  // Se inicia por defecto por  ultimos productos 
   const [localFilters, setLocalFilters] = useState({
     price: "",
     sortBy: "newest",

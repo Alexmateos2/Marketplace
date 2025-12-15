@@ -7,7 +7,7 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 const AdminProductEditLayout = () => {
   const [producto, setProducto] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ const AdminProductEditLayout = () => {
     };
     fetchProduct();
   }, [id]);
-
+  //Manejo de edicion del producto 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -109,7 +109,7 @@ const AdminProductEditLayout = () => {
       toast.success("Producto actualizado correctamente");
       navigate(`/product/${id}`);
     } catch (err) {
-     
+
       toast.err(err);
     }
   };
@@ -153,10 +153,10 @@ const AdminProductEditLayout = () => {
               </h1>
             </div>
 
-    
+
             <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 items-start">
-          
+
                 <div className="lg:col-span-1 flex flex-col">
                   <div className="flex flex-col gap-4 rounded-xl border border-border-light dark:border-border-dark bg-white dark:bg-surface-dark p-6">
                     <h3 className="text-lg font-semibold text-content-light dark:text-surface-light">
@@ -414,7 +414,7 @@ const AdminProductEditLayout = () => {
                 </div>
               </div>
 
-    
+
               <div className="flex justify-end gap-4">
                 <button
                   className="h-10 rounded-lg px-4 text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"

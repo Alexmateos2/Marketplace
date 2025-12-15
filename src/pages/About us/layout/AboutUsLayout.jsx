@@ -7,6 +7,7 @@ import { BadgeCheck, ThumbsUp, Rocket, Zap, Target, Users } from "lucide-react";
 const AboutUsPage = () => {
   const [activeCard, setActiveCard] = useState(null);
 
+  // Array con el contenido de las features 
   const features = [
     {
       icon: BadgeCheck,

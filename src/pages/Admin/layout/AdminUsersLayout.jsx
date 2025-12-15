@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { toast } from "react-toastify";
 const AdminUsersLayout = () => {
+  //Se envia paginacion y tipos de datos al componente padre
+
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [loading, setLoading] = useState(true);

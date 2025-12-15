@@ -16,6 +16,7 @@ const AdminDashboardLayout = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //Renderizado de todas las estadisticas
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -23,7 +24,7 @@ const AdminDashboardLayout = () => {
         const data = await res.json();
         setStats(data);
       } catch (err) {
-       toast.error("Error cargando estadísticas: " + err.message);
+        toast.error("Error cargando estadísticas: " + err.message);
       } finally {
         setLoading(false);
       }
@@ -122,7 +123,7 @@ const AdminDashboardLayout = () => {
               })}
             </div>
 
-         
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Tendencias de ventas */}
               <div className="lg:col-span-2">
@@ -211,7 +212,7 @@ const AdminDashboardLayout = () => {
                 </div>
               </div>
 
-       
+
               <div>
                 <h2 className="text-xl font-bold text-text-light dark:text-text-dark mb-5 border-b border-border-light dark:border-border-dark pb-2">
                   Acciones Rápidas

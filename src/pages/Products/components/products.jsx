@@ -5,6 +5,8 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage, placeholder } from "@cloudinary/react";
 import { toast } from "react-toastify";
+
+//Skeleton de productos para carga de estos
 const SkeletonLoader = () => (
   <div className="h-full flex flex-col bg-surface-light dark:bg-surface-dark rounded-lg overflow-hidden shadow-md animate-pulse">
     <div className="w-full aspect-square bg-gray-300 dark:bg-gray-600" />
@@ -19,6 +21,7 @@ const SkeletonLoader = () => (
   </div>
 );
 
+//Manejo de productos añadidos al carrito
 const CartBadge = ({ productId }) => {
   const { cart } = useCart();
   const productInCart = cart.find((item) => item.id === productId);
@@ -35,6 +38,8 @@ const CartBadge = ({ productId }) => {
 // Componente de imagen memoizado para optimizar el rendimiento al clicar en añadir al carrito
 const ProductImageCard = memo(({ product, idx, imageConfigs }) => {
   const cldImgConfig = imageConfigs[product.id_producto];
+  
+// Se almacenan las imagenes primero para evitar problemas con el efecto blur al añadir productos
 
   return (
     <NavLink

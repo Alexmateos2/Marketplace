@@ -5,7 +5,7 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import { toast } from "react-toastify";
-import Footer from  "../../../shared/utils/Footer.jsx";
+import Footer from "../../../shared/utils/Footer.jsx";
 const OrderDetailsPage = () => {
   const { id, id_usuario } = useParams();
   const [pedido, setPedido] = useState(null);
@@ -17,6 +17,7 @@ const OrderDetailsPage = () => {
 
   const navigate = useNavigate();
 
+  //Formato euros para el precio
   const formatCurrency = (value) =>
     new Intl.NumberFormat("es-ES", {
       style: "currency",
@@ -40,10 +41,10 @@ const OrderDetailsPage = () => {
       setLoading(false);
       return;
     }
-
-    const endpoint = `${import.meta.env.VITE_API_KEY}pedidos/detalles/${
-      id_usuario || usuario
-    }/${id}`;
+    
+    // Endpoint dinamico dependiendo si el usuario que lo visita es el logeado
+    const endpoint = `${import.meta.env.VITE_API_KEY}pedidos/detalles/${id_usuario || usuario
+      }/${id}`;
 
     const fetchOrderDetails = async () => {
       try {
@@ -54,7 +55,7 @@ const OrderDetailsPage = () => {
         const data = await response.json();
         setPedido(data);
       } catch (err) {
- 
+
         toast.error("No se pudieron cargar los detalles del pedido.", err);
         setPedido(null);
       } finally {
@@ -86,9 +87,9 @@ const OrderDetailsPage = () => {
   }
 
   return (
- <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen flex flex-col">
+    <div className="font-display bg-background-light dark:bg-background-dark transition-colors min-h-screen flex flex-col">
       <Navbar />
-   <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center">
+      <main className="flex-1 px-6 sm:px-10 lg:px-20 py-8 flex justify-center">
         <div className="layout-content-container flex flex-col w-full max-w-5xl flex-1">
           <div className="mb-8">
             <NavLink
@@ -157,7 +158,7 @@ const OrderDetailsPage = () => {
                           <p className="font-semibold text-content-light dark:text-content-dark">
                             {formatCurrency(
                               Number(item.precio_unitario) *
-                                Number(item.cantidad)
+                              Number(item.cantidad)
                             )}
                           </p>
                         </div>
@@ -255,7 +256,7 @@ const OrderDetailsPage = () => {
           </div>
         </div>
       </main>
-      <Footer />  
+      <Footer />
     </div>
   );
 };

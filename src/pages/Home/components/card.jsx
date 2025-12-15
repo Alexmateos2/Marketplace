@@ -1,5 +1,7 @@
 import React from "react";
 
+// Card de Why choose us
+
 function Card({ title, text, icon }) {
   return (
     <div className="group relative flex flex-col items-center p-6 bg-surface-light dark:bg-surface-dark/50 rounded-xl border border-border-light dark:border-border-dark/30 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 overflow-hidden">

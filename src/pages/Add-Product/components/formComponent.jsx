@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+
+// Se inicializa las variables del formulario
 const FormComponent = () => {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -26,6 +28,7 @@ const FormComponent = () => {
     }
   }, []);
 
+  //Uso del arrastre de imagenes
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -70,6 +73,7 @@ const FormComponent = () => {
     URL.revokeObjectURL(fileToRemove.preview);
   };
 
+  //Manejo de los datos
   const handleFormChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -115,6 +119,7 @@ const FormComponent = () => {
     setSpecifications((prev) => prev.filter((_, i) => i !== index));
   };
 
+  //Subida de imagenes a Cloudinary
   const uploadToCloudinary = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
@@ -141,6 +146,7 @@ const FormComponent = () => {
     }
   };
 
+  //Subida del formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -244,7 +250,7 @@ const FormComponent = () => {
 
   return (
     <div className="space-y-6">
-      
+
       {isLoading && (
         <div className="p-4 rounded-lg flex items-center gap-3 bg-blue-500/10 border border-blue-500/30 text-blue-700 dark:text-blue-400">
           <div className="flex items-center gap-2">
@@ -264,11 +270,10 @@ const FormComponent = () => {
             onDragLeave={handleDrag}
             onDragOver={handleDrag}
             onDrop={handleDrop}
-            className={`mt-1 flex justify-center p-8 border-3 border-dashed rounded-lg cursor-pointer transition-colors ${
-              isDragActive
-                ? "border-primary bg-primary/10"
-                : "border-border-light dark:border-border-dark hover:border-primary/50 bg-background-light dark:bg-background-dark"
-            }`}
+            className={`mt-1 flex justify-center p-8 border-3 border-dashed rounded-lg cursor-pointer transition-colors ${isDragActive
+              ? "border-primary bg-primary/10"
+              : "border-border-light dark:border-border-dark hover:border-primary/50 bg-background-light dark:bg-background-dark"
+              }`}
           >
             <div className="space-y-1 text-center w-full">
               <svg

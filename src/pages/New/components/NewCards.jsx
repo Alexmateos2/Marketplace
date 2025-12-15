@@ -4,6 +4,8 @@ import { cld } from "../../../shared/utils/cloudinary.js";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { AdvancedImage } from "@cloudinary/react";
 import { toast } from "react-toastify";
+
+// Renderizado de los ultimos productos
 const NewCards = () => {
   const [newProductos, setNewProductos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

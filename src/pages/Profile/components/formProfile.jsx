@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { Eye, EyeOff, Check, X } from "lucide-react";
 import AVATARS from "../../../shared/utils/avatars.js";
 
+// Normas de validacion al editar datos
 const VALIDATION_RULES = {
   nombre: {
     minLength: 3,
@@ -26,7 +27,7 @@ const VALIDATION_RULES = {
   },
 };
 
-const API_BASE_URL = "http://localhost:3000";
+//Reutilizacion de FormField para evitar duplicacion de codigo, condicional por si no es textarea y es input normal
 
 const FormField = ({
   label,
@@ -56,13 +57,11 @@ const FormField = ({
         readOnly={readOnly}
         rows={rows}
         placeholder={placeholder}
-        className={`form-textarea w-full rounded-lg p-4 border-2 ${
-          error
-            ? "border-red-500"
-            : "border-border-light dark:border-border-dark"
-        } bg-surface-light dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark transition-colors ${
-          readOnly ? "cursor-not-allowed opacity-50" : ""
-        }`}
+        className={`form-textarea w-full rounded-lg p-4 border-2 ${error
+          ? "border-red-500"
+          : "border-border-light dark:border-border-dark"
+          } bg-surface-light dark:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary/50 text-content-light dark:text-content-dark transition-colors ${readOnly ? "cursor-not-allowed opacity-50" : ""
+          }`}
       />
     ) : (
       <input
@@ -72,13 +71,11 @@ const FormField = ({
         onChange={onChange}
         readOnly={readOnly}
         placeholder={placeholder}
-        className={`form-input flex w-full min-w-0 flex-1 rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 ${
-          error
-            ? "border-red-500"
-            : "border-border-light dark:border-border-dark"
-        } bg-surface-light dark:bg-surface-dark h-14 p-4 text-base transition-colors ${
-          readOnly ? "cursor-not-allowed opacity-50" : ""
-        }`}
+        className={`form-input flex w-full min-w-0 flex-1 rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 ${error
+          ? "border-red-500"
+          : "border-border-light dark:border-border-dark"
+          } bg-surface-light dark:bg-surface-dark h-14 p-4 text-base transition-colors ${readOnly ? "cursor-not-allowed opacity-50" : ""
+          }`}
       />
     )}
     {error && (
@@ -89,6 +86,7 @@ const FormField = ({
   </div>
 );
 
+// Se inicializa datos del formulario, se envian solo los que cambian
 const FormProfile = ({ usuario }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -119,6 +117,8 @@ const FormProfile = ({ usuario }) => {
       setErrors({});
     }
   }, [usuario]);
+
+  // Comprobaciones de fallos de validacion, si esta todo OK el handleChange funciona correctamente
 
   const validateField = useCallback((id, value) => {
     const rule = VALIDATION_RULES[id];
@@ -176,7 +176,8 @@ const FormProfile = ({ usuario }) => {
     setShowAvatarPicker(false);
     toast.info("Cambios descartados");
   }, [usuario]);
-
+  
+  //Validacion del formulario para cada apartado del perfil
   const validateForm = useCallback(() => {
     let isValid = true;
     const newErrors = {};
@@ -304,11 +305,10 @@ const FormProfile = ({ usuario }) => {
                     key={a.value}
                     type="button"
                     onClick={() => changeAvatar(a.value)}
-                    className={`w-24 h-24 cursor-pointer rounded-full bg-no-repeat aspect-square bg-cover border-4 transition-all hover:scale-105 ${
-                      formData.avatar === a.value
-                        ? "border-primary"
-                        : "border-border-light dark:border-border-dark opacity-60 hover:opacity-100"
-                    }`}
+                    className={`w-24 h-24 cursor-pointer rounded-full bg-no-repeat aspect-square bg-cover border-4 transition-all hover:scale-105 ${formData.avatar === a.value
+                      ? "border-primary"
+                      : "border-border-light dark:border-border-dark opacity-60 hover:opacity-100"
+                      }`}
                     style={{ backgroundImage: `url(${a.url})` }}
                     aria-label={`Avatar opción ${a.value}`}
                   />
@@ -413,13 +413,11 @@ const FormProfile = ({ usuario }) => {
                   placeholder={
                     isEditing ? "Nueva contraseña (opcional)" : "*****"
                   }
-                  className={`form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 ${
-                    errors.password
-                      ? "border-red-500"
-                      : "border-border-light dark:border-border-dark"
-                  } bg-surface-light dark:bg-surface-dark h-14 p-4 pr-12 text-base font-normal transition-colors ${
-                    !isEditing ? "cursor-not-allowed opacity-50" : ""
-                  }`}
+                  className={`form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-content-light dark:text-content-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-2 ${errors.password
+                    ? "border-red-500"
+                    : "border-border-light dark:border-border-dark"
+                    } bg-surface-light dark:bg-surface-dark h-14 p-4 pr-12 text-base font-normal transition-colors ${!isEditing ? "cursor-not-allowed opacity-50" : ""
+                    }`}
                 />
                 {isEditing && (
                   <button
@@ -454,11 +452,10 @@ const FormProfile = ({ usuario }) => {
               <button
                 onClick={handleSubmit}
                 disabled={isLoading || !hasChanges}
-                className={`flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto gap-2 transition-colors ${
-                  isLoading || !hasChanges
-                    ? "bg-primary/50 text-white cursor-not-allowed opacity-50"
-                    : "bg-primary text-white hover:bg-primary/90 dark:text-content-dark"
-                }`}
+                className={`flex max-w-[400px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold tracking-[0.015em] w-full @[480px]:w-auto gap-2 transition-colors ${isLoading || !hasChanges
+                  ? "bg-primary/50 text-white cursor-not-allowed opacity-50"
+                  : "bg-primary text-white hover:bg-primary/90 dark:text-content-dark"
+                  }`}
               >
                 <Check size={18} />
                 {isLoading ? "Guardando..." : "Guardar Cambios"}

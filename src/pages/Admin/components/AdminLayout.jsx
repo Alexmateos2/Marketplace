@@ -23,7 +23,7 @@ const AdminLayout = ({
 }) => {
   const location = useLocation();
   const { confirm, Modal } = useConfirmDelete(); // Usar el hook
-  
+
   const hasData = data && data.length > 0;
   const isProductPage = location.pathname.includes("/products");
   const isUsersPage = location.pathname.includes("/users");
@@ -68,13 +68,13 @@ const AdminLayout = ({
                   </h1>
                   {isProductPage ? (
                     <>
-                      <NavLink  to="/add" className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 transition-colors">
+                      <NavLink to="/add" className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 transition-colors">
                         <Plus size={20} />
                         <span className="truncate">
                           Agregar nuevo
-                          </span>
-                        </NavLink>
-                     
+                        </span>
+                      </NavLink>
+
                     </>
                   ) : null}
                 </div>
@@ -103,11 +103,10 @@ const AdminLayout = ({
                           {columns.map((col, idx) => (
                             <th
                               key={idx}
-                              className={`px-6 py-4 text-sm font-semibold text-subtle-light dark:text-subtle-dark cursor-pointer select-none ${
-                                col.sortable
-                                  ? "hover:text-primary transition-colors"
-                                  : ""
-                              }`}
+                              className={`px-6 py-4 text-sm font-semibold text-subtle-light dark:text-subtle-dark cursor-pointer select-none ${col.sortable
+                                ? "hover:text-primary transition-colors"
+                                : ""
+                                }`}
                               onClick={() => col.sortable && onSort(col.key)}
                             >
                               <div className="flex items-center gap-1">
@@ -139,8 +138,8 @@ const AdminLayout = ({
                                 {col.render
                                   ? col.render(item)
                                   : col.key === "precio" || col.key === "total"
-                                  ? `${item[col.key]} €`
-                                  : item[col.key]}
+                                    ? `${item[col.key]} €`
+                                    : item[col.key]}
                               </td>
                             ))}
                             <td className="px-2 py-4 whitespace-nowrap text-right flex gap-2 justify-end">
@@ -201,8 +200,8 @@ const AdminLayout = ({
                             {col.render
                               ? col.render(item)
                               : col.key === "precio" || col.key === "total"
-                              ? `${item[col.key]} €`
-                              : item[col.key]}
+                                ? `${item[col.key]} €`
+                                : item[col.key]}
                           </span>
                         </div>
                       ))}
@@ -248,7 +247,7 @@ const AdminLayout = ({
               </>
             )}
           </div>
-         
+
           <Modal />
         </main>
       </div>

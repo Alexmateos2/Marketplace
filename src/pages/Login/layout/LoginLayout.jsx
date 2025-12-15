@@ -11,6 +11,7 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Manejo de mayusculas para password
   const onKeyDown = (keyEvent) => {
     setIsMayus(keyEvent.getModifierState("CapsLock"));
   };

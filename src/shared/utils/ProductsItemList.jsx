@@ -1,3 +1,4 @@
+// Lista antigua con datos estaticos
 const products = [
   {
     id: 1,

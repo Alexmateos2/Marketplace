@@ -1,5 +1,5 @@
 import GlareHover from "./GlareHover";
-
+// Componente de react.bits
 const GlareButton = ({ children, width = "auto", textSize = "text-lg",type="button" }) => {
   return (
     <GlareHover
