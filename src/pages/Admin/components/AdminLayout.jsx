@@ -7,7 +7,7 @@ import Pagination from "../../../shared/utils/pagination";
 import { NavLink, useLocation } from "react-router-dom";
 import BusquedaAdmin from "./BusquedaAdmin";
 import { toast } from "react-toastify";
-import { useConfirmDelete } from "./onConfirmDelete"; // Importar el hook
+import { useConfirmDelete } from "./onConfirmDelete";
 
 const AdminLayout = ({
   data = [],
@@ -22,7 +22,7 @@ const AdminLayout = ({
   sortConfig,
 }) => {
   const location = useLocation();
-  const { confirm, Modal } = useConfirmDelete(); // Usar el hook
+  const { confirm, Modal } = useConfirmDelete();
 
   const hasData = data && data.length > 0;
   const isProductPage = location.pathname.includes("/products");
@@ -30,7 +30,7 @@ const AdminLayout = ({
 
   const deleteItem = async (id, itemName = "este elemento") => {
     const url = isProductPage ? "productos" : "usuarios";
-    const confirmDelete = await confirm(itemName); // Esperar la confirmación
+    const confirmDelete = await confirm(itemName);
     if (!confirmDelete) return;
 
     try {
@@ -46,6 +46,13 @@ const AdminLayout = ({
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+  // Handler específico para móviles
+  const handleDeleteClick = (e, id, itemName) => {
+    e.preventDefault();
+    e.stopPropagation();
+    deleteItem(id, itemName);
   };
 
   return (
@@ -67,15 +74,15 @@ const AdminLayout = ({
                     {title}
                   </h1>
                   {isProductPage ? (
-                    <>
-                      <NavLink to="/add" className="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 transition-colors">
-                        <Plus size={20} />
-                        <span className="truncate">
-                          Agregar nuevo
-                        </span>
-                      </NavLink>
-
-                    </>
+                    <NavLink 
+                      to="/add" 
+                      className="flex h-10 items-center justify-center gap-2 overflow-hidden rounded-lg bg-primary px-4 text-sm font-bold text-white shadow-sm hover:bg-primary/90 active:bg-primary/80 transition-colors touch-manipulation"
+                    >
+                      <Plus size={20} />
+                      <span className="truncate">
+                        Agregar nuevo
+                      </span>
+                    </NavLink>
                   ) : null}
                 </div>
 
@@ -103,10 +110,11 @@ const AdminLayout = ({
                           {columns.map((col, idx) => (
                             <th
                               key={idx}
-                              className={`px-6 py-4 text-sm font-semibold text-subtle-light dark:text-subtle-dark cursor-pointer select-none ${col.sortable
-                                ? "hover:text-primary transition-colors"
-                                : ""
-                                }`}
+                              className={`px-6 py-4 text-sm font-semibold text-subtle-light dark:text-subtle-dark cursor-pointer select-none ${
+                                col.sortable
+                                  ? "hover:text-primary transition-colors"
+                                  : ""
+                              }`}
                               onClick={() => col.sortable && onSort(col.key)}
                             >
                               <div className="flex items-center gap-1">
@@ -138,22 +146,22 @@ const AdminLayout = ({
                                 {col.render
                                   ? col.render(item)
                                   : col.key === "precio" || col.key === "total"
-                                    ? `${item[col.key]} €`
-                                    : item[col.key]}
+                                  ? `${item[col.key]} €`
+                                  : item[col.key]}
                               </td>
                             ))}
                             <td className="px-2 py-4 whitespace-nowrap text-right flex gap-2 justify-end">
                               {isProductPage ? (
                                 <>
                                   <NavLink
-                                    className="p-2 cursor-pointer text-subtle-light dark:text-subtle-dark hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                    className="p-2 text-subtle-light dark:text-subtle-dark hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                     to={`edit/${item[idKey]}`}
                                     title="Editar"
                                   >
                                     <Edit2 size={18} />
                                   </NavLink>
                                   <button
-                                    className="p-2 cursor-pointer text-subtle-light dark:text-subtle-dark hover:text-red-500 dark:hover:text-red-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                    className="p-2 text-subtle-light dark:text-subtle-dark hover:text-red-500 dark:hover:text-red-400 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                     onClick={() => deleteItem(item[idKey], item.nombre || "este elemento")}
                                     title="Eliminar"
                                   >
@@ -163,7 +171,7 @@ const AdminLayout = ({
                               ) : isUsersPage ? (
                                 <NavLink
                                   to={`/pedidos/historial/${item.id_usuario}`}
-                                  className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                  className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                   title="Ver pedidos"
                                 >
                                   <FileText size={18} />
@@ -171,7 +179,7 @@ const AdminLayout = ({
                               ) : (
                                 <NavLink
                                   to={`/pedidos/historial/details/${item.id_usuario}/${item.id_pedido}`}
-                                  className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                                  className="p-2 mr-5 text-slate-500 hover:text-primary rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                                   title="Ver detalles del pedido"
                                 >
                                   <FileText size={18} />
@@ -184,6 +192,7 @@ const AdminLayout = ({
                     </table>
                   </div>
                 </div>
+
                 {/* Mobile & Tablet: Vista en tarjetas */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-4">
                   {data.map((item, idx) => (
@@ -200,8 +209,8 @@ const AdminLayout = ({
                             {col.render
                               ? col.render(item)
                               : col.key === "precio" || col.key === "total"
-                                ? `${item[col.key]} €`
-                                : item[col.key]}
+                              ? `${item[col.key]} €`
+                              : item[col.key]}
                           </span>
                         </div>
                       ))}
@@ -210,14 +219,15 @@ const AdminLayout = ({
                           <>
                             <NavLink
                               to={`edit/${item[idKey]}`}
-                              className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
+                              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 active:bg-blue-200 dark:active:bg-blue-900/40 rounded-lg transition-all touch-manipulation"
                             >
                               <Edit2 size={16} />
                               Editar
                             </NavLink>
                             <button
-                              onClick={() => deleteItem(item[idKey], item.nombre || "este elemento")}
-                              className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-600/30 hover:bg-red-100 dark:hover:bg-red-900/30 rounded-lg transition-all"
+                              type="button"
+                              onClick={(e) => handleDeleteClick(e, item[idKey], item.nombre || "este elemento")}
+                              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-600/30 hover:bg-red-100 dark:hover:bg-red-900/30 active:bg-red-200 dark:active:bg-red-900/40 rounded-lg transition-all touch-manipulation"
                             >
                               <Trash2 size={16} />
                               Eliminar
@@ -226,7 +236,7 @@ const AdminLayout = ({
                         ) : isUsersPage ? (
                           <NavLink
                             to={`/pedidos/historial/${item.id_usuario}`}
-                            className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
+                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 active:bg-blue-200 dark:active:bg-blue-900/40 rounded-lg transition-all touch-manipulation"
                           >
                             <FileText size={16} />
                             Ver pedidos
@@ -234,7 +244,7 @@ const AdminLayout = ({
                         ) : (
                           <NavLink
                             to={`/pedidos/historial/details/${item.id_usuario}/${item.id_pedido}`}
-                            className="flex-1 cursor-pointer flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 rounded-lg transition-all"
+                            className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 active:bg-blue-200 dark:active:bg-blue-900/40 rounded-lg transition-all touch-manipulation"
                           >
                             <FileText size={16} />
                             Ver pedido
